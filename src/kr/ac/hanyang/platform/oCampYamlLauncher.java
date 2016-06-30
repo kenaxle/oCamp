@@ -37,13 +37,6 @@ public class oCampYamlLauncher {
 	ManagementContext oCampManagement;
 	CampServer server;
 	
-//	public oCampYamlLauncher launch(){
-//		launcher = BrooklynLauncher.newInstance().start();
-//		CampPlatform platform = launcher.getCampPlatform();
-//		//yLauncher	
-//		server = new CampServer(platform,"").start();
-//		return this;
-//	}
 	
 	public oCampYamlLauncher(){
 		this.platformLauncher = new oCampPlatformLauncher(); 
@@ -111,23 +104,17 @@ public class oCampYamlLauncher {
     }
 	
 	public static void main (String[] args){
-		//oCampYamlLauncher l = new oCampYamlLauncher();
-		//l.setShutdownAppsOnExit(true);
-		try {
-			System.out.println(new URL("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/java-web-app-and-db-with-function.yaml").openStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//l.launchAppYaml("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/java-web-app-and-db-with-function.yaml");
+		oCampYamlLauncher l = new oCampYamlLauncher();
+		l.setShutdownAppsOnExit(true);
+		l.launchAppYaml("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint.yaml");
 				
 			
 	}
 	
-	//public void stopServers() throws Exception {
-    //    yLauncher =  new oCampYamlLauncher().launch();
-		//launcher.getServerDetails().getWebServer().stop();
-        //campServer.stop();
-       // yLauncher.launch();
-  //  }
+//	public void stopServers() throws Exception {
+//        yLauncher =  new oCampYamlLauncher().launch();
+//		launcher.getServerDetails().getWebServer().stop();
+//        campServer.stop();
+//        yLauncher.launch();
+//    }
 }
