@@ -74,7 +74,7 @@ public class oCampYamlLauncher {
             AssemblyTemplate at = platform.pdp().registerDeploymentPlan(input);
 
             Assembly assembly = at.getInstantiator().newInstance().instantiate(at, platform);
-            Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId());
+            Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId()); // an exception is thrown here... 
             log.info("Launching "+app);
 
             if (getShutdownAppsOnExit()) BrooklynShutdownHooks.invokeStopOnShutdown(app);

@@ -11,7 +11,7 @@ import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
 
 public class oCampPlatform extends AggregatingCampPlatform implements HasBrooklynManagementContext{
 	
-	private final ManagementContext mgmt; // need a management context. this is a brooklyn object so I will have to understand it
+	private final ManagementContext mgmt; // need a management context. this is a brooklyn object that manages brooklyn components
     									  // the management context is created outside so we need a handle to it
 	//constructor
 	public oCampPlatform(PlatformRootSummary root, ManagementContext mgmt) {

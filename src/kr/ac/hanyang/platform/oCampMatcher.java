@@ -95,12 +95,15 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
 
-        Object location = attrs.remove("location");
-        if (location!=null)
-            builder.customAttribute("location", location);
-        Object locations = attrs.remove("locations");
-        if (locations!=null)
-            builder.customAttribute("locations", locations);
+        builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
+        
+        // TODO need to obtain the location from another source 
+//        Object location = attrs.remove("location");
+//        if (location!=null)
+//            builder.customAttribute("location", location);
+//        Object locations = attrs.remove("locations");
+//        if (locations!=null)
+//            builder.customAttribute("locations", locations);
         //------------------------------------------------------------------
         
         // brooklyn flags are added here but I am not using the brooklyn entity matcher so I cannot perform then tasks
@@ -128,7 +131,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         atc.add(builder.build());
 
         return true;
-		
+		//return false; // TODO need to remove this. but i dont want to actually deploy as yet.
 	}
 	
 	// copying these methods howver I may have to remove them 
