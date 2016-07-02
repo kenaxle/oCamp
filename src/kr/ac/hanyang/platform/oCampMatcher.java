@@ -3,6 +3,7 @@ package kr.ac.hanyang.platform;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.brooklyn.api.location.LocationDefinition;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampConstants;
@@ -16,6 +17,7 @@ import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
 import org.apache.brooklyn.camp.spi.pdp.Service;
 import org.apache.brooklyn.camp.spi.resolve.PdpMatcher;
 import org.apache.brooklyn.core.catalog.internal.BasicBrooklynCatalog;
+import org.apache.brooklyn.core.location.BasicLocationDefinition;
 import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.text.Strings;
@@ -94,8 +96,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 
         if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
-
-        builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
+       // mgmt.getLocationRegistry().getDefinedLocationByName(arg0)
+        Map locations = mgmt.getLocationRegistry().getDefinedLocations();		
+		LocationDefinition defLocations = (BasicLocationDefinition) locations.get(locations.keySet().iterator().next());
+        builder.customAttribute("location", defLocations.getName());
         
         // TODO need to obtain the location from another source 
 //        Object location = attrs.remove("location");

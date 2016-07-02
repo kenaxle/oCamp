@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.location.Location;
+import org.apache.brooklyn.api.location.LocationDefinition;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.Task;
 import org.apache.brooklyn.camp.CampPlatform;
@@ -17,6 +21,7 @@ import org.apache.brooklyn.camp.server.rest.CampServer;
 import org.apache.brooklyn.camp.spi.Assembly;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.core.entity.Entities;
+import org.apache.brooklyn.core.location.BasicLocationDefinition;
 import org.apache.brooklyn.core.mgmt.BrooklynTaskTags;
 import org.apache.brooklyn.core.mgmt.internal.BrooklynShutdownHooks;
 import org.apache.brooklyn.launcher.BrooklynLauncher;
@@ -106,9 +111,7 @@ public class oCampYamlLauncher {
 	public static void main (String[] args){
 		oCampYamlLauncher l = new oCampYamlLauncher();
 		l.setShutdownAppsOnExit(true);
-		l.launchAppYaml("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint.yaml");
-				
-			
+		l.launchAppYaml("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint.yaml");		
 	}
 	
 //	public void stopServers() throws Exception {
