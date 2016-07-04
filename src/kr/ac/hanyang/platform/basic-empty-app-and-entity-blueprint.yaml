@@ -16,11 +16,18 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-name: Simple Netcat Server Example
+name: Simple Netcat Server Example 2 CAMP
 #location: AWS Tokyo (ap-northeast-1)
+artifacts:
+- type: kr.ac.hanyang.oCamp:RPM
+  content: {some-app.rpm}
+  requirements:
+  - type: kr.ac.hanyang.oCamp:Install
+    fulfillment: tomcat1
+     
+
 services:
-- type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
-  name: Simple Netcat Server
-  launch.command: |
-    echo hello | nc -l 4321 &
-    echo $! > $PID_FILE
+- type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+  name: Simple Tomcat Server
+  id: tomcat1
+  
