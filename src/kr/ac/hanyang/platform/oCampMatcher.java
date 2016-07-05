@@ -43,7 +43,12 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		if (deploymentItem instanceof Artifact){
 			Artifact artifact = (Artifact) deploymentItem;
 			String artifactType = artifact.getArtifactType();
-			return artifactType; //just for testing
+			// now can we load the class 
+			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();
+			if (loader == null) 
+				loader = JavaBrooklynClassLoadingContext.create(mgmt);
+			if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, artifactType) != null)         
+				return artifactType; //just for testing
 		}
 		
 		if (deploymentItem instanceof Service){
@@ -64,8 +69,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 
 	@Override
 	public boolean accepts(Object deploymentPlanItem) {
-		return lookupType(deploymentPlanItem) != null;
-		
+		return lookupType(deploymentPlanItem) != null;		
 	}
 
 	@Override
@@ -80,7 +84,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		Object instantiator = atc.getInstantiator();
 		// remove the restrictions for only brooklyn types
 		Builder<? extends PlatformComponentTemplate> builder = PlatformComponentTemplate.builder();
-        builder.type( type.indexOf(':')==-1 ? "brooklyn:"+type : type ); //reform the type string 
+        builder.type( type.indexOf(':')==-1 ? "brooklyn:"+type : type ); //reform the type string: this forces the types to only be brooklyn types
         
         // use my own instantiator so I can instantiate Services and Artifacts
         atc.instantiator(oCampAssemblyTemplateInstantiator.class);
@@ -88,48 +92,53 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         //cleaning up the map by removing items not needed
         // leaving this for now since I'm testing with prooklyn blueprints
         // will remove this soon as they dont form part of camp plans
-        String name = ((Service)deploymentPlanItem).getName();
-        if (!Strings.isBlank(name)) builder.name(name);
-        
-        // configuration
-        Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() );
-
-        if (attrs.containsKey("id"))
+        String name;
+        Map<String, Object> attrs;
+        if (deploymentPlanItem instanceof Service){
+            name = ((Service)deploymentPlanItem).getName();
+            if (!Strings.isBlank(name)) builder.name(name);
+            attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
+            if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
-       // mgmt.getLocationRegistry().getDefinedLocationByName(arg0)
-        Map locations = mgmt.getLocationRegistry().getDefinedLocations();		
-		LocationDefinition defLocations = (BasicLocationDefinition) locations.get(locations.keySet().iterator().next());
-        builder.customAttribute("location", defLocations.getName());
+
+
+            //simply gets the first location.	
+            Map locations = mgmt.getLocationRegistry().getDefinedLocations();		
+            LocationDefinition defLocations = (BasicLocationDefinition) locations.get(locations.keySet().iterator().next());
+            builder.customAttribute("location", defLocations.getName());
         
-        // TODO need to obtain the location from another source 
-//        Object location = attrs.remove("location");
-//        if (location!=null)
-//            builder.customAttribute("location", location);
-//        Object locations = attrs.remove("locations");
-//        if (locations!=null)
-//            builder.customAttribute("locations", locations);
-        //------------------------------------------------------------------
+
         
         // brooklyn flags are added here but I am not using the brooklyn entity matcher so I cannot perform then tasks
         
-        MutableMap<Object, Object> brooklynFlags = MutableMap.of();
-        Object origBrooklynFlags = attrs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
-        if (origBrooklynFlags!=null) {
-            if (!(origBrooklynFlags instanceof Map))
-                throw new IllegalArgumentException("brooklyn.flags must be a map of brooklyn flags");
-            brooklynFlags.putAll((Map<?,?>)origBrooklynFlags);
+	        MutableMap<Object, Object> brooklynFlags = MutableMap.of();
+	        Object origBrooklynFlags = attrs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
+	        if (origBrooklynFlags!=null) {
+	            if (!(origBrooklynFlags instanceof Map))
+	                throw new IllegalArgumentException("brooklyn.flags must be a map of brooklyn flags");
+	            brooklynFlags.putAll((Map<?,?>)origBrooklynFlags);
+	        }
+	
+	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CONFIG);
+	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_POLICIES);
+	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_ENRICHERS);
+	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_INITIALIZERS);
+	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CHILDREN);
+	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CATALOG);
+	
+	        brooklynFlags.putAll(attrs);
+	        if (!brooklynFlags.isEmpty()) {
+	            builder.customAttribute(BrooklynCampReservedKeys.BROOKLYN_FLAGS, brooklynFlags);
+	        }
         }
-
-        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CONFIG);
-        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_POLICIES);
-        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_ENRICHERS);
-        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_INITIALIZERS);
-        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CHILDREN);
-        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CATALOG);
-
-        brooklynFlags.putAll(attrs);
-        if (!brooklynFlags.isEmpty()) {
-            builder.customAttribute(BrooklynCampReservedKeys.BROOKLYN_FLAGS, brooklynFlags);
+        else{ 
+        	name = ((Artifact)deploymentPlanItem).getName();
+        	if (!Strings.isBlank(name)) builder.name(name);
+        	attrs = MutableMap.copyOf( ((Artifact)deploymentPlanItem).getCustomAttributes() );
+        	
+        	//TODO complete attribute
+        	//added to test building
+        	
         }
 
         atc.add(builder.build());
