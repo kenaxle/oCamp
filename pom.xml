@@ -72,5 +72,50 @@
   		<artifactId>brooklyn-software-webapp</artifactId>
   		<version>0.9.0</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-cm-ansible</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-cm-salt</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-database</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-messaging</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-monitoring</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-network</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-nosql</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-software-osgi</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.brooklyn</groupId>
+  		<artifactId>brooklyn-utils-common</artifactId>
+  		<version>0.9.0</version>
+  	</dependency>
   </dependencies>
 </project>

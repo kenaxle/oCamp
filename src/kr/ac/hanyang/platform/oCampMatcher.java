@@ -13,12 +13,14 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityMatcher;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate.Builder;
 import org.apache.brooklyn.camp.spi.pdp.Artifact;
+import org.apache.brooklyn.camp.spi.pdp.ArtifactRequirement;
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
 import org.apache.brooklyn.camp.spi.pdp.Service;
 import org.apache.brooklyn.camp.spi.resolve.PdpMatcher;
 import org.apache.brooklyn.core.catalog.internal.BasicBrooklynCatalog;
 import org.apache.brooklyn.core.location.BasicLocationDefinition;
 import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
+import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.text.Strings;
 import org.slf4j.Logger;
@@ -26,6 +28,8 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import kr.ac.hanyang.entities.IService;
 
 public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	private static final Logger log = LoggerFactory.getLogger(oCampMatcher.class);
@@ -51,6 +55,17 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 				return artifactType; //just for testing
 		}
 		
+		if (deploymentItem instanceof ArtifactRequirement){
+			ArtifactRequirement artifactReq = (ArtifactRequirement) deploymentItem;
+			String artReqType = artifactReq.getRequirementType();
+			// now can we load the class 
+			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();
+			if (loader == null) 
+				loader = JavaBrooklynClassLoadingContext.create(mgmt);
+			if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, artReqType) != null)         
+				return artReqType; //just for testing
+		}
+		
 		if (deploymentItem instanceof Service){
 			Service service = (Service) deploymentItem;
 			String serviceType = service.getServiceType();
@@ -66,15 +81,47 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		log.debug( "Not an artifact or Service. unable to match "+deploymentItem);
 		return null;
 	}
+	
+	private String extractTypeName(String type){
+		int index = type.lastIndexOf(".");
+		return type.substring(index+1);
+	}
+	
+	// matches the best service to the requirement type and takes 
+	// into consideration the characteristics 
+	protected List<String> matchService(String typeName){
+		String[] services = {"kr.ac.hanyang.entities.services.machine.Machine"};
+		List<String> matches = new MutableList<String>();
+		for(String servType: services){
+			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();
+	        if (loader == null) 
+	        	loader = JavaBrooklynClassLoadingContext.create(mgmt);
+	        IService service;
+			try {
+				service = (IService) loader.loadClass(servType).newInstance();
+				for(String capType: service.getCapabilities()){
+					if (capType.equals(typeName))
+						matches.add(service.getClass().getCanonicalName()) ;
+				}
+			} catch (InstantiationException e) {
+				log.error("cannot instantiate "+servType+" "+e );
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				log.error("no access to "+servType);
+				e.printStackTrace();
+			}
+		}
+		return matches;
+	}
 
 	@Override
 	public boolean accepts(Object deploymentPlanItem) {
 		return lookupType(deploymentPlanItem) != null;		
 	}
-
+	
 	@Override
 	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc) {
-		if (!(deploymentPlanItem instanceof Service) && !(deploymentPlanItem instanceof Artifact))	return false;
+		if (!(deploymentPlanItem instanceof Service) && !(deploymentPlanItem instanceof Artifact) && !(deploymentPlanItem instanceof ArtifactRequirement))	return false;
 		String type = lookupType(deploymentPlanItem);
 		if (type == null) return false;
 		
@@ -93,11 +140,11 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         // leaving this for now since I'm testing with prooklyn blueprints
         // will remove this soon as they dont form part of camp plans
         String name;
-        Map<String, Object> attrs;
+
         if (deploymentPlanItem instanceof Service){
             name = ((Service)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) builder.name(name);
-            attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
+            	Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
 
@@ -131,16 +178,64 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	            builder.customAttribute(BrooklynCampReservedKeys.BROOKLYN_FLAGS, brooklynFlags);
 	        }
         }
-        else{ 
+        else if (deploymentPlanItem instanceof Artifact){ 
         	name = ((Artifact)deploymentPlanItem).getName();
-        	if (!Strings.isBlank(name)) builder.name(name);
-        	attrs = MutableMap.copyOf( ((Artifact)deploymentPlanItem).getCustomAttributes() );
-        	
+        	if (!Strings.isBlank(name)) 
+        		builder.name(name);
+        	List<Object> reqs = MutableList.copyOf( ((Artifact)deploymentPlanItem).getRequirements() ); 
+        	       	
+        	if (reqs != null ){
+        		System.out.println(reqs);
+        		for(Object requirement: reqs){
+	        		apply(requirement, atc);        			
+	        		
+        		}
+        		// perform the parsing of the requirements
+        		// add the requirements to the builder
+        	}else{
+        		// the artifact does not have a requirement listed. 
+        		// each artifact should know its requirements and can look up the information 
+        		// this lookup information will be added to the interface for each artifact type.
+        	}
+//        	MutableMap<Object, Object> customFlags = MutableMap.of();
+//        	Object origBrooklynFlags = reqs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
+        	 
         	//TODO complete attribute
         	//added to test building
-        	
+        	// here I need to formalize the artifact
         }
-
+        else if (deploymentPlanItem instanceof ArtifactRequirement){
+        	Map<String, Object> attrs = MutableMap.copyOf( ((ArtifactRequirement)deploymentPlanItem).getCustomAttributes() );
+	        		if (attrs.containsKey("fulfillment")){
+	        			// need to convert this into a service here by a recursive call
+	        			
+	        			Map<String, Object> fulfillment = (Map<String, Object>) attrs.remove("fulfillment");
+	        			//builder.customAttribute("fulfillment", fulfillment);
+	        			// may have to edit the map to add a name and type
+	        			// lookup the service type required based in the requirement type. 
+	        			// each service should have a capability lookup therefore  
+	        			// go through each service of the catalog and find a service that 
+	        			// matches the requirement.
+	        			//then need to match the characteristics to narrow down the best service.
+	        			
+	        			// this lookup information will be added to the interface of each service type.
+	        			String typeName = extractTypeName(((ArtifactRequirement)deploymentPlanItem).getRequirementType());
+	        			
+	        			List<String> services =  matchService(typeName);
+	        			for(String matchedService: services){
+	        				//System.out.println(matchedService);
+	        				fulfillment.put("type",matchedService);
+	        			}
+	        			//List<Service> services = new MutableList<Service>();
+	        			//search only the oCamp namespace
+	        			
+	        			//fulfillment.add("type", )
+	        			Service service = Service.of(fulfillment); //create a service object 
+	        			apply(service, atc); //recursive call
+	        			
+	        		}
+        }
+        
         atc.add(builder.build());
 
         return true;

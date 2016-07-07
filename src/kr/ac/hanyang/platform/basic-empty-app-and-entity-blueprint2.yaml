@@ -1,0 +1,44 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+name: Simple Netcat Server Example 2 CAMP
+#location: AWS Tokyo (ap-northeast-1)
+artifacts:
+- type: kr.ac.hanyang.entities.artifacts.machine.Machine_Art
+  content: |
+    echo utc `date +%s` > DATE
+    echo human `date` >> DATE
+    nohup sleep 60 &
+    echo $! > $PID_FILE
+    sleep 3
+  requirements:
+  - type: kr.ac.hanyang.entities.requirements.ExecuteOn
+    fulfillment: 
+      characteristics:
+      - type: kr.ac.hanyang.entities.services.machine.Machine
+        kernelVersion: [3.9.6]
+
+#services:
+#- type: kr.ac.hanyang.entities.services.machine.Machine
+#  name: Simple Server
+#  id: machine1
+#  characteristics:
+#  - type: com.example.linux
+#    com.example.linux.kernelVersion: [3.9.6]
+#    org.iaas.bitsize: 64
+  
