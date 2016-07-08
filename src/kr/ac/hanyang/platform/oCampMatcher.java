@@ -120,7 +120,11 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	}
 	
 	@Override
-	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc) {
+	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc){
+		return apply(deploymentPlanItem,atc,null); //change null to the application
+	}
+	
+	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc, Object parent) {
 		if (!(deploymentPlanItem instanceof Service) && !(deploymentPlanItem instanceof Artifact) && !(deploymentPlanItem instanceof ArtifactRequirement))	return false;
 		String type = lookupType(deploymentPlanItem);
 		if (type == null) return false;
@@ -147,7 +151,8 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
             	Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
-
+            builder.customAttribute("parent", parent);
+        	
 
             //simply gets the first location.	
             Map locations = mgmt.getLocationRegistry().getDefinedLocations();		
@@ -177,18 +182,24 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        if (!brooklynFlags.isEmpty()) {
 	            builder.customAttribute(BrooklynCampReservedKeys.BROOKLYN_FLAGS, brooklynFlags);
 	        }
+	        atc.add(builder.build()); 
         }
         else if (deploymentPlanItem instanceof Artifact){ 
         	name = ((Artifact)deploymentPlanItem).getName();
         	if (!Strings.isBlank(name)) 
         		builder.name(name);
+        	
+        	builder.customAttribute("parent", parent);
+        	
         	List<Object> reqs = MutableList.copyOf( ((Artifact)deploymentPlanItem).getRequirements() ); 
         	       	
         	if (reqs != null ){
-        		System.out.println(reqs);
+        	
         		for(Object requirement: reqs){
-	        		apply(requirement, atc);        			
-	        		
+        			builder.customAttribute("child", requirement.toString());
+                	
+        			apply(requirement, atc, deploymentPlanItem);        			
+        			atc.add(builder.build());
         		}
         		// perform the parsing of the requirements
         		// add the requirements to the builder
@@ -205,6 +216,8 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         	// here I need to formalize the artifact
         }
         else if (deploymentPlanItem instanceof ArtifactRequirement){
+        	builder.customAttribute("parent", parent);
+        	
         	Map<String, Object> attrs = MutableMap.copyOf( ((ArtifactRequirement)deploymentPlanItem).getCustomAttributes() );
 	        		if (attrs.containsKey("fulfillment")){
 	        			// need to convert this into a service here by a recursive call
@@ -224,6 +237,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        			List<String> services =  matchService(typeName);
 	        			for(String matchedService: services){
 	        				//System.out.println(matchedService);
+	        				builder.customAttribute("child", matchedService);
 	        				fulfillment.put("type",matchedService);
 	        			}
 	        			//List<Service> services = new MutableList<Service>();
@@ -231,12 +245,12 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        			
 	        			//fulfillment.add("type", )
 	        			Service service = Service.of(fulfillment); //create a service object 
-	        			apply(service, atc); //recursive call
+	        			apply(service, atc, deploymentPlanItem); //recursive call
 	        			
 	        		}
         }
         
-        atc.add(builder.build());
+        //atc.add(builder.build());
 
         return true;
 		//return false; // TODO need to remove this. but i dont want to actually deploy as yet.

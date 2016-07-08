@@ -17,7 +17,6 @@
 # under the License.
 #
 name: Simple Netcat Server Example 2 CAMP
-#location: AWS Tokyo (ap-northeast-1)
 artifacts:
 - type: kr.ac.hanyang.entities.artifacts.machine.Machine_Art
   content: |
