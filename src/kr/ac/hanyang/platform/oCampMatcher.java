@@ -10,6 +10,7 @@ import org.apache.brooklyn.camp.brooklyn.BrooklynCampConstants;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampReservedKeys;
 import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateResolver;
 import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityMatcher;
+import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate.Builder;
 import org.apache.brooklyn.camp.spi.pdp.Artifact;
@@ -25,6 +26,8 @@ import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.text.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import kr.ac.hanyang.platform.oCampPlatformComponentTemplate;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -121,10 +124,22 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	
 	@Override
 	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc){
-		return apply(deploymentPlanItem,atc,null); //change null to the application
+		
+		//Object instantiator = atc.getInstantiator();
+		// use my own instantiator so I can instantiate Services and Artifact
+		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
+		Object result = applyPlanItem(deploymentPlanItem);
+		if (result != null){
+			atc.add((PlatformComponentTemplate) result);
+			return true; //change null to the application
+		}else
+			return false;
+		// add to the ATC here *******
 	}
 	
-	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc, Object parent) {
+	
+	//recursve method
+	public Object applyPlanItem(Object deploymentPlanItem) {
 		if (!(deploymentPlanItem instanceof Service) && !(deploymentPlanItem instanceof Artifact) && !(deploymentPlanItem instanceof ArtifactRequirement))	return false;
 		String type = lookupType(deploymentPlanItem);
 		if (type == null) return false;
@@ -132,13 +147,15 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		log.debug("Item "+deploymentPlanItem+" being instantiated with "+type);
 		
 		//now to instantiate the AssemblyTemplate
-		Object instantiator = atc.getInstantiator();
+		//Object instantiator = atc.getInstantiator();
 		// remove the restrictions for only brooklyn types
-		Builder<? extends PlatformComponentTemplate> builder = PlatformComponentTemplate.builder();
+		
+		//**** build an oCampPlatformComponentTemplate instead
+		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
         builder.type( type.indexOf(':')==-1 ? "brooklyn:"+type : type ); //reform the type string: this forces the types to only be brooklyn types
         
         // use my own instantiator so I can instantiate Services and Artifacts
-        atc.instantiator(oCampAssemblyTemplateInstantiator.class);
+        //atc.instantiator(oCampAssemblyTemplateInstantiator.class);
         
         //cleaning up the map by removing items not needed
         // leaving this for now since I'm testing with prooklyn blueprints
@@ -151,7 +168,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
             	Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
-            builder.customAttribute("parent", parent);
+           // builder.customAttribute("parent", parent);
         	
 
             //simply gets the first location.	
@@ -182,24 +199,25 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        if (!brooklynFlags.isEmpty()) {
 	            builder.customAttribute(BrooklynCampReservedKeys.BROOKLYN_FLAGS, brooklynFlags);
 	        }
-	        atc.add(builder.build()); 
+	        return builder.build(); 
         }
         else if (deploymentPlanItem instanceof Artifact){ 
         	name = ((Artifact)deploymentPlanItem).getName();
         	if (!Strings.isBlank(name)) 
         		builder.name(name);
         	
-        	builder.customAttribute("parent", parent);
+        	//builder.customAttribute("parent", parent);
         	
         	List<Object> reqs = MutableList.copyOf( ((Artifact)deploymentPlanItem).getRequirements() ); 
         	       	
         	if (reqs != null ){
         	
         		for(Object requirement: reqs){
-        			builder.customAttribute("child", requirement.toString());
+        			//builder.customAttribute("child", requirement.toString());
                 	
-        			apply(requirement, atc, deploymentPlanItem);        			
-        			atc.add(builder.build());
+        			
+        			builder.add((oCampPlatformComponentTemplate)applyPlanItem(requirement));
+        			//atc.add(builder.build());
         		}
         		// perform the parsing of the requirements
         		// add the requirements to the builder
@@ -214,9 +232,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         	//TODO complete attribute
         	//added to test building
         	// here I need to formalize the artifact
+        	return builder.build();
         }
         else if (deploymentPlanItem instanceof ArtifactRequirement){
-        	builder.customAttribute("parent", parent);
+        	//builder.customAttribute("parent", parent);
         	
         	Map<String, Object> attrs = MutableMap.copyOf( ((ArtifactRequirement)deploymentPlanItem).getCustomAttributes() );
 	        		if (attrs.containsKey("fulfillment")){
@@ -237,7 +256,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        			List<String> services =  matchService(typeName);
 	        			for(String matchedService: services){
 	        				//System.out.println(matchedService);
-	        				builder.customAttribute("child", matchedService);
+	        				//builder.customAttribute("child", matchedService);
 	        				fulfillment.put("type",matchedService);
 	        			}
 	        			//List<Service> services = new MutableList<Service>();
@@ -245,9 +264,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        			
 	        			//fulfillment.add("type", )
 	        			Service service = Service.of(fulfillment); //create a service object 
-	        			apply(service, atc, deploymentPlanItem); //recursive call
+	        			builder.add((oCampPlatformComponentTemplate)applyPlanItem(service)); //recursive call
 	        			
 	        		}
+	        		return builder.build();
         }
         
         //atc.add(builder.build());

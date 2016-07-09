@@ -111,7 +111,10 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        //for (PlatformComponentTemplate pctl: (List)template.getPlatformComponentTemplates())
 	        
 	        for (ResolvableLink<PlatformComponentTemplate> ctl: template.getPlatformComponentTemplates().links()) {
-	            PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
+	            //use link's get id to and its resource provider to get the item i.e. resolve()
+	        	// the item will be the platform component template
+	        	
+	        	PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
 	            BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	            //get the type of the component
 	            // if the component is an artifact then try to find the requirements
@@ -123,11 +126,24 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            
 	            
 	            EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
-	            
-	            System.out.println(spec.getType());
+	            spec.child(buildTemplateArtifactRec((oCampPlatformComponentTemplate)appChildComponentTemplate));
+	            //System.out.println(spec.getType());
 	            result.add(spec);
 	        }
 	        return result;
+	    }
+	    
+	  //TODO need to complete this method
+	    private List<EntitySpec<?>> buildTemplateArtifactRec(BrooklynClassLoadingContext loader, oCampPlatformComponentTemplate pctl, Set<String> encounteredRegisteredTypeIds){
+	    	List<EntitySpec<?>> result = Lists.newArrayList();
+	    	for (ResolvableLink<PlatformComponentTemplate> ctl: pctl.getPlatformComponentTemplates().links()) {
+	    		PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
+	    		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	    		EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
+	    		spec.children(buildTemplateArtifactRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	    		result.add(spec);
+	    	}
+	    	return result;
 	    }
 
 	    
