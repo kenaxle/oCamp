@@ -1,12 +1,9 @@
 package kr.ac.hanyang.entities.artifacts.machine;
 
-import org.apache.brooklyn.core.entity.AbstractEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.brooklyn.core.entity.trait.Startable;
+import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 
-import kr.ac.hanyang.entities.IArtifact;
-
-public class Machine_Art<T> extends AbstractEntity{
+public class Machine_Art<T> extends EffectorStartableImpl implements Startable{
 	//private static final Logger log = LoggerFactory.getLogger(Machine_Art.class);
 	
 	private T content;
@@ -25,9 +22,14 @@ public class Machine_Art<T> extends AbstractEntity{
 		this.content = content;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public T getContent(){
 		return (T) this.content;
 	}
-	
+
+//	@Override
+//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 }

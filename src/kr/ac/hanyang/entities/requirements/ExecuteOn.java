@@ -1,16 +1,16 @@
 package kr.ac.hanyang.entities.requirements;
 
 import java.util.Collection;
-
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
-import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.entity.trait.Startable;
+import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 
 import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IExecutable;
 import kr.ac.hanyang.entities.services.AbstractOCampService;
 
-public class ExecuteOn extends AbstractEntity {
+public class ExecuteOn extends EffectorStartableImpl implements Startable {
 	
 	//private Artifact art;
 	private AbstractOCampService serviceFulfillment;
@@ -37,6 +37,30 @@ public class ExecuteOn extends AbstractEntity {
 				fulfillment.executeContent((String)content);
 			}
 	}
+
+	@Override
+	public void start(Collection<? extends Location> locations) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void restart() {
+		// TODO Auto-generated method stub
+		
+	}
+
+//	@Override
+//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	
 	

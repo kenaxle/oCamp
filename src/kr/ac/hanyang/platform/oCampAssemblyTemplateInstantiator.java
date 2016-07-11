@@ -126,7 +126,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            
 	            
 	            EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
-	            spec.child(buildTemplateArtifactRec((oCampPlatformComponentTemplate)appChildComponentTemplate));
+	            spec.children(buildTemplateSpecRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
 	            //System.out.println(spec.getType());
 	            result.add(spec);
 	        }
@@ -134,13 +134,13 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    }
 	    
 	  //TODO need to complete this method
-	    private List<EntitySpec<?>> buildTemplateArtifactRec(BrooklynClassLoadingContext loader, oCampPlatformComponentTemplate pctl, Set<String> encounteredRegisteredTypeIds){
+	    private List<EntitySpec<?>> buildTemplateSpecRec(BrooklynClassLoadingContext loader, oCampPlatformComponentTemplate pctl, Set<String> encounteredRegisteredTypeIds){
 	    	List<EntitySpec<?>> result = Lists.newArrayList();
 	    	for (ResolvableLink<PlatformComponentTemplate> ctl: pctl.getPlatformComponentTemplates().links()) {
 	    		PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
 	    		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	    		EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
-	    		spec.children(buildTemplateArtifactRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	    		spec.children(buildTemplateSpecRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
 	    		result.add(spec);
 	    	}
 	    	return result;
