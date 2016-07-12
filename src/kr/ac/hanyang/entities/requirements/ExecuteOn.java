@@ -3,6 +3,8 @@ package kr.ac.hanyang.entities.requirements;
 import java.util.Collection;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
+import org.apache.brooklyn.api.mgmt.Task;
+import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 
@@ -40,7 +42,12 @@ public class ExecuteOn extends EffectorStartableImpl implements Startable {
 
 	@Override
 	public void start(Collection<? extends Location> locations) {
-		// TODO Auto-generated method stub
+		for(Entity e: this.getChildren()){
+			
+			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);
+			//Entities.waitForServiceUp(e,);
+			System.out.println("ExecuteOn task... "+task.getStatusSummary());
+		}
 		
 	}
 
