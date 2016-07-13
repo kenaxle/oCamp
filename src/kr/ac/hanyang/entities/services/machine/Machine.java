@@ -20,9 +20,8 @@ public class Machine extends MachineEntityImpl implements IExecutable, IMachine,
 		super.execCommand(command);
 	}
 
-	@Override
 	public String[] getCapabilities() {
-		return Capabilities;
+		return CAPABILITIES;
 	}
 
 

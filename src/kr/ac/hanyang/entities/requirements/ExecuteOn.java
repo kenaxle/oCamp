@@ -10,12 +10,9 @@ import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 
 import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IExecutable;
-import kr.ac.hanyang.entities.services.AbstractOCampService;
 
 public class ExecuteOn extends EffectorStartableImpl implements Startable {
 	
-	//private Artifact art;
-	private AbstractOCampService serviceFulfillment;
 	
 	public ExecuteOn(){
 		super();
