@@ -7,13 +7,14 @@ import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.core.mgmt.EntityManagementUtils.CreationResult;
-import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class Machine_Art<T> extends EffectorStartableImpl implements Startable{
-	//private static final Logger log = LoggerFactory.getLogger(Machine_Art.class);
-	
-	private T content;
+import kr.ac.hanyang.entities.services.BasicOCampArtifact;
+import kr.ac.hanyang.entities.services.IBasicOCampArtifact;
+
+public class Machine_Art<T> extends BasicOCampArtifact<Object> implements Startable, IMachine_Art{
+	private static final Logger log = LoggerFactory.getLogger(Machine_Art.class);
 	
 	boolean connectedSensors = false; // not sure if I need sensors as yet
 	
@@ -24,26 +25,21 @@ public class Machine_Art<T> extends EffectorStartableImpl implements Startable{
 	public void init(){
 		super.init();
 	}
-	
-	public void setContent(T content){
-		this.content = content;
-	}
-	
-	public T getContent(){
-		return (T) this.content;
-	}
 
-	
-	
 	@Override
-	public void start(Collection<? extends Location> locations) {
+	public String[] getRequirements() {
 		// TODO Auto-generated method stub
-		//super.start(locations);
+		String[] result = new String[IBasicOCampArtifact.REQUIREMENTS.length+IMachine_Art.REQUIREMENTS.length];
+		System.arraycopy(IBasicOCampArtifact.REQUIREMENTS, 0, result, 0, IBasicOCampArtifact.REQUIREMENTS.length);
+		System.arraycopy(IMachine_Art.REQUIREMENTS, 0, result, IBasicOCampArtifact.REQUIREMENTS.length, IMachine_Art.REQUIREMENTS.length); 
+		return result;
+	}
+	
+	public void start(Collection<? extends Location> locations ){
 		for(Entity e: this.getChildren()){
-			
-			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);
-			//Entities.waitForServiceUp(e,);
-			System.out.println("Machine_Art... task "+task.getStatusSummary());
+			log.info("Starting ExecuteOn...");
+			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
+			//task.blockUntilEnded(null);
 		}
 	}
 
