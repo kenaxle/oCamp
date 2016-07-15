@@ -12,10 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IExecutable;
-import kr.ac.hanyang.entities.artifacts.machine.Machine_Art;
 
 public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
-	private static final Logger log = LoggerFactory.getLogger(Machine_Art.class);
+	private static final Logger log = LoggerFactory.getLogger(ExecuteOn.class);
 	
 	T content;
 	

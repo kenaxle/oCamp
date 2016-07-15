@@ -111,7 +111,7 @@ public class oCampYamlLauncher {
 	public static void main (String[] args){
 		oCampYamlLauncher l = new oCampYamlLauncher();
 		l.setShutdownAppsOnExit(true);
-		l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint2.yaml");
+		l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint3.yaml");
 		//l.launchAppYaml("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint2.yaml");
 	}
 	

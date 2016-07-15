@@ -1,4 +1,4 @@
-package kr.ac.hanyang.entities.artifacts.machine;
+package kr.ac.hanyang.entities.artifacts;
 
 import org.apache.brooklyn.api.catalog.Catalog;
 import org.apache.brooklyn.api.entity.ImplementedBy;

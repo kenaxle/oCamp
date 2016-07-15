@@ -33,14 +33,10 @@ public class BasicOCampArtifact<T> extends EffectorStartableImpl implements IBas
 	}
 	
 	@Override
-	public void start(Collection<? extends Location> locations) {
-		// TODO Auto-generated method stub
-		//super.start(locations);
+	public void start(Collection<? extends Location> locations ){
 		for(Entity e: this.getChildren()){
-			
-			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);
-			//Entities.waitForServiceUp(e,);
-			System.out.println("Machine_Art... task "+task.getStatusSummary());
+			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
+			//task.blockUntilEnded(null);
 		}
 	}
 

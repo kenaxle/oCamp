@@ -6,7 +6,7 @@ import org.apache.brooklyn.entity.machine.MachineEntityImpl;
 
 import kr.ac.hanyang.entities.IExecutable;
 import kr.ac.hanyang.entities.IService;
-import kr.ac.hanyang.entities.artifacts.machine.IMachine_Art;
+import kr.ac.hanyang.entities.artifacts.IMachine_Art;
 import kr.ac.hanyang.entities.services.IBasicOCampArtifact;
 import kr.ac.hanyang.entities.services.IBasicOCampService;
 

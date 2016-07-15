@@ -1,11 +1,5 @@
-package kr.ac.hanyang.entities.artifacts.machine;
+package kr.ac.hanyang.entities.artifacts;
 
-import java.util.Collection;
-
-import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.api.location.Location;
-import org.apache.brooklyn.api.mgmt.Task;
-import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,14 +27,6 @@ public class Machine_Art<T> extends BasicOCampArtifact<Object> implements Starta
 		System.arraycopy(IBasicOCampArtifact.REQUIREMENTS, 0, result, 0, IBasicOCampArtifact.REQUIREMENTS.length);
 		System.arraycopy(IMachine_Art.REQUIREMENTS, 0, result, IBasicOCampArtifact.REQUIREMENTS.length, IMachine_Art.REQUIREMENTS.length); 
 		return result;
-	}
-	
-	public void start(Collection<? extends Location> locations ){
-		for(Entity e: this.getChildren()){
-			log.info("Starting ExecuteOn...");
-			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
-			//task.blockUntilEnded(null);
-		}
 	}
 
 	
