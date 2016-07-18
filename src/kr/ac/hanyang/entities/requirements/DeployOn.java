@@ -12,33 +12,36 @@ import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IDeployable;
-import kr.ac.hanyang.entities.IExecutable;
 
-public class DeployOn<T> extends EffectorStartableImpl implements Startable {
+public class DeployOn<T> extends EffectorStartableImpl implements Startable, IDeployOn{
 	private static final Logger log = LoggerFactory.getLogger(DeployOn.class);
 	
-	T content;
+	T url;
 	String target;
 	
 	public DeployOn(){
 		super();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void init(){
-		content = ((IArtifact)this.getParent()).getContent();
-		target = "~/brooklyn-managed-processes/installs/ITomcat_8.0.36/apache-tomcat-8.0.36/webapps/";
 		super.init();
+		url = ((IArtifact)this.getParent()).getContent();//(T) "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war";
+		target = "/webapp";
 	}
 	
+	@SuppressWarnings("unchecked")
+	public T getUrl(){return url;}
+	public String getTarget(){return target;}
 	
 	
 	public boolean deployContent(Entity child) {
 		//Object content =  ((IArtifact)this.getParent()).getContent();
-		if(content instanceof String){
+		if(url instanceof String){
 				if (child instanceof IDeployable){
 					IDeployable fulfillment = (IDeployable) child;
-					log.info("Executecuting task on DeployOn...");
-					fulfillment.deploy((String)content, target);
+					log.info("**** INFO INFO **** Executecuting task on DeployOn...");
+					fulfillment.deploy((String)url, target);
 					return true;
 				}
 		}
@@ -49,22 +52,19 @@ public class DeployOn<T> extends EffectorStartableImpl implements Startable {
 	public void start(Collection<? extends Location> locations) {
 		
 		for(Entity e: this.getChildren()){
-			log.info("Starting ExecuteOn...");
+			log.info("**** INFO INFO **** Starting DeployOn...");
 			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
 			task.blockUntilEnded(null);
-			if (task.isDone())
-				deployContent(e);
+			
+			if (task.isDone() /*&& !task.isError()*/){
+				log.info("**** INFO INFO **** "+task.getStatusSummary());
+				Task<Void> deployTask = Entities.invokeEffector(this, e, IDeployable.DEPLOY);
+				log.info("**** INFO INFO ****"+deployTask.getStatusSummary());
+			}else
+				log.error("**** ERROR ERROR **** ERROR ERROR ****"+task.getStatusSummary());
 		}
 	}
 
 
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	
-	
-	
 
 }

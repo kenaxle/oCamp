@@ -21,10 +21,12 @@ public class BasicOCampArtifact<T> extends EffectorStartableImpl implements IBas
 	
 	public void init(){
 		super.init();
+		setContent();
 	}
 	
-	public void setContent(T content){
-		this.content = content;
+	@SuppressWarnings("unchecked")
+	public void setContent(){
+		this.content = (T) getConfig(CONTENT);
 	}
 	
 	@SuppressWarnings("unchecked")

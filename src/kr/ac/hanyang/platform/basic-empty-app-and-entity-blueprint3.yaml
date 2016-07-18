@@ -25,6 +25,7 @@ artifacts:
     fulfillment: 
       characteristics:
       - type: kr.ac.hanyang.entities.services.web.tomcat.Tomcat8
+        kernelVersion: [3.9.6]
         
 
 #services:
