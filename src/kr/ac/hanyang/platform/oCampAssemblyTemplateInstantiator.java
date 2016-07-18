@@ -12,7 +12,6 @@ import org.apache.brooklyn.api.objs.SpecParameter;
 import org.apache.brooklyn.camp.CampPlatform;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampReservedKeys;
 import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynAssemblyTemplateInstantiator;
-import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateResolver;
 import org.apache.brooklyn.camp.spi.Assembly;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate.Builder;
@@ -115,7 +114,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        	// the item will be the platform component template
 	        	
 	        	PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
-	            BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	            oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	            //get the type of the component
 	            // if the component is an artifact then try to find the requirements
 	            // then for each requirement find the service
@@ -138,7 +137,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    	List<EntitySpec<?>> result = Lists.newArrayList();
 	    	for (ResolvableLink<PlatformComponentTemplate> ctl: pctl.getPlatformComponentTemplates().links()) {
 	    		PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
-	    		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	    		oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	    		EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
 	    		spec.children(buildTemplateSpecRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
 	    		result.add(spec);
@@ -152,7 +151,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 
 	        for (ResolvableLink<PlatformComponentTemplate> ctl: template.getPlatformComponentTemplates().links()) {
 	            PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
-	            BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	            oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	            EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
 	            result.add(spec);
 	        }
@@ -188,8 +187,8 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    }
 
 	    private EntitySpec<? extends Application> createWrapperApp(AssemblyTemplate template, BrooklynClassLoadingContext loader) {
-	        BrooklynComponentTemplateResolver resolver = BrooklynComponentTemplateResolver.Factory.newInstance(
-	            loader, buildWrapperAppTemplate(template));
+	        oCampComponentTemplateResolver resolver = oCampComponentTemplateResolver.Factory.newInstance(
+ 	            loader, buildWrapperAppTemplate(template));
 	        EntitySpec<Application> wrapperSpec = resolver.resolveSpec(ImmutableSet.<String>of());
 	        resetSpecIfTemplateHasNoExplicitParameters(template, wrapperSpec);
 	        // caller always sets WRAPPER_APP config; should we do it here?
