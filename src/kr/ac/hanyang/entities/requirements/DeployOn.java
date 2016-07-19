@@ -16,7 +16,7 @@ import kr.ac.hanyang.entities.IDeployable;
 public class DeployOn<T> extends EffectorStartableImpl implements Startable, IDeployOn{
 	private static final Logger log = LoggerFactory.getLogger(DeployOn.class);
 	
-	T url;
+	T contentUrl;
 	String target;
 	
 	public DeployOn(){
@@ -26,22 +26,22 @@ public class DeployOn<T> extends EffectorStartableImpl implements Startable, IDe
 	@SuppressWarnings("unchecked")
 	public void init(){
 		super.init();
-		url = ((IArtifact)this.getParent()).getContent();//(T) "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war";
+		contentUrl = ((IArtifact)this.getParent()).getContent();
 		target = "/webapp";
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T getUrl(){return url;}
+	public T getContentUrl(){return contentUrl;}
 	public String getTarget(){return target;}
 	
 	
 	public boolean deployContent(Entity child) {
 		//Object content =  ((IArtifact)this.getParent()).getContent();
-		if(url instanceof String){
+		if(contentUrl instanceof String){
 				if (child instanceof IDeployable){
 					IDeployable fulfillment = (IDeployable) child;
 					log.info("**** INFO INFO **** Executecuting task on DeployOn...");
-					fulfillment.deploy((String)url, target);
+					fulfillment.deploy((String)contentUrl, target);
 					return true;
 				}
 		}

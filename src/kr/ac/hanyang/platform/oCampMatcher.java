@@ -14,6 +14,7 @@ import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate.Builder;
 import org.apache.brooklyn.camp.spi.pdp.Artifact;
+import org.apache.brooklyn.camp.spi.pdp.ArtifactContent;
 import org.apache.brooklyn.camp.spi.pdp.ArtifactRequirement;
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
 import org.apache.brooklyn.camp.spi.pdp.Service;
@@ -94,6 +95,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	// into consideration the characteristics 
 	protected List<String> matchService(String typeName){
 		String[] services = {"kr.ac.hanyang.entities.services.machine.Machine","kr.ac.hanyang.entities.services.web.tomcat.Tomcat8"};
+		
 		List<String> matches = new MutableList<String>();
 		for(String servType: services){
 			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();
@@ -152,7 +154,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		
 		//**** build an oCampPlatformComponentTemplate instead
 		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-        builder.type( type.indexOf(':')==-1 ? "brooklyn:"+type : type ); //reform the type string: this forces the types to only be brooklyn types
+        builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
         
         // use my own instantiator so I can instantiate Services and Artifacts
         //atc.instantiator(oCampAssemblyTemplateInstantiator.class);
@@ -187,13 +189,14 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	                throw new IllegalArgumentException("brooklyn.flags must be a map of brooklyn flags");
 	            brooklynFlags.putAll((Map<?,?>)origBrooklynFlags);
 	        }
-	
-	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CONFIG);
-	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_POLICIES);
-	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_ENRICHERS);
-	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_INITIALIZERS);
-	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CHILDREN);
-	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CATALOG);
+	        
+	        //must remove these TODO
+//	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CONFIG);
+//	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_POLICIES);
+//	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_ENRICHERS);
+//	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_INITIALIZERS);
+//	        addCustomListAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CHILDREN);
+//	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CATALOG);
 	
 	        brooklynFlags.putAll(attrs);
 	        if (!brooklynFlags.isEmpty()) {
@@ -205,8 +208,16 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         	name = ((Artifact)deploymentPlanItem).getName();
         	if (!Strings.isBlank(name)) 
         		builder.name(name);
+        	ArtifactContent content = (ArtifactContent)((Artifact)deploymentPlanItem).getContent();
+        	if (content != null){
+        		builder.customAttribute("content",content.getHref());
+        	}
+        	Map<String, Object> attrs = MutableMap.copyOf( ((Artifact)deploymentPlanItem).getCustomAttributes() ); 
+       
+        	// may need this if deciding to add attributes to artifacts
+        	//addCustomMapAttributeIfNonNull(builder,attrs,);
         	
-        	//builder.customAttribute("parent", parent);
+        	
         	
         	List<Object> reqs = MutableList.copyOf( ((Artifact)deploymentPlanItem).getRequirements() ); 
         	       	
@@ -235,11 +246,11 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         	return builder.build();
         }
         else if (deploymentPlanItem instanceof ArtifactRequirement){
-        	//builder.customAttribute("parent", parent);
+        	
         	
         	Map<String, Object> attrs = MutableMap.copyOf( ((ArtifactRequirement)deploymentPlanItem).getCustomAttributes() );
 	        		if (attrs.containsKey("fulfillment")){
-	        			// need to convert this into a service here by a recursive call
+	        			// need to recursively find the service
 	        			
 	        			Map<String, Object> fulfillment = (Map<String, Object>) attrs.remove("fulfillment");
 	        			//builder.customAttribute("fulfillment", fulfillment);

@@ -28,7 +28,7 @@ public interface IDeployable{
         public static final ConfigKey<Object> TARGET = ConfigKeys.newConfigKey(Object.class, "target",
                 "where the content will be hosted.");
         @Override public Void call(ConfigBag parameters) {
-            parameters.put(URL, (String)((IDeployOn)entity().getParent()).getUrl());
+            parameters.put(URL, (String)((IDeployOn)entity().getParent()).getContentUrl());
             parameters.put(TARGET, (String)((IDeployOn)entity().getParent()).getTarget());
             return new MethodEffector<Void>(IDeployable.class, "deploy").call(entity(), parameters.getAllConfig());
         }
