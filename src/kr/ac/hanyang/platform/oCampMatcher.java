@@ -1,5 +1,8 @@
 package kr.ac.hanyang.platform;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -19,15 +22,18 @@ import org.apache.brooklyn.camp.spi.pdp.ArtifactRequirement;
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
 import org.apache.brooklyn.camp.spi.pdp.Service;
 import org.apache.brooklyn.camp.spi.resolve.PdpMatcher;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.catalog.internal.BasicBrooklynCatalog;
 import org.apache.brooklyn.core.location.BasicLocationDefinition;
 import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
+import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
 import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
+import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.text.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import kr.ac.hanyang.platform.oCampReserved;
 import kr.ac.hanyang.platform.oCampPlatformComponentTemplate;
 
 import com.google.common.collect.Lists;
@@ -35,7 +41,7 @@ import com.google.common.collect.Maps;
 
 import kr.ac.hanyang.entities.IService;
 
-public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
+public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oCampReserved {
 	private static final Logger log = LoggerFactory.getLogger(oCampMatcher.class);
 	//private ManagementContext mgmt;
 	
@@ -86,16 +92,12 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		return null;
 	}
 	
-	private String extractTypeName(String type){
-		int index = type.lastIndexOf(".");
-		return type.substring(index+1);
-	}
+	
 	
 	// matches the best service to the requirement type and takes 
 	// into consideration the characteristics 
 	protected List<String> matchService(String typeName){
-		String[] services = {"kr.ac.hanyang.entities.services.machine.Machine","kr.ac.hanyang.entities.services.web.tomcat.Tomcat8"};
-		
+		String[] services = {"machine.Machine","web.tomcat.Tomcat8"};
 		List<String> matches = new MutableList<String>();
 		for(String servType: services){
 			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();
@@ -103,7 +105,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	        	loader = JavaBrooklynClassLoadingContext.create(mgmt);
 	        IService service;
 			try {
-				service = (IService) loader.loadClass(servType).newInstance();
+				service = (IService) loader.loadClass(SERVICE_PREFIX+servType).newInstance();
 				for(String capType: service.getCapabilities()){
 					if (capType.equals(typeName))
 						matches.add(service.getClass().getCanonicalName()) ;
@@ -189,6 +191,16 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 	                throw new IllegalArgumentException("brooklyn.flags must be a map of brooklyn flags");
 	            brooklynFlags.putAll((Map<?,?>)origBrooklynFlags);
 	        }
+	        
+	        //add custom tags
+	        Collection<String> keys = getTagIDs();
+	        for(String key: keys){
+	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
+	        }
+	        
+	        //get non-depricated config tags 
+	        // for each tag determine if it is in the PDP
+	        // if the tag is in the pdp then add the custom attribute.
 	        
 	        //must remove these TODO
 //	        addCustomMapAttributeIfNonNull(builder, attrs, BrooklynCampReservedKeys.BROOKLYN_CONFIG);
@@ -287,8 +299,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
 		//return false; // TODO need to remove this. but i dont want to actually deploy as yet.
 	}
 	
-	// copying these methods howver I may have to remove them 
-	// only keeping them to not break compatibility as yet
 	
 	 /**
      * Looks for the given key in the map of attributes and adds it to the given builder
@@ -328,6 +338,40 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher {
         }
     }
 
+	private String extractTypeName(String type){
+		int index = type.lastIndexOf(".");
+		return type.substring(index+1);
+	}
 	
-
+	private Collection<String> getTagIDs(){
+		ArrayList<String> result = new ArrayList<String>();
+		BrooklynClassLoadingContext bclc = JavaBrooklynClassLoadingContext.create(mgmt);
+		//load the configKeys class
+		Maybe<Class<?>> mby = bclc.tryLoadClass("org.apache.brooklyn.core.entity.BrooklynConfigKeys");
+		if (mby.isPresentAndNonNull()){
+			Class<?> clazz = mby.get();
+			try {
+				Field[] fields = clazz.getDeclaredFields();
+				for(int i = 0; i<fields.length-1; i++){
+	
+					Field field = fields[i];
+					field.setAccessible(true);
+					if(! field.isAnnotationPresent(Deprecated.class)){
+					if (field.get(null) instanceof ConfigKey)
+						result.add(((ConfigKey<?>) field.get(null)).getName());
+					else if (field.get(null) instanceof AttributeSensorAndConfigKey)
+						result.add(((AttributeSensorAndConfigKey<?, ?>) field.get(null)).getConfigKey().getName());
+					else
+						result.add(((String) field.get(null)).toString());
+					}
+				}			
+			} catch (ClassCastException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				log.error("***Exception***"+e);
+				//e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 }

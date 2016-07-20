@@ -16,12 +16,12 @@ public interface ITomcat extends Tomcat8Server {
 	@SetFromFlag("version")
     ConfigKey<String> SUGGESTED_VERSION = ConfigKeys.newConfigKeyWithDefault(SoftwareProcess.SUGGESTED_VERSION, "8.0.36");
 
-	
 	@SetFromFlag("downloadUrl")
     AttributeSensorAndConfigKey<String, String> DOWNLOAD_URL = ConfigKeys.newSensorAndConfigKeyWithDefault(SoftwareProcess.DOWNLOAD_URL,
             "http://mirror.apache-kr.org/tomcat/tomcat-8/v${version}/bin/apache-tomcat-${version}.tar.gz");
 
 	public static final String[] CAPABILITIES = {"DeployOn"};
 		//need to add the characteristics also
+		//characteristics should be added as AttributeSensorAndConfigKey
 
 }

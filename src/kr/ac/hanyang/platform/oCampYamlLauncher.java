@@ -2,6 +2,7 @@ package kr.ac.hanyang.platform;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
@@ -14,19 +15,25 @@ import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.location.LocationDefinition;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.Task;
+import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
 import org.apache.brooklyn.camp.CampPlatform;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampPlatformLauncherAbstract;
 import org.apache.brooklyn.camp.brooklyn.YamlLauncherAbstract;
 import org.apache.brooklyn.camp.server.rest.CampServer;
 import org.apache.brooklyn.camp.spi.Assembly;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.location.BasicLocationDefinition;
 import org.apache.brooklyn.core.mgmt.BrooklynTaskTags;
+import org.apache.brooklyn.core.mgmt.classloading.BrooklynClassLoadingContextSequential;
+import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
 import org.apache.brooklyn.core.mgmt.internal.BrooklynShutdownHooks;
+import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
 import org.apache.brooklyn.launcher.BrooklynLauncher;
 import org.apache.brooklyn.util.core.ResourceUtils;
 import org.apache.brooklyn.util.exceptions.Exceptions;
+import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.stream.Streams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,11 +115,17 @@ public class oCampYamlLauncher {
         this.shutdownAppsOnExit = shutdownAppsOnExit;
     }
 	
+	@SuppressWarnings("unchecked")
 	public static void main (String[] args){
 		oCampYamlLauncher l = new oCampYamlLauncher();
 		l.setShutdownAppsOnExit(true);
-		l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint3.yaml");
+		//l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint3.yaml");
 		//l.launchAppYaml("file:///C:/Users/Kena/Git/oCamp/src/kr/ac/hanyang/platform/basic-empty-app-and-entity-blueprint2.yaml");
+		
+		
+		
+
+		
 	}
 	
 //	public void stopServers() throws Exception {
