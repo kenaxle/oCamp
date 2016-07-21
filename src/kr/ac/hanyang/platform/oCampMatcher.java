@@ -96,7 +96,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	
 	// matches the best service to the requirement type and takes 
 	// into consideration the characteristics 
-	protected List<String> matchService(String typeName){
+	protected List<String> matchService(String typeName, Collection<String> charTypes){
 		String[] services = {"machine.Machine","web.tomcat.Tomcat8"};
 		List<String> matches = new MutableList<String>();
 		for(String servType: services){
@@ -274,9 +274,13 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	        			//then need to match the characteristics to narrow down the best service.
 	        			
 	        			// this lookup information will be added to the interface of each service type.
-	        			String typeName = extractTypeName(((ArtifactRequirement)deploymentPlanItem).getRequirementType());
-	        			
-	        			List<String> services =  matchService(typeName);
+	        			String reqType = extractTypeName(((ArtifactRequirement)deploymentPlanItem).getRequirementType());
+	        			List charTypes = new ArrayList();
+	        			List characteristics = (ArrayList) fulfillment.get("characteristics");
+	        			for (Object obj: characteristics){
+	        				charTypes.add(((Map<String,Object>)obj).get("type"));
+	        			}
+	        			List<String> services =  matchService(reqType,charTypes);
 	        			for(String matchedService: services){
 	        				//System.out.println(matchedService);
 	        				//builder.customAttribute("child", matchedService);
