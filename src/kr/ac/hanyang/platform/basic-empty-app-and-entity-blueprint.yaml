@@ -16,18 +16,16 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-name: Simple Netcat Server Example 2 CAMP
+name: Simple PHP
 #location: AWS Tokyo (ap-northeast-1)
 artifacts:
-- type: kr.ac.hanyang.core.ArtifactWAR
-  content: {some-app.rpm}
+- type: kr.ac.hanyang.entities.artifacts.Software
+  content: apt-get install php5
   requirements:
-  - type: kr.ac.hanyang.oCamp:Install
-    fulfillment: tomcat1
+  - type: kr.ac.hanyang.entities.requirements.ExecuteOn
+    fulfillment: 
+      characteristics:
+      - type: kr.ac.hanyang.entities.services.software.SoftwareProcess
+        
+        
      
-
-services:
-- type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
-  name: Simple Tomcat Server
-  id: tomcat1
-  

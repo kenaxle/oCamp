@@ -97,7 +97,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	// matches the best service to the requirement type and takes 
 	// into consideration the characteristics 
 	protected List<String> matchService(String typeName, Collection<String> charTypes){
-		String[] services = {"machine.Machine","web.tomcat.Tomcat8"};
+		String[] services = {"web.tomcat.Tomcat8","software.SoftwareProcess"};
 		List<String> matches = new MutableList<String>();
 		for(String servType: services){
 			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();

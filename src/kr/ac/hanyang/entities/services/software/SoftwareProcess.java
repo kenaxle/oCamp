@@ -21,9 +21,10 @@ public class SoftwareProcess extends VanillaSoftwareProcessImpl implements IExec
 	}
 
 	@Override
-	public boolean executeContent(String command) {
+	public void execute(String command) {
 		//return super..execCommand(command) != null;
-		return true; //no-op
+		//no-op;
+		
 	}
 
 	public String[] getCapabilities() {

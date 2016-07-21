@@ -11,11 +11,10 @@ import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IExecutable;
 import kr.ac.hanyang.entities.services.software.ISoftwareProcess;
 
-public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
+public class ExecuteOn<T> extends EffectorStartableImpl implements Startable, IExecuteOn{
 	private static final Logger log = LoggerFactory.getLogger(ExecuteOn.class);
 	
 	T content;
@@ -24,8 +23,10 @@ public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
 		super();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void init(){
-		content = ((IArtifact)this.getParent()).getContent();
+		//content = ((IArtifact)this.getParent()).getContent();
+		content = (T) new String("apt-get install php5");
 		super.init();
 	}
 	
@@ -37,7 +38,8 @@ public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
 				if (child instanceof IExecutable){
 					IExecutable fulfillment = (IExecutable) child;
 					log.info("Executecuting task on ExecuteOn...");
-					return fulfillment.executeContent((String)content);
+					fulfillment.execute((String)content);
+					return true;
 				}
 		}
 		return false;
@@ -48,6 +50,7 @@ public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
 		
 		for(Entity e: this.getChildren()){
 			log.info("Starting ExecuteOn...");
+			e.config().set((ConfigKey<T>)ISoftwareProcess.INSTALL_COMMAND,content);
 			//e.setConfig((T)ISoftwareProcess.INSTALL_COMMAND,content);
 			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
 			task.blockUntilEnded(null);
@@ -55,6 +58,12 @@ public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
 				executeContent(e);
 		}
 	}
+
+	@Override
+	public <T> T getContent() {
+		return (T) content;
+	}
+
 
 
 //	@Override
