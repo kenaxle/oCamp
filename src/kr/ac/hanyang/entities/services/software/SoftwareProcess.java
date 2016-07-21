@@ -1,17 +1,18 @@
-package kr.ac.hanyang.entities.services.machine;
+package kr.ac.hanyang.entities.services.software;
 
 
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.machine.MachineEntityImpl;
+import org.apache.brooklyn.entity.software.base.VanillaSoftwareProcessImpl;
 
 import kr.ac.hanyang.entities.IExecutable;
 import kr.ac.hanyang.entities.IService;
-import kr.ac.hanyang.entities.artifacts.IMachine_Art;
+import kr.ac.hanyang.entities.artifacts.ISoftware;
 import kr.ac.hanyang.entities.services.IBasicOCampArtifact;
 import kr.ac.hanyang.entities.services.IBasicOCampService;
 
-public class Machine extends MachineEntityImpl implements IExecutable, IMachine, IService, Startable{
-	public Machine(){
+public class SoftwareProcess extends VanillaSoftwareProcessImpl implements IExecutable, ISoftwareProcess, IService, Startable{
+	public SoftwareProcess(){
 		super();
 	}
 	
@@ -21,13 +22,14 @@ public class Machine extends MachineEntityImpl implements IExecutable, IMachine,
 
 	@Override
 	public boolean executeContent(String command) {
-		return super.execCommand(command) != null;
+		//return super..execCommand(command) != null;
+		return true; //no-op
 	}
 
 	public String[] getCapabilities() {
-		String[] result = new String[IBasicOCampService.CAPABILITIES.length+IMachine.CAPABILITIES.length];
+		String[] result = new String[IBasicOCampService.CAPABILITIES.length+ISoftwareProcess.CAPABILITIES.length];
 		System.arraycopy(IBasicOCampService.CAPABILITIES, 0, result, 0, IBasicOCampService.CAPABILITIES.length);
-		System.arraycopy(IMachine.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, IMachine.CAPABILITIES.length); 
+		System.arraycopy(ISoftwareProcess.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, ISoftwareProcess.CAPABILITIES.length); 
 		return result;
 	}
 

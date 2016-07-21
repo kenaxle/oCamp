@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IExecutable;
+import kr.ac.hanyang.entities.services.software.ISoftwareProcess;
 
 public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
 	private static final Logger log = LoggerFactory.getLogger(ExecuteOn.class);
@@ -46,6 +48,7 @@ public class ExecuteOn<T> extends EffectorStartableImpl implements Startable {
 		
 		for(Entity e: this.getChildren()){
 			log.info("Starting ExecuteOn...");
+			//e.setConfig((T)ISoftwareProcess.INSTALL_COMMAND,content);
 			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
 			task.blockUntilEnded(null);
 			if (task.isDone())

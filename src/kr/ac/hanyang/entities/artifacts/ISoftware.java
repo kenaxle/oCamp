@@ -5,9 +5,9 @@ import org.apache.brooklyn.api.entity.ImplementedBy;
 import kr.ac.hanyang.entities.IArtifact;
 
 @Catalog(name="Machine Artifact Entity", description="Represents a machine Artifact, providing metrics about it (e.g. obtained from ssh)")
-@ImplementedBy(Machine_Art.class)
+@ImplementedBy(Software.class)
 
-public interface IMachine_Art extends IArtifact{
+public interface ISoftware extends IArtifact{
 	
 	public static final String[] REQUIREMENTS = {"DependsOn","ExecuteOn"};
 	
