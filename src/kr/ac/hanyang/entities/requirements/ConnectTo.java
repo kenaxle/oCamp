@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.entities.IArtifact;
 import kr.ac.hanyang.entities.IDeployable;
+import kr.ac.hanyang.entities.IExecutable;
 
 public class ConnectTo<T> extends EffectorStartableImpl implements Startable, IConnectTo{
 	private static final Logger log = LoggerFactory.getLogger(ConnectTo.class);
@@ -37,13 +38,13 @@ public class ConnectTo<T> extends EffectorStartableImpl implements Startable, IC
 	}
 
 	
-	public boolean deployContent(Entity child) {
+	public boolean executeContent(Entity child) {
 		//Object content =  ((IArtifact)this.getParent()).getContent();
 		if(script instanceof String){
 				if (child instanceof IDeployable){
-					IDeployable fulfillment = (IDeployable) child;
+					IExecutable fulfillment = (IExecutable) child;
 					log.info("**** INFO INFO **** Executecuting task on DeployOn...");
-					fulfillment.deploy((String)contentUrl, target);
+					fulfillment.executeScript((String) script);
 					return true;
 				}
 		}
