@@ -38,7 +38,7 @@ public class ExecuteOn<T> extends EffectorStartableImpl implements Startable, IE
 				if (child instanceof IExecutable){
 					IExecutable fulfillment = (IExecutable) child;
 					log.info("Executecuting task on ExecuteOn...");
-					fulfillment.execute((String)content);
+					fulfillment.executeScript((String)content);
 					return true;
 				}
 		}

@@ -21,7 +21,8 @@ public class SoftwareProcess extends VanillaSoftwareProcessImpl implements IExec
 	}
 
 	@Override
-	public void execute(String command) {
+	public String executeScript(String command) {
+		return command;
 		//return super..execCommand(command) != null;
 		//no-op;
 		

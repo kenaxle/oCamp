@@ -24,11 +24,11 @@ public interface IExecutable{
         
         @Override public Void call(ConfigBag parameters) {
             parameters.put(COMMAND, (String)((IDeployOn)entity().getParent()).getContentUrl());            
-            return new MethodEffector<Void>(IExecutable.class, "execute").call(entity(), parameters.getAllConfig());
+            return new MethodEffector<Void>(IExecutable.class, "executeScript").call(entity(), parameters.getAllConfig());
         }
     }
 
-    org.apache.brooklyn.api.effector.Effector<Void> EXECUTE = Effectors.effector(new MethodEffector<Void>(IExecutable.class, "execute"))
+    org.apache.brooklyn.api.effector.Effector<Void> EXECUTE = Effectors.effector(new MethodEffector<Void>(IExecutable.class, "executeScript"))
         // override start to take strings etc
         .parameter(ExecuteEffectorBody.COMMAND)
         .impl(new ExecuteEffectorBody())
@@ -43,6 +43,6 @@ public interface IExecutable{
      * a richer set of parameters.  See the entity-specific {@link #DEPLOY} effector declaration.
      */
     @org.apache.brooklyn.core.annotation.Effector(description="execute a command")
-    void execute(@EffectorParam(name="command") String command);
+    String executeScript(@EffectorParam(name="command") String command);
 	
 }
