@@ -1,4 +1,4 @@
-package kr.ac.hanyang.policy.placement;
+ package kr.ac.hanyang.policy.placement;
 
 public interface IPlacement {
 	

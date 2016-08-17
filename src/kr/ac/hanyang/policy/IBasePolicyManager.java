@@ -10,7 +10,7 @@ import org.apache.brooklyn.util.core.config.ConfigBag;
 import kr.ac.hanyang.policy.placement.IPlacement;
 
 public interface IBasePolicyManager {
-	public static final String[] ACTIONS = {"START","STOP","RESTART"};
+	public static final String[] ACTIONGROUPS = {"START","STOP","RESTART"};
 	
 	public static class StartActionBody extends EffectorBody<Void> {
         @Override public Void call(ConfigBag parameters) {
