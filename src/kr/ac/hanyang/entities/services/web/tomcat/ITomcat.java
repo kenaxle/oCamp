@@ -9,6 +9,9 @@ import org.apache.brooklyn.entity.software.base.SoftwareProcess;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
+import kr.ac.hanyang.policy.ConstraintSet;
+import kr.ac.hanyang.policy.PolicyConstraint;
+
 @Catalog(name="Tomcat Entity", description="Represents a server")
 @ImplementedBy(Tomcat8.class)
 public interface ITomcat extends Tomcat8Server {
@@ -23,5 +26,6 @@ public interface ITomcat extends Tomcat8Server {
 	public static final String[] CAPABILITIES = {"DeployOn"};
 		//need to add the characteristics also
 		//characteristics should be added as AttributeSensorAndConfigKey
+	
 
 }

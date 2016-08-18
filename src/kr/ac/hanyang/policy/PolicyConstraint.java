@@ -1,8 +1,8 @@
 package kr.ac.hanyang.policy;
 
 public class PolicyConstraint<T> implements IConstraint<T>, Comparable{
-	private String property;
-	private String operator; //FIXME need to change this to a type object
+	private String property; //TODO this should be a Brooklyn attribute or sensor.
+	private String type; //FIXME need to change this to a type object
 	private T value; // this is the value/values of the property.
 	
 	public PolicyConstraint(String property){
@@ -11,7 +11,7 @@ public class PolicyConstraint<T> implements IConstraint<T>, Comparable{
 	
 	public PolicyConstraint(String property, String type, T value){
 		this.property = property;
-		this.operator = type;
+		this.type = type;
 		this.value = value;
 	}
 	
@@ -20,12 +20,21 @@ public class PolicyConstraint<T> implements IConstraint<T>, Comparable{
 	}
 	
 	@Override
-	public String getOperator() {
-		return operator;
+	public String getType() {
+		return type;                                                                                                                                                                              
 	}
 
 	public T getValue(){
 		return value;
+	}
+	
+	// simple equals alignment
+	// TODO may have to adjust to perform diferent alignments based on the function/type
+	public boolean isAlignedWith(PolicyConstraint constraint){
+		if (this.property.equals(constraint.getProperty()) && this.value.equals(constraint.getValue()))
+			return true;
+		return false;
+					
 	}
 
 	@Override

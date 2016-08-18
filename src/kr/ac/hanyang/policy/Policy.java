@@ -14,29 +14,28 @@ public class Policy implements IPolicy{
 	private static final Logger log = LoggerFactory.getLogger(Policy.class);
 	private String name;
 	private String type; //FIXME have to change this to a dynamic type
-	private Map<String, IConstraint> constraints;
+	//private Map<String, IConstraint> constraints;
 	private List<Entity> targets; //FIXME may have to use a higher class
-	private Goal desiredState;
+	private ConstraintSet desiredState;
 	
 	@SuppressWarnings("rawtypes")
 	public static class Builder{
 		private String name;
 		private String type; //FIXME have to change this to a dynamic type
-		private Map<String, IConstraint> constraints;
+		//private Map<String, IConstraint> constraints;
 		private List<Entity> targets; //FIXME may have to use a higher class
-		private Goal desiredState;
+		private ConstraintSet desiredState;
 		
 		public Builder(String name, String type){
 			this.name = name;
 			this.type = type;
-			constraints = new LinkedHashMap<String, IConstraint>();
+			//constraints = new LinkedHashMap<String, IConstraint>();
 			targets = new ArrayList<Entity>();
-			desiredState = new Goal("BaseDesiredState");
-			desiredState.addConstraint(new PolicyConstraint("STATE"));
+			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraint("SERVICE_ACTUAL_STATE","equals","started")).build();
 		}
 		
-		public Builder addConstraint(IConstraint<?> constraint){
-			constraints.put(constraint.getProperty(), constraint);
+		public Builder addConstraint(PolicyConstraint constraint){
+			//constraints.put(constraint.getProperty(), constraint);
 			desiredState.addConstraint(constraint);
 			return this;
 		}
@@ -46,10 +45,10 @@ public class Policy implements IPolicy{
 			return this;
 		}
 		
-//		public Builder desiredState(Goal g){
-//			desiredState = g;
-//			return this;
-//		}
+		public Builder desiredState(ConstraintSet g){
+			desiredState = g;
+			return this;
+		}
 		
 		public Policy build(){
 			return new Policy(this);
@@ -61,20 +60,16 @@ public class Policy implements IPolicy{
 	private Policy(Builder builder) {
 		this.name = builder.name;
 		this.type = builder.type;
-		this.constraints = builder.constraints;
+		//this.constraints = builder.constraints;
 		this.targets = builder.targets;
-		//this.desiredState = builder.desiredState;
+		this.desiredState = builder.desiredState;
 	}
 	
 	public String getType(){ 
 		return type;
 	}
-    
-	public IConstraint<?> getConstraint(String property){
-		return constraints.get(property);
-	}
 	
-	public Goal getDesiredState(){return desiredState;}
+	public ConstraintSet getDesiredState(){return desiredState;}
 	
 	// will implement later
 	//public Entity getTarget()

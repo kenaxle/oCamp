@@ -4,7 +4,7 @@ public interface IConstraint<T> {
 	
 	public String getProperty();
 	
-	public String getOperator();
+	public String getType();
 	
 	public T getValue();
 }

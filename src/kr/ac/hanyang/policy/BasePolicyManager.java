@@ -6,15 +6,15 @@ import java.util.List;
 public class BasePolicyManager implements IBasePolicyManager{
 	
 	private List<Policy> policyList;
-	private List<ActionGroup> actionGroups;
+	//private List<ActionGroup> actionGroups;
 	
 	// create the policy manager with the appropriate action groups
 	public BasePolicyManager(){
 		policyList = new ArrayList<Policy>();
-		actionGroups = new ArrayList<ActionGroup>();
-		for (String action: ACTIONGROUPS){
-			actionGroups.add(new ActionGroup(action));
-		}
+//		actionGroups = new ArrayList<ActionGroup>();
+//		for (String action: ACTIONGROUPS){
+//			actionGroups.add(new ActionGroup(action));
+//		}
 	}
 	
 	public void addPolicy(Policy pol){
@@ -23,13 +23,18 @@ public class BasePolicyManager implements IBasePolicyManager{
 	
 	public void evaluateActions(){
 		// will run O(n^2)
-		for (IPolicy policy: this.policyList){
-			for (ActionGroup actionGroup: this.actionGroups){
+		for (Policy policy: this.policyList){
+			//get the Goal{desired state}
+			ConstraintSet desiredState = policy.getDesiredState();
+			for (ActionGroup actionGroup: ACTIONGROUPS){
 				//1. evaluate the action group
-				if()
-				//2. enumerate the actions of the group
+				if(actionGroup.canFulfill(policy)){
+					//calculate the weight of the action group
+					//2. enumerate the actions of the group
 				
-				//3. evaluate each action
+					//3. evaluate each action
+				}
+				
 			}
 		}
 		
