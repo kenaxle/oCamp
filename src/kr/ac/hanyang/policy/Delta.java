@@ -18,6 +18,8 @@ public class Delta {
 		this.constraints.add(constraint);
 	}
 	
+	public List<IConstraint> getConstraints(){return constraints;}
+	
 	public IConstraint getConstraint(String property){
 		return constraints.get(constraints.indexOf(new PolicyConstraint(property)));
 	}
