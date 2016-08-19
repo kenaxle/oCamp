@@ -36,6 +36,14 @@ public class PolicyConstraint<T> implements IConstraint<T>, Comparable{
 		return false;
 					
 	}
+	
+	// may not need as I can simply check for alignment then use the constraint
+	public PolicyConstraint getDelta(PolicyConstraint constraint){
+		if (this.property.equals(constraint.getProperty()))
+			if (this.value.equals(constraint.getValue()))
+				return null;
+			return constraint; 		
+	}
 
 	@Override
 	public int compareTo(Object obj) {

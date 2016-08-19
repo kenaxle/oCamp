@@ -34,20 +34,6 @@ public class DeployOn<T> extends EffectorStartableImpl implements Startable, IDe
 	public T getContentUrl(){return contentUrl;}
 	public String getTarget(){return target;}
 	
-	// FIXME this is not in use
-	// should be removed
-//	public boolean deployContent(Entity child) {
-//		//Object content =  ((IArtifact)this.getParent()).getContent();
-//		if(contentUrl instanceof String){
-//				if (child instanceof IDeployable){
-//					IDeployable fulfillment = (IDeployable) child;
-//					log.info("**** INFO INFO **** Executecuting task on DeployOn...");
-//					fulfillment.deploy((String)contentUrl, target);
-//					return true;
-//				}
-//		}
-//		return false;
-//	}
 
 	@Override
 	public void start(Collection<? extends Location> locations) {

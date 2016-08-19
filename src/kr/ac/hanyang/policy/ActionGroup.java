@@ -5,15 +5,14 @@ import java.util.List;
 
 public class ActionGroup {
 	private String name;
-	private ConstraintSet fulfillment; // constraints that must be fulfilled
+	private ConstraintSet actionableConstraints; // constraints that the actiongroup can influence;
 	private double weight; //calculated based on the delta
 	private List<Action> actions; //calculated after evaluating actions
-	
 	
 	public static class Builder{
 	
 		private String name;
-		private PolicyConstraint fulfillment; // constraints that must be fulfilled
+		private ConstraintSet actionableConstraints; // constraints that must be fulfilled
 		private double weight; //calculated based on the delta
 		private List<Action> actions; //calculated after evaluating actions
 		
@@ -23,13 +22,13 @@ public class ActionGroup {
 			this.actions = new ArrayList<Action>();
 		}
 		
-		public Builder addAction(Action action){
-			actions.add(action);
-			return this;
-		}
+//		public Builder addAction(Action action){
+//			actions.add(action);
+//			return this;
+//		}
 		
-		public Builder addFulfillment(PolicyConstraint constraint){
-			this.fulfillment = constraint;
+		public Builder addConstraint(PolicyConstraint constraint){
+			this.actionableConstraints.addConstraint(constraint); 
 			return this;
 		}
 		
@@ -53,14 +52,22 @@ public class ActionGroup {
 		return weight;
 	}
 	
+	public void addAction(Action action){
+		actions.add(action);
+	}
+	
 	//FIXME need to finish this method
-	public ConstraintSet canFulfill(Policy pol){
+	// must use the delta of the entity and the actionable
+	// then using that delta
+	public boolean canFulfill(Policy pol){
 		ConstraintSet desiredState = pol.getDesiredState();
-		for(PolicyConstraint constraint: desiredState.getConstraints()){
-			
-		}
-		ConstraintSet.Builder deltaBuilder = new ConstraintSet.Builder("delta");
+		return desiredState.isAlignedWith(actionableConstraints);
 		
-		return null;
+//		if (alignment.isEmpty()) return null;
+//		return alignment;
+	}
+	
+	public ConstraintSet getDelta(Policy pol, Entity entity){
+		
 	}
 }

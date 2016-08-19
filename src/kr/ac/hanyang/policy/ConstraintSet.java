@@ -6,6 +6,7 @@ import java.util.List;
 public class ConstraintSet {
 	private String name;
 	private List<PolicyConstraint> constraints;
+
 	
 	public static class Builder{
 		private String name;
@@ -37,9 +38,9 @@ public class ConstraintSet {
 	
 	public String getName(){ return name;}
 	
-//	public PolicyConstraint getConstraint(PolicyConstraint constraint){
-//		return constraints.get(constraints.indexOf(constraint));
-//	}
+	public PolicyConstraint getConstraint(PolicyConstraint constraint){
+		return constraints.get(constraints.indexOf(constraint));
+	}
 	
 	public PolicyConstraint getConstraint(String property){
 		return constraints.get(constraints.indexOf(new PolicyConstraint(property)));
@@ -47,14 +48,28 @@ public class ConstraintSet {
 	
 	public List<PolicyConstraint> getConstraints(){return constraints;}	
 	
-	public boolean isAlignedWith(ConstraintSet desiredState){
+	// tests if this set is a subset of the other
+	// and that they are aligned. if they are aligned then the delta is empty.
+	public boolean isAlignedWith(ConstraintSet otherSet){
+		//ConstraintSet.Builder returnBuilder = new ConstraintSet.Builder("delta");
 		for (PolicyConstraint pConst: constraints){
-			PolicyConstraint desiredConst = desiredState.getConstraint(pConst.getProperty());
-			if(desiredConst != null){
-				if (! pConst.isAlignedWith(desiredConst)) return false;
+			PolicyConstraint otherConst = otherSet.getConstraint(pConst.getProperty());
+			if(otherConst == null){
+				return false;
+				//if (! pConst.isAlignedWith(otherConst)) 
+				//	returnBuilder.addConstraint(otherConst);
 			}
 		}
 		return true;
+	}
+	
+	public boolean isEmpty(){
+		return constraints.size() == 0;
+	}
+	
+	//let the weight be the number of items in the set.
+	public int getWeight(){
+		return constraints.size();
 	}
 	
 }
