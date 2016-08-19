@@ -30,6 +30,7 @@ public class BasePolicyManager implements IBasePolicyManager{
 				//1. evaluate the action group
 				if(actionGroup.canFulfill(policy)){
 					//calculate the weight of the action group
+					
 					//2. enumerate the actions of the group
 				
 					//3. evaluate each action

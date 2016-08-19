@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ActionGroup {
 	private String name;
-	private PolicyConstraint fulfillment; // constraints that must be fulfilled
+	private ConstraintSet fulfillment; // constraints that must be fulfilled
 	private double weight; //calculated based on the delta
 	private List<Action> actions; //calculated after evaluating actions
 	
@@ -54,9 +54,13 @@ public class ActionGroup {
 	}
 	
 	//FIXME need to finish this method
-	public boolean canFulfill(Policy pol){
+	public ConstraintSet canFulfill(Policy pol){
 		ConstraintSet desiredState = pol.getDesiredState();
+		for(PolicyConstraint constraint: desiredState.getConstraints()){
+			
+		}
+		ConstraintSet.Builder deltaBuilder = new ConstraintSet.Builder("delta");
 		
-		return true;
+		return null;
 	}
 }
