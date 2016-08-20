@@ -38,12 +38,14 @@ public class ConstraintSet {
 	
 	public String getName(){ return name;}
 	
-	public PolicyConstraint getConstraint(PolicyConstraint constraint){
-		return constraints.get(constraints.indexOf(constraint));
+	public PolicyConstraint getConstraint(Comparable constraint){
+		if (constraint instanceof PolicyConstraint)
+			return constraints.get(constraints.indexOf(constraint));
+		return null; //FIXME should throw exception and log issue instead of returning null
 	}
 	
 	public PolicyConstraint getConstraint(String property){
-		return constraints.get(constraints.indexOf(new PolicyConstraint(property)));
+		return constraints.get(constraints.indexOf(new PolicyConstraint.Builder(property).build()));
 	}
 	
 	public List<PolicyConstraint> getConstraints(){return constraints;}	
@@ -61,6 +63,17 @@ public class ConstraintSet {
 			}
 		}
 		return true;
+	}
+	
+	public ConstraintSet getDelta(ConstraintSet otherSet){
+		ConstraintSet.Builder deltaBuilder = new ConstraintSet.Builder("delta");
+		for (PolicyConstraint constraint: constraints){
+			PolicyConstraint deltaConstraint = constraint.getDelta(otherSet.getConstraint(constraint));
+			if (deltaConstraint != null){
+				deltaBuilder.addConstraint(deltaConstraint);
+			}
+		}
+		return deltaBuilder.build();
 	}
 	
 	public boolean isEmpty(){

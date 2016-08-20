@@ -10,10 +10,10 @@ import kr.ac.hanyang.policy.placement.IPlacement;
 
 public interface IBasePolicyManager {
 	@SuppressWarnings("unchecked")
-	public static final ActionGroup[] ACTIONGROUPS = {new ActionGroup.Builder("start").addConstraint(new PolicyConstraint("SERVICE_ACTUAL_STATE","equals","started"))
-																					  .addConstraint(new PolicyConstraint("LOCATION","equals","location")) //FIXME
+	public static final ActionGroup[] ACTIONGROUPS = {new ActionGroup.Builder("start").addConstraint(new PolicyConstraint.Builder("SERVICE_ACTUAL_STATE","equals","started").build())
+																					  .addConstraint(new PolicyConstraint.Builder("LOCATION","equals","location").build()) //FIXME
 																					  .build(),
-													  new ActionGroup.Builder("stop").addConstraint(new PolicyConstraint("SERVICE_ACTUAL_STATE","equals","stopped"))
+													  new ActionGroup.Builder("stop").addConstraint(new PolicyConstraint.Builder("SERVICE_ACTUAL_STATE","equals","stopped").build())
 													  								 .build()
 													  };
 	

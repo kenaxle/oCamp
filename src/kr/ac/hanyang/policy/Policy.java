@@ -28,7 +28,7 @@ public class Policy{
 			this.name = name;
 			this.type = type;
 			targets = new ArrayList<Entity>();
-			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraint("SERVICE_ACTUAL_STATE","equals","started")).build();
+			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraint.Builder("SERVICE_ACTUAL_STATE","equals","started").build()).build();
 		}
 		
 		public Builder addConstraint(PolicyConstraint constraint){

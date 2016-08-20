@@ -3,6 +3,8 @@ package kr.ac.hanyang.policy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.brooklyn.api.entity.Entity;
+
 public class ActionGroup {
 	private String name;
 	private ConstraintSet actionableConstraints; // constraints that the actiongroup can influence;
@@ -44,6 +46,10 @@ public class ActionGroup {
 		this.actions = builder.actions;
 	}
 	
+	public String getName(){
+		return name;
+	}
+	
 	public void setWeight(double weight){
 		this.weight = weight;
 	}
@@ -62,12 +68,11 @@ public class ActionGroup {
 	public boolean canFulfill(Policy pol){
 		ConstraintSet desiredState = pol.getDesiredState();
 		return desiredState.isAlignedWith(actionableConstraints);
-		
-//		if (alignment.isEmpty()) return null;
-//		return alignment;
 	}
 	
-	public ConstraintSet getDelta(Policy pol, Entity entity){
-		
-	}
+//	public ConstraintSet getDelta(Policy pol, Entity entity){
+//		for (PolicyConstraint constraint: pol.getDesiredState().getConstraints()){
+//			
+//		}
+//	}
 }

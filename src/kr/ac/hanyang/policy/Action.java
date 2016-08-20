@@ -12,11 +12,13 @@ public class Action implements IAction{
 	private String type;
 	private Entity entity;
 	private BasePolicyManager policyManager;
+	private ConstraintSet constraintSet;
 	
-	public Action(BasePolicyManager policyManager, String type, Entity entity){
+	public Action(BasePolicyManager policyManager, String type, Entity entity, ConstraintSet constraintSet){
 		this.policyManager = policyManager;
 		this.type = type;
 		this.entity = entity;
+		this.constraintSet = constraintSet;
 	}
 
 	@Effector(description="Executes an action on an entity once given the action name")
