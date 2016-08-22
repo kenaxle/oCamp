@@ -4,13 +4,12 @@ import java.util.Collection;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
-import org.apache.brooklyn.core.config.BasicConfigKey;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
+import kr.ac.hanyang.entities.oCampEntity;
 
 
-public class BasicOCampArtifact<T> extends EffectorStartableImpl implements IBasicOCampArtifact {
+public class BasicOCampArtifact<T> extends oCampEntity implements IBasicOCampArtifact {
 
 	private T content;
 	
