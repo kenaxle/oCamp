@@ -5,7 +5,7 @@ import org.apache.brooklyn.api.entity.ImplementedBy;
 import kr.ac.hanyang.entities.IArtifact;
 
 @Catalog(name="Machine Artifact Entity", description="Represents a machine Artifact, providing metrics about it (e.g. obtained from ssh)")
-@ImplementedBy(Software.class)
+@ImplementedBy(Script.class)
 
 public interface IScript extends IArtifact{
 	

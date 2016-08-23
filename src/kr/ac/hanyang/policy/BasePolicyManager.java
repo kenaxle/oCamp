@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 
+import kr.ac.hanyang.entities.IEntity;
+
 public class BasePolicyManager extends AbstractEntity implements IBasePolicyManager{
 	
 	private List<Policy> policyList;
@@ -24,7 +26,7 @@ public class BasePolicyManager extends AbstractEntity implements IBasePolicyMana
 		policyList.add(pol);
 	}
 	
-	public void evaluateActions(Policy policy, Entity entity){
+	public void evaluateActions(Policy policy, IEntity entity){
 		//for (Policy policy: this.policyList){
 			//get the Goal{desired state}
 			//ConstraintSet desiredState = policy.getDesiredState();

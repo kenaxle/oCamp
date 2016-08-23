@@ -6,10 +6,11 @@ import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
-import kr.ac.hanyang.entities.oCampEntity;
+import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 
 
-public class BasicOCampArtifact<T> extends oCampEntity implements IBasicOCampArtifact {
+
+public class BasicOCampArtifact<T> extends EffectorStartableImpl implements IBasicOCampArtifact {
 
 	private T content;
 	
