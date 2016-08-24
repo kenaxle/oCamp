@@ -44,6 +44,7 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	public void deploy(String url, String targetName) {
 		System.out.println(this.sensors().getAll());
 		System.out.println(this.sensors().get(Attributes.SERVICE_UP));
+		System.out.println(PROVISIONING_LOCATION);
 		super.deploy(url, targetName);
 	}
 
