@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
+import org.apache.brooklyn.core.entity.Attributes;
 
 import kr.ac.hanyang.entities.IDeployable;
 import kr.ac.hanyang.entities.IEntity;
@@ -14,7 +15,20 @@ import kr.ac.hanyang.entities.services.IBasicOCampService;
 import kr.ac.hanyang.policy.ConstraintSet;
 
 public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, IService, Startable, IEntity{
-
+	
+	
+	public Tomcat8(){
+		super();
+	}
+	
+	public void init(){
+		//configure the constraint set here 
+		//BasicSensorSupport sensorSup = this.sensors();
+		//sensorSup.set(Attributes.SERVICE_UP, true);
+		
+		//System.out.println("The sensors "+sensorSup.getAll());
+		//CONSTRAINTSET.addConstraint(new PolicyConstraint.Builder()));
+	}
 
 	@Override
 	public String[] getCapabilities() {
@@ -28,6 +42,8 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	
 	@Override
 	public void deploy(String url, String targetName) {
+		System.out.println(this.sensors().getAll());
+		System.out.println(this.sensors().get(Attributes.SERVICE_UP));
 		super.deploy(url, targetName);
 	}
 

@@ -85,4 +85,12 @@ public class ConstraintSet {
 		return constraints.size();
 	}
 	
+	public String toString(){
+		String toReturn = "";
+		for (PolicyConstraint constraint: constraints){
+			toReturn += constraint.toString()+"\n";
+		}
+		return this.name+"\n"+toReturn;		
+	}
+	
 }

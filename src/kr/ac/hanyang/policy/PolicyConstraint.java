@@ -143,4 +143,8 @@ public class PolicyConstraint<T extends Comparable, U> implements Comparable{
 		return this.property.equals(polCon.property);
 	}
 	
+	public String toString(){
+		return property.toString()+" "+function+" "+value.toString();
+	}
+	
 }
