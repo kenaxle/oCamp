@@ -19,14 +19,16 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	
 	public Tomcat8(){
 		super();
+		System.out.println("");
 	}
 	
 	public void init(){
+		//super.init();
 		//configure the constraint set here 
-		//BasicSensorSupport sensorSup = this.sensors();
+		BasicSensorSupport sensorSup = this.sensors();
 		//sensorSup.set(Attributes.SERVICE_UP, true);
-		
-		//System.out.println("The sensors "+sensorSup.getAll());
+	
+		System.out.println("The sensors "+sensorSup.getAll());
 		//CONSTRAINTSET.addConstraint(new PolicyConstraint.Builder()));
 	}
 
@@ -52,6 +54,11 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	public ConstraintSet getConstraintSet() {
 		// TODO Auto-generated method stub
 		return CONSTRAINTSET;
+	}
+	
+	@Override
+	public void postStart(){
+		System.out.println("The sensors "+this.sensors().getAll());
 	}
 
 
