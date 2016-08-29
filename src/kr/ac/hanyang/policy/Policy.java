@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.core.entity.Attributes;
+import org.apache.brooklyn.core.sensor.BasicSensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +30,7 @@ public class Policy{
 			this.name = name;
 			this.type = type;
 			targets = new ArrayList<Entity>();
-			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraint.Builder("SERVICE_ACTUAL_STATE","equals","started").build()).build();
+			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraint.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",true).build()).build();
 		}
 		
 		public Builder addConstraint(PolicyConstraint constraint){

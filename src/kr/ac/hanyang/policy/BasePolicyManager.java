@@ -2,13 +2,15 @@ package kr.ac.hanyang.policy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
 import kr.ac.hanyang.entities.IEntity;
 
-public class BasePolicyManager extends AbstractEntity implements IBasePolicyManager{
+public class BasePolicyManager extends AbstractEntity implements IBasePolicyManager, INotifiable{
 	
 	private List<Policy> policyList;
 	//private List<ActionGroup> actionGroups;
@@ -64,4 +66,11 @@ public class BasePolicyManager extends AbstractEntity implements IBasePolicyMana
 	public void restartaction(){
 		
 	}
+
+	@Override
+	public void notification(Entity entity) {
+		evaluateActions();
+		
+	}
+
 }

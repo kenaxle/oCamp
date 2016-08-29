@@ -3,14 +3,19 @@ package kr.ac.hanyang.policy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConstraintSet {
+import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.sensor.BasicSensor;
+
+public class ConstraintSet extends AbstractEntity implements INotifiable{
 	private String name;
 	private List<PolicyConstraint> constraints;
-
+	private List<INotifiable> subscribers;
 	
 	public static class Builder{
 		private String name;
 		private List<PolicyConstraint> constraints;
+		private List<INotifiable> subscribers = new ArrayList<INotifiable>(); 
 		
 		public Builder(String name){
 			this.name = name;
@@ -30,6 +35,7 @@ public class ConstraintSet {
 	private ConstraintSet(Builder builder){
 		this.name = builder.name;
 		this.constraints = builder.constraints;
+		this.subscribers = builder.subscribers;
 	}
 	
 	public void addConstraint(PolicyConstraint constraint){
@@ -38,13 +44,13 @@ public class ConstraintSet {
 	
 	public String getName(){ return name;}
 	
-	public PolicyConstraint getConstraint(Comparable constraint){
+	public PolicyConstraint getConstraint(PolicyConstraint constraint){
 		if (constraint instanceof PolicyConstraint)
 			return constraints.get(constraints.indexOf(constraint));
 		return null; //FIXME should throw exception and log issue instead of returning null
 	}
 	
-	public PolicyConstraint getConstraint(String property){
+	public PolicyConstraint getConstraint(BasicSensor property){
 		return constraints.get(constraints.indexOf(new PolicyConstraint.Builder(property).build()));
 	}
 	
@@ -92,5 +98,29 @@ public class ConstraintSet {
 		}
 		return this.name+"\n"+toReturn;		
 	}
+
+	public void subscribe(INotifiable subscriber){
+		subscribers.add(subscriber);
+	}
+	
+	public void unsubscribe(INotifiable subscriber){
+		subscribers.remove(subscriber);
+	}
+	
+	private void notifySubscribers(Entity entity) {
+		for (INotifiable subscriber: subscribers){
+			subscriber.notification(entity);
+		}
+	}
+	
+	
+	@Override
+	public void notification(Entity notifier) {
+		//immediately notify the policy 
+		//or aggregate the notifications into a set over a 
+		//period and notify the policy 
+		notifySubscribers(notifier);
+	}
+	
 	
 }

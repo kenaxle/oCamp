@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
+import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.core.entity.Attributes;
 
 import kr.ac.hanyang.entities.IDeployable;
@@ -52,13 +53,13 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 
 	@Override
 	public ConstraintSet getConstraintSet() {
-		// TODO Auto-generated method stub
 		return CONSTRAINTSET;
 	}
-	
+
 	@Override
-	public void postStart(){
-		System.out.println("The sensors "+this.sensors().getAll());
+	public void notification(Entity entity) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

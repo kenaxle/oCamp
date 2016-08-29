@@ -3,17 +3,19 @@ package kr.ac.hanyang.policy;
 import org.apache.brooklyn.core.effector.EffectorBody;
 import org.apache.brooklyn.core.effector.Effectors;
 import org.apache.brooklyn.core.effector.MethodEffector;
+import org.apache.brooklyn.core.entity.Attributes;
+import org.apache.brooklyn.core.sensor.BasicSensor;
 import org.apache.brooklyn.util.core.config.ConfigBag;
 
-
+import kr.ac.hanyang.entities.IEntity;
 import kr.ac.hanyang.policy.placement.IPlacement;
 
 public interface IBasePolicyManager {
 	@SuppressWarnings("unchecked")
-	public static final ActionGroup[] ACTIONGROUPS = {new ActionGroup.Builder("start").addConstraint(new PolicyConstraint.Builder("SERVICE_ACTUAL_STATE","equals","started").build())
-																					  .addConstraint(new PolicyConstraint.Builder("LOCATION","equals","location").build()) //FIXME
+	public static final ActionGroup[] ACTIONGROUPS = {new ActionGroup.Builder("START").addConstraint(new PolicyConstraint.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",true).build())
+																					  .addConstraint(new PolicyConstraint.Builder((BasicSensor) IEntity.LOCATION,"equals","location").build()) //FIXME
 																					  .build(),
-													  new ActionGroup.Builder("stop").addConstraint(new PolicyConstraint.Builder("SERVICE_ACTUAL_STATE","equals","stopped").build())
+													  new ActionGroup.Builder("STOP").addConstraint(new PolicyConstraint.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",false).build())
 													  								 .build()
 													  };
 	

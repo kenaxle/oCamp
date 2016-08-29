@@ -1,26 +1,32 @@
 package kr.ac.hanyang.policy;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.sensor.SensorEvent;
+import org.apache.brooklyn.api.sensor.SensorEventListener;
+import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.sensor.BasicSensor;
 
-import com.google.common.collect.Range;
-
-public class PolicyConstraint<T extends Comparable, U> implements Comparable{
-	private T property; //TODO this should be a Brooklyn attribute or sensor.
+public class PolicyConstraint<U> extends AbstractEntity{
+	private boolean enabled;
+	private BasicSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private String function; //FIXME need to change this to a type object
 	private U value; // this is the value/values of the property.
+	private List<INotifiable> subscribers;
 	
-	
-	public static class Builder<T extends Comparable,U>{
+	public static class Builder<U>{
 		
-		private T property; //TODO this should be a Brooklyn attribute or sensor.
+		private BasicSensor property; //TODO this should be a Brooklyn attribute or sensor.
 		private String function; //FIXME need to change this to a type object
 		private U value; // this is the value/values of the property.
+		private List<INotifiable> subscribers = new ArrayList<INotifiable>(); 
 		
-		public Builder(T property){
+		public Builder(BasicSensor property){
 			this.property = property;
 		}
 		
-		public Builder(T property, String function, U value){
+		public Builder(BasicSensor property, String function, U value){
 			this.property = property;
 			this.value = value;
 			this.function = function;
@@ -36,19 +42,25 @@ public class PolicyConstraint<T extends Comparable, U> implements Comparable{
 			return this;
 		}
 		
+		public Builder subscribe(INotifiable subscriber){
+			subscribers.add(subscriber);
+			return this;
+		}
+		
 		public PolicyConstraint build(){
 			return new PolicyConstraint(this);
 		}
 	}
 	
 	private PolicyConstraint(Builder builder){
-		this.property = (T)builder.property;
+		this.enabled = false;
+		this.property = builder.property;
 		this.function = builder.function;
 		this.value = (U)builder.value;
+		this.subscribers = builder.subscribers;
 	}
 	
-	
-	public T getProperty(){
+	public BasicSensor getProperty(){
 		return property;
 	}
 	
@@ -60,13 +72,45 @@ public class PolicyConstraint<T extends Comparable, U> implements Comparable{
 		return value;
 	}
 	
+	public void enable(Entity entity){
+		if (! enabled)
+			this.subscriptions().subscribe(entity, property, constraintListener(this));
+	}
+	
+	public void disable(Entity entity){
+		if (enabled)
+			this.subscriptions().unsubscribe(entity);
+	}
+	
+	private SensorEventListener constraintListener(Entity constraint){
+		return new SensorEventListener(){
+			public void onEvent(SensorEvent event){
+				if (!((PolicyConstraint) constraint).evaluateFunction())
+					((PolicyConstraint) constraint).notifySubscribers();
+			}
+		};
+	}
+	
+	public void subscribe(INotifiable subscriber){
+		subscribers.add(subscriber);
+	}
+	
+	public void unsubscribe(INotifiable subscriber){
+		subscribers.remove(subscriber);
+	}
+	
+	private void notifySubscribers() {
+		for (INotifiable subscriber: subscribers){
+			subscriber.notification(this);
+		}
+	}
+	
 	// simple equals alignment
 	// TODO may have to adjust to perform diferent alignments based on the function/type
 	public boolean isAlignedWith(PolicyConstraint constraint){
 		if (this.property.equals(constraint.getProperty()) && this.value.equals(constraint.getValue()))
 			return true;
-		return false;
-					
+		return false;				
 	}
 	
 	// may not need as I can simply check for alignment then use the constraint
@@ -102,40 +146,41 @@ public class PolicyConstraint<T extends Comparable, U> implements Comparable{
 	
 	//evaluates by testing the string output of the operands
 		// using a Guava range here 
-		public boolean evaluateFunction(){
-			switch (function){
-				case "equals":
-					return property.toString().equals(value.toString());	
-				case "less_equals":
-					if(property.toString().compareTo(value.toString()) >= 0)
-						return true;		
-					break;
-				case "greater_equals":
-					if(property.toString().compareTo(value.toString()) <= 0)
-						return true;		
-					break;
-				case "within":
-					if (value instanceof List<?>)
-						if (((List<?>)value).contains(property))
-							return true;
-					else if(value instanceof Range<?>){
-						if (((Range<T>)value).contains((T) property))
-							return true;
-					}	
-					break;
-				default:
-					return false;
-			}
-			return false;
+	public boolean evaluateFunction(){
+		switch (function){
+			case "equals":
+				return property.toString().equals(value.toString());	
+			case "less_equals":
+				if(property.toString().compareTo(value.toString()) >= 0)
+					return true;		
+				break;
+			case "greater_equals":
+				if(property.toString().compareTo(value.toString()) <= 0)
+					return true;		
+				break;
+			case "within":
+				if (value instanceof List<?>)
+					if (((List<?>)value).contains(property))
+						return true;
+				//TODO
+//				else if(value instanceof Range<BasicSensor>){
+//					if (((Range<BasicSensor>)value).contains(property))
+//						return true;
+//				}	
+				break;
+			default:
+				return false;
 		}
-	
-	//TODO why is this needed? must re-evaluate
-	@Override
-	public int compareTo(Object obj) {
-		if(obj.getClass() != this.getClass()) throw new ClassCastException("Not a Constraint object");
-		PolicyConstraint polCon = (PolicyConstraint) obj;
-		return this.property.compareTo(polCon.property);
+		return false;
 	}
+	
+//	//TODO why is this needed? must re-evaluate
+//	@Override
+//	public int compareTo(Object obj) {
+//		if(obj.getClass() != this.getClass()) throw new ClassCastException("Not a Constraint object");
+//		PolicyConstraint polCon = (PolicyConstraint) obj;
+//		return this.property.compareTo(polCon.property);
+//	}
 
 	public boolean equals(Object obj){
 		if(obj.getClass() != getClass()) return false;
@@ -146,5 +191,12 @@ public class PolicyConstraint<T extends Comparable, U> implements Comparable{
 	public String toString(){
 		return property.toString()+" "+function+" "+value.toString();
 	}
-	
+
+
+	//@Override
+	//protected BrooklynObjectInternal configure(Map<?, ?> flags) {
+		// TODO Auto-generated method stub
+	//	return null;
+	//}
+
 }

@@ -1,16 +1,24 @@
 package kr.ac.hanyang.entities;
 
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.Attributes;
+import org.apache.brooklyn.core.sensor.BasicSensor;
 
+import kr.ac.hanyang.entities.services.software.SoftwareProcess;
 import kr.ac.hanyang.policy.ConstraintSet;
+import kr.ac.hanyang.policy.INotifiable;
 import kr.ac.hanyang.policy.PolicyConstraint;
-import kr.ac.hanyang.policy.SensorSet;
 
-public interface IEntity<T> extends Entity{
+public interface IEntity<T> extends Entity, INotifiable{
 	
-	public static final SensorSet POLICY_SENSORS = new SensorSet.Builder("Policy Sensors").addSensor(Attributes.SERVICE_UP).build();
-	public static final ConstraintSet CONSTRAINTSET = new ConstraintSet.Builder("Tomcat Constraints").addConstraint(new PolicyConstraint.Builder((Comparable) Attributes.SERVICE_UP).build()).build();
+	ConfigKey<String> LOCATION = ConfigKeys.newStringConfigKey(
+            "location",
+            "The the entity should be provisioned");
+	
+	public static final ConstraintSet CONSTRAINTSET = new ConstraintSet.Builder("Entity Constraints").addConstraint(new PolicyConstraint.Builder( (BasicSensor) Attributes.SERVICE_UP).build())
+																									 .addConstraint(new PolicyConstraint.Builder( (BasicSensor) SoftwareProcess.PROVISIONING_LOCATION).build()).build();
 	
 	public ConstraintSet getConstraintSet();
 }
