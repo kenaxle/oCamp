@@ -70,9 +70,5 @@ public class ActionGroup {
 		return desiredState.isAlignedWith(actionableConstraints);
 	}
 	
-//	public ConstraintSet getDelta(Policy pol, Entity entity){
-//		for (PolicyConstraint constraint: pol.getDesiredState().getConstraints()){
-//			
-//		}
-//	}
+
 }

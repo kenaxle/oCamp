@@ -8,11 +8,13 @@ import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.sensor.BasicSensor;
 
-public class PolicyConstraint<U> extends AbstractEntity{
+public class PolicyConstraint<T, U> extends AbstractEntity{
 	private boolean enabled;
 	private BasicSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private String function; //FIXME need to change this to a type object
 	private U value; // this is the value/values of the property.
+	private IBasePolicyManager policyManager;
+	private Policy policy;
 	private List<INotifiable> subscribers;
 	
 	public static class Builder<U>{
@@ -20,6 +22,8 @@ public class PolicyConstraint<U> extends AbstractEntity{
 		private BasicSensor property; //TODO this should be a Brooklyn attribute or sensor.
 		private String function; //FIXME need to change this to a type object
 		private U value; // this is the value/values of the property.
+		private IBasePolicyManager policyManager;
+		private Policy policy;
 		private List<INotifiable> subscribers = new ArrayList<INotifiable>(); 
 		
 		public Builder(BasicSensor property){
@@ -42,6 +46,16 @@ public class PolicyConstraint<U> extends AbstractEntity{
 			return this;
 		}
 		
+		public Builder policyManager(IBasePolicyManager policyManager){
+			this.policyManager = policyManager;
+			return this;
+		}
+		
+		public Builder policy(Policy policy){
+			this.policy = policy;
+			return this;
+		}
+		
 		public Builder subscribe(INotifiable subscriber){
 			subscribers.add(subscriber);
 			return this;
@@ -56,7 +70,9 @@ public class PolicyConstraint<U> extends AbstractEntity{
 		this.enabled = false;
 		this.property = builder.property;
 		this.function = builder.function;
-		this.value = (U)builder.value;
+		this.value = (U) builder.value;
+		this.policyManager = builder.policyManager;
+		this.policy = builder.policy;
 		this.subscribers = builder.subscribers;
 	}
 	
@@ -70,6 +86,14 @@ public class PolicyConstraint<U> extends AbstractEntity{
 
 	public U getValue(){
 		return value;
+	}
+	
+	public IBasePolicyManager getPolicyManager(){
+		return policyManager;
+	}
+	
+	public Policy getPolicy(){
+		return policy;
 	}
 	
 	public void enable(Entity entity){

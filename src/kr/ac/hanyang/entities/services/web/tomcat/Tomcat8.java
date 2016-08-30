@@ -1,5 +1,8 @@
 package kr.ac.hanyang.entities.services.web.tomcat;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.brooklyn.core.entity.trait.Startable;
@@ -13,10 +16,15 @@ import kr.ac.hanyang.entities.IEntity;
 import kr.ac.hanyang.entities.IExecutable;
 import kr.ac.hanyang.entities.IService;
 import kr.ac.hanyang.entities.services.IBasicOCampService;
+import kr.ac.hanyang.policy.BasePolicyManager;
 import kr.ac.hanyang.policy.ConstraintSet;
+import kr.ac.hanyang.policy.IBasePolicyManager;
+import kr.ac.hanyang.policy.INotifiable;
+import kr.ac.hanyang.policy.PolicyConstraint;
 
 public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, IService, Startable, IEntity{
 	
+	private Map<String,BasePolicyManager> policyManagers;
 	
 	public Tomcat8(){
 		super();
@@ -24,7 +32,8 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	}
 	
 	public void init(){
-		//super.init();
+		super.init();
+		policyManagers = new LinkedHashMap<String,BasePolicyManager>();
 		//configure the constraint set here 
 		BasicSensorSupport sensorSup = this.sensors();
 		//sensorSup.set(Attributes.SERVICE_UP, true);
@@ -55,11 +64,25 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	public ConstraintSet getConstraintSet() {
 		return CONSTRAINTSET;
 	}
-
+	
+	public void subscribe(BasePolicyManager subscriber){
+		policyManagers.put(subscriber.getType(), subscriber);
+	}
+	
+	public void unsubscribe(BasePolicyManager subscriber){
+		policyManagers.remove(subscriber.getType());
+	}
+	
+	
+	//the entity is a constraint entity that is forwarded by the constraintset
+	// extract the policy manager and then initiate the policy manager's process
+	//for handling the 
 	@Override
 	public void notification(Entity entity) {
-		// TODO Auto-generated method stub
-		
+		if (!(entity instanceof PolicyConstraint)) return; //this should be logged as an error
+		PolicyConstraint policyConstraint = (PolicyConstraint) entity;
+		IBasePolicyManager policyManager = policyConstraint.getPolicyManager();
+		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
 	}
 
 

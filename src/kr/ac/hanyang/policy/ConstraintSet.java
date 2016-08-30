@@ -9,6 +9,7 @@ import org.apache.brooklyn.core.sensor.BasicSensor;
 
 public class ConstraintSet extends AbstractEntity implements INotifiable{
 	private String name;
+	//private Policy policy; //TODO this is the policy the set is related to.
 	private List<PolicyConstraint> constraints;
 	private List<INotifiable> subscribers;
 	

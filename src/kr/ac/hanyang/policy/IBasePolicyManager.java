@@ -8,18 +8,19 @@ import org.apache.brooklyn.core.sensor.BasicSensor;
 import org.apache.brooklyn.util.core.config.ConfigBag;
 
 import kr.ac.hanyang.entities.IEntity;
+import kr.ac.hanyang.entities.services.software.SoftwareProcess;
 import kr.ac.hanyang.policy.placement.IPlacement;
 
 public interface IBasePolicyManager {
 	@SuppressWarnings("unchecked")
-	public static final ActionGroup[] ACTIONGROUPS = {new ActionGroup.Builder("START").addConstraint(new PolicyConstraint.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",true).build())
-																					  .addConstraint(new PolicyConstraint.Builder((BasicSensor) IEntity.LOCATION,"equals","location").build()) //FIXME
+	public static final ActionGroup[] ACTIONGROUPS = {new ActionGroup.Builder("START").addConstraint(new PolicyConstraint.Builder((BasicSensor) Attributes.SERVICE_UP,"set_to",true).build())
+																					  .addConstraint(new PolicyConstraint.Builder((BasicSensor) SoftwareProcess.PROVISIONING_LOCATION,"obtained_from",null).build()) //FIXME
 																					  .build(),
 													  new ActionGroup.Builder("STOP").addConstraint(new PolicyConstraint.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",false).build())
 													  								 .build()
 													  };
 	
-	
+	public void evaluateActions(Policy policy, IEntity entity);
 //	public static class StartActionBody extends EffectorBody<Void> {
 //        @Override public Void call(ConfigBag parameters) {
 //            return new MethodEffector<Void>(IPlacement.class, "startaction").call(entity(), parameters.getAllConfig());

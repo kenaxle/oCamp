@@ -15,7 +15,7 @@ public class Policy{
 	
 	private static final Logger log = LoggerFactory.getLogger(Policy.class);
 	private String name;
-	private String type; //FIXME have to change this to a dynamic type
+	private String type; //FIXME this is the policy manager.
 	private List<Entity> targets; //FIXME may have to use a higher class
 	private ConstraintSet desiredState;
 	
@@ -65,6 +65,8 @@ public class Policy{
 	public String getType(){ 
 		return type;
 	}
+	
+	
 	
 	public ConstraintSet getDesiredState(){return desiredState;}
 	
