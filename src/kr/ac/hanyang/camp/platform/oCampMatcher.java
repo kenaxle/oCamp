@@ -1,4 +1,4 @@
-package kr.ac.hanyang.platform;
+package kr.ac.hanyang.camp.platform;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -33,12 +33,12 @@ import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.text.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import kr.ac.hanyang.platform.oCampReserved;
-import kr.ac.hanyang.platform.oCampPlatformComponentTemplate;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import kr.ac.hanyang.camp.platform.oCampPlatformComponentTemplate;
+import kr.ac.hanyang.camp.platform.oCampReserved;
 import kr.ac.hanyang.entities.IService;
 
 public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oCampReserved {

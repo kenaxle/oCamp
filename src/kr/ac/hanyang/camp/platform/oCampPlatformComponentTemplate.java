@@ -1,4 +1,4 @@
-package kr.ac.hanyang.platform;
+package kr.ac.hanyang.camp.platform;
 
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.collection.BasicResourceLookup;

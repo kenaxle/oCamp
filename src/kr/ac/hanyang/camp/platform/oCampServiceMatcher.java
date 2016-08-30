@@ -1,4 +1,4 @@
-package kr.ac.hanyang.platform;
+package kr.ac.hanyang.camp.platform;
 
 public class oCampServiceMatcher {
 	

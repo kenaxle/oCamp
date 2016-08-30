@@ -1,4 +1,4 @@
-package kr.ac.hanyang.platform;
+package kr.ac.hanyang.camp.platform;
 
 import java.util.List;
 import java.util.Map.Entry;
