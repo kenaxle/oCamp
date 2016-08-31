@@ -22,6 +22,7 @@ public class Policy{
     String policyType;
     
     List<PolicyConstraint> policyConstraints;
+    List<String> targets;
     
     Map<String,Object> customAttributes;
     
@@ -36,6 +37,7 @@ public class Policy{
         result.policyType = (String) Yamls.removeMultinameAttribute(fields, "policy_type", "policyType", "type");
         
         result.policyConstraints = new ArrayList<PolicyConstraint>();
+        
         Object constraints = fields.remove("constraints");
         if (constraints instanceof Iterable) {
             for (Object constr: (Iterable<Object>)constraints) {
@@ -50,6 +52,21 @@ public class Policy{
             throw new IllegalArgumentException("services body should be iterable, not "+constraints.getClass());
         }
         
+        result.targets = new ArrayList<String>();
+        
+        Object targets = fields.remove("targets");
+        if (targets instanceof Iterable) {
+            for (Object target: (Iterable<Object>)targets) {
+                if (target instanceof String) {
+                    result.targets.add((String)target);
+                } else {
+                    throw new IllegalArgumentException("targets should be a String, not "+target.getClass());
+                }
+            }
+        } else if (targets!=null) {
+            // TODO "map" short form
+            throw new IllegalArgumentException("targets body should be iterable, not "+targets.getClass());
+        }
         result.customAttributes = fields;
         
         return result;
@@ -67,6 +84,11 @@ public class Policy{
     public List<PolicyConstraint> getPolicyConstraints() {
         return ImmutableList.copyOf(policyConstraints);
     }
+    
+    public List<String> getTargets() {
+        return ImmutableList.copyOf(targets);
+    }
+    
     public Map<String, Object> getCustomAttributes() {
         return ImmutableMap.copyOf(customAttributes);
     }

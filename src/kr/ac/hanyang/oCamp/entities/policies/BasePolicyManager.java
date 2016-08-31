@@ -6,16 +6,17 @@ import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 
 import kr.ac.hanyang.oCamp.entities.IEntity;
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
 
 public class BasePolicyManager extends AbstractEntity implements IBasePolicyManager{
 	
 	private String type;
-	private List<Policy> policyList;
+	private List<PolicyImpl> policyList;
 	//private List<ActionGroup> actionGroups;
 	
 	// create the policy manager with the appropriate action groups
 	public BasePolicyManager(String type){
-		policyList = new ArrayList<Policy>();
+		policyList = new ArrayList<PolicyImpl>();
 //		actionGroups = new ArrayList<ActionGroup>();
 //		for (String action: ACTIONGROUPS){
 //			actionGroups.add(new ActionGroup(action));
@@ -26,7 +27,7 @@ public class BasePolicyManager extends AbstractEntity implements IBasePolicyMana
 		return type;
 	}
 	
-	public void addPolicy(Policy pol){
+	public void addPolicy(PolicyImpl pol){
 		policyList.add(pol);
 		for (Entity entity: pol.getTargets()){
 			
@@ -38,13 +39,13 @@ public class BasePolicyManager extends AbstractEntity implements IBasePolicyMana
 		
 	}
 	
-	public void evaluateActions(Policy policy, IEntity entity){
+	public void evaluateActions(PolicyImpl policy, IEntity entity){
 		
 			for (ActionGroup actionGroup: ACTIONGROUPS){
 				//1. evaluate the action group
 				//ConstraintSet delta = actionGroup.canFulfill(policy);
 				if(actionGroup.canFulfill(policy)){
-					ConstraintSet  delta = (ConstraintSet)entity.getConstraintSet().getDelta(policy.getDesiredState()); //FIXME I dont need the delta
+					ConstraintSetImpl  delta = (ConstraintSetImpl)entity.getConstraintSet().getDelta(policy.getDesiredState()); //FIXME I dont need the delta
 					actionGroup.addAction(new Action(this,actionGroup.getName(),entity,delta));
 				}
 			}

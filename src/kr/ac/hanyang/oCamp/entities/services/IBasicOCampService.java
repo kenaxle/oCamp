@@ -1,7 +1,7 @@
 package kr.ac.hanyang.oCamp.entities.services;
 
-import kr.ac.hanyang.oCamp.entities.policies.ConstraintSet;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.ConstraintSetImpl;
 
 public interface IBasicOCampService {
 	

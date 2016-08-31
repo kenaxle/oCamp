@@ -1,80 +1,30 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import org.apache.brooklyn.api.entity.ImplementedBy;
+import org.apache.brooklyn.api.sensor.SensorEvent;
+import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
 
-import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.core.entity.Attributes;
-import org.apache.brooklyn.core.sensor.BasicSensor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraint;
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
 
-public class Policy{
-	
-	private static final Logger log = LoggerFactory.getLogger(Policy.class);
-	private String name;
-	private String type; //FIXME this is the policy manager.
-	private List<Entity> targets; //FIXME may have to use a higher class
-	private ConstraintSet desiredState;
-	
-	@SuppressWarnings("rawtypes")
-	public static class Builder{
-		private String name;
-		private String type; //FIXME have to change this to a dynamic type
-		private List<Entity> targets; //FIXME may have to use a higher class
-		private ConstraintSet desiredState;
-		
-		public Builder(String name, String type){
-			this.name = name;
-			this.type = type;
-			targets = new ArrayList<Entity>();
-			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraintImpl.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",true).build()).build();
-		}
-		
-		public Builder addConstraint(PolicyConstraintImpl constraint){
-			desiredState.addConstraint(constraint);
-			return this;
-		}
-		
-		public Builder addTarget(Entity e){
-			targets.add(e);
-			return this;
-		}
-		
-		public Builder desiredState(ConstraintSet g){
-			desiredState = g;
-			return this;
-		}
-		
-		public Policy build(){
-			return new Policy(this);
-		}
-		
-	}
-	
-	//TODO may have to address whether this is the proper way to construct
-	private Policy(Builder builder) {
-		this.name = builder.name;
-		this.type = builder.type;
-		this.targets = builder.targets;
-		this.desiredState = builder.desiredState;
-	}
-	
-	public String getType(){ 
-		return type;
-	}
-	
-	
-	
-	public ConstraintSet getDesiredState(){return desiredState;}
-	
-	public List<Entity> getTargets(){return targets;}
-	
-	
-	
-	// will implement later
-	//public Entity getTarget()
+@ImplementedBy(PolicyConstraintImpl.class)
+public interface Policy {
 
+	public static final BasicNotificationSensor<SensorEvent> POLICY_VIOLATED = new BasicNotificationSensor<SensorEvent>(
+            SensorEvent.class, "policy.violated", "The policy was violated");
+	
+	public static final BasicNotificationSensor<PolicyConstraint> CONSTRAINT_ADDED = new BasicNotificationSensor<PolicyConstraint>(
+			PolicyConstraint.class, "constraint.added", "The policy was violated");
+	
+	public static final BasicNotificationSensor<PolicyConstraint> CONSTRAINT_REMOVED = new BasicNotificationSensor<PolicyConstraint>(
+			PolicyConstraint.class, "constraint.removed", "The policy was violated");
+	
+	public boolean addConstraint(PolicyConstraint constraint);
+	
+	//public void addConstraintSet(ConstraintSetImpl constraintSet);
+	
+	public boolean removeConstraint(PolicyConstraint constraint);
+	
+	//public void removeConstraintSet(ConstraintSetImpl constraintSet);
+	
 }

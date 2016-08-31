@@ -12,9 +12,9 @@ public class Action implements IAction{
 	private String type;
 	private Entity entity;
 	private BasePolicyManager policyManager;
-	private ConstraintSet constraintSet;
+	private ConstraintSetImpl constraintSet;
 	
-	public Action(BasePolicyManager policyManager, String type, Entity entity, ConstraintSet constraintSet){
+	public Action(BasePolicyManager policyManager, String type, Entity entity, ConstraintSetImpl constraintSet){
 		this.policyManager = policyManager;
 		this.type = type;
 		this.entity = entity;

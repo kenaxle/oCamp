@@ -5,16 +5,18 @@ import java.util.List;
 
 import org.apache.brooklyn.api.entity.Entity;
 
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
+
 public class ActionGroup {
 	private String name;
-	private ConstraintSet actionableConstraints; // constraints that the actiongroup can influence;
+	private ConstraintSetImpl actionableConstraints; // constraints that the actiongroup can influence;
 	private double weight; //calculated based on the delta
 	private List<Action> actions; //calculated after evaluating actions
 	
 	public static class Builder{
 	
 		private String name;
-		private ConstraintSet actionableConstraints; // constraints that must be fulfilled
+		private ConstraintSetImpl actionableConstraints; // constraints that must be fulfilled
 		private double weight; //calculated based on the delta
 		private List<Action> actions; //calculated after evaluating actions
 		
@@ -65,8 +67,8 @@ public class ActionGroup {
 	//FIXME need to finish this method
 	// must use the delta of the entity and the actionable
 	// then using that delta
-	public boolean canFulfill(Policy pol){
-		ConstraintSet desiredState = pol.getDesiredState();
+	public boolean canFulfill(PolicyImpl pol){
+		ConstraintSetImpl desiredState = pol.getDesiredState();
 		return desiredState.isAlignedWith(actionableConstraints);
 	}
 	

@@ -8,6 +8,7 @@ import org.apache.brooklyn.core.sensor.BasicSensor;
 import org.apache.brooklyn.util.core.config.ConfigBag;
 
 import kr.ac.hanyang.oCamp.entities.IEntity;
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
 import kr.ac.hanyang.oCamp.entities.policies.placement.IPlacement;
 import kr.ac.hanyang.oCamp.entities.services.software.SoftwareProcess;
 
@@ -20,7 +21,7 @@ public interface IBasePolicyManager {
 													  								 .build()
 													  };
 	
-	public void evaluateActions(Policy policy, IEntity entity);
+	public void evaluateActions(PolicyImpl policy, IEntity entity);
 //	public static class StartActionBody extends EffectorBody<Void> {
 //        @Override public Void call(ConfigBag parameters) {
 //            return new MethodEffector<Void>(IPlacement.class, "startaction").call(entity(), parameters.getAllConfig());

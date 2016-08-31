@@ -15,11 +15,11 @@ import kr.ac.hanyang.oCamp.entities.IDeployable;
 import kr.ac.hanyang.oCamp.entities.IEntity;
 import kr.ac.hanyang.oCamp.entities.IExecutable;
 import kr.ac.hanyang.oCamp.entities.IService;
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
 import kr.ac.hanyang.oCamp.entities.policies.BasePolicyManager;
-import kr.ac.hanyang.oCamp.entities.policies.ConstraintSet;
+import kr.ac.hanyang.oCamp.entities.policies.ConstraintSetImpl;
 import kr.ac.hanyang.oCamp.entities.policies.IBasePolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.INotifiable;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyConstraintImpl;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, IService, Startable, IEntity{
@@ -61,7 +61,7 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	}
 
 	@Override
-	public ConstraintSet getConstraintSet() {
+	public ConstraintSetImpl getConstraintSet() {
 		return CONSTRAINTSET;
 	}
 	
