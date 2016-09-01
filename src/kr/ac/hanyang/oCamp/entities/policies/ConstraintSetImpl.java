@@ -21,6 +21,13 @@ public class ConstraintSetImpl extends AbstractEntity implements ConstraintSet{
 	public ConstraintSetImpl(){}
 	
 	@Override
+	public void init(){
+		super.init();
+		//initialize the list of constraints
+		constraints = new ArrayList<PolicyConstraint>();
+	}
+	
+	@Override
 	public boolean addConstraint(PolicyConstraint constraint){
 		if (this.constraints.add(constraint)){
 			sensors().emit(ConstraintSet.CONSTRAINT_ADDED, constraint);
@@ -49,7 +56,19 @@ public class ConstraintSetImpl extends AbstractEntity implements ConstraintSet{
 	
 	public List<PolicyConstraint> getConstraints(){return constraints;}	
 	
+	public void registerEntity(Entity entity){
+		for(PolicyConstraint polConstraint: constraints){
+			polConstraint.register(entity);
+		}
+		sensors().emit(ConstraintSet.ENTITY_REGISTERED, entity);
+	}
 	
+	public void unregisterEntity(Entity entity){
+		for(PolicyConstraint polConstraint: constraints){
+			polConstraint.unregister(entity);
+		}
+		sensors().emit(ConstraintSet.ENTITY_UNREGISTERED, entity);
+	}
 	
 //	public PolicyConstraintImpl getConstraint(BasicSensor property){
 //		return constraints.get(constraints.indexOf(new PolicyConstraintImpl.Builder(property).build()));

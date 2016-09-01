@@ -1,46 +1,31 @@
 package kr.ac.hanyang.oCamp.entities.constraints;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
-import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
-import org.apache.brooklyn.core.sensor.BasicSensor;
-import org.apache.brooklyn.util.collections.MutableMap;
-
-import kr.ac.hanyang.oCamp.entities.policies.IBasePolicyManager;
-import kr.ac.hanyang.oCamp.entities.policies.INotifiable;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyImpl;
 
 public class PolicyConstraintImpl<T> extends AbstractEntity implements PolicyConstraint{
-	private boolean enabled;
 	private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private T value; // this is the value/values of the property.
-	private IBasePolicyManager policyManager;
-	private PolicyImpl policy;
-	private List<INotifiable> subscribers;
 	
 	// No-arg constructor
-	public PolicyConstraintImpl(){ 
-		super(MutableMap.of(), null);
-	}
+	public PolicyConstraintImpl(){}
 	
-	public PolicyConstraintImpl(Entity parent){
-		this(MutableMap.of(), parent);
-	}
-	
-	public PolicyConstraintImpl(Map properties){
-		this(properties, null);
-	}
-	
-	public PolicyConstraintImpl(Map properties, Entity parent){
-		super(properties, parent);
-	}
+//	
+//	public PolicyConstraintImpl(Entity parent){
+//		this(MutableMap.of(), parent);
+//	}
+//	
+//	public PolicyConstraintImpl(Map properties){
+//		this(properties, null);
+//	}
+//	
+//	public PolicyConstraintImpl(Map properties, Entity parent){
+//		super(properties, parent);
+//	}
 	
 	@Override
 	public void init(){
@@ -50,38 +35,26 @@ public class PolicyConstraintImpl<T> extends AbstractEntity implements PolicyCon
 	public BasicAttributeSensor getProperty(){
 		return property;
 	}
-	
 
 	public T getValue(){
 		return value;
 	}
 	
-	public IBasePolicyManager getPolicyManager(){
-		return policyManager;
-	}
-	
-	public PolicyImpl getPolicy(){
-		return policy;
-	}
-	
-	public boolean isEnabled(){ return enabled;}
-	
 	//these may be effector methods
-	public void enable(Entity entity){
-		if (! enabled)
-			this.subscriptions().subscribe(entity, property, constraintListener(this));
+	@SuppressWarnings("unchecked")
+	public void register(Entity entity){
+		this.subscriptions().subscribe(entity, property, constraintListener(this));
 	}
 	
-	public void disable(Entity entity){
-		if (enabled)
-			this.subscriptions().unsubscribe(entity);
+	public void unregister(Entity entity){
+		this.subscriptions().unsubscribe(entity);
 	}
 	
 	private SensorEventListener<Object> constraintListener(Entity listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
 				if (!((PolicyConstraintImpl) listener).evaluate(event)){
-					sensors().emit(PolicyConstraint.CONSTRAINT_VIOLATED, event);
+					listener.sensors().emit(PolicyConstraint.CONSTRAINT_VIOLATED, event);
 				}
 			}
 		};
@@ -89,7 +62,7 @@ public class PolicyConstraintImpl<T> extends AbstractEntity implements PolicyCon
 	
 	
 	// simple equals alignment
-	// TODO may have to adjust to perform diferent alignments based on the function/type
+	// TODO may have to adjust to perform different alignments based on the function/type
 //	public boolean isAlignedWith(PolicyConstraintImpl constraint){
 //		if (this.property.equals(constraint.getProperty()) && this.value.equals(constraint.getValue()))
 //			return true;

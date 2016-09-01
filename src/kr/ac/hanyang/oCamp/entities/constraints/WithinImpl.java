@@ -7,7 +7,6 @@ public class WithinImpl<T> extends PolicyConstraintImpl implements Within {
 	public WithinImpl(){}
 	
 	public boolean evaluate(SensorEvent event){
-		if (! isEnabled()) return false;
 		//if (! getValue() instanceof )
 		if (event.getValue().getClass() != getValue().getClass()) return false;
 		return ((T)event.getValue()).equals((T)getValue());

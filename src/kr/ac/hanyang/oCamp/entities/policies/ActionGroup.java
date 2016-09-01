@@ -11,19 +11,19 @@ public class ActionGroup {
 	private String name;
 	private ConstraintSetImpl actionableConstraints; // constraints that the actiongroup can influence;
 	private double weight; //calculated based on the delta
-	private List<Action> actions; //calculated after evaluating actions
+	private List<ActionImpl> actions; //calculated after evaluating actions
 	
 	public static class Builder{
 	
 		private String name;
 		private ConstraintSetImpl actionableConstraints; // constraints that must be fulfilled
 		private double weight; //calculated based on the delta
-		private List<Action> actions; //calculated after evaluating actions
+		private List<ActionImpl> actions; //calculated after evaluating actions
 		
 		public Builder(String name){
 			this.name = name;
 			this.weight = 0;
-			this.actions = new ArrayList<Action>();
+			this.actions = new ArrayList<ActionImpl>();
 		}
 		
 //		public Builder addAction(Action action){
@@ -60,7 +60,7 @@ public class ActionGroup {
 		return weight;
 	}
 	
-	public void addAction(Action action){
+	public void addAction(ActionImpl action){
 		actions.add(action);
 	}
 	

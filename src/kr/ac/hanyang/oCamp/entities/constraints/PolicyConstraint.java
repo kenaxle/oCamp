@@ -26,11 +26,9 @@ public interface PolicyConstraint<T> {
 
 	public T getValue();
 	
-	public void enable(Entity entity);
+	public void register(Entity entity);
 	
-	public void disable(Entity entity);
-	
-	public boolean isEnabled();
+	public void unregister(Entity entity);
 	
 	public boolean evaluate(SensorEvent event);
 	

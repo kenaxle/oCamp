@@ -1,32 +1,27 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
-import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.api.mgmt.Task;
-import org.apache.brooklyn.core.annotation.Effector;
+import org.apache.brooklyn.api.entity.ImplementedBy;
 import org.apache.brooklyn.core.annotation.EffectorParam;
+import org.apache.brooklyn.core.effector.EffectorBody;
+import org.apache.brooklyn.core.effector.Effectors;
 import org.apache.brooklyn.core.effector.MethodEffector;
-import org.apache.brooklyn.core.entity.Entities;
+import org.apache.brooklyn.util.core.config.ConfigBag;
 
-public class Action implements IAction{
-	
-	private String type;
-	private Entity entity;
-	private BasePolicyManager policyManager;
-	private ConstraintSetImpl constraintSet;
-	
-	public Action(BasePolicyManager policyManager, String type, Entity entity, ConstraintSetImpl constraintSet){
-		this.policyManager = policyManager;
-		this.type = type;
-		this.entity = entity;
-		this.constraintSet = constraintSet;
-	}
+import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
 
-	@Effector(description="Executes an action on an entity once given the action name")
-	public void action(	@EffectorParam(name="effectorName", description="name of the action to perform") MethodEffector effectorName){
+@ImplementedBy(ActionImpl.class)
+public interface Action {
 		
-		Task<Void> action = Entities.invokeEffector(policyManager, entity, effectorName);
-		
-	}
-
+	public static class ActionBody extends EffectorBody<Void> {
+        @Override public Void call(ConfigBag parameters) {
+            return new MethodEffector<Void>(ActionImpl.class, "action").call(entity(), parameters.getAllConfig());
+        }
+    }
 	
+	org.apache.brooklyn.api.effector.Effector<Void> ACTION = Effectors.effector(new MethodEffector<Void>(ActionImpl.class, "action"))
+		        .impl(new ActionBody())
+		        .build();
+	 
+	@org.apache.brooklyn.core.annotation.Effector(description="action effector")
+	    void action(@EffectorParam(name="actionName") MethodEffector effectorName);
 }

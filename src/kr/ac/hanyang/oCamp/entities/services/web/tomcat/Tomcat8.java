@@ -16,15 +16,15 @@ import kr.ac.hanyang.oCamp.entities.IEntity;
 import kr.ac.hanyang.oCamp.entities.IExecutable;
 import kr.ac.hanyang.oCamp.entities.IService;
 import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
-import kr.ac.hanyang.oCamp.entities.policies.BasePolicyManager;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
 import kr.ac.hanyang.oCamp.entities.policies.ConstraintSetImpl;
-import kr.ac.hanyang.oCamp.entities.policies.IBasePolicyManager;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.INotifiable;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, IService, Startable, IEntity{
 	
-	private Map<String,BasePolicyManager> policyManagers;
+	private Map<String,PolicyManagerImpl> policyManagers;
 	
 	public Tomcat8(){
 		super();
@@ -33,7 +33,7 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	
 	public void init(){
 		super.init();
-		policyManagers = new LinkedHashMap<String,BasePolicyManager>();
+		policyManagers = new LinkedHashMap<String,PolicyManagerImpl>();
 		//configure the constraint set here 
 		BasicSensorSupport sensorSup = this.sensors();
 		//sensorSup.set(Attributes.SERVICE_UP, true);
@@ -65,11 +65,11 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 		return CONSTRAINTSET;
 	}
 	
-	public void subscribe(BasePolicyManager subscriber){
+	public void subscribe(PolicyManagerImpl subscriber){
 		policyManagers.put(subscriber.getType(), subscriber);
 	}
 	
-	public void unsubscribe(BasePolicyManager subscriber){
+	public void unsubscribe(PolicyManagerImpl subscriber){
 		policyManagers.remove(subscriber.getType());
 	}
 	
@@ -81,7 +81,7 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	public void notification(Entity entity) {
 		if (!(entity instanceof PolicyConstraintImpl)) return; //this should be logged as an error
 		PolicyConstraintImpl policyConstraint = (PolicyConstraintImpl) entity;
-		IBasePolicyManager policyManager = policyConstraint.getPolicyManager();
+		PolicyManager policyManager = policyConstraint.getPolicyManager();
 		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
 	}
 

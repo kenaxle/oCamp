@@ -8,7 +8,6 @@ public class EqualToImpl<T> extends PolicyConstraintImpl implements Within {
 	
 	@Override
 	public boolean evaluate(SensorEvent event){
-		if(! isEnabled()) return false;
 		if (event.getValue().getClass() != getValue().getClass()) return false;
 		return ((T)event.getValue()).equals((T)getValue());
 	}

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.sensor.SensorEvent;
+import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
@@ -22,80 +24,70 @@ public class PolicyImpl extends AbstractEntity implements Policy{
 	private String name;
 	//private String type; //FIXME this is the policy manager.
 	private List<Entity> targets; //FIXME may have to use a higher class
-	private ConstraintSetImpl desiredState;
-	
-//	@SuppressWarnings("rawtypes")
-//	public static class Builder{
-//		private String name;
-//		private String type; //FIXME have to change this to a dynamic type
-//		private List<Entity> targets; //FIXME may have to use a higher class
-//		private ConstraintSet desiredState;
-//		
-//		public Builder(String name, String type){
-//			this.name = name;
-//			this.type = type;
-//			targets = new ArrayList<Entity>();
-//			desiredState = new ConstraintSet.Builder("BaseDesiredState").addConstraint(new PolicyConstraintImpl.Builder((BasicSensor) Attributes.SERVICE_UP,"equals",true).build()).build();
-//		}
-//		
-//		public Builder addConstraint(PolicyConstraintImpl constraint){
-//			desiredState.addConstraint(constraint);
-//			return this;
-//		}
-//		
-//		public Builder addTarget(Entity e){
-//			targets.add(e);
-//			return this;
-//		}
-//		
-//		public Builder desiredState(ConstraintSet g){
-//			desiredState = g;
-//			return this;
-//		}
-//		
-//		public Policy build(){
-//			return new Policy(this);
-//		}
-//		
-//	}
-	
-//	//TODO may have to address whether this is the proper way to construct
-//	private Policy(Builder builder) {
-//		this.name = builder.name;
-//		this.type = builder.type;
-//		this.targets = builder.targets;
-//		this.desiredState = builder.desiredState;
-//	}	
-	
-//	public String getType(){ 
-//		return type;
-//	}
+	private ConstraintSet desiredState;
 	
 	
-	
-	public ConstraintSetImpl getDesiredState(){return desiredState;}
+	public ConstraintSet getDesiredState(){return desiredState;}
 	
 	public List<Entity> getTargets(){return targets;}
-
-	@Override
-	public boolean addConstraint(PolicyConstraint constraint) {
-		if (desiredState.addConstraint(constraint)){
-			sensors().emit(Policy.CONSTRAINT_ADDED, constraint);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean removeConstraint(PolicyConstraint constraint) {
-		if (desiredState.removeConstraint(constraint)){
-			sensors().emit(Policy.CONSTRAINT_ADDED, constraint);
-			return true;
-		}
-		return false;
-	}
-
 	
+	public PolicyImpl(){}
+	
+	@Override
+	public void init(){
+		super.init();
+		targets = new ArrayList<Entity>();
+	}
+	
+//	@Override
+//	public boolean addConstraintSet(ConstraintSet constraints) {
+//		if (desiredState.addConstraintSet(constraints)){
+//			sensors().emit(Policy.CONSTRAINTS_ADDED, constraints);
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean removeConstraintSet(ConstraintSet constraints) {
+//		if (desiredState.removeConstraint(constraints)){
+//			sensors().emit(Policy.CONSTRAINTS_ADDED, constraints);
+//			return true;
+//		}
+//		return false;
+//	}
+
+	@Override
+	public boolean addSubscriber(Entity entity) {
+		if (targets.add(entity)){
+			desiredState.registerEntity(entity);
+			for (PolicyConstraint policyConst: desiredState.getConstraints()){
+				this.subscriptions().subscribe((Entity) policyConst, PolicyConstraint.CONSTRAINT_VIOLATED, policyListener(this));
+			}
+			sensors().emit(Policy.SUBSCRIBER_ADDED, entity);
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public boolean removeSubscriber(Entity entity) {
+		if (targets.remove(entity)){
+			desiredState.unregisterEntity(entity);
+			sensors().emit(Policy.SUBSCRIBER_REMOVED, entity);
+			return true;
+		}
+		return false;		
+	}
+
+	private SensorEventListener<Object> policyListener(Entity listener){
+		return new SensorEventListener<Object>(){
+			public void onEvent(SensorEvent<Object> event){
+				listener.sensors().emit(Policy.POLICY_VIOLATED, event.getValue());
+			}
+		};
+	}
 	
 	
 	// will implement later
