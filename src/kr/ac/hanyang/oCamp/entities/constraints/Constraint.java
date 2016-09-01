@@ -10,8 +10,8 @@ import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
-@ImplementedBy(PolicyConstraintImpl.class)
-public interface PolicyConstraint<T> {
+@ImplementedBy(ConstraintImpl.class)
+public interface Constraint<T> extends kr.ac.hanyang.oCamp.api.policy.Constraint{
 	
 	public static final BasicNotificationSensor<SensorEvent> CONSTRAINT_VIOLATED = new BasicNotificationSensor<SensorEvent>(
 	            SensorEvent.class, "constraint.violated", "The constraint was violated");
@@ -32,5 +32,5 @@ public interface PolicyConstraint<T> {
 	
 	public boolean evaluate(SensorEvent event);
 	
-	public boolean isAlignedWith(PolicyConstraint constraint);
+	public boolean isAlignedWith(Constraint constraint);
 }

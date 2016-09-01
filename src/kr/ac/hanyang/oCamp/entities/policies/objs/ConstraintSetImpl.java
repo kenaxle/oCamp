@@ -1,4 +1,4 @@
-package kr.ac.hanyang.oCamp.entities.policies;
+package kr.ac.hanyang.oCamp.entities.policies.objs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.core.sensor.BasicSensor;
 
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraint;
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
 public class ConstraintSetImpl extends AbstractEntity implements ConstraintSet{
 	private String name;
 	//private Policy policy; //TODO this is the policy the set is related to.
-	private List<PolicyConstraint> constraints;
+	private List<Constraint> constraints;
 
 	
 	public ConstraintSetImpl(){}
@@ -24,11 +24,11 @@ public class ConstraintSetImpl extends AbstractEntity implements ConstraintSet{
 	public void init(){
 		super.init();
 		//initialize the list of constraints
-		constraints = new ArrayList<PolicyConstraint>();
+		constraints = new ArrayList<Constraint>();
 	}
 	
 	@Override
-	public boolean addConstraint(PolicyConstraint constraint){
+	public boolean addConstraint(Constraint constraint){
 		if (this.constraints.add(constraint)){
 			sensors().emit(ConstraintSet.CONSTRAINT_ADDED, constraint);
 			return true;
@@ -37,7 +37,7 @@ public class ConstraintSetImpl extends AbstractEntity implements ConstraintSet{
 	}
 	
 	@Override
-	public boolean removeConstraint(PolicyConstraint constraint) {
+	public boolean removeConstraint(Constraint constraint) {
 		if (this.constraints.remove(constraint)){
 			sensors().emit(ConstraintSet.CONSTRAINT_REMOVED, constraint);
 			return true;
@@ -48,23 +48,23 @@ public class ConstraintSetImpl extends AbstractEntity implements ConstraintSet{
 	
 	public String getName(){ return name;}
 	
-	public PolicyConstraint getConstraint(PolicyConstraint constraint){
-		if (constraint instanceof PolicyConstraint)
+	public Constraint getConstraint(Constraint constraint){
+		if (constraint instanceof Constraint)
 			return constraints.get(constraints.indexOf(constraint));
 		return null; //FIXME should throw exception and log issue instead of returning null
 	}
 	
-	public List<PolicyConstraint> getConstraints(){return constraints;}	
+	public List<Constraint> getConstraints(){return constraints;}	
 	
 	public void registerEntity(Entity entity){
-		for(PolicyConstraint polConstraint: constraints){
+		for(Constraint polConstraint: constraints){
 			polConstraint.register(entity);
 		}
 		sensors().emit(ConstraintSet.ENTITY_REGISTERED, entity);
 	}
 	
 	public void unregisterEntity(Entity entity){
-		for(PolicyConstraint polConstraint: constraints){
+		for(Constraint polConstraint: constraints){
 			polConstraint.unregister(entity);
 		}
 		sensors().emit(ConstraintSet.ENTITY_UNREGISTERED, entity);

@@ -1,5 +1,7 @@
 package kr.ac.hanyang.oCamp.api.policy;
 
-public interface PolicyType {
+import org.apache.brooklyn.api.objs.BrooklynType;
+
+public interface PolicyType extends BrooklynType {
 
 }

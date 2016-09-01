@@ -1,31 +1,18 @@
 package kr.ac.hanyang.oCamp.entities.constraints;
 
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.sensor.AttributeSensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyImpl;
 
-public class PolicyConstraintImpl<T> extends AbstractEntity implements PolicyConstraint{
+public class ConstraintImpl<T> extends AbstractEntity implements Constraint{
 	private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private T value; // this is the value/values of the property.
 	
 	// No-arg constructor
-	public PolicyConstraintImpl(){}
-	
-//	
-//	public PolicyConstraintImpl(Entity parent){
-//		this(MutableMap.of(), parent);
-//	}
-//	
-//	public PolicyConstraintImpl(Map properties){
-//		this(properties, null);
-//	}
-//	
-//	public PolicyConstraintImpl(Map properties, Entity parent){
-//		super(properties, parent);
-//	}
+	public ConstraintImpl(){}
 	
 	@Override
 	public void init(){
@@ -53,8 +40,8 @@ public class PolicyConstraintImpl<T> extends AbstractEntity implements PolicyCon
 	private SensorEventListener<Object> constraintListener(Entity listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
-				if (!((PolicyConstraintImpl) listener).evaluate(event)){
-					listener.sensors().emit(PolicyConstraint.CONSTRAINT_VIOLATED, event);
+				if (!((ConstraintImpl) listener).evaluate(event)){
+					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
 				}
 			}
 		};
@@ -149,7 +136,31 @@ public class PolicyConstraintImpl<T> extends AbstractEntity implements PolicyCon
 		return false;
 	}
 	
-	public boolean isAlignedWith(PolicyConstraint constraint){
+	public boolean isAlignedWith(Constraint constraint){
+		return false;
+	}
+
+	@Override
+	public boolean addProperty(AttributeSensor property) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeProperty(AttributeSensor constraint) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addValue(Entity entity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeValue(Entity entity) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

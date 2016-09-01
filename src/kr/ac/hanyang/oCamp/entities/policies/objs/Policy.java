@@ -1,15 +1,13 @@
-package kr.ac.hanyang.oCamp.entities.policies;
+package kr.ac.hanyang.oCamp.entities.policies.objs;
 
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
-import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
 
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraint;
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
-@ImplementedBy(PolicyConstraintImpl.class)
-public interface Policy {
+@ImplementedBy(ConstraintImpl.class)
+public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 
 	public static final BasicNotificationSensor<Object> POLICY_VIOLATED = new BasicNotificationSensor<Object>(
             Object.class, "policy.violated", "The policy was violated");
@@ -26,13 +24,5 @@ public interface Policy {
 	public static final BasicNotificationSensor<Entity> SUBSCRIBER_REMOVED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.removed", "The subscriber was removed");
 
-	
-	//public boolean addConstraintSet(ConstraintSet constraints);
-	
-	public boolean addSubscriber(Entity entity);
-	
-	//public boolean removeConstraintSet(ConstraintSet constraints);
-	
-	public boolean removeSubscriber(Entity entity);
 	
 }

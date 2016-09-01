@@ -9,8 +9,8 @@ import org.apache.brooklyn.entity.software.base.SoftwareProcess;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
-import kr.ac.hanyang.oCamp.entities.policies.ConstraintSetImpl;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintSetImpl;
 
 @Catalog(name="Tomcat Entity", description="Represents a server")
 @ImplementedBy(Tomcat8.class)

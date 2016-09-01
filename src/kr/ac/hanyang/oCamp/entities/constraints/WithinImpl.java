@@ -2,7 +2,7 @@ package kr.ac.hanyang.oCamp.entities.constraints;
 
 import org.apache.brooklyn.api.sensor.SensorEvent;
 
-public class WithinImpl<T> extends PolicyConstraintImpl implements Within {
+public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 	
 	public WithinImpl(){}
 	
@@ -12,7 +12,7 @@ public class WithinImpl<T> extends PolicyConstraintImpl implements Within {
 		return ((T)event.getValue()).equals((T)getValue());
 	}
 	
-	public boolean isAlignedWith(PolicyConstraint constraint){
+	public boolean isAlignedWith(Constraint constraint){
 		return false;
 	}
 }

@@ -15,9 +15,9 @@ import kr.ac.hanyang.oCamp.entities.IDeployable;
 import kr.ac.hanyang.oCamp.entities.IEntity;
 import kr.ac.hanyang.oCamp.entities.IExecutable;
 import kr.ac.hanyang.oCamp.entities.IService;
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
-import kr.ac.hanyang.oCamp.entities.policies.ConstraintSetImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintSetImpl;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.INotifiable;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
@@ -79,8 +79,8 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	//for handling the 
 	@Override
 	public void notification(Entity entity) {
-		if (!(entity instanceof PolicyConstraintImpl)) return; //this should be logged as an error
-		PolicyConstraintImpl policyConstraint = (PolicyConstraintImpl) entity;
+		if (!(entity instanceof ConstraintImpl)) return; //this should be logged as an error
+		ConstraintImpl policyConstraint = (ConstraintImpl) entity;
 		PolicyManager policyManager = policyConstraint.getPolicyManager();
 		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
 	}

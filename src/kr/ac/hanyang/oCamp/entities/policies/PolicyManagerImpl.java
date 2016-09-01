@@ -1,18 +1,12 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
-import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
-
-import kr.ac.hanyang.oCamp.entities.IEntity;
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraint;
-import kr.ac.hanyang.oCamp.entities.constraints.PolicyConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 
 public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	
@@ -24,32 +18,10 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	
 	@Override
 	public void init(){
-		policyList = new ArrayList<Policy>();
-//		actionGroups = new ArrayList<ActionGroup>();
-//		for (String action: ACTIONGROUPS){
-//			actionGroups.add(new ActionGroup(action));
-//		}
-	}
-	
-	@Override
-	public boolean addPolicy(Policy policy) {
-		if (this.policyList.add(policy)){
-			this.subscriptions().subscribe((Entity) policy, Policy.POLICY_VIOLATED, policyManagerListener(this));
-			sensors().emit(PolicyManager.POLICY_ADDED, policy);
-			return true;
-		}
-			return false;
+		
+		//policyList = new ArrayList<Policy>();
 	}
 
-	@Override
-	public boolean removePolicy(Policy policy) {
-		if (this.policyList.remove(policy)){
-			this.subscriptions().unsubscribe((Entity) policy);
-			sensors().emit(PolicyManager.POLICY_REMOVED, policy);
-			return true;
-		}
-			return false;
-	}
 	
 	private SensorEventListener<Object> policyManagerListener(Entity listener){
 		return new SensorEventListener<Object>(){
@@ -95,6 +67,38 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	
 	public void restartaction(){
 		
+	}
+
+	@Override
+	public boolean addOCampPolicy(org.apache.brooklyn.api.policy.Policy policy) {
+		if (this.policyList.add((Policy) policy)){
+			this.subscriptions().subscribe((Entity) policy, Policy.POLICY_VIOLATED, policyManagerListener(this));
+			sensors().emit((Sensor)PolicyManager.POLICY_ADDED, policy);
+			return true;
+		}
+			return false;
+	}
+
+	@Override
+	public boolean removeOCampPolicy(org.apache.brooklyn.api.policy.Policy policy) {
+		if (this.policyList.remove(policy)){
+			this.subscriptions().unsubscribe((Entity) policy);
+			sensors().emit((Sensor)PolicyManager.POLICY_REMOVED, policy);
+			return true;
+		}
+			return false;
+	}
+
+	@Override
+	public boolean addActionGroup(kr.ac.hanyang.oCamp.api.objs.ActionGroup actionGroup) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeActionGroupt(kr.ac.hanyang.oCamp.api.objs.ActionGroup actionGroup) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
