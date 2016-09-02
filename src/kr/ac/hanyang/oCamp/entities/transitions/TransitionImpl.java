@@ -1,6 +1,7 @@
 package kr.ac.hanyang.oCamp.entities.transitions;
 
 import org.apache.brooklyn.api.sensor.SensorEvent;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 
 //import kr.ac.hanyang.oCamp.entities.transitions.Transition;
@@ -19,7 +20,7 @@ public class TransitionImpl<T> extends AbstractEntity implements Transition{
 	
 	
 	public Object getValue() {
-		return value;
+		return config().get(VALUE);
 	}
 	
 	public int getWeight(){
@@ -34,13 +35,14 @@ public class TransitionImpl<T> extends AbstractEntity implements Transition{
 
 	@Override
 	public boolean setValue(Object value) {
-		return true;
+		return (config().set((ConfigKey)VALUE, value) != null);
 	}
 
+	
+	//will have to remove this
 	@Override
 	public boolean removeValue(Object value) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	

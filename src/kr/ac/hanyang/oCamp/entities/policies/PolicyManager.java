@@ -14,6 +14,7 @@ import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
 import com.google.common.reflect.TypeToken;
 
+import kr.ac.hanyang.oCamp.api.objs.Action;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroupImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionImpl;
@@ -35,26 +36,31 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 	ConfigKey<List<ActionGroup>> ACTIONGROUPS = ConfigKeys.newConfigKey(new TypeToken<List<ActionGroup>>(){ },
 			"actiongroups","represents the list of actiongroups",
 			new ArrayList<ActionGroup>(){{
-				add(new ActionGroupImpl(){{	setActionID(Startable.START); 
-					addAction(new ActionImpl(){{ setProperty(Attributes.SERVICE_UP);
-						addTransition(new InitialImpl(){{	setValue(new Boolean(false));	}});
-						addTransition(new SetImpl(){{	    setValue(new Boolean(true));	}});
+				add(new ActionGroupImpl(){{	
+					setActionID(Startable.START); 
+					setActions(new ArrayList<Action>(){{ 
+						add(new ActionImpl(){{ setProperty(Attributes.SERVICE_UP);
+							addTransition(new InitialImpl(){{	setValue(new Boolean(false));	}});
+							addTransition(new SetImpl(){{	    setValue(new Boolean(true));	}});
+						}});
+						add(new ActionImpl(){{ setProperty(SoftwareProcess.PROVISIONING_LOCATION);
+							addTransition(new InitialImpl(){{	setValue(null);							}});
+							addTransition(new SetImpl(){{	    setValue(Optional.of(Object.class));	}}); 
+						}});
 					}});
-					addAction(new ActionImpl(){{ setProperty(SoftwareProcess.PROVISIONING_LOCATION);
-						addTransition(new InitialImpl(){{	setValue(null);							}});
-						addTransition(new SetImpl(){{	    setValue(Optional.of(Object.class));	}}); 
-					}});	
 				}});
-				add(new ActionGroupImpl(){{	setActionID(Startable.STOP); 
-					addAction(new ActionImpl(){{ setProperty(Attributes.SERVICE_UP);
-						addTransition(new InitialImpl(){{	setValue(new Boolean(false));	}});
-						addTransition(new SetImpl(){{	    setValue(new Boolean(true));	}});
-					}});
-					addAction(new ActionImpl(){{ setProperty(SoftwareProcess.PROVISIONING_LOCATION);
-						addTransition(new InitialImpl(){{	setValue(Optional.of(Object.class));	}});
-						addTransition(new SetImpl(){{	    setValue(null);							}});
-					}});	
-				}});
+			}});
+//				
+//				add(new ActionGroupImpl(){{	setActionID(Startable.STOP); 
+//					addAction(new ActionImpl(){{ setProperty(Attributes.SERVICE_UP);
+//						addTransition(new InitialImpl(){{	setValue(new Boolean(false));	}});
+//						addTransition(new SetImpl(){{	    setValue(new Boolean(true));	}});
+//					}});
+//					addAction(new ActionImpl(){{ setProperty(SoftwareProcess.PROVISIONING_LOCATION);
+//						addTransition(new InitialImpl(){{	setValue(Optional.of(Object.class));	}});
+//						addTransition(new SetImpl(){{	    setValue(null);							}});
+//					}});	
+//				}});
 // FIXME no moveable exists				
 //				add(new ActionGroupImpl(){{	setActionID(Startable.MOVE); 
 //					addAction(new ActionImpl(){{ setProperty(Attributes.SERVICE_UP);
@@ -66,7 +72,7 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //						addTransition(new SetImpl(){{	    setValue(null);							}});
 //					}});	
 //				}});
-			}});
+//			}});
 	
 	// = new ActionGroupImpl();
 	//public Set<ActionGroup> AGroups;// [];

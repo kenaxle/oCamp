@@ -19,7 +19,7 @@ public class ActionImpl extends AbstractEntity implements Action{
 	public ActionImpl(){ }
 
 	public void init(){
-		transitions = new ArrayList<Transition>();
+		//transitions = new ArrayList<Transition>();
 	}
 	
 	public void setAction(Effector action){
@@ -38,29 +38,13 @@ public class ActionImpl extends AbstractEntity implements Action{
 	}
 
 	@Override
-	public boolean removeProperty(Sensor property) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addTransition(Transition transition) {
-		if (this.transitions.add(transition)){
-			sensors().emit((Sensor)Action.TRANSITION_ADDED, transition);
+	public boolean addTransitions(List<Transition> transitions) {
+		if (config().set(TRANSITIONS, transitions) != null){
+			sensors().emit((Sensor)Action.TRANSITIONS_ADDED, transitions);
 			return true;
 		}
 			return false;
 	}
-
-	@Override
-	public boolean removeTransition(Transition transition) {
-		if (this.transitions.remove(transition)){
-			sensors().emit((Sensor)Action.TRANSITION_REMOVED, transition);
-			return true;
-		}
-			return false;
-	}
-
 
 
 	
