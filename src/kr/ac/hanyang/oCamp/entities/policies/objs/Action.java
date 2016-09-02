@@ -26,7 +26,7 @@ public interface Action extends kr.ac.hanyang.oCamp.api.objs.Action{
 	ConfigKey<List<Transition>> TRANSITIONS = ConfigKeys.newConfigKey(new TypeToken<List<Transition>>(){ },"actiongroups","represents the list of actiongroups");
 	
 	
-	public static final Sensor<Effector> ACTION_SET = new BasicNotificationSensor<Effector>(
+	public static final Sensor<Effector> PROPERTY_SET = new BasicNotificationSensor<Effector>(
             Effector.class, "action.set", "The action was set");
 	
 	public static final Sensor<Object> TRANSITIONS_ADDED = new BasicNotificationSensor<Object>(

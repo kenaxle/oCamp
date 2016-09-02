@@ -16,10 +16,10 @@ import com.google.common.reflect.TypeToken;
 public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup{
 	
 	@SetFromFlag("actionID")
-	ConfigKey<Effector> ACTION_ID = ConfigKeys.newConfigKey(Effector.class,"actionID","represents the ID of the action");
+	public static final ConfigKey<Effector> ACTION_ID = ConfigKeys.newConfigKey(Effector.class,"actionID","represents the ID of the action");
 	
 	@SetFromFlag("actions")
-	ConfigKey<List<Action>> ACTIONS = ConfigKeys.newConfigKey(new TypeToken<List<Action>>(){ },"actiongroups","represents the list of actiongroups");	
+	public static final ConfigKey<List<Action>> ACTIONS = ConfigKeys.newConfigKey(new TypeToken<List<Action>>(){ },"actiongroups","represents the list of actiongroups");	
 	
 	public static final Sensor<Effector> ACTION_ID_SET = new BasicNotificationSensor<Effector>(
             Effector.class, "actionID.set", "The actionID was set");
@@ -29,8 +29,5 @@ public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup{
 	
 //	public void setAction(Effector action);
 //	public Effector getAction();
-	
-	//public boolean addAction(Action action);
-	//public boolean removeAction(Action action);
-	
+
 }

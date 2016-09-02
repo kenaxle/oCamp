@@ -1,7 +1,7 @@
 package kr.ac.hanyang.oCamp.entities.transitions;
 
+import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.SensorEvent;
-import org.apache.brooklyn.core.entity.AbstractEntity;
 
 public class ChangeImpl<T> extends TransitionImpl implements Change{
 
@@ -16,6 +16,17 @@ public class ChangeImpl<T> extends TransitionImpl implements Change{
 	public boolean evaluate(SensorEvent event) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean evaluate(Object obj, Entity entity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public int getWeight(){
+		return Change.WEIGHT;
 	}
 
 //	@Override

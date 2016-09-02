@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.policy.Policy;
+import org.apache.brooklyn.api.sensor.Sensor;
 
 
 public interface ActionGroup extends Entity{
@@ -14,5 +15,7 @@ public interface ActionGroup extends Entity{
 	
 	public boolean setActions(List<Action> actions);
 	//public boolean removeAction(Action action);
+	
+	public Action getAction(Sensor policySensor);
 	
 }

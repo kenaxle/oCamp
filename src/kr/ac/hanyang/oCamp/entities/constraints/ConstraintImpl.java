@@ -2,12 +2,15 @@ package kr.ac.hanyang.oCamp.entities.constraints;
 
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.AttributeSensor;
+import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
 
-public class ConstraintImpl<T> extends AbstractEntity implements Constraint{
+import kr.ac.hanyang.oCamp.api.policy.Policy;
+
+public abstract class ConstraintImpl<T> extends AbstractEntity implements Constraint{
 	private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private T value; // this is the value/values of the property.
 	
@@ -29,23 +32,26 @@ public class ConstraintImpl<T> extends AbstractEntity implements Constraint{
 	
 	//these may be effector methods
 	@SuppressWarnings("unchecked")
-	public void register(Entity entity){
-		this.subscriptions().subscribe(entity, property, constraintListener(this));
+	public void register(Policy policy){
+		this.subscriptions().subscribe(policy, property, constraintListener(this));
 	}
 	
-	public void unregister(Entity entity){
-		this.subscriptions().unsubscribe(entity);
+	public void unregister(Policy policy){
+		this.subscriptions().unsubscribe(policy);
 	}
 	
-	private SensorEventListener<Object> constraintListener(Entity listener){
+	private SensorEventListener<Object> constraintListener(Constraint listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
-				if (!((ConstraintImpl) listener).evaluate(event)){
+				if (! listener.evaluate(event)){
 					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
 				}
 			}
 		};
 	}
+	
+	public abstract boolean isViolated(Sensor propertySensor, Entity entity);
+		
 	
 	
 	// simple equals alignment
@@ -136,32 +142,34 @@ public class ConstraintImpl<T> extends AbstractEntity implements Constraint{
 		return false;
 	}
 	
-	public boolean isAlignedWith(Constraint constraint){
+	//--------------------------------------------------------
+    
+    
+    
+    public boolean isAlignedWith(Constraint constraint){
 		return false;
 	}
 
 	@Override
-	public boolean addProperty(AttributeSensor property) {
-		// TODO Auto-generated method stub
+	public boolean setProperty(Sensor property) {
+		if (config().set(PROPERTY, property) != null){
+			sensors().emit(PROPERTY_SET, property);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean removeProperty(AttributeSensor constraint) {
-		// TODO Auto-generated method stub
+	public boolean setValue(Object object) {
+		if (config().set(VALUE, object) != null){
+			sensors().emit(VALUE_SET, object);
+			return true;
+		}
 		return false;
 	}
-
-	@Override
-	public boolean addValue(Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeValue(Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public SensorEventListener<T> getListener(){
+		return (SensorEventListener<T>) constraintListener(this);
 	}
 
 

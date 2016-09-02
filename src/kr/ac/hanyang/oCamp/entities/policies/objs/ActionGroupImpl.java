@@ -1,7 +1,9 @@
 package kr.ac.hanyang.oCamp.entities.policies.objs;
 
+import java.util.Iterator;
 import java.util.List;
 import org.apache.brooklyn.api.effector.Effector;
+import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import kr.ac.hanyang.oCamp.api.objs.Action;
 
@@ -28,9 +30,13 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	
 	@Override
 	public boolean setActionID(Effector actionEffector) {
-		// TODO Auto-generated method stub
 		return config().set(ACTION_ID, actionEffector) != null;
 	}
 
-
+	@Override
+	public Action getAction(Sensor policySensor){
+		for(Action action: actions)
+			return action.getProperty().equals(policySensor) ? action : null;
+		return null;
+	}
 }

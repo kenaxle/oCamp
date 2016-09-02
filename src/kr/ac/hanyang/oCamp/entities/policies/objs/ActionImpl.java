@@ -1,10 +1,12 @@
 package kr.ac.hanyang.oCamp.entities.policies.objs;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
 
 import kr.ac.hanyang.oCamp.api.transition.Transition;
@@ -24,7 +26,7 @@ public class ActionImpl extends AbstractEntity implements Action{
 	
 	public void setAction(Effector action){
 		this.action = action;
-		sensors().emit(Action.ACTION_SET, action);
+		sensors().emit(Action.PROPERTY_SET, action);
 	}
 	
 	public Effector getAction(){
@@ -33,17 +35,40 @@ public class ActionImpl extends AbstractEntity implements Action{
 
 	@Override
 	public boolean setProperty(Sensor property) {
-		// TODO Auto-generated method stub
-		return false;
+		return config().set(PROPERTY, property) != null;
+	}
+	
+	@Override
+	public Sensor getProperty(){
+		return property;
 	}
 
 	@Override
 	public boolean addTransitions(List<Transition> transitions) {
 		if (config().set(TRANSITIONS, transitions) != null){
-			sensors().emit((Sensor)Action.TRANSITIONS_ADDED, transitions);
+			sensors().emit(Action.TRANSITIONS_ADDED, transitions);
 			return true;
 		}
 			return false;
+	}
+
+	@Override
+	public Transition getFirstTransition() {
+		return transitions.get(0);
+	}
+
+	@Override
+	public Transition getLastTransition() {
+		return transitions.get(transitions.size()-1);
+	}
+	
+	@Override
+	public int getWeight(){
+		int count = 0;
+		for (Transition transition: transitions){
+			count += transition.getWeight();
+		}
+		return count;
 	}
 
 

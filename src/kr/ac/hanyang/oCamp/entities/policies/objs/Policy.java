@@ -1,27 +1,44 @@
 package kr.ac.hanyang.oCamp.entities.policies.objs;
 
+import java.util.List;
+
+import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
+import org.apache.brooklyn.api.sensor.Sensor;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
+import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
+import com.google.common.reflect.TypeToken;
+
+import kr.ac.hanyang.oCamp.api.objs.Action;
+import kr.ac.hanyang.oCamp.api.policy.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
 @ImplementedBy(ConstraintImpl.class)
 public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 
-	public static final BasicNotificationSensor<Object> POLICY_VIOLATED = new BasicNotificationSensor<Object>(
+	@SetFromFlag("constraints")
+	public static final ConfigKey<List<Constraint>> CONSTRAINTS = ConfigKeys.newConfigKey(new TypeToken<List<Constraint>>(){ },"constraints","represents the ID of the action");
+	
+	@SetFromFlag("targets")
+	public static final ConfigKey<List<Entity>> TARGETS = ConfigKeys.newConfigKey(new TypeToken<List<Entity>>(){ },"targets","represents the list of actiongroups");	
+	
+	public static final Sensor<Object> POLICY_VIOLATED = new BasicNotificationSensor<Object>(
             Object.class, "policy.violated", "The policy was violated");
 	
-//	public static final BasicNotificationSensor<ConstraintSet> CONSTRAINTS_ADDED = new BasicNotificationSensor<ConstraintSet>(
-//			ConstraintSet.class, "constraint.added", "The constraint was added");
-//	
-//	public static final BasicNotificationSensor<ConstraintSet> CONSTRAINTS_REMOVED = new BasicNotificationSensor<ConstraintSet>(
-//			ConstraintSet.class, "constraint.removed", "The constraint was removed");
+	public static final Sensor<Object> CONSTRAINTS_SET = new BasicNotificationSensor<Object>(
+			Object.class, "constraint.added", "The list of constraints was set");
 	
-	public static final BasicNotificationSensor<Entity> SUBSCRIBER_ADDED = new BasicNotificationSensor<Entity>(
+	public static final Sensor<Object> SUBSCRIBERS_SET = new BasicNotificationSensor<Object>(
+			Object.class, "constraint.added", "The list of constraints was set");
+	
+	public static final Sensor<Entity> SUBSCRIBER_ADDED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.added", "The subscriber was added");
 	
-	public static final BasicNotificationSensor<Entity> SUBSCRIBER_REMOVED = new BasicNotificationSensor<Entity>(
+	public static final Sensor<Entity> SUBSCRIBER_REMOVED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.removed", "The subscriber was removed");
 
 	

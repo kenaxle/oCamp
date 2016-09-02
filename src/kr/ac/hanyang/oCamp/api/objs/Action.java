@@ -13,4 +13,12 @@ public interface Action extends Entity{
 	
 	public boolean addTransitions(List<Transition> transition);
 	
+	public Sensor getProperty();
+	
+	public Transition getFirstTransition();
+	
+	public Transition getLastTransition();
+	
+	public int getWeight();
+	
 }

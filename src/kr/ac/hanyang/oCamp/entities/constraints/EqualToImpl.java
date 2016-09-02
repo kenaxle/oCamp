@@ -1,5 +1,8 @@
 package kr.ac.hanyang.oCamp.entities.constraints;
 
+import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.sensor.AttributeSensor;
+import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 
 public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
@@ -15,6 +18,12 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 	public boolean isAlignedWith(ConstraintImpl constraint){
 		return (this.getProperty().equals(constraint.getProperty()) && 
 				this.getValue().equals(constraint.getValue()));			
+	}
+
+	@Override
+	public boolean isViolated(Sensor propertySensor, Entity entity) {
+		T value = entity.sensors().get((AttributeSensor<T>) propertySensor);
+		return ! value.equals(getValue());
 	}
 	
 	
