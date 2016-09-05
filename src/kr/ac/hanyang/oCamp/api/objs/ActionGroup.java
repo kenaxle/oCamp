@@ -18,4 +18,7 @@ public interface ActionGroup extends Entity{
 	
 	public Action getAction(Sensor policySensor);
 	
+	public void setWeight(int weight);
+	public int getWeight();
+	
 }

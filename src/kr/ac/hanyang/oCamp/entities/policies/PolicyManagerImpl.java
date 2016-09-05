@@ -1,6 +1,8 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
 import java.util.List;
+
+import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
@@ -61,31 +63,6 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		};
 	}
 	
-	
-//	public void evaluateActions(Entity entity, Policy policy, Sensor sensor){
-		
-		
-//			for (ActionGroup actionGroup: ACTIONGROUPS){
-//				//1. evaluate the action group
-//				//ConstraintSet delta = actionGroup.canFulfill(policy);
-//				if(actionGroup.canFulfill(policy)){
-//					ConstraintSetImpl  delta = (ConstraintSetImpl)entity.getConstraintSet().getDelta(policy.getDesiredState()); //FIXME I dont need the delta
-//					actionGroup.addAction(new Action(this,actionGroup.getName(),entity,delta));
-//				}
-//			}
-//					
-//					//calculate the weight of the action group
-//					
-//					//2. enumerate the actions of the group
-//				
-//					//3. evaluate each action
-//		
-//	}
-	
-	//need the policy logic here 
-	
-	//--------------------------
-	
 
 	@Override
 	public boolean setActionGroups(List<ActionGroup> actionGroups) {
@@ -97,37 +74,46 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	}
 
 	@Override
-	public void evaluateActions(Entity entity, Policy policy, Sensor sensor) {
+	public List<ActionGroup> evaluateActions(Entity entity, Policy policy, Sensor sensor) {
 		for(ActionGroup actionGroup: actionGroups){
+			boolean badGroup = false;
 			int taskCount = 0;
 			for(Constraint constraint: policy.getDesiredState()){
 				Sensor policySensor = constraint.getProperty();
 				Action action = actionGroup.getAction(policySensor); //this may be null so there is risk of null pointer
 				if (! constraint.isViolated(policySensor, entity)){ // if the constraint is not violated on the entity we have a different approach
-					if (action.getLastTransition().evaluate(policySensor,entity)){
+					if (action.getLastTransition().evaluate(constraint,null)){// FIXME change this to the desired state
 						taskCount += action.getWeight(); //Continue from here
 					}
 					
+				}else if (constraint.isViolated(policySensor, entity)){
+					if(action.getFirstTransition().evaluate(policySensor, entity) && action.getLastTransition().evaluate(constraint, null)){
+						taskCount += action.getWeight(); //weight if all the transactions
+					}
+					//if (action.getFirstTransition().evaluate(, entity))
+				}else{
+					//the action group is bad
+					// this is not the solution.
+					badGroup = true;
+					break;
 				}
 				
+			}if(! badGroup){
+				actionGroup.setWeight(taskCount);
+				validActions.add(actionGroup);//add group to a list sorted by weight.
 			}
 		}
-		
+		return validActions;
 	}
 
 
 // policy actions **********
-	public void startaction(){
+	@Override
+	public void doAction(Effector effector, Entity entity){
 		
 	}
 	
-	public void stopaction(){
-		
-	}
 	
-	public void restartaction(){
-		
-	}
 	
 	
 

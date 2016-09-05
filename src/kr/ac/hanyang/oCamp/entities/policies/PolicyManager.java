@@ -3,14 +3,21 @@ package kr.ac.hanyang.oCamp.entities.policies;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.annotation.EffectorParam;
 import org.apache.brooklyn.core.config.ConfigKeys;
+import org.apache.brooklyn.core.effector.EffectorBody;
+import org.apache.brooklyn.core.effector.Effectors;
+import org.apache.brooklyn.core.effector.MethodEffector;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
+import org.apache.brooklyn.util.core.config.ConfigBag;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
 import com.google.common.reflect.TypeToken;
@@ -19,8 +26,10 @@ import kr.ac.hanyang.oCamp.api.objs.Action;
 import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.api.transition.Transition;
 import kr.ac.hanyang.oCamp.api.policy.Policy;
+import kr.ac.hanyang.oCamp.entities.IDeployable.DeployEffectorBody;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroupImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionImpl;
+import kr.ac.hanyang.oCamp.entities.requirements.IDeployOn;
 import kr.ac.hanyang.oCamp.entities.services.software.SoftwareProcess;
 import kr.ac.hanyang.oCamp.entities.transitions.InitialImpl;
 import kr.ac.hanyang.oCamp.entities.transitions.SetImpl;
@@ -98,10 +107,10 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 	//public Set<ActionGroup> AGroups;// [];
 	
 	//private MutableMap policy = ;
-//	org.apache.brooklyn.api.effector.Effector<Void> START_EFFECTOR = Effectors.effector(new MethodEffector<Void>(ActionImpl.class, "start"))
-//	        .impl(new StartActionBody())
-//	        .build();	
-//	
+	org.apache.brooklyn.api.effector.Effector<Void> ACTION_EFFECTOR = Effectors.effector(new MethodEffector<Void>(PolicyManagerImpl.class, "action.effector"))
+	        .impl(new ActionBody())
+	        .build();	
+	
 //	org.apache.brooklyn.api.effector.Effector<Void> STOP = Effectors.effector(new MethodEffector<Void>(ActionImpl.class, "stop"))
 //	        .impl(new StopActionBody())
 //	        .build();
@@ -122,16 +131,23 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //	public boolean removePolicy(Policy policy);
 //	
 //	
-	public void evaluateActions(Entity entity, Policy policy, Sensor sensor);
+	public List<ActionGroup> evaluateActions(Entity entity, Policy policy, Sensor sensor);
 	
 	
 	
-//	public static class StartActionBody extends EffectorBody<Void> {
-//        @Override public Void call(ConfigBag parameters) {
-//            return new MethodEffector<Void>(IPlacement.class, "startaction").call(entity(), parameters.getAllConfig());
-//        }
-//    }
-//	
+	
+	public static class ActionBody extends EffectorBody<Void> {
+			public static final ConfigKey<Effector> EFFECTOR = ConfigKeys.newConfigKey(Effector.class, "effector",
+	            "effector to be invoked on the entity.");
+	        public static final ConfigKey<Entity> ENTITY = ConfigKeys.newConfigKey(Entity.class, "entity",
+	                "entity the effector will be invoked on.");
+        @Override public Void call(ConfigBag parameters) {
+        	 parameters.put(EFFECTOR, (String)((IDeployOn)entity().getParent()).getContentUrl());
+             parameters.put(ENTITY, (String)((IDeployOn)entity().getParent()).getTarget());
+            return new MethodEffector<Void>(PolicyManagerImpl.class, "action.effector").call(entity(), parameters.getAllConfig());
+        }
+    }
+	
 //	public static class StopActionBody extends EffectorBody<Void> {
 //      @Override public Void call(ConfigBag parameters) {
 //          return new MethodEffector<Void>(IPlacement.class, "stopaction").call(entity(), parameters.getAllConfig());
@@ -144,10 +160,12 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //	      }
 //	}
 //
-//    org.apache.brooklyn.api.effector.Effector<Void> STARTACTION = Effectors.effector(new MethodEffector<Void>(IPlacement.class, "startaction"))
-//        .impl(new StartActionBody())
-//        .build();
-//    
+    org.apache.brooklyn.api.effector.Effector<Void> STARTACTION = Effectors.effector(new MethodEffector<Void>(IPlacement.class, "startaction"))
+    	.parameter(ActionBody.EFFECTOR)
+        .parameter(ActionBody.ENTITY)
+        .impl(new ActionBody())
+        .build();
+    
 //    org.apache.brooklyn.api.effector.Effector<Void> STOPACTION = Effectors.effector(new MethodEffector<Void>(IPlacement.class, "stopaction"))
 //            .impl(new StartActionBody())
 //            .build();
@@ -157,8 +175,9 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //            .build();
 //    
 //    
-//    @org.apache.brooklyn.core.annotation.Effector(description="startaction effector")
-//    void startaction();
+    @org.apache.brooklyn.core.annotation.Effector(description="startaction effector")
+    public void doAction(@EffectorParam(name="url") String url, @EffectorParam(name="target") String target);
+    //void doAction();
 //    
 //    @org.apache.brooklyn.core.annotation.Effector(description="stopaction effector")
 //    void stopaction();

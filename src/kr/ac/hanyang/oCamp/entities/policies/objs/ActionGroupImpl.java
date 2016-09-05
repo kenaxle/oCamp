@@ -13,6 +13,8 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	
 	private List<Action> actions;
 	
+	private int weight;
+	
 	public ActionGroupImpl(){ }
 	
 	public void init(){
@@ -39,4 +41,16 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 			return action.getProperty().equals(policySensor) ? action : null;
 		return null;
 	}
+	
+	@Override
+	public void setWeight(int weight){
+		this.weight = weight;
+	}
+	
+	@Override
+	public int getWeight(){
+		return weight;
+	}
+	
+	
 }

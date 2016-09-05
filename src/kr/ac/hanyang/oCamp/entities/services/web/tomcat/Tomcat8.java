@@ -60,30 +60,30 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 		super.deploy(url, targetName);
 	}
 
-	@Override
-	public ConstraintSetImpl getConstraintSet() {
-		return CONSTRAINTSET;
-	}
-	
-	public void subscribe(PolicyManagerImpl subscriber){
-		policyManagers.put(subscriber.getType(), subscriber);
-	}
-	
-	public void unsubscribe(PolicyManagerImpl subscriber){
-		policyManagers.remove(subscriber.getType());
-	}
-	
-	
-	//the entity is a constraint entity that is forwarded by the constraintset
-	// extract the policy manager and then initiate the policy manager's process
-	//for handling the 
-	@Override
-	public void notification(Entity entity) {
-		if (!(entity instanceof ConstraintImpl)) return; //this should be logged as an error
-		ConstraintImpl policyConstraint = (ConstraintImpl) entity;
-		PolicyManager policyManager = policyConstraint.getPolicyManager();
-		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
-	}
+//	@Override
+//	public ConstraintSetImpl getConstraintSet() {
+//		return CONSTRAINTSET;
+//	}
+//	
+//	public void subscribe(PolicyManagerImpl subscriber){
+//		policyManagers.put(subscriber.getType(), subscriber);
+//	}
+//	
+//	public void unsubscribe(PolicyManagerImpl subscriber){
+//		policyManagers.remove(subscriber.getType());
+//	}
+//	
+//	
+//	//the entity is a constraint entity that is forwarded by the constraintset
+//	// extract the policy manager and then initiate the policy manager's process
+//	//for handling the 
+//	@Override
+//	public void notification(Entity entity) {
+//		if (!(entity instanceof ConstraintImpl)) return; //this should be logged as an error
+//		ConstraintImpl policyConstraint = (ConstraintImpl) entity;
+//		PolicyManager policyManager = policyConstraint.getPolicyManager();
+//		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
+//	}
 
 
 }
