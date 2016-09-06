@@ -1,25 +1,16 @@
 package kr.ac.hanyang.oCamp.entities.services.web.tomcat;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
-import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.core.entity.Attributes;
 
 import kr.ac.hanyang.oCamp.entities.IDeployable;
 import kr.ac.hanyang.oCamp.entities.IEntity;
-import kr.ac.hanyang.oCamp.entities.IExecutable;
 import kr.ac.hanyang.oCamp.entities.IService;
-import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
-import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintSetImpl;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
-import kr.ac.hanyang.oCamp.entities.policies.INotifiable;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, IService, Startable, IEntity{

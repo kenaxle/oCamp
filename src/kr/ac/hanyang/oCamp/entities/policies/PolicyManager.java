@@ -107,10 +107,10 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 	//public Set<ActionGroup> AGroups;// [];
 	
 	//private MutableMap policy = ;
-	org.apache.brooklyn.api.effector.Effector<Void> ACTION_EFFECTOR = Effectors.effector(new MethodEffector<Void>(PolicyManagerImpl.class, "action.effector"))
-	        .impl(new ActionBody())
-	        .build();	
-	
+//	org.apache.brooklyn.api.effector.Effector<Void> ACTION_EFFECTOR = Effectors.effector(new MethodEffector<Void>(PolicyManagerImpl.class, "action.effector"))
+//	        .impl(new ActionBody())
+//	        .build();	
+//	
 //	org.apache.brooklyn.api.effector.Effector<Void> STOP = Effectors.effector(new MethodEffector<Void>(ActionImpl.class, "stop"))
 //	        .impl(new StopActionBody())
 //	        .build();
@@ -133,21 +133,21 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //	
 	public List<ActionGroup> evaluateActions(Entity entity, Policy policy, Sensor sensor);
 	
+	public void doAction(Effector effector, Entity entity);
 	
 	
-	
-	public static class ActionBody extends EffectorBody<Void> {
-			public static final ConfigKey<Effector> EFFECTOR = ConfigKeys.newConfigKey(Effector.class, "effector",
-	            "effector to be invoked on the entity.");
-	        public static final ConfigKey<Entity> ENTITY = ConfigKeys.newConfigKey(Entity.class, "entity",
-	                "entity the effector will be invoked on.");
-        @Override public Void call(ConfigBag parameters) {
-        	 parameters.put(EFFECTOR, (String)((IDeployOn)entity().getParent()).getContentUrl());
-             parameters.put(ENTITY, (String)((IDeployOn)entity().getParent()).getTarget());
-            return new MethodEffector<Void>(PolicyManagerImpl.class, "action.effector").call(entity(), parameters.getAllConfig());
-        }
-    }
-	
+//	public static class ActionBody extends EffectorBody<Void> {
+//			public static final ConfigKey<Effector> EFFECTOR = ConfigKeys.newConfigKey(Effector.class, "effector",
+//	            "effector to be invoked on the entity.");
+//	        public static final ConfigKey<Entity> ENTITY = ConfigKeys.newConfigKey(Entity.class, "entity",
+//	                "entity the effector will be invoked on.");
+//        @Override public Void call(ConfigBag parameters) {
+//        	 parameters.put(EFFECTOR, (String)((IDeployOn)entity().getParent()).getContentUrl());
+//             parameters.put(ENTITY, (String)((IDeployOn)entity().getParent()).getTarget());
+//            return new MethodEffector<Void>(PolicyManagerImpl.class, "action.effector").call(entity(), parameters.getAllConfig());
+//        }
+//    }
+//	
 //	public static class StopActionBody extends EffectorBody<Void> {
 //      @Override public Void call(ConfigBag parameters) {
 //          return new MethodEffector<Void>(IPlacement.class, "stopaction").call(entity(), parameters.getAllConfig());
@@ -160,11 +160,11 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //	      }
 //	}
 //
-    org.apache.brooklyn.api.effector.Effector<Void> STARTACTION = Effectors.effector(new MethodEffector<Void>(IPlacement.class, "startaction"))
-    	.parameter(ActionBody.EFFECTOR)
-        .parameter(ActionBody.ENTITY)
-        .impl(new ActionBody())
-        .build();
+//    org.apache.brooklyn.api.effector.Effector<Void> STARTACTION = Effectors.effector(new MethodEffector<Void>(IPlacement.class, "startaction"))
+//    	.parameter(ActionBody.EFFECTOR)
+//        .parameter(ActionBody.ENTITY)
+//        .impl(new ActionBody())
+//        .build();
     
 //    org.apache.brooklyn.api.effector.Effector<Void> STOPACTION = Effectors.effector(new MethodEffector<Void>(IPlacement.class, "stopaction"))
 //            .impl(new StartActionBody())
@@ -175,8 +175,8 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 //            .build();
 //    
 //    
-    @org.apache.brooklyn.core.annotation.Effector(description="startaction effector")
-    public void doAction(@EffectorParam(name="url") String url, @EffectorParam(name="target") String target);
+//    @org.apache.brooklyn.core.annotation.Effector(description="startaction effector")
+//    public void doAction(@EffectorParam(name="url") String url, @EffectorParam(name="target") String target);
     //void doAction();
 //    
 //    @org.apache.brooklyn.core.annotation.Effector(description="stopaction effector")

@@ -26,10 +26,10 @@ artifacts:
     echo $! > $PID_FILE
     sleep 3
   requirements:
-  - type: kr.ac.hanyang.entities.requirements.ExecuteOn
+  - type: kr.ac.hanyang.oCamp.entities.requirements.ExecuteOn
     fulfillment: 
       characteristics:
-      - type: kr.ac.hanyang.entities.services.machine.Machine
+      - type: kr.ac.hanyang.oCamp.entities.services.machine.Machine
         kernelVersion: [3.9.6]
 
 #services:

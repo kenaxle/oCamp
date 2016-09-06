@@ -1,8 +1,5 @@
 package kr.ac.hanyang.oCamp.entities.services;
 
-import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
-import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintSetImpl;
-
 public interface IBasicOCampService {
 	
 	public static final String[] CAPABILITIES = {"DependsOn"};

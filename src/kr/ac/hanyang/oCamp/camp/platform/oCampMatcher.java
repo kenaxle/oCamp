@@ -174,7 +174,8 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             builder.customAttribute("planId", attrs.remove("id"));
            // builder.customAttribute("parent", parent);
         	
-
+            // Dont put the location here. 
+            // let the policy manager set the location
             //simply gets the first location.	
             Map locations = mgmt.getLocationRegistry().getDefinedLocations();		
             LocationDefinition defLocations = (BasicLocationDefinition) locations.get(locations.keySet().iterator().next());

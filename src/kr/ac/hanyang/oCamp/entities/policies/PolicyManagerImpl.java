@@ -110,7 +110,12 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 // policy actions **********
 	@Override
 	public void doAction(Effector effector, Entity entity){
+		//entity.invoke(effector, entity.parameters)
+		// map to config key.
+		// get the new config for the entity 
+		// the locations should be treated differently to other configs 
 		
+		//then invoke the effector on the entity
 	}
 	
 	
