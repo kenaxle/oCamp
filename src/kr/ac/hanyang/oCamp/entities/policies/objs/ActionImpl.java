@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.sensor.Sensor;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
@@ -13,7 +14,7 @@ import kr.ac.hanyang.oCamp.api.transition.Transition;
 
 public class ActionImpl extends AbstractEntity implements Action{
 	
-	private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
+	//private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private Effector action;
 	private List<Transition> transitions; // this is the value/values of the property.
 	
@@ -39,9 +40,20 @@ public class ActionImpl extends AbstractEntity implements Action{
 	}
 	
 	@Override
-	public Sensor getProperty(){
-		return property;
+	public boolean setConfig(ConfigKey config) {
+		return config().set(CONFIGKEY, config) != null;
 	}
+	
+	@Override
+	public Sensor getProperty(){
+		return config().get(PROPERTY);
+	}
+	
+	@Override
+	public ConfigKey getConfig(){
+		return config().get(CONFIGKEY);
+	}
+	
 
 	@Override
 	public boolean addTransitions(List<Transition> transitions) {

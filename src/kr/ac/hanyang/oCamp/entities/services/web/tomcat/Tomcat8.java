@@ -20,6 +20,7 @@ public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, 
 	public Tomcat8(){
 		super();
 		System.out.println("");
+		//this.config().set("location", "AWS Tokyo (ap-northeast-1)");
 	}
 	
 	public void init(){

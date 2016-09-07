@@ -117,6 +117,7 @@ public class oCampYamlLauncher {
 	
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args){
+
 		oCampYamlLauncher l = new oCampYamlLauncher();
 		l.setShutdownAppsOnExit(true);
 		l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/basic-empty-app-and-entity-blueprint3.yaml");

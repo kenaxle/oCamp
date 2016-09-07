@@ -22,6 +22,9 @@ public interface Action extends kr.ac.hanyang.oCamp.api.objs.Action{
 	@SetFromFlag("property")
 	ConfigKey<Sensor> PROPERTY = ConfigKeys.newConfigKey(Sensor.class,"property","represents the property of the action");
 	
+	@SetFromFlag("configkey")
+	ConfigKey<ConfigKey> CONFIGKEY = ConfigKeys.newConfigKey(ConfigKey.class,"configkey","represents the config key to be altered. it may be null");
+	
 	@SetFromFlag("transitions")
 	ConfigKey<List<Transition>> TRANSITIONS = ConfigKeys.newConfigKey(new TypeToken<List<Transition>>(){ },"actiongroups","represents the list of actiongroups");
 	
