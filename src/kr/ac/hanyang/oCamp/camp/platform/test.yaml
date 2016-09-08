@@ -16,16 +16,39 @@
 # specific language governing permissions and limitations
 # under the License.
 #
+Camp_Version: CAMP 1.1
 name: Simple PHP
-#location: AWS Tokyo (ap-northeast-1)
+
 artifacts:
-- type: kr.ac.hanyang.entities.artifacts.Software
-  content: apt-get install php5
+- type: kr.ac.hanyang.entities.artifacts.War
+  content: {href: webapp.war}
   requirements:
-  - type: kr.ac.hanyang.entities.requirements.ExecuteOn
-    fulfillment: 
-      characteristics:
-      - type: kr.ac.hanyang.entities.services.software.SoftwareProcess
+  - type: kr.ac.hanyang.entities.requirements.HostedOn
+    fulfillment: ApacheServer
+    
+  - type: kr.ac.hanyang.entities.requirements.ConnectsTo
+    port: 3306
+    fulfillment: MySQLServer
+    
+- type: kr.ac.hanyang.entities.artifacts.SQL
+  content: {href: webshop_database.sql}
+  requirements:
+  - type: kr.ac.hanyang.entities.requirements.HostedOn
+    server.port: 3306
+    fulfillment: MySQLServer   
+
+services:
+  - 
+    name: ApacheServer
+    characteristics:
+      - characteristic_type: kr.ac.hanyang.entities.services.Tomcat7
+        postInstallCommand: "apt-get install php5 libapache2-mod-php5 php5-mcrypt"
+  - 
+    name: MySQLServer
+    characteristics:
+      - characteristic_type: kr.ac.hanyang.entities.services.MySQL      
+        mysql.port: 3306    
+      
         
         
      

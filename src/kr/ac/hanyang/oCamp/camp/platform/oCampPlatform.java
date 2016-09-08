@@ -3,11 +3,10 @@ package kr.ac.hanyang.oCamp.camp.platform;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.camp.AggregatingCampPlatform;
 import org.apache.brooklyn.camp.BasicCampPlatform;
-import org.apache.brooklyn.camp.CampPlatform;
-import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityMatcher;
 import org.apache.brooklyn.camp.brooklyn.spi.dsl.BrooklynDslInterpreter;
 import org.apache.brooklyn.camp.spi.PlatformRootSummary;
 import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
+import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 
 public class oCampPlatform extends AggregatingCampPlatform implements HasBrooklynManagementContext{
 	
@@ -27,7 +26,12 @@ public class oCampPlatform extends AggregatingCampPlatform implements HasBrookly
 		return mgmt;
 	}
 	
-	
+	@Override
+	public PdpProcessor pdp() {
+        return new PdpProcessor(this);
+    }
+
+
 	
 	
 }
