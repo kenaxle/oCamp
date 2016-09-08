@@ -83,8 +83,10 @@ public class oCampYamlLauncher {
 
     public Application launchAppYaml(Reader input, boolean waitForTasksToComplete) {
         try {
-            AssemblyTemplate at = platform.pdp().registerDeploymentPlan(input);
+            AssemblyTemplate at = platform.oCampPdp().registerDeploymentPlan(input);
 
+            // this should be changed to the policy manager 
+            // let the policy manager instantiate and manage the application
             Assembly assembly = at.getInstantiator().newInstance().instantiate(at, platform);
             Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId()); // an exception is thrown here... 
             log.info("Launching "+app);

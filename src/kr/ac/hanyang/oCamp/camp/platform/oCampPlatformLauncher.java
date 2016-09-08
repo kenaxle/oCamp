@@ -1,18 +1,8 @@
 package kr.ac.hanyang.oCamp.camp.platform;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.apache.brooklyn.api.mgmt.ManagementContext;
-import org.apache.brooklyn.camp.AggregatingCampPlatform;
-import org.apache.brooklyn.camp.CampPlatform;
-import org.apache.brooklyn.camp.brooklyn.BrooklynCampPlatform;
-import org.apache.brooklyn.camp.brooklyn.BrooklynCampPlatformLauncherAbstract;
-import org.apache.brooklyn.camp.server.rest.CampServer;
 import org.apache.brooklyn.camp.spi.PlatformRootSummary;
 import org.apache.brooklyn.core.mgmt.internal.LocalManagementContext;
-import org.apache.brooklyn.launcher.BrooklynLauncher;
-import org.apache.brooklyn.launcher.camp.BrooklynCampPlatformLauncher;
 
 public class oCampPlatformLauncher /*extends BrooklynCampPlatformLauncher*/ {
 
