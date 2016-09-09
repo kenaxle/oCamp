@@ -9,7 +9,7 @@ import kr.ac.hanyang.oCamp.api.objs.Action;
 
 public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	
-	//private Effector ACTION_ID;
+	private Effector actionId;
 	
 	private List<Action> actions;
 	
@@ -18,7 +18,8 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	public ActionGroupImpl(){ }
 	
 	public void init(){
-		//actions = new ArrayList<Action>();
+		actionId = config().get(ACTION_ID);
+		actions = config().get(ACTIONS);
 	}
 	
 	@Override

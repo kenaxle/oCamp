@@ -88,7 +88,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, serviceType) != null)
                 return serviceType;
 			
-			//return serviceType; //just for testing
+			
 		}
 		
 		if (deploymentItem instanceof Policy){
@@ -101,7 +101,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, policyType) != null)
                 return policyType;
 			
-			//return serviceType; //just for testing
+
 		}
 		log.debug( "Not an artifact or Service. unable to match "+deploymentItem);
 		return null;
@@ -141,33 +141,12 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		return lookupType(deploymentPlanItem) != null;		
 	}
 	
-//	@Override
-//	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc){
-//		
-//		//Object instantiator = atc.getInstantiator();
-//		// use my own instantiator so I can instantiate Services and Artifact
-//		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
-//		//Object result = applyPlanItem(deploymentPlanItem);
-//		if (result != null ){ 
-//			if (result instanceof Boolean){
-//				if ((Boolean) result  != false)
-//					return true;
-//			}
-//			else{
-//				atc.add((PlatformComponentTemplate) result);
-//			}
-//			return true; //change null to the application
-//		}else
-//			return false;
-//		// add to the ATC here *******
-//	}
-//	
+
 	
-	//recursve method
+	@Override
 	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc) {
 		if (!(deploymentPlanItem instanceof Service) && 
 		    !(deploymentPlanItem instanceof Artifact) && 
-		    //!(deploymentPlanItem instanceof ArtifactRequirement) && 
 		    !(deploymentPlanItem instanceof Policy))	return false;
 		
 		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
@@ -185,8 +164,9 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 
         if (deploymentPlanItem instanceof Service){
             name = ((Service)deploymentPlanItem).getName();
-            if (!Strings.isBlank(name)) builder.name(name);
-            	Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
+            if (!Strings.isBlank(name)) 
+            	builder.name(name);
+            Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
 	        
@@ -240,6 +220,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		        			apply(service,atc);
 		        			//builder.add((oCampPlatformComponentTemplate)applyPlanItem(service)); //recursive call
 		        		}else{
+		        			log.info("The artifact is referencing a service that is already created");
 		        			//it is a string
 		        			// this service will be added
 		        			// add method to verify this.
@@ -247,10 +228,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	
 		        	}
         			
-                	
-        			//builder.add((oCampPlatformComponentTemplate)applyPlanItem(requirement));
-        			//atc.add(builder.build());
-                	//builder.add( artRequirement);
         		}
         		// perform the parsing of the requirements
         		// add the requirements to the builder
@@ -262,10 +239,32 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	//added to test building
         	// here I need to formalize the artifact
         	atc.add(builder.build());//return builder.build();
+        }else if(deploymentPlanItem instanceof Policy){
+            name = ((Policy)deploymentPlanItem).getName();
+            if (!Strings.isBlank(name)) 
+            	builder.name(name);
+            
+            Map<String, Object> attrs = MutableMap.copyOf( ((Policy)deploymentPlanItem).getCustomAttributes() ); 
+            if (attrs.containsKey("id"))
+            builder.customAttribute("planId", attrs.remove("id"));
+            
+            List<Object> constraints = MutableList.copyOf( ((Policy)deploymentPlanItem).getPolicyConstraints() ); 
+            List<String> targets = MutableList.copyOf( ((Policy)deploymentPlanItem).getTargets() ); 
+            builder.customAttribute("constraint", constraints);
+            builder.customAttribute("targets", targets);
+            
+	        
+	        //add custom tags
+	        Collection<String> keys = getTagIDs();
+	        for(String key: keys){
+	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
+	        }
+	        
+	        atc.add(builder.build()); //builder.build(); 
         }
 
         return true;
-		//return false; // TODO need to remove this. but i dont want to actually deploy as yet.
+		
 	}
 	
 	

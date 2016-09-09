@@ -31,7 +31,7 @@ services:
         install.version: 8.0.22
         
 policies: 
-- type: kr.ac.hanyang.oCamp.entities.policies.Placement
+- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
   - property: LOCATION
     type: kr.ac.hanyang.oCamp.entities.constraints.Within

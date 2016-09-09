@@ -27,7 +27,10 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	
 	@Override
 	public void init(){
-		
+		//System.out.println("initializing...");
+		//actionGroups = config().get(ACTIONGROUPS);
+		//System.out.println(actionGroups);
+		//config().
 		//policyList = new ArrayList<Policy>();
 	}
 

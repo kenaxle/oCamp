@@ -4,7 +4,7 @@ import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.camp.spi.PlatformRootSummary;
 import org.apache.brooklyn.core.mgmt.internal.LocalManagementContext;
 
-public class oCampPlatformLauncher /*extends BrooklynCampPlatformLauncher*/ {
+public class oCampPlatformLauncher{
 
 	
 	private oCampPlatform platform;
@@ -16,7 +16,7 @@ public class oCampPlatformLauncher /*extends BrooklynCampPlatformLauncher*/ {
 			System.out.println("There is an exception here. the platform already exists");
 		if (mgmt == null)
 			mgmt = new LocalManagementContext();
-		platform = new oCampPlatform(PlatformRootSummary.builder().name("Brooklyn CAMP Platform").build(),
+		platform = new oCampPlatform(PlatformRootSummary.builder().name("oCAMP Platform").build(),
                 getManagement());
 		return this;
 	}

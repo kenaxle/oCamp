@@ -27,9 +27,9 @@ public abstract class TransitionImpl<T> extends AbstractEntity implements Transi
 		return config().get(VALUE);
 	}
 	
-	public ConfigKey getConfigKey(){
-		return config().get(CONFIGKEY);
-	}
+//	public ConfigKey getConfigKey(){
+//		return config().get(CONFIGKEY);
+//	}
 	
 	@Override
 	public int getWeight(){
@@ -47,9 +47,9 @@ public abstract class TransitionImpl<T> extends AbstractEntity implements Transi
 		return (config().set((ConfigKey)VALUE, value) != null);
 	}
 	
-	public boolean setConfigKey(ConfigKey conf){
-		return (config().set((ConfigKey)CONFIGKEY, conf) != null);
-	}
+//	public boolean setConfigKey(ConfigKey conf){
+//		return (config().set((ConfigKey)CONFIGKEY, conf) != null);
+//	}
 
 	
 	//will have to remove this

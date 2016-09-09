@@ -1,39 +1,21 @@
 package kr.ac.hanyang.oCamp.camp.platform;
 
-import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Field;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.api.location.Location;
-import org.apache.brooklyn.api.location.LocationDefinition;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.Task;
-import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
-import org.apache.brooklyn.camp.CampPlatform;
-import org.apache.brooklyn.camp.brooklyn.BrooklynCampPlatformLauncherAbstract;
-import org.apache.brooklyn.camp.brooklyn.YamlLauncherAbstract;
 import org.apache.brooklyn.camp.server.rest.CampServer;
 import org.apache.brooklyn.camp.spi.Assembly;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
-import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.Entities;
-import org.apache.brooklyn.core.location.BasicLocationDefinition;
 import org.apache.brooklyn.core.mgmt.BrooklynTaskTags;
-import org.apache.brooklyn.core.mgmt.classloading.BrooklynClassLoadingContextSequential;
-import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
 import org.apache.brooklyn.core.mgmt.internal.BrooklynShutdownHooks;
-import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
 import org.apache.brooklyn.launcher.BrooklynLauncher;
 import org.apache.brooklyn.util.core.ResourceUtils;
 import org.apache.brooklyn.util.exceptions.Exceptions;
-import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.stream.Streams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +70,7 @@ public class oCampYamlLauncher {
             // this should be changed to the policy manager 
             // let the policy manager instantiate and manage the application
             Assembly assembly = at.getInstantiator().newInstance().instantiate(at, platform);
-            Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId()); // an exception is thrown here... 
+            Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId()); // an exception is thrown here...if the app is not actually deployed 
             log.info("Launching "+app);
 
             if (getShutdownAppsOnExit()) BrooklynShutdownHooks.invokeStopOnShutdown(app);
