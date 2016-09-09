@@ -73,7 +73,13 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            Set<String> encounteredRegisteredTypeIds) {
 	        return buildTemplateArtifactsAsSpecs(itemLoader, template, platform, encounteredRegisteredTypeIds);
 	    }
-
+	    
+	    public List<EntitySpec<?>> createComponentSpecs(
+	            AssemblyTemplate template,
+	            CampPlatform platform, BrooklynClassLoadingContext itemLoader,
+	            Set<String> encounteredRegisteredTypeIds) {
+	        return buildTemplateArtifactsOrServiceAsSpecs(itemLoader, template, platform, encounteredRegisteredTypeIds);
+	    }
 	   
 	    
 	    @Override
@@ -90,7 +96,8 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        app.configure(EntityManagementUtils.WRAPPER_APP_MARKER, Boolean.TRUE);
 
 	        // first build the children into an empty shell app
-	        List<EntitySpec<?>> childSpecs = createArtifactSpecs(template, platform, loader, encounteredTypeSymbolicNames);
+	        
+	        List<EntitySpec<?>> childSpecs = createComponentSpecs(template, platform, loader, encounteredTypeSymbolicNames);
 	        for (EntitySpec<?> childSpec : childSpecs) {
 	            // children get parsed and unwrapped irrespective of the NEVER_UNWRAP_APPS setting;
 	            // we could support a NEVER_UNWRAP_NESTED_ENTITIES item but i don't know if there's a use case
@@ -109,6 +116,35 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    }
 	    
 	    private List<EntitySpec<?>> buildTemplateArtifactsAsSpecs(BrooklynClassLoadingContext loader, AssemblyTemplate template, CampPlatform platform, Set<String> encounteredRegisteredTypeIds) {
+	        List<EntitySpec<?>> result = Lists.newArrayList();
+
+	        //for (PlatformComponentTemplate pctl: (List)template.getPlatformComponentTemplates())
+	        
+	        for (ResolvableLink<PlatformComponentTemplate> ctl: template.getPlatformComponentTemplates().links()) {
+	            //use link's get id to and its resource provider to get the item i.e. resolve()
+	        	// the item will be the platform component template
+	        	
+	        	PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
+	            BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	            //get the type of the component
+	            // if the component is an artifact then try to find the requirements
+	            // then for each requirement find the service
+	            // add the service as a child spec.
+	            
+	            
+	            //appChildComponentTemplate.getType();
+	            
+	            
+	            EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
+	            spec.children(buildTemplateSpecRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	            //System.out.println(spec.getType());
+	            result.add(spec);
+	        }
+	        return result;
+	    }
+
+	    
+	    private List<EntitySpec<?>> buildTemplateArtifactsOrServiceAsSpecs(BrooklynClassLoadingContext loader, AssemblyTemplate template, CampPlatform platform, Set<String> encounteredRegisteredTypeIds) {
 	        List<EntitySpec<?>> result = Lists.newArrayList();
 
 	        //for (PlatformComponentTemplate pctl: (List)template.getPlatformComponentTemplates())

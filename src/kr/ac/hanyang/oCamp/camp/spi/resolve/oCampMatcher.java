@@ -141,54 +141,46 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		return lookupType(deploymentPlanItem) != null;		
 	}
 	
-	@Override
-	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc){
-		
-		//Object instantiator = atc.getInstantiator();
-		// use my own instantiator so I can instantiate Services and Artifact
-		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
-		Object result = applyPlanItem(deploymentPlanItem);
-		if (result != null ){ 
-			if (result instanceof Boolean){
-				if ((Boolean) result  != false)
-					return true;
-			}
-			else{
-				atc.add((PlatformComponentTemplate) result);
-			}
-			return true; //change null to the application
-		}else
-			return false;
-		// add to the ATC here *******
-	}
-	
+//	@Override
+//	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc){
+//		
+//		//Object instantiator = atc.getInstantiator();
+//		// use my own instantiator so I can instantiate Services and Artifact
+//		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
+//		//Object result = applyPlanItem(deploymentPlanItem);
+//		if (result != null ){ 
+//			if (result instanceof Boolean){
+//				if ((Boolean) result  != false)
+//					return true;
+//			}
+//			else{
+//				atc.add((PlatformComponentTemplate) result);
+//			}
+//			return true; //change null to the application
+//		}else
+//			return false;
+//		// add to the ATC here *******
+//	}
+//	
 	
 	//recursve method
-	public Object applyPlanItem(Object deploymentPlanItem) {
+	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc) {
 		if (!(deploymentPlanItem instanceof Service) && 
 		    !(deploymentPlanItem instanceof Artifact) && 
 		    //!(deploymentPlanItem instanceof ArtifactRequirement) && 
 		    !(deploymentPlanItem instanceof Policy))	return false;
 		
+		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
 		String type = lookupType(deploymentPlanItem);
 		if (type == null) return false;
 		
 		log.debug("Item "+deploymentPlanItem+" being instantiated with "+type);
 		
-		//now to instantiate the AssemblyTemplate
-		//Object instantiator = atc.getInstantiator();
-		// remove the restrictions for only brooklyn types
-		
 		//**** build an oCampPlatformComponentTemplate instead
 		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
         builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
         
-        // use my own instantiator so I can instantiate Services and Artifacts
-        //atc.instantiator(oCampAssemblyTemplateInstantiator.class);
         
-        //cleaning up the map by removing items not needed
-        // leaving this for now since I'm testing with prooklyn blueprints
-        // will remove this soon as they dont form part of camp plans
         String name;
 
         if (deploymentPlanItem instanceof Service){
@@ -204,7 +196,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
 	        }
 	        
-	        return builder.build(); 
+	        atc.add(builder.build()); //builder.build(); 
         }
         else if (deploymentPlanItem instanceof Artifact){ 
         	name = ((Artifact)deploymentPlanItem).getName();
@@ -224,6 +216,20 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         			ArtifactRequirement artRequirement = (ArtifactRequirement) requirement;
         			String reqType = extractTypeName(artRequirement.getRequirementType());
         			Map<String, Object> reqAttrs = MutableMap.copyOf(artRequirement.getCustomAttributes() );
+        			
+        			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> reqBuilder = oCampPlatformComponentTemplate.builder(); 
+        	        reqBuilder.type( artRequirement.getRequirementType());
+        	        reqBuilder.customAttribute("planId", attrs.remove("id"));
+        	        
+        	        //add custom tags
+        	        Collection<String> keys = getTagIDs();
+        	        for(String key: keys){
+        	        	addCustomMapAttributeIfNonNull(reqBuilder, attrs, key);
+        	        }
+        	        
+        	        builder.add(reqBuilder.build()); //builder.build(); 
+        	        
+        			
         		
                 	if (reqAttrs.containsKey("fulfillment")){
 
@@ -231,35 +237,23 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		        		if (fulfillmentObj instanceof Map){ // we have a definition
 		        			Map<String, Object> fulfillment = (Map<String, Object>) fulfillmentObj;
 		        			Service service = Service.of(fulfillment);	        				
-		        			builder.add((oCampPlatformComponentTemplate)applyPlanItem(service)); //recursive call
+		        			apply(service,atc);
+		        			//builder.add((oCampPlatformComponentTemplate)applyPlanItem(service)); //recursive call
 		        		}else{
 		        			//it is a string
 		        			// this service will be added
 		        			// add method to verify this.
 		        		}
-		        		//Map<String, Object> fulfillment = (Map<String, Object>) 
-		        		//builder.customAttribute("fulfillment", fulfillment);
-		        		// may have to edit the map to add a name and type
-		        		// lookup the service type required based in the requirement type. 
-		        		// each service should have a capability lookup therefore  
-		        		// go through each service of the catalog and find a service that 
-		        		// matches the requirement.
-		        		//then need to match the characteristics to narrow down the best service.
-		
-		        		// this lookup information will be added to the interface of each service type.
-		        		//List<String> services =  matchService(reqType,charTypes); //find an appropriate service
-		
+	
 		        	}
         			
+                	
         			//builder.add((oCampPlatformComponentTemplate)applyPlanItem(requirement));
         			//atc.add(builder.build());
+                	//builder.add( artRequirement);
         		}
         		// perform the parsing of the requirements
         		// add the requirements to the builder
-        	}else{
-        		// the artifact does not have a requirement listed. 
-        		// each artifact should know its requirements and can look up the information 
-        		// this lookup information will be added to the interface for each artifact type.
         	}
         	MutableMap<Object, Object> customFlags = MutableMap.of();
         	Object origBrooklynFlags = reqs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
@@ -267,9 +261,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	//TODO complete attribute
         	//added to test building
         	// here I need to formalize the artifact
-        	return builder.build();
-        }else if (deploymentPlanItem instanceof Artifact){ 
-        	// create the policy object
+        	atc.add(builder.build());//return builder.build();
         }
 
         return true;
