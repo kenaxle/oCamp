@@ -41,6 +41,7 @@ import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
 import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
 import kr.ac.hanyang.oCamp.entities.IService;
 
 public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oCampReserved {
@@ -155,15 +156,18 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		
 		log.debug("Item "+deploymentPlanItem+" being instantiated with "+type);
 		
-		//**** build an oCampPlatformComponentTemplate instead
-		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-        builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
+//		//**** build an oCampPlatformComponentTemplate instead
+//		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
+//        builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
         
         
         String name;
 
         if (deploymentPlanItem instanceof Service){
-            name = ((Service)deploymentPlanItem).getName();
+        	//**** build an oCampPlatformComponentTemplate instead
+    		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
+            builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
+        	name = ((Service)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) 
             	builder.name(name);
             Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
@@ -179,6 +183,9 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	        atc.add(builder.build()); //builder.build(); 
         }
         else if (deploymentPlanItem instanceof Artifact){ 
+        	//**** build an oCampPlatformComponentTemplate instead
+    		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
+            builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
         	name = ((Artifact)deploymentPlanItem).getName();
         	if (!Strings.isBlank(name)) 
         		builder.name(name);
@@ -240,7 +247,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	// here I need to formalize the artifact
         	atc.add(builder.build());//return builder.build();
         }else if(deploymentPlanItem instanceof Policy){
-            name = ((Policy)deploymentPlanItem).getName();
+        	//**** build an oCampPlatformComponentTemplate instead
+    		PolicyManagerComponentTemplate.Builder<? extends PolicyManagerComponentTemplate> builder = PolicyManagerComponentTemplate.builder(); 
+            builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
+        	name = ((Policy)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) 
             	builder.name(name);
             
@@ -256,11 +266,11 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	        
 	        //add custom tags
 	        Collection<String> keys = getTagIDs();
-	        for(String key: keys){
-	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
-	        }
+//	        for(String key: keys){
+//	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
+//	        }
 	        
-	        atc.add(builder.build()); //builder.build(); 
+	        //atc.add(builder.build()); //builder.build(); 
         }
 
         return true;
