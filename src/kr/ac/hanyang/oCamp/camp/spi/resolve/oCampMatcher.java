@@ -173,7 +173,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             	builder.name(name);
             Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
-            builder.customAttribute("planId", attrs.remove("id"));
+            builder.customAttribute("serviceID", attrs.remove("id"));
 	        
 	        //add custom tags
 	        Collection<String> keys = getTagIDs();
@@ -184,6 +184,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	        atc.add(builder.build()); // Add the service to the AssemblyTemplate
         }
         else if (deploymentPlanItem instanceof Artifact){ 
+        	//all services were already added except those specified in fulfillment
         	//**** build an oCampPlatformComponentTemplate instead
     		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
             builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
@@ -202,12 +203,12 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	
         		for(Object requirement: reqs){
         			ArtifactRequirement artRequirement = (ArtifactRequirement) requirement;
-        			String reqType = extractTypeName(artRequirement.getRequirementType());
+        			String reqType = extractSubValue(artRequirement.getRequirementType(),".");
         			Map<String, Object> reqAttrs = MutableMap.copyOf(artRequirement.getCustomAttributes() );
         			
         			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> reqBuilder = oCampPlatformComponentTemplate.builder(); 
         	        reqBuilder.type( artRequirement.getRequirementType());
-        	        reqBuilder.customAttribute("planId", attrs.remove("id"));
+        	        reqBuilder.customAttribute("requirementID", attrs.remove("id"));
         	        
         	        //add custom tags
         	        Collection<String> keys = getTagIDs();
@@ -215,8 +216,9 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	        	addCustomMapAttributeIfNonNull(reqBuilder, attrs, key);
         	        }
         	        
-        	        builder.add(reqBuilder.build()); // Add the requirement to the Artifact Template
-        	        
+        	        //builder.add(reqBuilder.build()); // Add the requirement to the Artifact Template
+        	        //inverting
+        	        reqBuilder.add(builder.build());
         			
         		
                 	if (reqAttrs.containsKey("fulfillment")){
@@ -225,11 +227,32 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		        		if (fulfillmentObj instanceof Map){ // we have a definition
 		        			Map<String, Object> fulfillment = (Map<String, Object>) fulfillmentObj;
 		        			Service service = Service.of(fulfillment);	        				
-		        			apply(service,atc); // recursively call apply to add the service
-		        			
+		        		
+		        			//apply(service,atc); // recursively call apply to add the service
+		        			//service specified in fulfillment
+		        			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> servBuilder = oCampPlatformComponentTemplate.builder(); 
+		                    builder.type( service.getServiceType()); 
+		                	name = service.getName();
+		                    if (!Strings.isBlank(name)) 
+		                    	builder.name(name);
+		                    Map<String, Object> servAttrs = MutableMap.copyOf( service.getCustomAttributes() ); 
+		                    if (attrs.containsKey("id"))
+		                    builder.customAttribute("serviceID", attrs.remove("id"));
+		        	        
+		        	        //add custom tags
+		        	        Collection<String> servKeys = getTagIDs();
+		        	        for(String key: servKeys){
+		        	        	addCustomMapAttributeIfNonNull(servBuilder, attrs, key);
+		        	        }
+		        	        servBuilder.add(reqBuilder.build());
+		        	        atc.add(servBuilder.build()); // Add the service to the AssemblyTemplate
 		        		}else{
-		        			log.info("The artifact is referencing a service that is already created");
+		        			log.info("The artifact is referencing a service by ID");
 		        			// I need to verify that the service is specified with an ID
+		        			//extract the service id. id:serviceID
+		        			//atc.getService(string id);
+		        			String id = extractSubValue((String)fulfillmentObj,":");
+		        			((oCampAssemblyTemplateConstructor)atc).addRequirement(reqBuilder.build(),id);
 		        		}
 	
 		        	}
@@ -240,7 +263,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	MutableMap<Object, Object> customFlags = MutableMap.of();
         	Object origBrooklynFlags = reqs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
         	
-        	atc.add(builder.build());// Add the Artifact to the AssemblyTemplate
+        	//atc.add(builder.build());// Add the Artifact to the AssemblyTemplate
         	
         }else if(deploymentPlanItem instanceof Policy){
         	
@@ -293,6 +316,9 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		
 	}
 	
+	public void invertApp(oCampAssemblyTemplateConstructor atc){
+		
+	}
 	
 	 /**
      * Looks for the given key in the map of attributes and adds it to the given builder
@@ -332,9 +358,9 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         }
     }
 
-	private String extractTypeName(String type){
-		int index = type.lastIndexOf(".");
-		return type.substring(index+1);
+	private String extractSubValue(String str, String del){
+		int index = str.lastIndexOf(del);
+		return str.substring(index+1);
 	}
 	
 	private Collection<String> getTagIDs(){

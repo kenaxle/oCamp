@@ -103,7 +103,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
     
     
     @Override
-    public PlatformTransaction transaction() {
+    public oCampPlatformTransaction transaction() {
         return new oCampPlatformTransaction(this);
     }
 	
@@ -113,6 +113,15 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         
         public oCampPlatformTransaction(oCampPlatform platform) {
             this.platform = platform;
+        }
+        
+        public PlatformComponentTemplate getPlatformComponentTemplate(String id){
+        	for(Object obj: additions){
+        		if(obj instanceof PlatformComponentTemplate){
+        			if (((PlatformComponentTemplate)obj).getCustomAttributes().get("serviceID").equals(id)) return (PlatformComponentTemplate)obj;
+        		}
+        	}
+        	return null;
         }
         
         @Override

@@ -12,14 +12,26 @@ public class oCampPlatformComponentTemplate extends PlatformComponentTemplate {
 		return platformComponentTemplates != null ? platformComponentTemplates : new EmptyResourceLookup<PlatformComponentTemplate>();
 	}
 	
-
 	private void setPlatformComponentTemplates(ResourceLookup<PlatformComponentTemplate> platformComponentTemplates) {
         this.platformComponentTemplates = platformComponentTemplates;
+    }
+	
+	// had to make the object mutable
+	public synchronized void add(PlatformComponentTemplate x) {
+        if (this.platformComponentTemplates==null) {
+           this.platformComponentTemplates = new BasicResourceLookup<PlatformComponentTemplate>();
+        }
+        if (!(this.platformComponentTemplates instanceof BasicResourceLookup)) {
+            throw new IllegalStateException("Cannot add to resource lookup "+this.platformComponentTemplates);
+        }
+        ((BasicResourceLookup<PlatformComponentTemplate>)this.platformComponentTemplates).add(x);
     }
 	
 	public static Builder<? extends oCampPlatformComponentTemplate> builder(){
 		return new oCampPlatformComponentTemplate().new Builder<oCampPlatformComponentTemplate>(CAMP_TYPE);
 	}
+	
+	
 	
 	public class Builder<T extends oCampPlatformComponentTemplate> extends PlatformComponentTemplate.Builder<T> {
 		
