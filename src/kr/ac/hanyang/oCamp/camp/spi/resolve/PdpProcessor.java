@@ -29,6 +29,7 @@ import com.google.api.client.repackaged.com.google.common.annotations.VisibleFor
 
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
+import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 
 public class PdpProcessor{
@@ -71,7 +72,7 @@ public class PdpProcessor{
     
     /** applies matchers to the given deployment plan to create an assembly template */
     public AssemblyTemplate registerDeploymentPlan(DeploymentPlan plan) {
-        AssemblyTemplateConstructor atc = new AssemblyTemplateConstructor(campPlatform);
+        oCampAssemblyTemplateConstructor atc = new oCampAssemblyTemplateConstructor(campPlatform);
         
         if (plan.getName()!=null) atc.name(plan.getName());
         if (plan.getDescription()!=null) atc.description(plan.getDescription());

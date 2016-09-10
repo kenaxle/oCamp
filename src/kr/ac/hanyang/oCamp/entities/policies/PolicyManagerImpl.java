@@ -1,5 +1,6 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.brooklyn.api.effector.Effector;
@@ -19,19 +20,15 @@ import kr.ac.hanyang.oCamp.api.policy.Policy;
 public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	
 	private List<Policy> policyList;
-	private List<ActionGroup> actionGroups;
-	
+	//private List<ActionGroup> actionGroups;	
 	private List<ActionGroup> validActions;
-	// create the policy manager with the appropriate action groups
+
 	public PolicyManagerImpl(){ }
 	
 	@Override
 	public void init(){
-		//System.out.println("initializing...");
-		//actionGroups = config().get(ACTIONGROUPS);
-		//System.out.println(actionGroups);
-		//config().
-		//policyList = new ArrayList<Policy>();
+		policyList = new ArrayList<Policy>();
+		validActions = new ArrayList<ActionGroup>();
 	}
 
 	@Override
@@ -78,7 +75,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 
 	@Override
 	public List<ActionGroup> evaluateActions(Entity entity, Policy policy, Sensor sensor) {
-		for(ActionGroup actionGroup: actionGroups){
+		for(ActionGroup actionGroup: ACTIONGROUPS.getDefaultValue()){
 			boolean badGroup = false;
 			int taskCount = 0;
 			for(Constraint constraint: policy.getDesiredState()){

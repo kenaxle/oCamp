@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.location.LocationDefinition;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
@@ -16,6 +17,7 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityMatcher;
 import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate.Builder;
+import org.apache.brooklyn.camp.spi.collection.ResolvableLink;
 import org.apache.brooklyn.camp.spi.pdp.Artifact;
 import org.apache.brooklyn.camp.spi.pdp.ArtifactContent;
 import org.apache.brooklyn.camp.spi.pdp.ArtifactRequirement;
@@ -29,6 +31,7 @@ import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContex
 import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
 import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
+import org.apache.brooklyn.util.collections.MutableSet;
 import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.text.Strings;
 import org.slf4j.Logger;
@@ -37,8 +40,12 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import kr.ac.hanyang.oCamp.api.policyManager.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
+import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
+import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
+import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
 import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
@@ -144,7 +151,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	
 
 	
-	@Override
 	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc) {
 		if (!(deploymentPlanItem instanceof Service) && 
 		    !(deploymentPlanItem instanceof Artifact) && 
@@ -155,11 +161,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		if (type == null) return false;
 		
 		log.debug("Item "+deploymentPlanItem+" being instantiated with "+type);
-		
-//		//**** build an oCampPlatformComponentTemplate instead
-//		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-//        builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
-        
         
         String name;
 
@@ -180,7 +181,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
 	        }
 	        
-	        atc.add(builder.build()); //builder.build(); 
+	        atc.add(builder.build()); // Add the service to the AssemblyTemplate
         }
         else if (deploymentPlanItem instanceof Artifact){ 
         	//**** build an oCampPlatformComponentTemplate instead
@@ -214,7 +215,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	        	addCustomMapAttributeIfNonNull(reqBuilder, attrs, key);
         	        }
         	        
-        	        builder.add(reqBuilder.build()); //builder.build(); 
+        	        builder.add(reqBuilder.build()); // Add the requirement to the Artifact Template
         	        
         			
         		
@@ -224,31 +225,49 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		        		if (fulfillmentObj instanceof Map){ // we have a definition
 		        			Map<String, Object> fulfillment = (Map<String, Object>) fulfillmentObj;
 		        			Service service = Service.of(fulfillment);	        				
-		        			apply(service,atc);
-		        			//builder.add((oCampPlatformComponentTemplate)applyPlanItem(service)); //recursive call
+		        			apply(service,atc); // recursively call apply to add the service
+		        			
 		        		}else{
 		        			log.info("The artifact is referencing a service that is already created");
-		        			//it is a string
-		        			// this service will be added
-		        			// add method to verify this.
+		        			// I need to verify that the service is specified with an ID
 		        		}
 	
 		        	}
         			
         		}
-        		// perform the parsing of the requirements
-        		// add the requirements to the builder
+        		
         	}
         	MutableMap<Object, Object> customFlags = MutableMap.of();
         	Object origBrooklynFlags = reqs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
-        	 
-        	//TODO complete attribute
-        	//added to test building
-        	// here I need to formalize the artifact
-        	atc.add(builder.build());//return builder.build();
+        	
+        	atc.add(builder.build());// Add the Artifact to the AssemblyTemplate
+        	
         }else if(deploymentPlanItem instanceof Policy){
-        	//**** build an oCampPlatformComponentTemplate instead
-    		PolicyManagerComponentTemplate.Builder<? extends PolicyManagerComponentTemplate> builder = PolicyManagerComponentTemplate.builder(); 
+        	
+        	//find the policy manager in the platform
+        	//if is does not exit then create it.
+        	for(ResolvableLink<PolicyManagerComponentTemplate> rlink:((oCampAssemblyTemplateConstructor)atc).getPlatform().policyManagerComponentTemplates().links() ){
+        		PolicyManagerComponentTemplate pmct = rlink.resolve();
+        		if (!pmct.getType().equals(((Policy)deploymentPlanItem).getPolicyType())){
+        			//no policy manager lets try to create it and add it.
+        			// then create the policy and add it to the application.
+        			
+        			PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Policy Manager for "+type+" policies.")
+			                .name(type+" PolicyManager")
+			                .type(type)
+			                .build();
+        			
+					BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
+					BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
+					
+					EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
+					PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
+					((oCampPlatformTransaction) ((oCampAssemblyTemplateConstructor)atc).getPlatform().transaction()).add(polMCT).commit();
+        		}// else means that a policy may be unmanagable
+        	}
+        	
+        	
+        	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
             builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
         	name = ((Policy)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) 
@@ -264,13 +283,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             builder.customAttribute("targets", targets);
             
 	        
-	        //add custom tags
 	        Collection<String> keys = getTagIDs();
-//	        for(String key: keys){
-//	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
-//	        }
+
 	        
-	        //atc.add(builder.build()); //builder.build(); 
+	        atc.add(builder.build()); // add the policytemplate
         }
 
         return true;

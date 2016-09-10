@@ -2,9 +2,11 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
-import org.apache.brooklyn.camp.AggregatingCampPlatform;
+import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
 import org.apache.brooklyn.camp.BasicCampPlatform;
+import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateResolver;
 import org.apache.brooklyn.camp.brooklyn.spi.dsl.BrooklynDslInterpreter;
 import org.apache.brooklyn.camp.spi.ApplicationComponent;
 import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
@@ -16,13 +18,17 @@ import org.apache.brooklyn.camp.spi.PlatformRootSummary;
 import org.apache.brooklyn.camp.spi.PlatformTransaction;
 import org.apache.brooklyn.camp.spi.collection.BasicResourceLookup;
 import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
+import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
+import org.apache.brooklyn.util.collections.MutableSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 
+import kr.ac.hanyang.oCamp.api.policyManager.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponent;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
+import kr.ac.hanyang.oCamp.camp.spi.oCampAbstractPlatformTransaction;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.oCampMatcher;
 
@@ -45,24 +51,38 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
 	private final PlatformRootSummary root;
 	private ManagementContext mgmt; // need a management context. this is a brooklyn object that manages brooklyn components
     									  // the management context is created outside so we need a handle to it
+	
 	// need to add a resourcelookup for the policies
 	//constructor
 	public oCampPlatform(PlatformRootSummary root, ManagementContext mgmt) {
 		this(root);
+		oCampPlatformTransaction transaction = (oCampPlatformTransaction) transaction();
 		//this.addPlatform(new BasicCampPlatform(root));
 		this.mgmt = mgmt;
 		addMatchers();
 		addInterpreters();
-		//pdp().addMatcher(new oCampMatcher(mgmt));
-		//pdp().addInterpreter(new BrooklynDslInterpreter()); // will have to fix this to a DSL that can interpret basic camp.
-		// TODO Auto-generated constructor stub
+		//add the base policy manager all services created will subscribe to this
+		PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Base Policy Manager")
+                																		.id("BasePolicyManager")
+																		                .name("BasePolicyManager")
+																		                .type("kr.ac.hanyang.oCamp.entities.policies.PolicyManager")
+																		                .build();
+		
+		BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
+		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
+		
+		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
+		PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
+		transaction.add(polMCT).commit();
+		//System.out.println("PolicyManager");
 	}
 	
 	 public oCampPlatform(PlatformRootSummary root){  
 		 super(root);
 		 this.root = Preconditions.checkNotNull(root, "root");
 	     pdp = new PdpProcessor(this);
-	    }
+
+	}
 	
 	@Override
 	public ManagementContext getBrooklynManagementContext(){	
@@ -81,12 +101,13 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         pdp.addInterpreter(new BrooklynDslInterpreter());
     }
     
+    
     @Override
     public PlatformTransaction transaction() {
         return new oCampPlatformTransaction(this);
     }
 	
-    public static class oCampPlatformTransaction extends PlatformTransaction {
+    public static class oCampPlatformTransaction extends oCampAbstractPlatformTransaction {
         private final oCampPlatform platform;
         private final AtomicBoolean committed = new AtomicBoolean(false);
         
