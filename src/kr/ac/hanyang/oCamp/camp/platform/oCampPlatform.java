@@ -72,7 +72,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
 		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
 		
 		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
-		PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
+		//TODO PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
 		transaction.add(polMCT).commit();
 		//System.out.println("PolicyManager");
 	}

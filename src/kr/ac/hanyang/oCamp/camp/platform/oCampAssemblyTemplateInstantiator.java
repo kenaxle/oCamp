@@ -39,7 +39,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 
 	public static final String NEVER_UNWRAP_APPS_PROPERTY = "wrappedApp"; 
 	
-	private List<EntitySpec<?>> servicesList;// = Lists.newArrayList();
+	//private List<EntitySpec<?>> servicesList;// = Lists.newArrayList();
 	private List<EntitySpec<?>> artifactList = Lists.newArrayList();
 	
 	public Assembly instantiate(AssemblyTemplate template, CampPlatform platform) {
@@ -58,6 +58,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
 	        EntitySpec<? extends Application> spec = createApplicationSpec(template, platform, loader, MutableSet.<String>of());
 	        Application instance = mgmt.getEntityManager().createEntity(spec);
+	        Application instance2 = mgmt.getEntityManager().createEntity(spec);
 	        log.info("CAMP created '{}'", instance);
 	        return instance;
 	    }
@@ -101,14 +102,15 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 
 	        // first build the children into an empty shell app
 	        
-	        //List<EntitySpec<?>> childSpecs = createComponentSpecs(template, platform, loader, encounteredTypeSymbolicNames);
-	        servicesList = createComponentSpecs(template, platform, loader, encounteredTypeSymbolicNames);
-//	        for (EntitySpec<?> childSpec : childSpecs) {
-//	            // children get parsed and unwrapped irrespective of the NEVER_UNWRAP_APPS setting;
-//	            // we could support a NEVER_UNWRAP_NESTED_ENTITIES item but i don't know if there's a use case
-//	            app.child(EntityManagementUtils.unwrapEntity(childSpec));
-//	        }
-
+	        List<EntitySpec<?>> childSpecs = createComponentSpecs(template, platform, loader, encounteredTypeSymbolicNames);
+	        
+	        for (EntitySpec<?> childSpec : childSpecs) {
+	            // children get parsed and unwrapped irrespective of the NEVER_UNWRAP_APPS setting;
+	            // we could support a NEVER_UNWRAP_NESTED_ENTITIES item but i don't know if there's a use case
+	            app.child(EntityManagementUtils.unwrapEntity(childSpec));
+	        }
+	        
+	        
 //	        if (allowedToUnwrap(template, app)) {
 //	            app = EntityManagementUtils.unwrapApplication(app);
 //	        }
@@ -150,7 +152,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 
 	    
 	    private List<EntitySpec<?>> buildTemplateArtifactsOrServiceAsSpecs(BrooklynClassLoadingContext loader, AssemblyTemplate template, CampPlatform platform, Set<String> encounteredRegisteredTypeIds) {
-	        //List<EntitySpec<?>> result = Lists.newArrayList();
+	        List<EntitySpec<?>> result = Lists.newArrayList();
 
 	        //for (PlatformComponentTemplate pctl: (List)template.getPlatformComponentTemplates())
 	        
@@ -168,13 +170,18 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            
 	            //appChildComponentTemplate.getType();
 	            
-	            
-	            EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
-	            spec.children(buildReqSpec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	            if(appChildComponentTemplate.getCustomAttributes().containsKey("serviceID")){
+	            	EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
+	            	spec.children(buildReqSpec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	            	result.add(spec);
+	            }else{
+	            	//this is a policy we need to create and link
+	            	
+	            }
 	            //System.out.println(spec.getType());
 	            //result.add(spec);
 	        }
-	        return null; //result;
+	        return result;
 	    }
 	    
 	    private List<EntitySpec<?>> buildReqSpec(BrooklynClassLoadingContext loader, oCampPlatformComponentTemplate pctl, Set<String> encounteredRegisteredTypeIds){
@@ -205,12 +212,12 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 		    			//the this is an Artifact see if it exists before.
 		    			for(EntitySpec<?> artSpec:artifactList){
 		    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
-		    						.equals(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
+		    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
 		    					//found the artifact in the list
 		    					return artSpec;
 		    				}
 		    			}
-		    			artifactList.add(childSpec);
+		    			artifactList.add(spec);
 		    			return spec;
 		    		//}/*else{
 			    		//spec.child(childSpec);

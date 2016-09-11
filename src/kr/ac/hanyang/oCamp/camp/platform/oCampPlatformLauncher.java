@@ -2,7 +2,7 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.camp.spi.PlatformRootSummary;
-import org.apache.brooklyn.core.mgmt.internal.LocalManagementContext;
+import kr.ac.hanyang.oCamp.core.mgmt.BaseEntityManager;
 
 public class oCampPlatformLauncher{
 
@@ -15,7 +15,7 @@ public class oCampPlatformLauncher{
 			//throw new Exception("platform already exists!"); // will have to fix this
 			System.out.println("There is an exception here. the platform already exists");
 		if (mgmt == null)
-			mgmt = new LocalManagementContext();
+			mgmt = new BaseEntityManager();
 		platform = new oCampPlatform(PlatformRootSummary.builder().name("oCAMP Platform").build(),
                 getManagement());
 		return this;
