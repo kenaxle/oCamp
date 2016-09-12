@@ -1,4 +1,4 @@
-package kr.ac.hanyang.oCamp.entities;
+package kr.ac.hanyang.oCamp.entities.requirements;
 
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.config.ConfigKey;

@@ -5,10 +5,10 @@ import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.machine.MachineEntityImpl;
 import org.apache.brooklyn.entity.software.base.VanillaSoftwareProcessImpl;
 
-import kr.ac.hanyang.oCamp.entities.IExecutable;
-import kr.ac.hanyang.oCamp.entities.IService;
-import kr.ac.hanyang.oCamp.entities.artifacts.ISoftware;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampArtifact;
+import kr.ac.hanyang.oCamp.entities.artifacts.Software;
+import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class SoftwareProcess extends VanillaSoftwareProcessImpl implements IExecutable, ISoftwareProcess, IService, Startable{

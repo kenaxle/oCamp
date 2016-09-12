@@ -1,4 +1,4 @@
-package kr.ac.hanyang.oCamp.entities;
+package kr.ac.hanyang.oCamp.entities.requirements;
 
 import org.apache.brooklyn.api.sensor.AttributeSensor;
 import org.apache.brooklyn.config.ConfigKey;
@@ -9,9 +9,6 @@ import org.apache.brooklyn.core.effector.Effectors;
 import org.apache.brooklyn.core.effector.MethodEffector;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.util.core.config.ConfigBag;
-
-import kr.ac.hanyang.oCamp.entities.requirements.IConnectTo;
-import kr.ac.hanyang.oCamp.entities.requirements.IDeployOn;
 
 public interface IConnectable{
 	
@@ -24,7 +21,7 @@ public interface IConnectable{
             "string to find the item to execute.");
         
         @Override public Void call(ConfigBag parameters) {
-            parameters.put(COMMAND, (String)((IConnectTo)entity().getParent()).getScript());            
+            parameters.put(COMMAND, (String)((ConnectTo)entity().getParent()).getScript());            
             return new MethodEffector<Void>(IConnectable.class, "executeScript").call(entity(), parameters.getAllConfig());
         }
     }

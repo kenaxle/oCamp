@@ -1,57 +1,21 @@
 package kr.ac.hanyang.oCamp.entities.services;
 
-import java.util.Collection;
 import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.api.location.Location;
-import org.apache.brooklyn.api.mgmt.Task;
-import org.apache.brooklyn.core.entity.Entities;
-import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.BasicConfigKey;
+import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
 
-
-public class BasicOCampArtifact<T> extends EffectorStartableImpl implements IBasicOCampArtifact {
-
-	private T content;
+public interface BasicOCampArtifact extends Entity{
 	
-	boolean connectedSensors = false; // not sure if I need sensors as yet
+	public static final String[] REQUIREMENTS = {"DependsOn"};
 	
-	public BasicOCampArtifact(){
-		super();
-	}
+	@SetFromFlag("content")
+	public static final ConfigKey<String> CONTENT = new BasicConfigKey<String>(
+			String.class, "content","The content of this artifact");
 	
-	public void init(){
-		super.init();
-		setContent();
-	}
+	public <T> T getContent();
 	
-	@SuppressWarnings("unchecked")
-	public void setContent(){
-		this.content = (T) getConfig(CONTENT);
-	}
+	public String[] getRequirements();
 	
-	@SuppressWarnings("unchecked")
-	public T getContent(){
-		//return (T) this.getConfig(new BasicConfigKey(null, "content"));
-		return (T) this.content;
-	}
-	
-	@Override
-	public void start(Collection<? extends Location> locations ){
-		for(Entity e: this.getChildren()){
-			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
-			//task.blockUntilEnded(null);
-		}
-	}
-
-	@Override
-	public String[] getRequirements() {
-		return IBasicOCampArtifact.REQUIREMENTS;
-	}
-
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

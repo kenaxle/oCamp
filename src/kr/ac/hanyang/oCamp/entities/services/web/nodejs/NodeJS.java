@@ -3,7 +3,7 @@ package kr.ac.hanyang.oCamp.entities.services.web.nodejs;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppServiceImpl;
 
-import kr.ac.hanyang.oCamp.entities.IService;
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class NodeJS extends NodeJsWebAppServiceImpl implements INodeJS, IService, Startable{

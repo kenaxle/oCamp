@@ -58,7 +58,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
 	        EntitySpec<? extends Application> spec = createApplicationSpec(template, platform, loader, MutableSet.<String>of());
 	        Application instance = mgmt.getEntityManager().createEntity(spec);
-	        Application instance2 = mgmt.getEntityManager().createEntity(spec);
+//	        Application instance2 = mgmt.getEntityManager().createEntity(spec);
 	        log.info("CAMP created '{}'", instance);
 	        return instance;
 	    }

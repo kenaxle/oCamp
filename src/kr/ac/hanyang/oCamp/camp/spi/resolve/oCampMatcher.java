@@ -49,7 +49,7 @@ import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
 import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
-import kr.ac.hanyang.oCamp.entities.IService;
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
 
 public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oCampReserved {
 	private static final Logger log = LoggerFactory.getLogger(oCampMatcher.class);

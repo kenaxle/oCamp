@@ -3,9 +3,9 @@ package kr.ac.hanyang.oCamp.entities.services.web.jboss;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
 
-import kr.ac.hanyang.oCamp.entities.IDeployable;
-import kr.ac.hanyang.oCamp.entities.IExecutable;
-import kr.ac.hanyang.oCamp.entities.IService;
+import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
+import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class JBoss7 extends Tomcat8ServerImpl implements IDeployable, IJBoss6, IService, Startable{

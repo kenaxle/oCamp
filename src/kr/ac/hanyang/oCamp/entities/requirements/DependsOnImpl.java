@@ -10,14 +10,12 @@ import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.ac.hanyang.oCamp.entities.IArtifact;
-import kr.ac.hanyang.oCamp.entities.IDeployable;
 
-public class DependOn<T> extends EffectorStartableImpl implements Startable, IDependOn{
-	private static final Logger log = LoggerFactory.getLogger(DependOn.class);
+public class DependsOnImpl<T> extends EffectorStartableImpl implements Startable, DependsOn{
+	private static final Logger log = LoggerFactory.getLogger(DependsOnImpl.class);
 	
 	
-	public DependOn(){
+	public DependsOnImpl(){
 		super();
 	}
 	

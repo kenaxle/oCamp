@@ -3,8 +3,8 @@ package kr.ac.hanyang.oCamp.entities.services.database.mysql;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.database.mysql.MySqlNodeImpl;
 
-import kr.ac.hanyang.oCamp.entities.IExecutable;
-import kr.ac.hanyang.oCamp.entities.IService;
+import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
 
 public class MySQL extends MySqlNodeImpl implements IExecutable, IMySQL, IService, Startable{

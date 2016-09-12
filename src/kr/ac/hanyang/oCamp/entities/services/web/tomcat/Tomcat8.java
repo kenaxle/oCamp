@@ -1,81 +1,30 @@
 package kr.ac.hanyang.oCamp.entities.services.web.tomcat;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import org.apache.brooklyn.api.catalog.Catalog;
+import org.apache.brooklyn.api.entity.ImplementedBy;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.ConfigKeys;
+import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
+import org.apache.brooklyn.entity.software.base.SoftwareProcess;
+import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server;
+import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
-import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
-import org.apache.brooklyn.core.entity.Attributes;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
-import kr.ac.hanyang.oCamp.entities.IDeployable;
-import kr.ac.hanyang.oCamp.entities.IEntity;
-import kr.ac.hanyang.oCamp.entities.IService;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
+@Catalog(name="Tomcat Entity", description="Represents a server")
+@ImplementedBy(Tomcat8Impl.class)
+public interface Tomcat8 extends Tomcat8Server {
 
-public class Tomcat8 extends Tomcat8ServerImpl implements IDeployable, ITomcat, IService, Startable, IEntity{
+//	@SetFromFlag("version")
+//    ConfigKey<String> SUGGESTED_VERSION = ConfigKeys.newConfigKeyWithDefault(SoftwareProcess.SUGGESTED_VERSION, "8.0.36");
+//
+//	@SetFromFlag("downloadUrl")
+//    AttributeSensorAndConfigKey<String, String> DOWNLOAD_URL = ConfigKeys.newSensorAndConfigKeyWithDefault(SoftwareProcess.DOWNLOAD_URL,
+//            "http://mirror.apache-kr.org/tomcat/tomcat-8/v${version}/bin/apache-tomcat-${version}.tar.gz");
+
+	public static final String[] CAPABILITIES = {"DeployOn"};
+		//need to add the characteristics also
+		//characteristics should be added as AttributeSensorAndConfigKey
 	
-	private Map<String,PolicyManagerImpl> policyManagers;
-	
-	public Tomcat8(){
-		super();
-		System.out.println("");
-		//this.config().set("location", "AWS Tokyo (ap-northeast-1)");
-	}
-	
-	public void init(){
-		super.init();
-		policyManagers = new LinkedHashMap<String,PolicyManagerImpl>();
-		//configure the constraint set here 
-		BasicSensorSupport sensorSup = this.sensors();
-		//sensorSup.set(Attributes.SERVICE_UP, true);
-	
-		System.out.println("The sensors "+sensorSup.getAll());
-		//CONSTRAINTSET.addConstraint(new PolicyConstraint.Builder()));
-	}
-
-	@Override
-	public String[] getCapabilities() {
-
-		String[] result = new String[IBasicOCampService.CAPABILITIES.length+ITomcat.CAPABILITIES.length];
-		System.arraycopy(IBasicOCampService.CAPABILITIES, 0, result, 0, IBasicOCampService.CAPABILITIES.length);
-		System.arraycopy(ITomcat.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, ITomcat.CAPABILITIES.length); 
-		return result;
-
-	}
-	
-	@Override
-	public void deploy(String url, String targetName) {
-		System.out.println(this.sensors().getAll());
-		System.out.println(this.sensors().get(Attributes.SERVICE_UP));
-		System.out.println(PROVISIONING_LOCATION);
-		super.deploy(url, targetName);
-	}
-
-//	@Override
-//	public ConstraintSetImpl getConstraintSet() {
-//		return CONSTRAINTSET;
-//	}
-//	
-//	public void subscribe(PolicyManagerImpl subscriber){
-//		policyManagers.put(subscriber.getType(), subscriber);
-//	}
-//	
-//	public void unsubscribe(PolicyManagerImpl subscriber){
-//		policyManagers.remove(subscriber.getType());
-//	}
-//	
-//	
-//	//the entity is a constraint entity that is forwarded by the constraintset
-//	// extract the policy manager and then initiate the policy manager's process
-//	//for handling the 
-//	@Override
-//	public void notification(Entity entity) {
-//		if (!(entity instanceof ConstraintImpl)) return; //this should be logged as an error
-//		ConstraintImpl policyConstraint = (ConstraintImpl) entity;
-//		PolicyManager policyManager = policyConstraint.getPolicyManager();
-//		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
-//	}
-
 
 }

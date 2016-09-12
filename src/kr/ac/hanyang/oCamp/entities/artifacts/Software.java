@@ -1,39 +1,14 @@
 package kr.ac.hanyang.oCamp.entities.artifacts;
 
-import org.apache.brooklyn.core.entity.trait.Startable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.apache.brooklyn.api.catalog.Catalog;
+import org.apache.brooklyn.api.entity.ImplementedBy;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampArtifact;
 
-public class Software<T> extends BasicOCampArtifact<Object> implements Startable, ISoftware{
-	private static final Logger log = LoggerFactory.getLogger(Software.class);
-	
-	boolean connectedSensors = false; // not sure if I need sensors as yet
-	
-	public Software(){
-		super();
-	}
-	
-	public void init(){
-		super.init();
-	}
+@Catalog(name="Software Artifact Entity", description="Represents a Software Artifact")
+@ImplementedBy(SoftwareImpl.class)
 
-	@Override
-	public String[] getRequirements() {
-		// TODO Auto-generated method stub
-		String[] result = new String[IBasicOCampArtifact.REQUIREMENTS.length+ISoftware.REQUIREMENTS.length];
-		System.arraycopy(IBasicOCampArtifact.REQUIREMENTS, 0, result, 0, IBasicOCampArtifact.REQUIREMENTS.length);
-		System.arraycopy(ISoftware.REQUIREMENTS, 0, result, IBasicOCampArtifact.REQUIREMENTS.length, ISoftware.REQUIREMENTS.length); 
-		return result;
-	}
-
+public interface Software extends BasicOCampArtifact{
 	
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
+	public static final String[] REQUIREMENTS = {"DependsOn","ExecuteOn"};
+	
 }

@@ -1,4 +1,4 @@
-package kr.ac.hanyang.oCamp.entities;
+package kr.ac.hanyang.oCamp.entities.requirements;
 
 import org.apache.brooklyn.api.sensor.AttributeSensor;
 import org.apache.brooklyn.config.ConfigKey;
@@ -9,8 +9,6 @@ import org.apache.brooklyn.core.effector.Effectors;
 import org.apache.brooklyn.core.effector.MethodEffector;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.util.core.config.ConfigBag;
-
-import kr.ac.hanyang.oCamp.entities.requirements.IDeployOn;
 
 
 
@@ -28,8 +26,8 @@ public interface IDeployable{
         public static final ConfigKey<Object> TARGET = ConfigKeys.newConfigKey(Object.class, "target",
                 "where the content will be hosted.");
         @Override public Void call(ConfigBag parameters) {
-            parameters.put(URL, (String)((IDeployOn)entity().getParent()).getContentUrl());
-            parameters.put(TARGET, (String)((IDeployOn)entity().getParent()).getTarget());
+            parameters.put(URL, (String)((DeployOn)entity().getParent()).getContentUrl());
+            parameters.put(TARGET, (String)((DeployOn)entity().getParent()).getTarget());
             return new MethodEffector<Void>(IDeployable.class, "deploy").call(entity(), parameters.getAllConfig());
         }
     }

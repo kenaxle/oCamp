@@ -1,4 +1,4 @@
-package kr.ac.hanyang.oCamp.entities;
+package kr.ac.hanyang.oCamp.entities.requirements;
 
 import org.apache.brooklyn.api.sensor.AttributeSensor;
 import org.apache.brooklyn.config.ConfigKey;
@@ -9,8 +9,6 @@ import org.apache.brooklyn.core.effector.Effectors;
 import org.apache.brooklyn.core.effector.MethodEffector;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.util.core.config.ConfigBag;
-
-import kr.ac.hanyang.oCamp.entities.requirements.IDeployOn;
 
 public interface IExecutable{
 	
@@ -23,7 +21,7 @@ public interface IExecutable{
             "string to find the item to execute.");
         
         @Override public Void call(ConfigBag parameters) {
-            parameters.put(COMMAND, (String)((IDeployOn)entity().getParent()).getContentUrl());            
+            parameters.put(COMMAND, (String)((DeployOn)entity().getParent()).getContentUrl());            
             return new MethodEffector<Void>(IExecutable.class, "executeScript").call(entity(), parameters.getAllConfig());
         }
     }
