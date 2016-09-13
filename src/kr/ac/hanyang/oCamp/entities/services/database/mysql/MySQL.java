@@ -5,7 +5,7 @@ import org.apache.brooklyn.entity.database.mysql.MySqlNodeImpl;
 
 import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class MySQL extends MySqlNodeImpl implements IExecutable, IMySQL, IService, Startable{
 
@@ -13,9 +13,9 @@ public class MySQL extends MySqlNodeImpl implements IExecutable, IMySQL, IServic
 	@Override
 	public String[] getCapabilities() {
 
-		String[] result = new String[IBasicOCampService.CAPABILITIES.length+IMySQL.CAPABILITIES.length];
-		System.arraycopy(IBasicOCampService.CAPABILITIES, 0, result, 0, IBasicOCampService.CAPABILITIES.length);
-		System.arraycopy(IMySQL.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, IMySQL.CAPABILITIES.length); 
+		String[] result = new String[BasicOCampService.CAPABILITIES.length+IMySQL.CAPABILITIES.length];
+		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
+		System.arraycopy(IMySQL.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, IMySQL.CAPABILITIES.length); 
 		return result;
 
 	}

@@ -2,11 +2,15 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 import java.util.List;
 import java.util.Map.Entry;
+
+import javax.annotation.Nullable;
+
 import java.util.Set;
 
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
+import org.apache.brooklyn.api.mgmt.Task;
 import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
 import org.apache.brooklyn.api.objs.SpecParameter;
 import org.apache.brooklyn.camp.CampPlatform;
@@ -19,19 +23,27 @@ import org.apache.brooklyn.camp.spi.AssemblyTemplate.Builder;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.collection.ResolvableLink;
 import org.apache.brooklyn.core.config.BasicConfigKey;
+import org.apache.brooklyn.core.entity.Entities;
+import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.mgmt.EntityManagementUtils;
 import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
 import org.apache.brooklyn.core.mgmt.EntityManagementUtils.CreationResult;
 import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
 import org.apache.brooklyn.entity.stock.BasicApplicationImpl;
+import org.apache.brooklyn.util.collections.MutableList;
+import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.collections.MutableSet;
 import org.apache.brooklyn.util.core.flags.TypeCoercions;
+import org.apache.brooklyn.util.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+
+import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
+import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
 
 public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateInstantiator {
 
@@ -48,9 +60,40 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	       //***************** 
 	       // do not start the app. instead issue a manage command which will start the policy manager for all components of the application
 	       
-	       // CreationResult<Application, Void> start = EntityManagementUtils.start(app);
+	       CreationResult<Application, Void> start = startup(app);
 	       // log.debug("CAMP created "+app+"; starting in "+start.task());
 	        return platform.assemblies().get(app.getApplicationId());
+	    }
+	
+	 private <T extends Application> CreationResult<T,Void> startup(T app) {
+	        Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP,
+	            // locations already set in the entities themselves;
+	            // TODO make it so that this arg does not have to be supplied to START !
+	            MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)"))
+	            );
+	        task.blockUntilEnded();
+	        return CreationResult.of(app, task);
+	    }
+	 
+	  public static class CreationResult<T,U> {
+	        private final T thing;
+	        @Nullable private final Task<U> task;
+	        public CreationResult(T thing, Task<U> task) {
+	            super();
+	            this.thing = thing;
+	            this.task = task;
+	        }
+	        
+	        protected static <T,U> CreationResult<T,U> of(T thing, @Nullable Task<U> task) {
+	            return new CreationResult<T,U>(thing, task);
+	        }
+	        
+	        /** returns the thing/things created */
+	        @Nullable public T get() { return thing; }
+	        /** associated task, ie the one doing the creation/starting */
+	        public Task<U> task() { return task; }
+	        public CreationResult<T,U> blockUntilComplete(Duration timeout) { if (task!=null) task.blockUntilEnded(timeout); return this; }
+	        public CreationResult<T,U> blockUntilComplete() { if (task!=null) task.blockUntilEnded(); return this; }
 	    }
 
 	    private Application create(AssemblyTemplate template, CampPlatform platform) {
@@ -259,7 +302,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    
 	    private static AssemblyTemplate buildWrapperAppTemplate(AssemblyTemplate template) {
 	        Builder<? extends AssemblyTemplate> builder = AssemblyTemplate.builder();
-	        builder.type("brooklyn:" + BasicApplicationImpl.class.getName());  //FIXME leaving brooklyn tags for now
+	        builder.type("brooklyn:" + BasicOCampApplicationImpl.class.getName());  //FIXME leaving brooklyn tags for now 
 	        builder.id(template.getId());
 	        builder.name(template.getName());
 	        builder.sourceCode(template.getSourceCode());

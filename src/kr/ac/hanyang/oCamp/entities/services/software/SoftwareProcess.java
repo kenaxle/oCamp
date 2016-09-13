@@ -9,7 +9,7 @@ import kr.ac.hanyang.oCamp.entities.artifacts.Software;
 import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class SoftwareProcess extends VanillaSoftwareProcessImpl implements IExecutable, ISoftwareProcess, IService, Startable{
 	public SoftwareProcess(){
@@ -29,9 +29,9 @@ public class SoftwareProcess extends VanillaSoftwareProcessImpl implements IExec
 	}
 
 	public String[] getCapabilities() {
-		String[] result = new String[IBasicOCampService.CAPABILITIES.length+ISoftwareProcess.CAPABILITIES.length];
-		System.arraycopy(IBasicOCampService.CAPABILITIES, 0, result, 0, IBasicOCampService.CAPABILITIES.length);
-		System.arraycopy(ISoftwareProcess.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, ISoftwareProcess.CAPABILITIES.length); 
+		String[] result = new String[BasicOCampService.CAPABILITIES.length+ISoftwareProcess.CAPABILITIES.length];
+		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
+		System.arraycopy(ISoftwareProcess.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, ISoftwareProcess.CAPABILITIES.length); 
 		return result;
 	}
 

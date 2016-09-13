@@ -7,8 +7,12 @@ import org.apache.brooklyn.api.mgmt.Task;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
+import org.apache.brooklyn.util.core.task.DynamicSequentialTask;
+import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
 
 public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable, DeployOn{
 	private static final Logger log = LoggerFactory.getLogger(DeployOnImpl.class);
@@ -34,19 +38,24 @@ public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable,
 
 	@Override
 	public void start(Collection<? extends Location> locations) {
-		
-		for(Entity e: this.getChildren()){
-			log.info("**** INFO INFO **** Starting DeployOn...");
-			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
-			task.blockUntilEnded(null);
-			
-			if (task.isDone() /*&& !task.isError()*/){
-				log.info("**** INFO INFO **** "+task.getStatusSummary());
-				Task<Void> deployTask = Entities.invokeEffector(this, e, IDeployable.DEPLOY);
-				log.info("**** INFO INFO ****"+deployTask.getStatusSummary());
+		// get the content
+		Entity child = this.getChildren().iterator().next(); // get my only child this will be the Artifact
+		T content = ((BasicOCampArtifact)child).getContent(); // I should instead have a general method to get all configurations 
+		log.info("**** INFO INFO **** Starting DeployOn...");
+			Task<Object> parentTasks = TaskBuilder.builder().add(Entities.invokeEffector(this, this.getParent(), Startable.START))
+								 						   .add(Entities.invokeEffector(this, this.getParent(), IDeployable.DEPLOY))
+								 						   .dynamic(true)
+								 						   .build();
+			parentTasks.blockUntilEnded(null);
+			if (parentTasks.isDone() && !parentTasks.isError()){
+				log.info("**** INFO INFO **** "+parentTasks.getStatusSummary());			
+				Task<Void> childTask = Entities.invokeEffector(this,child , Startable.START);
+				childTask.blockUntilEnded(null);
+				if (childTask.isDone() && !childTask.isError()){
+					log.info("**** INFO INFO ****"+childTask.getStatusSummary());
+				}
 			}else
-				log.error("**** ERROR ERROR **** ERROR ERROR ****"+task.getStatusSummary());
-		}
+				log.error("**** ERROR ERROR **** ERROR ERROR ****"+parentTasks.getStatusSummary());
 	}
 
 

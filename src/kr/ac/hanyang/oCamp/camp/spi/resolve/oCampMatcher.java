@@ -174,7 +174,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
             builder.customAttribute("serviceID", attrs.remove("id"));
-	        
+	        builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
 	        //add custom tags
 	        Collection<String> keys = getTagIDs();
 	        for(String key: keys){

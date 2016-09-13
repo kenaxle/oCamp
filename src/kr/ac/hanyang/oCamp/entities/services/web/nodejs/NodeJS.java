@@ -4,16 +4,16 @@ import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppServiceImpl;
 
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class NodeJS extends NodeJsWebAppServiceImpl implements INodeJS, IService, Startable{
 
 
 	@Override
 	public String[] getCapabilities() {
-		String[] result = new String[IBasicOCampService.CAPABILITIES.length+INodeJS.CAPABILITIES.length];
-		System.arraycopy(IBasicOCampService.CAPABILITIES, 0, result, 0, IBasicOCampService.CAPABILITIES.length);
-		System.arraycopy(INodeJS.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, INodeJS.CAPABILITIES.length); 
+		String[] result = new String[BasicOCampService.CAPABILITIES.length+INodeJS.CAPABILITIES.length];
+		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
+		System.arraycopy(INodeJS.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, INodeJS.CAPABILITIES.length); 
 		return result;
 
 	}

@@ -5,7 +5,7 @@ import org.apache.brooklyn.entity.webapp.jetty.Jetty6ServerImpl;
 
 import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.IBasicOCampService;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class Jetty6 extends Jetty6ServerImpl implements IDeployable, IJetty6, IService, Startable{
 
@@ -13,9 +13,9 @@ public class Jetty6 extends Jetty6ServerImpl implements IDeployable, IJetty6, IS
 	@Override
 	public String[] getCapabilities() {
 
-		String[] result = new String[IBasicOCampService.CAPABILITIES.length+IJetty6.CAPABILITIES.length];
-		System.arraycopy(IBasicOCampService.CAPABILITIES, 0, result, 0, IBasicOCampService.CAPABILITIES.length);
-		System.arraycopy(IJetty6.CAPABILITIES, 0, result, IBasicOCampService.CAPABILITIES.length, IJetty6.CAPABILITIES.length); 
+		String[] result = new String[BasicOCampService.CAPABILITIES.length+IJetty6.CAPABILITIES.length];
+		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
+		System.arraycopy(IJetty6.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, IJetty6.CAPABILITIES.length); 
 		return result;
 
 	}
