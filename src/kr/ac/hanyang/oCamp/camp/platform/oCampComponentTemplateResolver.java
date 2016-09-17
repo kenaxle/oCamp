@@ -16,7 +16,8 @@ package kr.ac.hanyang.oCamp.camp.platform;
 	import org.apache.brooklyn.api.typereg.RegisteredType;
 	import org.apache.brooklyn.camp.brooklyn.BrooklynCampConstants;
 	import org.apache.brooklyn.camp.brooklyn.BrooklynCampReservedKeys;
-	import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationResolver;
+import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateResolver;
+import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationResolver;
 	import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynYamlLocationResolver;
 	import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynYamlTypeInstantiator;
 	import org.apache.brooklyn.camp.brooklyn.spi.creation.EntitySpecConfiguration;
@@ -82,156 +83,8 @@ package kr.ac.hanyang.oCamp.camp.platform;
 	import org.apache.brooklyn.core.typereg.RegisteredTypes;
 	import com.google.common.collect.ImmutableSet;
 
-	public class oCampComponentTemplateResolver {
+	public class oCampComponentTemplateResolver{
 
-//	    private ManagementContext mgmt;
-//	    private RegisteredType type;
-//	    private RegisteredTypeLoadingContext context;
-//
-//	    // TODO we have a few different modes, detailed below; this logic should be moved to the new transformer
-//	    // and allow specifying which modes are permitted to be in effect?
-////	    /** whether to allow parsing of the 'full' syntax for applications,
-////	     * where items are wrapped in a "services:" block, and if the wrapper is an application,
-////	     * to promote it */
-////	    boolean allowApplicationFullSyntax = true;
-//	//
-////	    /** whether to allow parsing of the legacy 'full' syntax, 
-////	     * where a non-application items are wrapped:
-////	     * <li> in a "services:" block for entities,
-////	     * <li> in a "brooklyn.locations" or "brooklyn.policies" block for locations and policies */
-////	    boolean allowLegacyFullSyntax = true;
-//	//
-////	    /** whether to allow parsing of the type syntax, where an item is a map with a "type:" field,
-////	     * i.e. not wrapped in any "services:" or "brooklyn.{locations,policies}" block */
-////	    boolean allowTypeSyntax = true;
-//
-//	    public oCampComponentResolver(ManagementContext mgmt, RegisteredType type, RegisteredTypeLoadingContext context) {
-//	        this.mgmt = mgmt;
-//	        this.type = type;
-//	        this.context = context;
-//	    }
-//	    
-//	    
-//	    public static class Factory {
-//	    	
-//	        public static oCampComponentResolver newInstance(BrooklynClassLoadingContext context, Map<String, ?> childAttrs) {
-//	            return newInstance(context, ConfigBag.newInstance(childAttrs), null);
-//	        }
-//
-//	        public static oCampComponentResolver newInstance(BrooklynClassLoadingContext context, AbstractResource template) {
-//	            return newInstance(context, ConfigBag.newInstance(template.getCustomAttributes()), template);
-//	        }
-//
-//	        public static oCampComponentResolver newInstance(BrooklynClassLoadingContext context, String serviceType) {
-//	            return newInstance(context, ConfigBag.newInstance().configureStringKey("serviceType", serviceType), null);
-//	        }
-//
-//	        private static oCampComponentResolver newInstance(BrooklynClassLoadingContext context, ConfigBag attrs, AbstractResource optionalTemplate) {
-//	            String type = getDeclaredType(null, optionalTemplate, attrs);
-//	            return new oCampComponentResolver(context, attrs, optionalTemplate, type);
-//	        }
-//
-//	        
-//	        private static String getDeclaredType(String knownServiceType, AbstractResource optionalTemplate, @Nullable ConfigBag attrs) {
-//	            String type = knownServiceType;
-//	            if (type==null && optionalTemplate!=null) {
-//	                type = optionalTemplate.getType();
-//	                if (type.equals(AssemblyTemplate.CAMP_TYPE) || type.equals(PlatformComponentTemplate.CAMP_TYPE) || type.equals(ApplicationComponentTemplate.CAMP_TYPE))
-//	                    // ignore these values for the type; only subclasses are interesting
-//	                    type = null;
-//	            }
-//	            if (type==null) type = extractServiceTypeAttribute(attrs);
-//	            return type;
-//	        }
-//
-//	        private static String extractServiceTypeAttribute(@Nullable ConfigBag attrs) {
-//	            return BrooklynYamlTypeInstantiator.InstantiatorFromKey.extractTypeName("service", attrs).orNull();
-//	        }
-//	    }
-//	    	
-//	    
-//
-//	    public AbstractBrooklynObjectSpec<?, ?> createSpec() {
-//	        // TODO new-style approach:
-//	        //            AbstractBrooklynObjectSpec<?, ?> spec = RegisteredTypes.newSpecInstance(mgmt, /* 'type' key */);
-//	        //            spec.configure(keysAndValues);
-//	        return createSpecFromFull(mgmt, type, context.getExpectedJavaSuperType(), context.getAlreadyEncounteredTypes(), context.getLoader());
-//	    }
-//
-//	    static AbstractBrooklynObjectSpec<?, ?> createSpecFromFull(ManagementContext mgmt, RegisteredType item, Class<?> expectedType, Set<String> parentEncounteredTypes, BrooklynClassLoadingContext loaderO) {
-//	        // for this method, a prefix "services" or "brooklyn.{location,policies}" is required at the root;
-//	        // we now prefer items to come in "{ type: .. }" format, except for application roots which
-//	        // should have a "services: [ ... ]" block (and which may subsequently be unwrapped)
-//	        BrooklynClassLoadingContext loader = CatalogUtils.newClassLoadingContext(mgmt, item, loaderO);
-//
-//	        Set<String> encounteredTypes;
-//	        // symbolicName could be null if coming from the catalog parser where it tries to load before knowing the id
-//	        if (item.getSymbolicName() != null) {
-//	            encounteredTypes = ImmutableSet.<String>builder()
-//	                .addAll(parentEncounteredTypes)
-//	                .add(item.getSymbolicName())
-//	                .build();
-//	        } else {
-//	            encounteredTypes = parentEncounteredTypes;
-//	        }
-//
-//	        AbstractBrooklynObjectSpec<?, ?> spec;
-//	        String planYaml = RegisteredTypes.getImplementationDataStringForSpec(item);
-//	        MutableSet<Object> supers = MutableSet.copyOf(item.getSuperTypes());
-//	        supers.addIfNotNull(expectedType);
-//	        /*if (RegisteredTypes.isAnyTypeSubtypeOf(supers, Policy.class)) {
-//	            spec = CampInternalUtils.createPolicySpec(planYaml, loader, encounteredTypes);
-//	        } else if (RegisteredTypes.isAnyTypeSubtypeOf(supers, Location.class)) {
-//	            spec = CampInternalUtils.createLocationSpec(planYaml, loader, encounteredTypes);
-//	        } else*/ 
-//	        
-//	        if (RegisteredTypes.isAnyTypeSubtypeOf(supers, Application.class)) {
-//	            spec = createEntitySpecFromServicesBlock(planYaml, loader, encounteredTypes, true);
-//	        } else if (RegisteredTypes.isAnyTypeSubtypeOf(supers, Entity.class)) {
-//	            spec = createEntitySpecFromServicesBlock(planYaml, loader, encounteredTypes, false);
-//	        } else {
-//	            throw new IllegalStateException("Cannot detect spec type from "+item.getSuperTypes()+" for "+item+"\n"+planYaml);
-//	        }
-//	        if (expectedType!=null && !expectedType.isAssignableFrom(spec.getType())) {
-//	            throw new IllegalStateException("Creating spec from "+item+", got "+spec.getType()+" which is incompatible with expected "+expectedType);                
-//	        }
-//
-//	        ((AbstractBrooklynObjectSpec<?, ?>)spec).catalogItemIdIfNotNull(item.getId());
-//
-//	        if (Strings.isBlank( ((AbstractBrooklynObjectSpec<?, ?>)spec).getDisplayName() ))
-//	            ((AbstractBrooklynObjectSpec<?, ?>)spec).displayName(item.getDisplayName());
-//
-//	        return spec;
-//	    }
-//	 
-//	    private static EntitySpec<?> createEntitySpecFromServicesBlock(String plan, BrooklynClassLoadingContext loader, Set<String> encounteredTypes, boolean isApplication) {
-//	        CampPlatform camp = CampInternalUtils.getCampPlatform(loader.getManagementContext());
-//
-//	        AssemblyTemplate at = CampInternalUtils.registerDeploymentPlan(plan, loader, camp);
-//	        AssemblyTemplateInstantiator instantiator = CampInternalUtils.getInstantiator(at);
-//	        if (instantiator instanceof AssemblyTemplateSpecInstantiator) {
-//	            EntitySpec<? extends Application> appSpec = ((AssemblyTemplateSpecInstantiator)instantiator).createApplicationSpec(at, camp, loader, encounteredTypes);
-//
-//	            // above will unwrap but only if it's an Application (and it's permitted); 
-//	            // but it doesn't know whether we need an App or if an Entity is okay  
-//	            if (!isApplication) return EntityManagementUtils.unwrapEntity(appSpec);
-//	            // if we need an App then definitely *don't* unwrap here because
-//	            // the instantiator will have done that, and it knows if the plan
-//	            // specified a wrapped app explicitly (whereas we don't easily know that here!)
-//	            return appSpec;
-//	            
-//	        } else {
-//	            throw new IllegalStateException("Unable to instantiate YAML; invalid type or parameters in plan:\n"+plan);
-//	        }
-//
-//	    }
-//
-//	}
-//	
-	
-//public class oCampComponentTemplateResolver extends CampResolver{
-//	
-//
 	/**
 	 * This generates instances of a template resolver that use a {@link ServiceTypeResolver}
 	 * to parse the {@code serviceType} line in the template.
@@ -252,7 +105,7 @@ package kr.ac.hanyang.oCamp.camp.platform;
 	    private final EntitySpecResolver serviceSpecResolver;
 
 	    private oCampComponentTemplateResolver(BrooklynClassLoadingContext loader, ConfigBag attrs, AbstractResource optionalTemplate, String type) {
-	        this.loader = loader;
+	    	this.loader = loader;
 	        this.mgmt = loader.getManagementContext();
 	        this.attrs = ConfigBag.newInstanceCopying(attrs);
 	        this.template = Maybe.fromNullable(optionalTemplate);
@@ -354,6 +207,7 @@ package kr.ac.hanyang.oCamp.camp.platform;
 	            name = template.get().getName();
 	            templateId = template.get().getId();
 	            source = template.get().getSourceCode();
+	            spec.configure(template.get().getCustomAttributes());
 	        } else {
 	            name = (String)attrs.getStringKey("name");
 	        }
@@ -372,27 +226,29 @@ package kr.ac.hanyang.oCamp.camp.platform;
 	                spec.child(EntityManagementUtils.unwrapEntity(childSpec));
 	            }
 	        }
+	        
+	        
 
-	        if (source!=null) {
-	            spec.tag(BrooklynTags.newYamlSpecTag(source));
-	        }
-
-	        if (!Strings.isBlank(name))
-	            spec.displayName(name);
-	        if (templateId != null)
-	            spec.configure(BrooklynCampConstants.TEMPLATE_ID, templateId);
-	        if (planId != null)
-	            spec.configure(BrooklynCampConstants.PLAN_ID, planId);
-	        // locations should not be specified here so this may not be needed TODO
-	        List<LocationSpec<?>> locations = new BrooklynYamlLocationResolver(mgmt).resolveLocations(attrs.getAllConfig(), true);
-	        if (locations != null) {
-	            // override locations defined in the type if locations are specified here
-	            // empty list can be used by caller to clear, so they are inherited
-	            spec.clearLocations();
-	            spec.locationSpecs(locations);
-	        }
-	        //this adds policy, enrichers and initializers to the spec. 
-	        // not needed as yet.
+//	        if (source!=null) {
+//	            spec.tag(BrooklynTags.newYamlSpecTag(source));
+//	        }
+//
+//	        if (!Strings.isBlank(name))
+//	            spec.displayName(name);
+//	        if (templateId != null)
+//	            spec.configure(BrooklynCampConstants.TEMPLATE_ID, templateId);
+//	        if (planId != null)
+//	            spec.configure(BrooklynCampConstants.PLAN_ID, planId);
+//	        // locations should not be specified here so this may not be needed TODO
+//	        List<LocationSpec<?>> locations = new BrooklynYamlLocationResolver(mgmt).resolveLocations(attrs.getAllConfig(), true);
+//	        if (locations != null) {
+//	            // override locations defined in the type if locations are specified here
+//	            // empty list can be used by caller to clear, so they are inherited
+//	            spec.clearLocations();
+//	            spec.locationSpecs(locations);
+//	        }
+//	        //this adds policy, enrichers and initializers to the spec. 
+//	        // not needed as yet.
 	        decorateSpec(spec, encounteredRegisteredTypeIds);
 	    }
 

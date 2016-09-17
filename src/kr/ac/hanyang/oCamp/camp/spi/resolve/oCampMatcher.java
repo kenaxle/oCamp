@@ -40,8 +40,10 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import kr.ac.hanyang.oCamp.api.policy.Constraint;
 import kr.ac.hanyang.oCamp.api.policyManager.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
@@ -266,29 +268,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	//atc.add(builder.build());// Add the Artifact to the AssemblyTemplate
         	
         }else if(deploymentPlanItem instanceof Policy){
-        	
-        	//find the policy manager in the platform
-        	//if is does not exit then create it.
-        	for(ResolvableLink<PolicyManagerComponentTemplate> rlink:((oCampAssemblyTemplateConstructor)atc).getPlatform().policyManagerComponentTemplates().links() ){
-        		PolicyManagerComponentTemplate pmct = rlink.resolve();
-        		if (!pmct.getType().equals(((Policy)deploymentPlanItem).getPolicyType())){
-        			//no policy manager lets try to create it and add it.
-        			// then create the policy and add it to the application.
-        			
-        			PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Policy Manager for "+type+" policies.")
-			                .name(type+" PolicyManager")
-			                .type(type)
-			                .build();
-        			
-					BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
-					BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
-					
-					EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
-					PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
-					((oCampPlatformTransaction) ((oCampAssemblyTemplateConstructor)atc).getPlatform().transaction()).add(polMCT).commit();
-        		}// else means that a policy may be unmanagable
-        	}
-        	
+        	// just build the policy spec
         	
         	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
             builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
@@ -300,12 +280,20 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
             
-            List<Object> constraints = MutableList.copyOf( ((Policy)deploymentPlanItem).getPolicyConstraints() ); 
-            List<String> targets = MutableList.copyOf( ((Policy)deploymentPlanItem).getTargets() ); 
-            builder.customAttribute("constraint", constraints);
-            builder.customAttribute("targets", targets);
             
-	        
+            List<String> targets = MutableList.copyOf( ((Policy)deploymentPlanItem).getTargets() ); 
+            //builder.customAttribute("constraint", constraints);
+            builder.customAttribute("targets", targets);
+            List<Object> constraints = MutableList.copyOf( ((Policy)deploymentPlanItem).getPolicyConstraints() ); 
+	        for (Object constraintObject: constraints){
+	        	PolicyConstraint polConstraint = (PolicyConstraint) constraintObject;
+	        	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> constBuilder = oCampPlatformComponentTemplate.builder(); 
+    	        constBuilder.type( polConstraint.getPolicyConstraintType());
+    	        Map<String, Object> constAttrs = MutableMap.copyOf( polConstraint.getCustomAttributes()); 
+    	        constBuilder.customAttribute("property", constAttrs.remove("property"));
+    	        constBuilder.customAttribute("value", polConstraint.getValue());
+    	        builder.add(constBuilder.build());
+	        }
 	        Collection<String> keys = getTagIDs();
 
 	        

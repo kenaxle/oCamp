@@ -34,6 +34,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+
+import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class InternalOCampEntityFactory extends InternalEntityFactory {
@@ -88,16 +93,19 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 		T entity = constructEntityBySpec(clazz, spec);
         loadUnitializedEntity(entity, spec);
         List<EntitySpec<?>> childList = spec.getChildren();
-		if (childList.isEmpty()){
-        	
-			if(entitiesByEntityId.containsKey(entity.getId())){
-					return (T) entitiesByEntityId.get(entity.getId());
-			}else{
-	        	entitiesByEntityId.put(entity.getId(), entity);
-	            specsByEntityId.put(entity.getId(), spec);
-	            
-	        	return (T) entity;
+		if (childList.isEmpty() || (entity instanceof Constraint)){
+        	// Artifact or Policy
+			if ( (entity instanceof BasicOCampArtifact)){
+				
+				if(entitiesByEntityId.containsKey(entity.getId())){
+						return (T) entitiesByEntityId.get(entity.getId());
+				}else{
+		        	entitiesByEntityId.put(entity.getId(), entity);
+		            specsByEntityId.put(entity.getId(), spec);
+				} 
 			}
+	        return (T) entity;
+			
         }
         for (EntitySpec<?> childSpec : childList) {
 			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));
@@ -127,7 +135,7 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
                 + "and thus it should be already fully initialized.");
             return;
         }
-
+        
         // Validate all config before attempting to manage any entity. Do this here rather
         // than in manageRecursive so that rebind is unaffected.
         validateDescendantConfig(entity);

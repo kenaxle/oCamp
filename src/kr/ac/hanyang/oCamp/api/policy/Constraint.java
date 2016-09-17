@@ -15,6 +15,7 @@ public interface Constraint<T> extends Entity{
 
 	public T getValue();
 	
+	
 	public boolean isViolated(Sensor propertySensor, Entity entity);
 	
 }

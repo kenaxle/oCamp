@@ -204,7 +204,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        	// the item will be the platform component template
 	        	
 	        	PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
-	            BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	            oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	            //get the type of the component
 	            // if the component is an artifact then try to find the requirements
 	            // then for each requirement find the service
@@ -219,6 +219,9 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            	result.add(spec);
 	            }else{
 	            	//this is a policy we need to create and link
+	            	EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
+	            	spec.children(buildReqSpec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	            	result.add(spec);
 	            	
 	            }
 	            //System.out.println(spec.getType());
