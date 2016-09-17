@@ -19,10 +19,16 @@
 name: Simple Service specification
 #location: AWS Tokyo (ap-northeast-1)
 
+
+services:
+- id: tomcat
+  characteristics:
+      - type: kr.ac.hanyang.oCamp.entities.services.web.tomcat.Tomcat8
+        
 policies: 
 - type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
-  - property: LOCATION
+  - property: PROVISIONING_LOCATION
     type: kr.ac.hanyang.oCamp.entities.constraints.Within
     value: ["AWS Tokyo (ap-northeast-1)","AWS Virginia (us-east-1)"]
   targets: [tomcat]

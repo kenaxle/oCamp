@@ -13,15 +13,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.oCamp.api.policy.Constraint;
+import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
-public class PolicyImpl extends AbstractEntity implements Policy{
+public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableable{
 	
 	private static final Logger log = LoggerFactory.getLogger(PolicyImpl.class);
 	//private String name;
 	//private String type; //FIXME this is the policy manager.
-	private List<Entity> targets; //FIXME may have to use a higher class
-	private List<Constraint> desiredState;
+	//private List<Entity> targets; //FIXME may have to use a higher class
+	//private List<Constraint> desiredState;
 	
 	
 	//public ConstraintSet getDesiredState(){return desiredState;}
@@ -33,7 +34,6 @@ public class PolicyImpl extends AbstractEntity implements Policy{
 	@Override
 	public void init(){
 		super.init();
-		targets = new ArrayList<Entity>();
 	}
 	
 	private SensorEventListener<Object> policyListener(Policy listener){
@@ -69,44 +69,58 @@ public class PolicyImpl extends AbstractEntity implements Policy{
 		return false;
 	}
 
-	@Override
-	public boolean addTarget(Entity entity) {
-		if (targets.add(entity)){
-			for (Constraint constraint: desiredState){
-				constraint.subscriptions().subscribe(entity, ((ConstraintImpl)constraint).getProperty(), ((ConstraintImpl)constraint).getListener());
-			}
-			sensors().emit(Policy.SUBSCRIBER_ADDED, entity);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean removeTarget(Entity entity) {
-		if (targets.remove(entity)){
-			for (Constraint constraint: desiredState){
-				constraint.subscriptions().unsubscribe(entity);
-			}
-			sensors().emit(Policy.SUBSCRIBER_REMOVED, entity);
-			return true;
-		}
-		return false;	
-	}
+//	@Override
+//	public boolean addTarget(Entity entity) {
+//		if (this.config().add(entity)){
+//			for (Constraint constraint: CONSTRAINTS.getDefaultValue()){
+//				constraint.subscriptions().subscribe(entity, ((ConstraintImpl)constraint).getProperty(), ((ConstraintImpl)constraint).getListener());
+//			}
+//			sensors().emit(Policy.SUBSCRIBER_ADDED, entity);
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean removeTarget(Entity entity) {
+//		if (targets.remove(entity)){
+//			for (Constraint constraint: CONSTRAINTS.getDefaultValue()){
+//				constraint.subscriptions().unsubscribe(entity);
+//			}
+//			sensors().emit(Policy.SUBSCRIBER_REMOVED, entity);
+//			return true;
+//		}
+//		return false;	
+//	}
 	
 	@Override
-	public List<Constraint> getDesiredState(){return desiredState;}
+	public List<Constraint> getDesiredState(){return CONSTRAINTS.getDefaultValue();}
 
 	@Override
-	public List<Entity> getTargets(){return targets;}
+	public List<Entity> getTargets(){return TARGETS.getDefaultValue();}
 	
 	
 	private void connectSensors(){
-		for (Constraint constraint: desiredState){
-			for (Entity entity: targets){
+		for (Constraint constraint: CONSTRAINTS.getDefaultValue()){
+			for (Entity entity: TARGETS.getDefaultValue()){
 				constraint.subscriptions().subscribe(entity, ((ConstraintImpl)constraint).getProperty(), ((ConstraintImpl)constraint).getListener());
 			}
 		}
 	}
+
+	@Override
+	public void enable() {
+		connectSensors();
+	}
+
+	@Override
+	public void disable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 	
 	// will implement later
 	//public Entity getTarget()

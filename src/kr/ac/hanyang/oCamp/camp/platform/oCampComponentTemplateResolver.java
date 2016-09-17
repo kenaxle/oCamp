@@ -200,18 +200,19 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationRe
 	        return overrides;
 	    }
 
-	    @SuppressWarnings("unchecked")
+	    @SuppressWarnings({ "unchecked", "unused" })
 	    private <T extends Entity> void populateSpec(EntitySpec<T> spec, Set<String> encounteredRegisteredTypeIds) {
 	        String name, source=null, templateId=null, planId=null;
 	        if (template.isPresent()) {
 	            name = template.get().getName();
 	            templateId = template.get().getId();
 	            source = template.get().getSourceCode();
-	            spec.configure(template.get().getCustomAttributes());
+	         
+	            //spec.configure(template.get().getCustomAttributes());
 	        } else {
 	            name = (String)attrs.getStringKey("name");
 	        }
-	        planId = (String)attrs.getStringKey("id");
+	        planId = (String)attrs.getStringKey("planId");
 	        if (planId==null)
 	            planId = (String) attrs.getStringKey(BrooklynCampConstants.PLAN_ID_FLAG);
 	        //if the template is an artifact or a relationship or a service then do something FIXME
@@ -268,9 +269,10 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationRe
 	        // Any top-level flags will go into "brooklyn.flags". When resolving a spec from $brooklyn:entitySpec
 	        // top level flags remain in place. Have to support both cases.
 
-	        ConfigBag bag = ConfigBag.newInstance((Map<Object, Object>) attrs.getStringKey(BrooklynCampReservedKeys.BROOKLYN_CONFIG));
+	        //ConfigBag bag = ConfigBag.newInstance((Map<Object, Object>) attrs.getStringKey(BrooklynCampReservedKeys.BROOKLYN_CONFIG));
+	    	ConfigBag bag = ConfigBag.newInstanceCopying(attrs);
 	        ConfigBag bagFlags = ConfigBag.newInstanceCopying(attrs);
-	        if (attrs.containsKey(BrooklynCampReservedKeys.BROOKLYN_FLAGS)) {
+	        if (attrs.containsKey(BrooklynCampReservedKeys.BROOKLYN_FLAGS)) { //FIXME
 	            bagFlags.putAll((Map<String, Object>) attrs.getStringKey(BrooklynCampReservedKeys.BROOKLYN_FLAGS));
 	        }
 
@@ -301,7 +303,7 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationRe
 	        // set unused keys as anonymous config keys -
 	        // they aren't flags or known config keys, so must be passed as config keys in order for
 	        // EntitySpec to know what to do with them (as they are passed to the spec as flags)
-	        for (String key: MutableSet.copyOf(bag.getUnusedConfig().keySet())) {
+	        for (String key: MutableSet.copyOf(bag.getAllConfig().keySet())) {
 	            // we don't let a flag with the same name as a config key override the config key
 	            // (that's why we check whether it is used)
 	            if (!keyNamesUsed.contains(key)) {

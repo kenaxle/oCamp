@@ -10,8 +10,8 @@ public interface Policy extends Entity{
 	//public boolean removeConstraint(Constraint constraint);
 	
 	public boolean setTargets(List<Entity> targets);
-	public boolean addTarget(Entity entity);
-	public boolean removeTarget(Entity entity);
+	//public boolean addTarget(Entity entity);
+	//public boolean removeTarget(Entity entity);
 	
 	public List<Constraint> getDesiredState();
 	public List<Entity> getTargets();

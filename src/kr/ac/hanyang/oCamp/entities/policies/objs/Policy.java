@@ -17,7 +17,7 @@ import kr.ac.hanyang.oCamp.api.objs.Action;
 import kr.ac.hanyang.oCamp.api.policy.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
-@ImplementedBy(ConstraintImpl.class)
+@ImplementedBy(PolicyImpl.class)
 public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 
 	@SetFromFlag("constraints")

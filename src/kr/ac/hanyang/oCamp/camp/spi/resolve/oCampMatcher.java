@@ -175,7 +175,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             	builder.name(name);
             Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
-            builder.customAttribute("serviceID", attrs.remove("id"));
+            builder.customAttribute("planId", attrs.remove("id"));
 	        builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
 	        //add custom tags
 	        Collection<String> keys = getTagIDs();
@@ -210,7 +210,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         			
         			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> reqBuilder = oCampPlatformComponentTemplate.builder(); 
         	        reqBuilder.type( artRequirement.getRequirementType());
-        	        reqBuilder.customAttribute("requirementID", attrs.remove("id"));
+        	        reqBuilder.customAttribute("planId", attrs.remove("id"));
         	        
         	        //add custom tags
         	        Collection<String> keys = getTagIDs();
@@ -239,7 +239,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		                    	builder.name(name);
 		                    Map<String, Object> servAttrs = MutableMap.copyOf( service.getCustomAttributes() ); 
 		                    if (attrs.containsKey("id"))
-		                    builder.customAttribute("serviceID", attrs.remove("id"));
+		                    builder.customAttribute("planId", attrs.remove("id"));
 		        	        
 		        	        //add custom tags
 		        	        Collection<String> servKeys = getTagIDs();
@@ -271,7 +271,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	// just build the policy spec
         	
         	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-            builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
+            builder.type(POLICY_PREFIX+"Policy"); //reform the type string: this forces the types to only be brooklyn types
         	name = ((Policy)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) 
             	builder.name(name);
@@ -280,6 +280,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
             
+            builder.customAttribute("policymanager.type", type);
             
             List<String> targets = MutableList.copyOf( ((Policy)deploymentPlanItem).getTargets() ); 
             //builder.customAttribute("constraint", constraints);

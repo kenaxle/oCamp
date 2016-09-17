@@ -1,6 +1,5 @@
 package kr.ac.hanyang.oCamp.core.objs.proxy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -9,11 +8,8 @@ import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.EntityInitializer;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.entity.EntityTypeRegistry;
-import org.apache.brooklyn.api.location.LocationSpec;
 import org.apache.brooklyn.api.policy.Policy;
-import org.apache.brooklyn.api.policy.PolicySpec;
-import org.apache.brooklyn.api.sensor.Enricher;
-import org.apache.brooklyn.api.sensor.EnricherSpec;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.config.BasicConfigKey;
 import org.apache.brooklyn.core.config.ConfigConstraints;
 import org.apache.brooklyn.core.entity.AbstractApplication;
@@ -23,7 +19,6 @@ import org.apache.brooklyn.core.mgmt.BrooklynTaskTags;
 import org.apache.brooklyn.core.mgmt.internal.ManagementContextInternal;
 import org.apache.brooklyn.core.objs.proxy.InternalEntityFactory;
 import org.apache.brooklyn.core.objs.proxy.InternalPolicyFactory;
-import org.apache.brooklyn.core.policy.AbstractPolicy;
 import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.flags.FlagUtils;
@@ -35,23 +30,24 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
-import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
+import kr.ac.hanyang.oCamp.api.policy.Constraint;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
+import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class InternalOCampEntityFactory extends InternalEntityFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(InternalOCampEntityFactory.class);
-	private List<Entity> artifactsList;
+	private Map<String, String> planId2serviceId;
 	private final EntityTypeRegistry entityTypeRegistry;
 	
 	public InternalOCampEntityFactory(ManagementContextInternal managementContext,
 			EntityTypeRegistry entityTypeRegistry, InternalPolicyFactory policyFactory) {
 		super(managementContext, entityTypeRegistry, policyFactory);
 		this.entityTypeRegistry = checkNotNull(entityTypeRegistry, "entityTypeRegistry");
-		artifactsList = new ArrayList<Entity>();
+		planId2serviceId = MutableMap.of();
 	}
 	
 //	@Override
@@ -77,6 +73,10 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
             for(EntitySpec<?> childSpec: spec.getChildren()){
             	entity.addChild(createEntitiesRec(childSpec,entitiesByEntityId,specsByEntityId));
             }
+            //setup parent to application
+            for (Entity child: entity.getChildren()){
+            	child.setParent(entity);
+            }
             
             entitiesByEntityId.put(entity.getId(), entity);
             specsByEntityId.put(entity.getId(), spec);
@@ -92,9 +92,8 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 		Class<? extends T> clazz = getImplementedBy(spec);
 		T entity = constructEntityBySpec(clazz, spec);
         loadUnitializedEntity(entity, spec);
-        List<EntitySpec<?>> childList = spec.getChildren();
-		if (childList.isEmpty() || (entity instanceof Constraint)){
-        	// Artifact or Policy
+		if ((entity instanceof BasicOCampArtifact) || (entity instanceof Constraint)){
+
 			if ( (entity instanceof BasicOCampArtifact)){
 				
 				if(entitiesByEntityId.containsKey(entity.getId())){
@@ -103,20 +102,81 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 		        	entitiesByEntityId.put(entity.getId(), entity);
 		            specsByEntityId.put(entity.getId(), spec);
 				} 
+			}else{
+				entity.config().set(ConstraintImpl.PROPERTY,ConstraintProperties.getProperty((String) spec.getConfig().get(new BasicConfigKey(String.class, "property"))));
 			}
 	        return (T) entity;
 			
-        }
-        for (EntitySpec<?> childSpec : childList) {
-			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));
-			
-			entitiesByEntityId.put(entity.getId(), entity);
-            specsByEntityId.put(entity.getId(), childSpec);
-            
-            return (T) entity ;
-        }
-		return null;
+        }else{
+	        
+	        	List<EntitySpec<?>> childList = spec.getChildren();
+	        	for (EntitySpec<?> childSpec : childList) {
+					entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));
+					if (entity instanceof PolicyImpl){
+						//set the targets and constraints
+						List<Entity> targetList = Lists.newArrayList();
+						List<Constraint> constraintList = Lists.newArrayList();
+						for (String id: (List<String>) spec.getConfig().get(PolicyImpl.TARGETS)){
+							targetList.add(entitiesByEntityId.get(planId2serviceId.get(id)));
+						}
+						for (Entity polConstraint: entity.getChildren()){
+							constraintList.add((Constraint) polConstraint);
+						}
+						entity.config().set(PolicyImpl.TARGETS, targetList);
+						entity.config().set(PolicyImpl.CONSTRAINTS, constraintList);
+					}
+	        	}
+	        	for(Entity child: entity.getChildren()){
+	        		child.setParent(entity);
+	        	}
+				entitiesByEntityId.put(entity.getId(), entity);
+	            specsByEntityId.put(entity.getId(), spec);
+	            planId2serviceId.put((String) spec.getConfig().get(new BasicConfigKey(String.class, "planId")), entity.getId());
+	            return (T) entity ;
+	        }
+	        
+
+//		return null;
 	}
+	
+	
+	
+	 @SuppressWarnings({ "unchecked", "rawtypes" })
+	    protected <T extends Entity> T loadUnitializedEntity(final T entity, final EntitySpec<T> spec) {
+	        try {
+	            if (spec.getDisplayName()!=null)
+	                ((AbstractEntity)entity).setDisplayName(spec.getDisplayName());
+	            
+	            if (spec.getCatalogItemId()!=null) {
+	                ((AbstractEntity)entity).setCatalogItemId(spec.getCatalogItemId());
+	            }
+	            
+	           // ((AbstractEntity)entity).configure(MutableMap.copyOf(spec.getFlags()));
+	            if (entity instanceof Policy){
+	            	//load the targets specs
+	            	//List<EntitySpec> targets = MutableList.of();
+	            	
+	            	//for (String targetName: spec.getConfig().get("targets"))
+	            	for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
+		                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
+		            }
+	            }
+	            for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
+	                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
+	            }
+	            
+	            Entity parent = spec.getParent();
+	            if (parent != null) {
+	                parent = (parent instanceof AbstractEntity) ? ((AbstractEntity)parent).getProxyIfAvailable() : parent;
+	                entity.setParent(parent);
+	            }
+	            
+	            return entity;
+	            
+	        } catch (Exception e) {
+	            throw Exceptions.propagate(e);
+	        }
+	    }
 		
 	public <T extends Entity> T constructEntityBySpec(Class<? extends T> clazz, EntitySpec<T> spec) {
         T entity = constructEntityImpl(clazz, spec, null, null);

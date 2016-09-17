@@ -1,9 +1,14 @@
 package kr.ac.hanyang.oCamp.entities.constraints;
 
+import java.util.Map;
+
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.AttributeSensor;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
+import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
+
+import kr.ac.hanyang.oCamp.api.policy.Policy;
 
 public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 	
@@ -25,6 +30,20 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 		T value = entity.sensors().get((AttributeSensor<T>) propertySensor);
 		return ! value.equals(getValue());
 	}
+
+	@Override
+	public void register(Policy policy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unregister(Policy policy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 	
 	
 }

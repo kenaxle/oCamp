@@ -7,9 +7,13 @@ import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
+import kr.ac.hanyang.oCamp.api.policy.Policy;
+
 public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 	
 	public WithinImpl(){}
+	
+	public void init(){super.init();}
 	
 	public boolean evaluate(SensorEvent event){
 		//if (! getValue() instanceof )
@@ -26,6 +30,20 @@ public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void register(Policy policy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unregister(Policy policy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 	
 }

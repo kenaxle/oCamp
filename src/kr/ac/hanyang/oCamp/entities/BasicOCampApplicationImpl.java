@@ -11,6 +11,7 @@ import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 
 public class BasicOCampApplicationImpl extends BasicApplicationImpl implements oCampStartable {
@@ -22,13 +23,23 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 		log.info("**** INFO INFO **** Starting Application...");
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
-			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	
+			if (e instanceof oCampStartable)
+				taskBuilder.add(Entities.invokeEffector(this, e, oCampStartable.STARTUP));	
 		}
 		Task<Void> task = taskBuilder.parallel(true)
 				   					 .build();
 		task.blockUntilEnded();
 		if (task.isDone() && !task.isError()){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
+			//now to start the policies 
+			TaskBuilder<Void> polTaskBuilder = TaskBuilder.builder();
+			for(Entity e: this.getChildren()){
+				if (e instanceof oCampEnableable)
+					polTaskBuilder.add(Entities.invokeEffector(this, e, oCampEnableable.ENABLE));	
+			}
+			Task<Void> task2 = polTaskBuilder.parallel(true)
+  					 						 .build();
+			task2.blockUntilEnded();
 		}else
 			log.error("**** ERROR ERROR **** "+task.getStatusSummary());
 	}

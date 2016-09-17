@@ -1,14 +1,15 @@
 package kr.ac.hanyang.oCamp.entities.constraints;
 
 import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.api.sensor.AttributeSensor;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
 
-import kr.ac.hanyang.oCamp.api.policy.Policy;
+import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
+
+//import kr.ac.hanyang.oCamp.api.policy.Policy;
 
 public abstract class ConstraintImpl<T> extends AbstractEntity implements Constraint{
 	private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
@@ -20,6 +21,11 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 	@Override
 	public void init(){
 		super.init();
+		value = (T) this.config().get(VALUE);
+		property = (BasicAttributeSensor) config().get(PROPERTY);
+		for (Object entity: this.getParent().config().get(Policy.TARGETS)){
+			
+		}
 	}
 	
 	public BasicAttributeSensor getProperty(){
