@@ -118,7 +118,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         public PlatformComponentTemplate getPlatformComponentTemplate(String id){
         	for(Object obj: additions){
         		if(obj instanceof PlatformComponentTemplate){
-        			if (((PlatformComponentTemplate)obj).getCustomAttributes().get("serviceID").equals(id)) return (PlatformComponentTemplate)obj;
+        			if (((PlatformComponentTemplate)obj).getType().contains("services")) return (PlatformComponentTemplate)obj;
         		}
         	}
         	return null;

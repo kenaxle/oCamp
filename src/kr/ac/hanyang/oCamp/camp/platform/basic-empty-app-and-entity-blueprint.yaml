@@ -24,6 +24,7 @@ services:
 - id: tomcat
   characteristics:
       - type: kr.ac.hanyang.oCamp.entities.services.web.tomcat.Tomcat8
+        version: 7.0.65
         
 policies: 
 - type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager

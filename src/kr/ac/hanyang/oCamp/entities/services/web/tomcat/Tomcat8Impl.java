@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
+import org.apache.brooklyn.entity.webapp.tomcat.TomcatServerImpl;
+import org.apache.brooklyn.util.collections.MutableList;
+import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +60,6 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	
 	@Override
 	public void deploy(String url, String targetName) {
-
 		super.deploy(url, targetName);
 	}
 	
@@ -67,8 +69,29 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	// this will initiate the start on the requirements and Artifacts then call 
 	// start on itself
 	//builds a parallel startup task and waits for the completion of the members.
+//	public void startup(Collection<? extends Location> locations){
+//		log.info("**** INFO INFO **** Starting Tomcat...");
+//		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
+//		for(Entity e: this.getChildren()){
+//			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	
+//		}
+//		Task<Void> task = taskBuilder.parallel(true)
+//				   					 .build();
+//		task.blockUntilEnded();
+//		if (task.isDone() /*&& !task.isError()*/){
+//			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
+//		}else
+//			log.error("**** ERROR ERROR **** "+task.getStatusSummary());
+//	}
+
+	
 	public void startup(Collection<? extends Location> locations){
 		log.info("**** INFO INFO **** Starting Tomcat...");
+		try {
+		    Thread.sleep(10000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
+		}
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
 			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	
@@ -76,12 +99,24 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 		Task<Void> task = taskBuilder.parallel(true)
 				   					 .build();
 		task.blockUntilEnded();
-		if (task.isDone() && !task.isError()){
+		if (task.isDone() /*&& !task.isError()*/){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
-		}else
+			try {
+			    Thread.sleep(10000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+		}else{
 			log.error("**** ERROR ERROR **** "+task.getStatusSummary());
+			try {
+			    Thread.sleep(10000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+		}
 	}
 
+	
 //	@Override
 //	public ConstraintSetImpl getConstraintSet() {
 //		return CONSTRAINTSET;

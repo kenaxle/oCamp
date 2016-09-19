@@ -22,13 +22,14 @@ artifacts:
   content: http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war
   requirements:
   - type: kr.ac.hanyang.oCamp.entities.requirements.DeployOn
+    target: /webapps
     fulfillment: id:tomcat
           
 services:
 - id: tomcat
   characteristics:
       - type: kr.ac.hanyang.oCamp.entities.services.web.tomcat.Tomcat8
-        install.version: 8.0.22
+        version: 8.0.37
         
 policies: 
 - type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager

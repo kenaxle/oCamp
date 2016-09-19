@@ -21,9 +21,14 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 	@Override
 	public void startup(Collection<? extends Location> locations) {
 		log.info("**** INFO INFO **** Starting Application...");
+		try {
+		    Thread.sleep(10000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
+		}
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
-			if (e instanceof oCampStartable)
+			if (e instanceof Startable)
 				taskBuilder.add(Entities.invokeEffector(this, e, oCampStartable.STARTUP));	
 		}
 		Task<Void> task = taskBuilder.parallel(true)
@@ -31,6 +36,11 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 		task.blockUntilEnded();
 		if (task.isDone() && !task.isError()){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
+			try {
+			    Thread.sleep(10000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
 			//now to start the policies 
 			TaskBuilder<Void> polTaskBuilder = TaskBuilder.builder();
 			for(Entity e: this.getChildren()){

@@ -20,14 +20,14 @@ public interface oCampStartable extends Startable {
 						+ "or a list of location objects");
 		@Override public Void call(ConfigBag parameters) {
 			parameters.put(LOCATIONS, entity().getManagementContext().getLocationRegistry().getListOfLocationsManaged(parameters.get(LOCATIONS)));
-			return new MethodEffector<Void>(Startable.class, "start").call(entity(), parameters.getAllConfig());
+			return new MethodEffector<Void>(oCampStartable.class, "startup").call(entity(), parameters.getAllConfig());
 		}
 	}
 	
     org.apache.brooklyn.api.effector.Effector<Void> STARTUP = Effectors.effector(new MethodEffector<Void>(oCampStartable.class, "startup"))
             // override start to take strings etc
-            .parameter(StartEffectorBody.LOCATIONS)
-            .impl(new StartEffectorBody())
+            .parameter(StartUpEffectorBody.LOCATIONS)
+            .impl(new StartUpEffectorBody())
             .build();
 	
     @org.apache.brooklyn.core.annotation.Effector(description="Start the process/service represented by an entity")
