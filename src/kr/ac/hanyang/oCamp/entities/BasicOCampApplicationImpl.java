@@ -22,7 +22,7 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 	public void startup(Collection<? extends Location> locations) {
 		log.info("**** INFO INFO **** Starting Application...");
 		try {
-		    Thread.sleep(10000);                 //1000 milliseconds is one second.
+		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
 		}
@@ -37,7 +37,7 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 		if (task.isDone() && !task.isError()){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
 			try {
-			    Thread.sleep(10000);                 //1000 milliseconds is one second.
+			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}

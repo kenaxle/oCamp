@@ -14,20 +14,16 @@ import org.apache.brooklyn.util.core.config.ConfigBag;
 
 public interface IDeployable{
 	
-	//public void deploy(String url, String targetName);
-	
-
-	
 	AttributeSensor<Boolean> SERVICE_UP = Attributes.SERVICE_UP;
 
     public static class DeployEffectorBody extends EffectorBody<Void> {
-        public static final ConfigKey<Object> URL = ConfigKeys.newConfigKey(Object.class, "url",
+        public static final ConfigKey<String> URL = ConfigKeys.newConfigKey(String.class, "url",
             "string to find the item to deploy.");
-        public static final ConfigKey<Object> TARGET = ConfigKeys.newConfigKey(Object.class, "target",
+        public static final ConfigKey<String> TARGET = ConfigKeys.newConfigKey(String.class, "target",
                 "where the content will be hosted.");
         @Override public Void call(ConfigBag parameters) {
-            parameters.put(URL, (String)(((DeployOn) entity().getParent()).getContentUrl()));
-            parameters.put(TARGET, ((DeployOn) entity().getParent()).getTarget());
+            parameters.put(URL, parameters.get(URL));
+            parameters.put(TARGET, parameters.get(TARGET));
             return new MethodEffector<Void>(IDeployable.class, "deploy").call(entity(), parameters.getAllConfig());
         }
     }
@@ -48,6 +44,6 @@ public interface IDeployable{
      * a richer set of parameters.  See the entity-specific {@link #DEPLOY} effector declaration.
      */
     @org.apache.brooklyn.core.annotation.Effector(description="deploy the content to the service")
-    void deploy(@EffectorParam(name="url") String url, @EffectorParam(name="target") String target);
+    void deploy(@EffectorParam(name="url") String url, @EffectorParam(name="target") String targetName);
 	
 }

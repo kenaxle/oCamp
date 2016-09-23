@@ -13,11 +13,6 @@ import org.apache.brooklyn.util.core.flags.SetFromFlag;
 public interface DeployOn extends Entity{
 	
 	@SetFromFlag("target")
-    ConfigKey<String> TARGET = ConfigKeys.newConfigKey(String.class,"target" ,"/webapp");
-	
-//	@SetFromFlag("contentUrl")
-//    ConfigKey<String> CONTENTURL = ConfigKeys.newConfigKey(String.class,"contentUrl");
-	
-	public <T> T getContentUrl();
-	public String getTarget();
+    ConfigKey<String> TARGET = ConfigKeys.newConfigKey(String.class,"target" ,"deployment target directory","/webapp");
+
 }

@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
+import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
@@ -19,9 +20,6 @@ import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
 public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable, DeployOn{
 	private static final Logger log = LoggerFactory.getLogger(DeployOnImpl.class);
 	
-	//T contentUrl;
-	//String target;
-	
 	public DeployOnImpl(){
 		super();
 	}
@@ -29,60 +27,42 @@ public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable,
 	@SuppressWarnings("unchecked")
 	public void init(){
 		super.init();
-		//contentUrl = ((BasicOCampArtifact) getParent()).getContent();
-		//target = "/webapp";
+		//this.getParent().config().set(TARGET, TARGET.getDefaultValue());
+		//this.getParent().config().set(IDeployable.URL, this.getChildren().iterator().next().config().get(BasicOCampArtifact.CONTENT));
 	}
-	
-	//@SuppressWarnings("unchecked")
-	public T getContentUrl(){
-		Entity child = this.getChildren().iterator().next();
-		return ((BasicOCampArtifact)child).getContent();
-	}
-	public String getTarget(){return this.TARGET.getDefaultValue();}
 	
 
 	@Override
 	public void start(Collection<? extends Location> locations) {
-		// get the content
-		
-		//T content = ((BasicOCampArtifact)child).getContent(); // I should instead have a general method to get all configurations 
 		log.info("**** INFO INFO **** Starting DeployOn...");
 		try {
-		    Thread.sleep(10000);                 //1000 milliseconds is one second.
+		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
 		}
-			Task<Object> parentTasks = TaskBuilder.builder().add(Entities.invokeEffector(this, this.getParent(), Startable.START,MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)"))))
-								 						   .add(Entities.invokeEffector(this, this.getParent(), IDeployable.DEPLOY))
-								 						   .dynamic(true)
-								 						   .build();
-			parentTasks.blockUntilEnded(null);
-			if (parentTasks.isDone() /*&& !parentTasks.isError()*/){
-				log.info("**** INFO INFO **** "+parentTasks.getStatusSummary());	
-				try {
-				    Thread.sleep(10000);                 //1000 milliseconds is one second.
-				} catch(InterruptedException ex) {
-				    Thread.currentThread().interrupt();
-				}
+			
+		Task<Void> startParent = Entities.invokeEffector(this, this.getParent(), Startable.START,MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)")));
+		startParent.blockUntilEnded();
+		if (startParent.isDone( )&& !startParent.isError()){
+			Task<Void> deployContent = Entities.invokeEffector(this, this.getParent(), IDeployable.DEPLOY, MutableMap.of("url",this.getChildren().iterator().next().config().get(BasicOCampArtifact.CONTENT),
+							 								   															 "target",this.config().get(ConfigKeys.newConfigKey(String.class, "target"))));
+			deployContent.blockUntilEnded();
+			if (deployContent.isDone( )&& !deployContent.isError()){
 				Entity child = this.getChildren().iterator().next(); // get my only child this will be the Artifact
 				Task<Void> childTask = Entities.invokeEffector(this,child , Startable.START);
 				childTask.blockUntilEnded(null);
-				if (childTask.isDone() /*&& !childTask.isError()*/){
+				if (childTask.isDone() && !childTask.isError()){
 					log.info("**** INFO INFO ****"+childTask.getStatusSummary());
-					try {
-					    Thread.sleep(10000);                 //1000 milliseconds is one second.
-					} catch(InterruptedException ex) {
-					    Thread.currentThread().interrupt();
-					}
+				}else{
+					log.error("**** ERROR ERROR **** ERROR ERROR ****"+childTask.getStatusSummary());
 				}
 			}else{
-				log.error("**** ERROR ERROR **** ERROR ERROR ****"+parentTasks.getStatusSummary());
-				try {
-				    Thread.sleep(10000);                 //1000 milliseconds is one second.
-				} catch(InterruptedException ex) {
-				    Thread.currentThread().interrupt();
-				}
+				log.error("**** ERROR ERROR **** ERROR ERROR ****"+deployContent.getStatusSummary());
 			}
+		}else{
+			log.error("**** ERROR ERROR **** ERROR ERROR ****"+startParent.getStatusSummary());
+		}
+
 	}
 
 

@@ -1,21 +1,24 @@
 package kr.ac.hanyang.oCamp.entities.services.web.tomcat;
 
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.brooklyn.core.entity.trait.Startable;
+import org.apache.brooklyn.entity.webapp.JavaWebAppDriver;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
-import org.apache.brooklyn.entity.webapp.tomcat.TomcatServerImpl;
-import org.apache.brooklyn.util.collections.MutableList;
-import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.api.client.repackaged.com.google.common.base.Throwables;
+import com.google.common.collect.Sets;
+
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
-import org.apache.brooklyn.core.entity.Attributes;
+import org.apache.brooklyn.core.annotation.Effector;
+import org.apache.brooklyn.core.annotation.EffectorParam;
 import org.apache.brooklyn.core.entity.Entities;
 
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
@@ -33,19 +36,10 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	
 	public Tomcat8Impl(){
 		super();
-		System.out.println("");
-		//this.config().set("location", "AWS Tokyo (ap-northeast-1)");
 	}
 	
 	public void init(){
 		super.init();
-		//policyManagers = new LinkedHashMap<String,PolicyManagerImpl>();
-		//configure the constraint set here 
-		//BasicSensorSupport sensorSup = this.sensors();
-		//sensorSup.set(Attributes.SERVICE_UP, true);
-	
-		//System.out.println("The sensors "+sensorSup.getAll());
-		//CONSTRAINTSET.addConstraint(new PolicyConstraint.Builder()));
 	}
 
 	@Override
@@ -55,12 +49,32 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
 		System.arraycopy(Tomcat8.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, Tomcat8.CAPABILITIES.length); 
 		return result;
-
+		
 	}
 	
 	@Override
-	public void deploy(String url, String targetName) {
-		super.deploy(url, targetName);
+	@Effector(description="Deploys the given artifact, from a source URL, to a given deployment filename/context")
+	public void deploy(
+            @EffectorParam(name="url", description="URL of WAR file") String url, 
+            @EffectorParam(name="targetName", description="context path where WAR should be deployed (/ for ROOT)") String targetName) {
+		//super.deploy(url, targetName);
+	       try {
+	            
+	            JavaWebAppDriver driver = getDriver();
+	            String deployedName = driver.deploy(url, targetName);
+	            
+	            // Update attribute
+	            Set<String> deployedWars = getAttribute(DEPLOYED_WARS);
+	            if (deployedWars == null) {
+	                deployedWars = Sets.newLinkedHashSet();
+	            }
+	            deployedWars.add(deployedName);
+	            sensors().set(DEPLOYED_WARS, deployedWars);
+	        } catch (RuntimeException e) {
+	            // Log and propagate, so that log says which entity had problems...
+	            log.warn("Error deploying '"+url+"' to "+targetName+" on "+toString()+"; rethrowing...", e);
+	            throw Throwables.propagate(e);
+	        }
 	}
 	
 
@@ -69,26 +83,10 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	// this will initiate the start on the requirements and Artifacts then call 
 	// start on itself
 	//builds a parallel startup task and waits for the completion of the members.
-//	public void startup(Collection<? extends Location> locations){
-//		log.info("**** INFO INFO **** Starting Tomcat...");
-//		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
-//		for(Entity e: this.getChildren()){
-//			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	
-//		}
-//		Task<Void> task = taskBuilder.parallel(true)
-//				   					 .build();
-//		task.blockUntilEnded();
-//		if (task.isDone() /*&& !task.isError()*/){
-//			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
-//		}else
-//			log.error("**** ERROR ERROR **** "+task.getStatusSummary());
-//	}
-
-	
 	public void startup(Collection<? extends Location> locations){
 		log.info("**** INFO INFO **** Starting Tomcat...");
 		try {
-		    Thread.sleep(10000);                 //1000 milliseconds is one second.
+		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
 		}
@@ -99,23 +97,26 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 		Task<Void> task = taskBuilder.parallel(true)
 				   					 .build();
 		task.blockUntilEnded();
-		if (task.isDone() /*&& !task.isError()*/){
+		if (task.isDone() && !task.isError()){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
 			try {
-			    Thread.sleep(10000);                 //1000 milliseconds is one second.
+			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
 		}else{
 			log.error("**** ERROR ERROR **** "+task.getStatusSummary());
 			try {
-			    Thread.sleep(10000);                 //1000 milliseconds is one second.
+			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
 		}
 	}
 
+	
+	
+	
 	
 //	@Override
 //	public ConstraintSetImpl getConstraintSet() {

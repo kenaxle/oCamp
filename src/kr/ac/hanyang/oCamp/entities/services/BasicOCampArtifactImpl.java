@@ -38,10 +38,10 @@ public class BasicOCampArtifactImpl<T> extends EffectorStartableImpl implements 
 	
 	@Override
 	public void start(Collection<? extends Location> locations ){
-		for(Entity e: this.getChildren()){
-			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
-			//task.blockUntilEnded(null);
-		}
+//		for(Entity e: this.getChildren()){
+//			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
+//			//task.blockUntilEnded(null);
+//		}
 	}
 
 	@Override
