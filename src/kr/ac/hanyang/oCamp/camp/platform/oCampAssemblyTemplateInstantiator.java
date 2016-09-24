@@ -57,11 +57,10 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	public Assembly instantiate(AssemblyTemplate template, CampPlatform platform) {
 //			return super.instantiate(template, platform);
 	        Application app = create(template, platform);
-	       //***************** 
-	       // do not start the app. instead issue a manage command which will start the policy manager for all components of the application
-	       
-	       CreationResult<Application, Void> start = startup(app);
-	       // log.debug("CAMP created "+app+"; starting in "+start.task());
+	        //***************** 
+	        
+	        CreationResult<Application, Void> start = startup(app);
+	        // log.debug("CAMP created "+app+"; starting in "+start.task());
 	        return platform.assemblies().get(app.getApplicationId());
 	    }
 	

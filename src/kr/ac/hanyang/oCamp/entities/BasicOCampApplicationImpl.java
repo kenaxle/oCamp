@@ -35,7 +35,7 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 				   					 .build();
 		task.blockUntilEnded();
 		if (task.isDone() && !task.isError()){
-			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
+			log.info("**** SUCCESS SUCCESS  Starting Policies now**** "+task.getStatusSummary());
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {

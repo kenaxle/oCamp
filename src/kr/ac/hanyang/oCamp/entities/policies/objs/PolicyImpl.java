@@ -111,6 +111,13 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 	@Override
 	public void enable() {
 		connectSensors();
+		// the enable method should also add the policy to a policy manager
+		// so that the policy becomes managed
+		// the policy should have already been connected to the entity therefore
+		// simply adding it will allow it to be managed. 
+		
+		// note if an appropriate manager does not exist then the appropriate 
+		// manager must be created and added to the policy managers set on the platform.
 	}
 
 	@Override
