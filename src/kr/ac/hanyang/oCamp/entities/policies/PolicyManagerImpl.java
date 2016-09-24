@@ -19,8 +19,7 @@ import kr.ac.hanyang.oCamp.api.policy.Policy;
 
 public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	
-	private List<Policy> policyList;
-	//private List<ActionGroup> actionGroups;	
+	private List<Policy> policyList;	
 	private List<ActionGroup> validActions;
 
 	public PolicyManagerImpl(){ }

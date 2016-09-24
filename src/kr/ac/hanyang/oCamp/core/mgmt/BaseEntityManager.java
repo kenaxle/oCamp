@@ -8,6 +8,7 @@ public class BaseEntityManager extends LocalManagementContext{// implements Poli
 
 	private LocalOCampEntityManager entityManager;
 	
+	
 	public BaseEntityManager() {
 		super();
 	}
@@ -26,6 +27,9 @@ public class BaseEntityManager extends LocalManagementContext{// implements Poli
         }
         return this.entityManager;
     }
+	
+
+	
 	
 
 }

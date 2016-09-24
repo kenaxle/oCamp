@@ -32,6 +32,7 @@ import com.google.common.collect.Lists;
 
 import kr.ac.hanyang.oCamp.api.policy.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
@@ -124,6 +125,9 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 						}
 						entity.config().set(PolicyImpl.TARGETS, targetList);
 						entity.config().set(PolicyImpl.CONSTRAINTS, constraintList);
+					}
+					if (entity instanceof PolicyManagerImpl){
+						// Complete this *******
 					}
 	        	}
 	        	for(Entity child: entity.getChildren()){
