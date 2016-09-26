@@ -17,8 +17,9 @@ public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 	
 	public boolean evaluate(SensorEvent event){
 		//if (! getValue() instanceof )
-		if (event.getValue().getClass() != getValue().getClass()) return false;
-		return ((T)event.getValue()).equals((T)getValue());
+//		if (event.getValue().getClass() != getValue().getClass()) return false;
+//		return ((T)event.getValue()).equals((T)getValue());
+		return true; // using for testing 
 	}
 	
 	public boolean isAlignedWith(Constraint constraint){
@@ -32,13 +33,13 @@ public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 	}
 
 	@Override
-	public void register(Policy policy) {
+	public void register(Entity entity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void unregister(Policy policy) {
+	public void unregister(Entity entity) {
 		// TODO Auto-generated method stub
 		
 	}

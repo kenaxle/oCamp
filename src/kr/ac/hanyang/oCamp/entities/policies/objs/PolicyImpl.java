@@ -7,13 +7,15 @@ import java.util.Map;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
+import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.ac.hanyang.oCamp.api.policy.Constraint;
+
 import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
+import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
 public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableable{
@@ -46,27 +48,20 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 
 	/* The set of constraints is immutable and required therefore there is no need to 
 	   connect the sensors there. the sensors will be connected when targets are set */
-	@Override
-	public boolean setConstraints(List<Constraint> constraints) {
-		if (config().set(CONSTRAINTS, constraints) != null){
-			for (Constraint constraint: constraints){
-				subscriptions().subscribe(constraint, ((ConstraintImpl)constraint).CONSTRAINT_VIOLATED, policyListener(this));
-			}
-			sensors().emit(CONSTRAINTS_SET, constraints);
-			//FIXME need to subscribe
-			return true;
+	//@Override
+	public void setConstraints(List<Constraint> constraints) {
+		config().set(CONSTRAINTS, constraints);
+		for (Constraint constraint: constraints){
+			subscriptions().subscribe(constraint,  Constraint.CONSTRAINT_VIOLATED, policyListener(this));
 		}
-		return false;
+		sensors().emit(CONSTRAINTS_SET, constraints);
 	}
 	
-	@Override
-	public boolean setTargets(List<Entity> targets) {
-		if (config().set(TARGETS, targets) != null){
-			connectSensors();
-			sensors().emit(CONSTRAINTS_SET, targets);
-			return true;
-		}
-		return false;
+	//@Override
+	public void setTargets(List<Entity> targets) {
+		config().set(TARGETS, targets);
+		connectSensors();
+		sensors().emit(CONSTRAINTS_SET, targets);
 	}
 
 //	@Override
@@ -94,16 +89,17 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 //	}
 	
 	@Override
-	public List<Constraint> getDesiredState(){return CONSTRAINTS.getDefaultValue();}
+	public List<Constraint> getDesiredState(){return (List<Constraint>) config().get(CONSTRAINTS);}
 
 	@Override
-	public List<Entity> getTargets(){return TARGETS.getDefaultValue();}
+	public List<Entity> getTargets(){return config().get(TARGETS);}
 	
 	
 	private void connectSensors(){
-		for (Constraint constraint: CONSTRAINTS.getDefaultValue()){
-			for (Entity entity: TARGETS.getDefaultValue()){
-				constraint.subscriptions().subscribe(entity, ((ConstraintImpl)constraint).getProperty(), ((ConstraintImpl)constraint).getListener());
+		for (Constraint constraint: config().get(CONSTRAINTS)){
+			for (Entity entity: config().get(TARGETS)){
+				constraint.register(entity);
+				//constraint.subscriptions().subscribe(entity, ((Constraint)constraint).getProperty(), ((kr.ac.hanyang.oCamp.entities.constraints.Constraint)constraint).getListener())register
 			}
 		}
 	}
@@ -111,13 +107,6 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 	@Override
 	public void enable() {
 		connectSensors();
-		// the enable method should also add the policy to a policy manager
-		// so that the policy becomes managed
-		// the policy should have already been connected to the entity therefore
-		// simply adding it will allow it to be managed. 
-		
-		// note if an appropriate manager does not exist then the appropriate 
-		// manager must be created and added to the policy managers set on the platform.
 	}
 
 	@Override

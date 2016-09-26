@@ -15,6 +15,7 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateR
 import org.apache.brooklyn.core.BrooklynLogging;
 import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.EntityInternal;
 import org.apache.brooklyn.core.internal.storage.BrooklynStorage;
 import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
@@ -38,10 +39,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import kr.ac.hanyang.oCamp.api.policy.Policy;
-import kr.ac.hanyang.oCamp.api.policyManager.PolicyManager;
+
 import kr.ac.hanyang.oCamp.camp.platform.oCampComponentTemplateResolver;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
 import kr.ac.hanyang.oCamp.core.objs.proxy.InternalOCampEntityFactory;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 
 public class LocalOCampEntityManager extends LocalEntityManager {
 
@@ -253,6 +255,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
         		policyManager = createEntity(polMgrSpec); // create the policy Manager
         		policyManager.addOCampPolicy((Policy)e); // I think I should add the proxy and not the actual entity.}
+        		//Entities.invokeEffector(this, policyManager, STARTUP);
         	}
         }
         if (!entities.contains(proxyE)) 

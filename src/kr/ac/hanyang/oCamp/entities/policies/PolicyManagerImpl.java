@@ -1,20 +1,27 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
+import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
+import org.apache.brooklyn.core.entity.trait.Startable;
+import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
 import kr.ac.hanyang.oCamp.api.objs.Action;
 import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
+import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 import kr.ac.hanyang.oCamp.api.policy.Constraint;
-import kr.ac.hanyang.oCamp.api.policy.Policy;
+
+import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 //import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 
 public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
@@ -30,7 +37,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		validActions = new ArrayList<ActionGroup>();
 	}
 
-	@Override
+	//@Override
 	public boolean addOCampPolicy(Policy policy) {
 		if (this.policyList.add(policy)){
 			this.subscriptions().subscribe((PolicyImpl)policy, PolicyImpl.POLICY_VIOLATED, policyManagerListener(this));
@@ -40,7 +47,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 			return false;
 	}
 	
-	@Override
+	//@Override
 	public boolean removeOCampPolicy(Policy policy) {
 		if (this.policyList.remove(policy)){
 			this.subscriptions().unsubscribe((PolicyImpl) policy);
@@ -72,7 +79,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		return false;
 	}
 
-	@Override
+	//@Override
 	public List<ActionGroup> evaluateActions(Entity entity, Policy policy, Sensor sensor) {
 		for(ActionGroup actionGroup: ACTIONGROUPS.getDefaultValue()){
 			boolean badGroup = false;
@@ -116,6 +123,31 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		
 		//then invoke the effector on the entity
 	}
+
+	@Override
+	public boolean addOCampPolicy(kr.ac.hanyang.oCamp.api.policy.Policy policy) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeOCampPolicy(kr.ac.hanyang.oCamp.api.policy.Policy policy) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<ActionGroup> evaluateActions(Entity entity, kr.ac.hanyang.oCamp.api.policy.Policy policy,
+			Sensor sensor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+
+
+	
 	
 	
 	

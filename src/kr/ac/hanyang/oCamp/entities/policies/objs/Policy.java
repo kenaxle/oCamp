@@ -14,7 +14,7 @@ import org.apache.brooklyn.util.core.flags.SetFromFlag;
 import com.google.common.reflect.TypeToken;
 
 import kr.ac.hanyang.oCamp.api.objs.Action;
-import kr.ac.hanyang.oCamp.api.policy.Constraint;
+import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
 @ImplementedBy(PolicyImpl.class)
@@ -41,5 +41,15 @@ public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 	public static final Sensor<Entity> SUBSCRIBER_REMOVED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.removed", "The subscriber was removed");
 
+	//public void setConstraints(List<Constraint> constraints);
+	//public boolean removeConstraint(Constraint constraint);
+	
+	//public void setTargets(List<Entity> targets);
+	//public boolean addTarget(Entity entity);
+	//public boolean removeTarget(Entity entity);
+	
+	public List<Constraint> getDesiredState();
+	public List<Entity> getTargets();
+	
 	
 }

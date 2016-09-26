@@ -12,8 +12,8 @@ import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 //import kr.ac.hanyang.oCamp.api.policy.Policy;
 
 public abstract class ConstraintImpl<T> extends AbstractEntity implements Constraint{
-	private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
-	private T value; // this is the value/values of the property.
+	//private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
+	//private T value; // this is the value/values of the property.
 	
 	// No-arg constructor
 	public ConstraintImpl(){}
@@ -21,36 +21,34 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 	@Override
 	public void init(){
 		super.init();
-		value = (T) this.config().get(VALUE);
-		property = (BasicAttributeSensor) config().get(PROPERTY);
-		for (Object entity: this.getParent().config().get(Policy.TARGETS)){
-			
-		}
 	}
 	
 	public BasicAttributeSensor getProperty(){
-		return property;
+		return (BasicAttributeSensor) config().get(PROPERTY);
 	}
 
 	public T getValue(){
-		return value;
+		return null;//value;
 	}
 	
 	//these may be effector methods
 	@SuppressWarnings("unchecked")
-	public void register(Policy policy){
-		this.subscriptions().subscribe(policy, property, constraintListener(this));
+	public void register(Entity entity){
+		this.subscriptions().subscribe(entity, config().get(PROPERTY), constraintListener(this));
 	}
 	
-	public void unregister(Policy policy){
-		this.subscriptions().unsubscribe(policy);
+	public void unregister(Entity entity){
+		this.subscriptions().unsubscribe(entity);
 	}
 	
 	private SensorEventListener<Object> constraintListener(Constraint listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
+				System.out.println("*********Sensor Event**********");
 				if (! listener.evaluate(event)){
-					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
+					//listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
+					System.out.println("*********Sensor Evaluated**********");
+					System.out.println("Sensor Event: "+event.getValue());
 				}
 			}
 		};

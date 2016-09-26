@@ -4,6 +4,7 @@ import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
+import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
@@ -31,11 +32,13 @@ public interface Constraint<T> extends kr.ac.hanyang.oCamp.api.policy.Constraint
 	public static final ConfigKey<Object> VALUE = ConfigKeys.newConfigKey(Object.class,"value","represents the property of the constraint");
 	
 	
-	public void register(Policy policy);
+	public void register(Entity entity);
 	
-	public void unregister(Policy policy);
+	public void unregister(Entity entity);
 	
 	public boolean evaluate(SensorEvent event);
 	
 	public boolean isAlignedWith(Constraint constraint);
+	
+	public SensorEventListener<T> getListener();
 }

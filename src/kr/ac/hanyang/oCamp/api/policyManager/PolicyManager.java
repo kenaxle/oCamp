@@ -9,9 +9,6 @@ import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
 
 public interface PolicyManager extends Entity{
 	
-	public boolean addOCampPolicy(Policy policy);	
-	public boolean removeOCampPolicy(Policy policy);
 	
-	public boolean setActionGroups(List<ActionGroup> actionGroups);
 	
 }

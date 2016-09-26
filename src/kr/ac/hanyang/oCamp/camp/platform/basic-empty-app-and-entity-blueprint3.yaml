@@ -34,9 +34,9 @@ services:
 policies: 
 - type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
-  - property: LOCATION
-    type: kr.ac.hanyang.oCamp.entities.constraints.Within
-    value: ["AWS Tokyo (ap-northeast-1)","AWS Virginia (us-east-1)"]
+  - property: SERVICE_UP
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
   targets: [tomcat]
             
 

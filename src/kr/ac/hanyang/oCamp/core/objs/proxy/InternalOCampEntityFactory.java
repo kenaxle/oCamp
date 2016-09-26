@@ -29,8 +29,10 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.reflect.TypeToken;
 
-import kr.ac.hanyang.oCamp.api.policy.Constraint;
+import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
+import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
@@ -78,7 +80,13 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
             for (Entity child: entity.getChildren()){
             	child.setParent(entity);
             }
-            
+//            if (entity instanceof PolicyManagerImpl){
+//				// Complete this *******
+//				// if the acctions specified then set
+//				//otherwise use the defaults to set
+//            	if(entity.config().get(new BasicConfigKey(new TypeToken<List<ActionGroup>>(){ }, "actiongroups")) == null)
+//            	entity.config().set(PolicyManagerImpl.ACTIONGROUPS, PolicyManagerImpl.ACTIONGROUPS.getDefaultValue());
+//			}
             entitiesByEntityId.put(entity.getId(), entity);
             specsByEntityId.put(entity.getId(), spec);
 
@@ -123,12 +131,10 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 						for (Entity polConstraint: entity.getChildren()){
 							constraintList.add((Constraint) polConstraint);
 						}
-						entity.config().set(PolicyImpl.TARGETS, targetList);
-						entity.config().set(PolicyImpl.CONSTRAINTS, constraintList);
+						((PolicyImpl)entity).setConstraints(constraintList);
+						((PolicyImpl) entity).setTargets(targetList);	
 					}
-					if (entity instanceof PolicyManagerImpl){
-						// Complete this *******
-					}
+					
 	        	}
 	        	for(Entity child: entity.getChildren()){
 	        		child.setParent(entity);

@@ -106,5 +106,10 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 	
 	public void doAction(Effector effector, Entity entity);
 	
+	public boolean addOCampPolicy(Policy policy);	
+	public boolean removeOCampPolicy(Policy policy);
+	
+	public boolean setActionGroups(List<ActionGroup> actionGroups);
+	
 
 }
