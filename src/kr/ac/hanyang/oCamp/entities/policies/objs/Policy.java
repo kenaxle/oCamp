@@ -30,10 +30,10 @@ public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
             Object.class, "policy.violated", "The policy was violated");
 	
 	public static final Sensor<Object> CONSTRAINTS_SET = new BasicNotificationSensor<Object>(
-			Object.class, "constraint.added", "The list of constraints was set");
+			Object.class, "constraint.set", "The list of constraints was set");
 	
 	public static final Sensor<Object> SUBSCRIBERS_SET = new BasicNotificationSensor<Object>(
-			Object.class, "constraint.added", "The list of constraints was set");
+			Object.class, "subscriber.set", "The list of entities was set");
 	
 	public static final Sensor<Entity> SUBSCRIBER_ADDED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.added", "The subscriber was added");
@@ -41,12 +41,9 @@ public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 	public static final Sensor<Entity> SUBSCRIBER_REMOVED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.removed", "The subscriber was removed");
 
-	//public void setConstraints(List<Constraint> constraints);
-	//public boolean removeConstraint(Constraint constraint);
+	public void setConstraints(List<Constraint> constraints);
 	
-	//public void setTargets(List<Entity> targets);
-	//public boolean addTarget(Entity entity);
-	//public boolean removeTarget(Entity entity);
+	public void setTargets(List<Entity> targets);
 	
 	public List<Constraint> getDesiredState();
 	public List<Entity> getTargets();

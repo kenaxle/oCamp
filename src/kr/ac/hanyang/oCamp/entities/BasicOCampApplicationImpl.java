@@ -1,15 +1,12 @@
 package kr.ac.hanyang.oCamp.entities;
 
 import java.util.Collection;
-import java.util.List;
-
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;
 import org.apache.brooklyn.api.mgmt.Task;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.stock.BasicApplicationImpl;
-import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +21,8 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 	
 	@Override
 	public void startup(Collection<? extends Location> locations) {
-		//policyList = MutableList.of();
 		log.info("**** INFO INFO **** Starting Application...");
-		try {
-		    Thread.sleep(1000);                 //1000 milliseconds is one second.
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
+
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		TaskBuilder<Void> polTaskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
@@ -52,7 +44,7 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 			polTask.blockUntilEnded();
 			if (polTask.isDone() && !polTask.isError()){
 				//get the policies in the task and add to the managers
-				
+				log.info("**** ERROR ERROR enabling policies**** "+task.getStatusSummary());
 			}
 			
 		}else

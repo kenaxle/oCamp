@@ -16,35 +16,30 @@ import kr.ac.hanyang.oCamp.entities.requirements.DeployOnImpl;
 
 public abstract class ConstraintImpl<T> extends AbstractEntity implements Constraint{
 	private static final Logger log = LoggerFactory.getLogger(DeployOnImpl.class);
-	//private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
-	//private T value; // this is the value/values of the property.
-	
-	// No-arg constructor
-	private boolean enabled;
-	
 	
 	public ConstraintImpl(){}
 	
 	@Override
 	public void init(){
 		super.init();
-		enabled = false;
 	}
 	
 	public BasicAttributeSensor getProperty(){
 		return (BasicAttributeSensor) config().get(PROPERTY);
 	}
 
+	//TODO need to fix this
 	public T getValue(){
 		return null;//value;
 	}
 	
-	//these may be effector methods
 	@SuppressWarnings("unchecked")
+	@Override
 	public void register(Entity entity){
 		this.subscriptions().subscribe(entity, config().get(PROPERTY), constraintListener(this));
 	}
 	
+	@Override
 	public void unregister(Entity entity){
 		this.subscriptions().unsubscribe(entity);
 	}
@@ -55,7 +50,7 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 				log.info("*********Sensor Event**********");
 				log.info("Sensor Event: "+event.getValue());
 				if (! listener.evaluate(event)){
-					//listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
+					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
 					log.info("*********Sensor Evaluated**********");
 					log.info("Sensor Event: "+event.getValue());
 				}
@@ -63,12 +58,6 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 		};
 	}
 	
-//	public synchronized void enable(){
-//		enabled = true;
-//		while (enabled){
-//			PROPERTY.
-//		}
-//	}
 	
 	public abstract boolean isViolated(Sensor propertySensor, Entity entity);
 		

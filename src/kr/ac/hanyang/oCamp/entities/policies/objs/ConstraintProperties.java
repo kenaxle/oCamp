@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.core.entity.Attributes;
+import org.apache.brooklyn.entity.machine.MachineAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,8 @@ public class ConstraintProperties {
 	
 	public static final Sensor PROVISIONING_LOCATION = SoftwareProcess.PROVISIONING_LOCATION;
 	public static final Sensor SERVICE_UP = Attributes.SERVICE_UP;
+	public static final Sensor SERVICE_STATE = Attributes.SERVICE_STATE_ACTUAL;
+	public static final Sensor CPU_USAGE = MachineAttributes.CPU_USAGE;
 	
 	public static Sensor getProperty(String name){
 		Sensor result = null;

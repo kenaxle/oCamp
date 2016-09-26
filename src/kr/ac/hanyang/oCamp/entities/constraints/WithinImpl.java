@@ -32,19 +32,4 @@ public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 		return false;
 	}
 
-	@Override
-	public void register(Entity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unregister(Entity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
-	
 }

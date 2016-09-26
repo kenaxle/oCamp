@@ -1,4 +1,4 @@
-package kr.ac.hanyang.oCamp.entities;
+package kr.ac.hanyang.oCamp.core.traits;
 
 import java.util.Collection;
 

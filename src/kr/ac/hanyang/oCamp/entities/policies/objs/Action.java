@@ -20,17 +20,17 @@ import com.google.common.reflect.TypeToken;
 public interface Action extends kr.ac.hanyang.oCamp.api.objs.Action{
 	
 	@SetFromFlag("property")
-	ConfigKey<Sensor> PROPERTY = ConfigKeys.newConfigKey(Sensor.class,"property","represents the property of the action");
+	ConfigKey<Sensor> PROPERTY = ConfigKeys.newConfigKey(Sensor.class,"property","represents the property that was sensed");
 	
 	@SetFromFlag("configkey")
 	ConfigKey<ConfigKey> CONFIGKEY = ConfigKeys.newConfigKey(ConfigKey.class,"configkey","represents the config key to be altered. it may be null");
 	
 	@SetFromFlag("transitions")
-	ConfigKey<List<Transition>> TRANSITIONS = ConfigKeys.newConfigKey(new TypeToken<List<Transition>>(){ },"actiongroups","represents the list of actiongroups");
+	ConfigKey<List<Transition>> TRANSITIONS = ConfigKeys.newConfigKey(new TypeToken<List<Transition>>(){ },"transitions","represents the list of transitions");
 	
 	
 	public static final Sensor<Effector> PROPERTY_SET = new BasicNotificationSensor<Effector>(
-            Effector.class, "action.set", "The action was set");
+            Effector.class, "property.set", "The property was set");
 	
 	public static final Sensor<Object> TRANSITIONS_ADDED = new BasicNotificationSensor<Object>(
 			Object.class, "transition.added", "The transition was added");

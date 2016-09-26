@@ -19,7 +19,6 @@ import org.apache.brooklyn.core.mgmt.BrooklynTaskTags;
 import org.apache.brooklyn.core.mgmt.internal.ManagementContextInternal;
 import org.apache.brooklyn.core.objs.proxy.InternalEntityFactory;
 import org.apache.brooklyn.core.objs.proxy.InternalPolicyFactory;
-import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.flags.FlagUtils;
 import org.apache.brooklyn.util.core.task.Tasks;
@@ -29,12 +28,8 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.reflect.TypeToken;
-
-import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
@@ -53,18 +48,6 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 		planId2serviceId = MutableMap.of();
 	}
 	
-//	@Override
-//    public <T extends Entity> T createEntity(EntitySpec<T> spec) {
-//		
-//	
-//		Map<String,Entity> entitiesByEntityId = MutableMap.of();
-//      Map<String,EntitySpec<?>> specsByEntityId = MutableMap.of();
-//        
-//		T entity = 
-//		return null; //fill this method
-//	}
-	
-	
 		
 	@Override
 	protected <T extends Entity> T createEntityAndDescendantsUninitialized(EntitySpec<T> spec, Map<String,Entity> entitiesByEntityId, Map<String,EntitySpec<?>> specsByEntityId) {
@@ -80,13 +63,7 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
             for (Entity child: entity.getChildren()){
             	child.setParent(entity);
             }
-//            if (entity instanceof PolicyManagerImpl){
-//				// Complete this *******
-//				// if the acctions specified then set
-//				//otherwise use the defaults to set
-//            	if(entity.config().get(new BasicConfigKey(new TypeToken<List<ActionGroup>>(){ }, "actiongroups")) == null)
-//            	entity.config().set(PolicyManagerImpl.ACTIONGROUPS, PolicyManagerImpl.ACTIONGROUPS.getDefaultValue());
-//			}
+
             entitiesByEntityId.put(entity.getId(), entity);
             specsByEntityId.put(entity.getId(), spec);
 
@@ -97,7 +74,7 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 	}
 	
 	protected <T extends Entity> T createEntitiesRec(EntitySpec<T> spec, Map<String,Entity> entitiesByEntityId, Map<String,EntitySpec<?>> specsByEntityId) {
-		//List<Entity> result = Lists.newArrayList();
+	
 		Class<? extends T> clazz = getImplementedBy(spec);
 		T entity = constructEntityBySpec(clazz, spec);
         loadUnitializedEntity(entity, spec);
@@ -144,9 +121,6 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 	            planId2serviceId.put((String) spec.getConfig().get(new BasicConfigKey(String.class, "planId")), entity.getId());
 	            return (T) entity ;
 	        }
-	        
-
-//		return null;
 	}
 	
 	
@@ -161,16 +135,6 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 	                ((AbstractEntity)entity).setCatalogItemId(spec.getCatalogItemId());
 	            }
 	            
-	           // ((AbstractEntity)entity).configure(MutableMap.copyOf(spec.getFlags()));
-	            if (entity instanceof Policy){
-	            	//load the targets specs
-	            	//List<EntitySpec> targets = MutableList.of();
-	            	
-	            	//for (String targetName: spec.getConfig().get("targets"))
-	            	for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
-		                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
-		            }
-	            }
 	            for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
 	                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
 	            }
@@ -236,26 +200,11 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 //                        managementContext.getLocationManager().createLocation(locationSpec)));
 //                }
 //                ((AbstractEntity)entity).addLocations(spec.getLocations());
-//
+
                 for (EntityInitializer initializer: spec.getInitializers()) {
                     initializer.apply((EntityInternal)entity);
                 }
 
-//                for (Enricher enricher : spec.getEnrichers()) {
-//                    entity.enrichers().add(enricher);
-//                }
-
-//                for (EnricherSpec<?> enricherSpec : spec.getEnricherSpecs()) {
-//                    entity.enrichers().add(policyFactory.createEnricher(enricherSpec));
-//                }
-//
-//                for (Policy policy : spec.getPolicies()) {
-//                    entity.policies().add((AbstractPolicy)policy);
-//                }
-//
-//                for (PolicySpec<?> policySpec : spec.getPolicySpecs()) {
-//                    entity.policies().add(policyFactory.createPolicy(policySpec));
-//                }
 
                 for (Entity child: entity.getChildren()) {
                     // right now descendants are initialized depth-first (see the getUnchecked() call below)

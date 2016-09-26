@@ -66,11 +66,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	
 	 private <T extends Application> CreationResult<T,Void> startup(T app) {
 		 	log.info("****** Application Startup*********");
-		 	try {
-			    Thread.sleep(10000);                 //1000 milliseconds is one second.
-			} catch(InterruptedException ex) {
-			    Thread.currentThread().interrupt();
-			}
+		 	
 	        Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP,
 	            // locations already set in the entities themselves;
 	            // TODO make it so that this arg does not have to be supplied to START !

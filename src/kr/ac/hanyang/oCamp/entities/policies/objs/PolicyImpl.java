@@ -1,22 +1,16 @@
 package kr.ac.hanyang.oCamp.entities.policies.objs;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
-import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.AbstractEntity;
-import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
-import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
 
 public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableable{
 	
@@ -61,7 +55,7 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 	public void setTargets(List<Entity> targets) {
 		config().set(TARGETS, targets);
 		connectSensors();
-		sensors().emit(CONSTRAINTS_SET, targets);
+		sensors().emit(SUBSCRIBERS_SET, targets);
 	}
 
 //	@Override
@@ -99,7 +93,7 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 		for (Constraint constraint: config().get(CONSTRAINTS)){
 			for (Entity entity: config().get(TARGETS)){
 				constraint.register(entity);
-				//constraint.subscriptions().subscribe(entity, ((Constraint)constraint).getProperty(), ((kr.ac.hanyang.oCamp.entities.constraints.Constraint)constraint).getListener())register
+				//constraint.subscriptions().subscribe(entity, constraint.getProperty(), constraint.getListener());
 			}
 		}
 	}
@@ -118,10 +112,5 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 		
 	}
 
-
-	
-	
-	// will implement later
-	//public Entity getTarget()
 
 }

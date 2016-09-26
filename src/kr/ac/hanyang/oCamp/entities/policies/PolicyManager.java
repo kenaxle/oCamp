@@ -20,9 +20,10 @@ import com.google.common.reflect.TypeToken;
 import kr.ac.hanyang.oCamp.api.objs.Action;
 import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.api.transition.Transition;
-import kr.ac.hanyang.oCamp.api.policy.Policy;
+
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroupImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.services.software.SoftwareProcess;
 import kr.ac.hanyang.oCamp.entities.transitions.InitialImpl;
 import kr.ac.hanyang.oCamp.entities.transitions.SetImpl;
@@ -37,7 +38,7 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 			Policy.class, "policy.removed", "The policy was removed");
 	
 	public static final Sensor<Object> ACTIONGROUPS_SET = new BasicNotificationSensor<Object>(
-			Object.class, "policy.removed", "The policy was removed");
+			Object.class, "actiongroups.set", "The actiongroups were set");
 	
 	@SetFromFlag("actiongroups")
 	ConfigKey<List<ActionGroup>> ACTIONGROUPS = ConfigKeys.newConfigKey(new TypeToken<List<ActionGroup>>(){ },

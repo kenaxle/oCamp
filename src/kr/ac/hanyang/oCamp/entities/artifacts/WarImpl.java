@@ -37,16 +37,9 @@ public class WarImpl extends BasicOCampArtifactImpl<Object> implements Startable
 		
 		@Override
 		public void start(Collection<? extends Location> locations){
-			//for(Entity e: this.getChildren()){
-				//log.info("**** INFO INFO **** Starting War...");
-				//Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
-				//task.blockUntilEnded(null);
+			// need to set the lifecycle state
+			log.info("**** SUCCESS SUCCESS **** "/*+task.getStatusSummary()*/);
 				
-				//if (task.isDone() && !task.isError()){
-					log.info("**** SUCCESS SUCCESS **** "/*+task.getStatusSummary()*/);
-				//}else
-				//	log.error("**** ERROR ERROR **** "+task.getStatusSummary());
-			//}
 		}
 		
 		

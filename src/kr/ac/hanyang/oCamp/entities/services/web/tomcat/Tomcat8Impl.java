@@ -39,7 +39,8 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	}
 	
 	public void init(){
-		super.init();
+		super.init(); 
+		int count = 0; boolean val;
 	}
 
 	@Override
@@ -57,24 +58,24 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	public void deploy(
             @EffectorParam(name="url", description="URL of WAR file") String url, 
             @EffectorParam(name="targetName", description="context path where WAR should be deployed (/ for ROOT)") String targetName) {
-		//super.deploy(url, targetName);
-	       try {
-	            
-	            JavaWebAppDriver driver = getDriver();
-	            String deployedName = driver.deploy(url, targetName);
-	            
-	            // Update attribute
-	            Set<String> deployedWars = getAttribute(DEPLOYED_WARS);
-	            if (deployedWars == null) {
-	                deployedWars = Sets.newLinkedHashSet();
-	            }
-	            deployedWars.add(deployedName);
-	            sensors().set(DEPLOYED_WARS, deployedWars);
-	        } catch (RuntimeException e) {
-	            // Log and propagate, so that log says which entity had problems...
-	            log.warn("Error deploying '"+url+"' to "+targetName+" on "+toString()+"; rethrowing...", e);
-	            throw Throwables.propagate(e);
-	        }
+		super.deploy(url, targetName);
+//	       try {
+//	            
+//	            JavaWebAppDriver driver = getDriver();
+//	            String deployedName = driver.deploy(url, targetName);
+//	            
+//	            // Update attribute
+//	            Set<String> deployedWars = getAttribute(DEPLOYED_WARS);
+//	            if (deployedWars == null) {
+//	                deployedWars = Sets.newLinkedHashSet();
+//	            }
+//	            deployedWars.add(deployedName);
+//	            sensors().set(DEPLOYED_WARS, deployedWars);
+//	        } catch (RuntimeException e) {
+//	            // Log and propagate, so that log says which entity had problems...
+//	            log.warn("Error deploying '"+url+"' to "+targetName+" on "+toString()+"; rethrowing...", e);
+//	            throw Throwables.propagate(e);
+//	        }
 	}
 	
 
@@ -85,11 +86,7 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	//builds a parallel startup task and waits for the completion of the members.
 	public void startup(Collection<? extends Location> locations){
 		log.info("**** INFO INFO **** Starting Tomcat...");
-//		try {
-//		    Thread.sleep(1000);                 //1000 milliseconds is one second.
-//		} catch(InterruptedException ex) {
-//		    Thread.currentThread().interrupt();
-//		}
+
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
 			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	

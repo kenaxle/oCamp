@@ -16,6 +16,7 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 	
 	@Override
 	public boolean evaluate(SensorEvent event){
+		//FIXME revert this after testing
 		//if (event.getValue().getClass() != getValue().getClass()) return false;
 		//return ((T)event.getValue()).equals((T)getValue());
 		return false;
@@ -32,19 +33,4 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 		return ! value.equals(getValue());
 	}
 
-	@Override
-	public void register(Entity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unregister(Entity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
-	
 }

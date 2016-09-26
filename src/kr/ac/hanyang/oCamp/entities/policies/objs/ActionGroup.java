@@ -19,13 +19,13 @@ public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup{
 	public static final ConfigKey<Effector> ACTION_ID = ConfigKeys.newConfigKey(Effector.class,"actionID","represents the ID of the action");
 	
 	@SetFromFlag("actions")
-	public static final ConfigKey<List<Action>> ACTIONS = ConfigKeys.newConfigKey(new TypeToken<List<Action>>(){ },"actiongroups","represents the list of actiongroups");	
+	public static final ConfigKey<List<Action>> ACTIONS = ConfigKeys.newConfigKey(new TypeToken<List<Action>>(){ },"actions","represents the list of actions");	
 	
 	public static final Sensor<Effector> ACTION_ID_SET = new BasicNotificationSensor<Effector>(
             Effector.class, "actionID.set", "The actionID was set");
 	
 	public static final Sensor<Object> ACTIONS_ADDED = new BasicNotificationSensor<Object>(
-			Object.class, "transition.added", "The transition was added");
+			Object.class, "actions.added", "The actions were added");
 	
 //	public void setAction(Effector action);
 //	public Effector getAction();

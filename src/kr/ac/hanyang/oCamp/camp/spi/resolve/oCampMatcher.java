@@ -55,12 +55,10 @@ import kr.ac.hanyang.oCamp.entities.requirements.IService;
 
 public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oCampReserved {
 	private static final Logger log = LoggerFactory.getLogger(oCampMatcher.class);
-	//private ManagementContext mgmt;
 	
 	
 	public oCampMatcher(ManagementContext mgmt){
 		super(mgmt);
-		//this.mgmt = mgmt;
 	}
 	
 	@Override
@@ -97,8 +95,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             	loader = JavaBrooklynClassLoadingContext.create(mgmt);
             if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, serviceType) != null)
                 return serviceType;
-			
-			
 		}
 		
 		if (deploymentItem instanceof Policy){
@@ -110,8 +106,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             	loader = JavaBrooklynClassLoadingContext.create(mgmt);
             if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, policyType) != null)
                 return policyType;
-			
-
 		}
 		log.debug( "Not an artifact or Service. unable to match "+deploymentItem);
 		return null;
@@ -169,15 +163,17 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         if (deploymentPlanItem instanceof Service){
         	//**** build an oCampPlatformComponentTemplate instead
     		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-            builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
+            builder.type( type ); 
         	name = ((Service)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) 
             	builder.name(name);
             Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
-	        builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
-	        //add custom tags
+	        //******************************************************************
+            builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
+            //******************************************************************
+            //add custom tags
 	        Collection<String> keys = getTagIDs();
 	        for(String key: keys){
 	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
@@ -189,7 +185,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	//all services were already added except those specified in fulfillment
         	//**** build an oCampPlatformComponentTemplate instead
     		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-            builder.type( type.indexOf(':')==-1 ? /*"brooklyn:"+*/type : type ); //reform the type string: this forces the types to only be brooklyn types
+            builder.type(type); //reform the type string: this forces the types to only be brooklyn types
         	name = ((Artifact)deploymentPlanItem).getName();
         	if (!Strings.isBlank(name)) 
         		builder.name(name);
@@ -217,21 +213,16 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	        for(String key: keys){
         	        	addCustomMapAttributeIfNonNull(reqBuilder, attrs, key);
         	        }
-        	        
-        	        //builder.add(reqBuilder.build()); // Add the requirement to the Artifact Template
-        	        //inverting
+        	  
         	        reqBuilder.add(builder.build());
-        			
-        		
+
                 	if (reqAttrs.containsKey("fulfillment")){
 
 		        		Object fulfillmentObj = reqAttrs.remove("fulfillment");
 		        		if (fulfillmentObj instanceof Map){ // we have a definition
 		        			Map<String, Object> fulfillment = (Map<String, Object>) fulfillmentObj;
 		        			Service service = Service.of(fulfillment);	        				
-		        		
-		        			//apply(service,atc); // recursively call apply to add the service
-		        			//service specified in fulfillment
+
 		        			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> servBuilder = oCampPlatformComponentTemplate.builder(); 
 		                    builder.type( service.getServiceType()); 
 		                	name = service.getName();
@@ -250,9 +241,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		        	        atc.add(servBuilder.build()); // Add the service to the AssemblyTemplate
 		        		}else{
 		        			log.info("The artifact is referencing a service by ID");
-		        			// I need to verify that the service is specified with an ID
-		        			//extract the service id. id:serviceID
-		        			//atc.getService(string id);
+
 		        			String id = extractSubValue((String)fulfillmentObj,":");
 		        			((oCampAssemblyTemplateConstructor)atc).addRequirement(reqBuilder.build(),id);
 		        		}
@@ -265,13 +254,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	MutableMap<Object, Object> customFlags = MutableMap.of();
         	Object origBrooklynFlags = reqs.remove(BrooklynCampReservedKeys.BROOKLYN_FLAGS);
         	
-        	//atc.add(builder.build());// Add the Artifact to the AssemblyTemplate
-        	
         }else if(deploymentPlanItem instanceof Policy){
-        	// just build the policy spec
-        	
+
         	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
-            builder.type(POLICY_PREFIX+"Policy"); //reform the type string: this forces the types to only be brooklyn types
+            builder.type(POLICY_PREFIX+"Policy"); //Policy class. there are no other policy types
         	name = ((Policy)deploymentPlanItem).getName();
             if (!Strings.isBlank(name)) 
             	builder.name(name);
@@ -280,10 +266,10 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
             
-            builder.customAttribute("policymanager.type", type);
-            
+            builder.customAttribute("policymanager.type", type); //need to keep track of the policy manager to process this policy
+           
             List<String> targets = MutableList.copyOf( ((Policy)deploymentPlanItem).getTargets() ); 
-            //builder.customAttribute("constraint", constraints);
+
             builder.customAttribute("targets", targets);
             List<Object> constraints = MutableList.copyOf( ((Policy)deploymentPlanItem).getPolicyConstraints() ); 
 	        for (Object constraintObject: constraints){
