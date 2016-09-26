@@ -34,9 +34,9 @@ services:
 policies: 
 - type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
-  - property: SERVICE_UP
+  - property: CPU_USAGE
     type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
-    value: true
+    value: 0.5
   targets: [tomcat]
             
 

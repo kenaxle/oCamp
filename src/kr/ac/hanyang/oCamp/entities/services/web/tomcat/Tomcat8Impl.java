@@ -85,11 +85,11 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	//builds a parallel startup task and waits for the completion of the members.
 	public void startup(Collection<? extends Location> locations){
 		log.info("**** INFO INFO **** Starting Tomcat...");
-		try {
-		    Thread.sleep(1000);                 //1000 milliseconds is one second.
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
+//		try {
+//		    Thread.sleep(1000);                 //1000 milliseconds is one second.
+//		} catch(InterruptedException ex) {
+//		    Thread.currentThread().interrupt();
+//		}
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
 			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	
@@ -99,18 +99,10 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 		task.blockUntilEnded();
 		if (task.isDone() && !task.isError()){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
-			try {
-			    Thread.sleep(1000);                 //1000 milliseconds is one second.
-			} catch(InterruptedException ex) {
-			    Thread.currentThread().interrupt();
-			}
+			
 		}else{
 			log.error("**** ERROR ERROR **** "+task.getStatusSummary());
-			try {
-			    Thread.sleep(1000);                 //1000 milliseconds is one second.
-			} catch(InterruptedException ex) {
-			    Thread.currentThread().interrupt();
-			}
+			
 		}
 	}
 

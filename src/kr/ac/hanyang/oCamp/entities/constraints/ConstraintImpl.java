@@ -6,21 +6,29 @@ import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
+import kr.ac.hanyang.oCamp.entities.requirements.DeployOnImpl;
 
 //import kr.ac.hanyang.oCamp.api.policy.Policy;
 
 public abstract class ConstraintImpl<T> extends AbstractEntity implements Constraint{
+	private static final Logger log = LoggerFactory.getLogger(DeployOnImpl.class);
 	//private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	//private T value; // this is the value/values of the property.
 	
 	// No-arg constructor
+	private boolean enabled;
+	
+	
 	public ConstraintImpl(){}
 	
 	@Override
 	public void init(){
 		super.init();
+		enabled = false;
 	}
 	
 	public BasicAttributeSensor getProperty(){
@@ -44,15 +52,23 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 	private SensorEventListener<Object> constraintListener(Constraint listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
-				System.out.println("*********Sensor Event**********");
+				log.info("*********Sensor Event**********");
+				log.info("Sensor Event: "+event.getValue());
 				if (! listener.evaluate(event)){
 					//listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
-					System.out.println("*********Sensor Evaluated**********");
-					System.out.println("Sensor Event: "+event.getValue());
+					log.info("*********Sensor Evaluated**********");
+					log.info("Sensor Event: "+event.getValue());
 				}
 			}
 		};
 	}
+	
+//	public synchronized void enable(){
+//		enabled = true;
+//		while (enabled){
+//			PROPERTY.
+//		}
+//	}
 	
 	public abstract boolean isViolated(Sensor propertySensor, Entity entity);
 		

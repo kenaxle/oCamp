@@ -106,7 +106,10 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 
 	@Override
 	public void enable() {
-		connectSensors();
+		for (Constraint constraint: config().get(CONSTRAINTS)){
+			
+		}
+		//connectSensors();
 	}
 
 	@Override

@@ -35,11 +35,11 @@ public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable,
 	@Override
 	public void start(Collection<? extends Location> locations) {
 		log.info("**** INFO INFO **** Starting DeployOn...");
-		try {
-		    Thread.sleep(1000);                 //1000 milliseconds is one second.
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
+//		try {
+//		    Thread.sleep(1000);                 //1000 milliseconds is one second.
+//		} catch(InterruptedException ex) {
+//		    Thread.currentThread().interrupt();
+//		}
 			
 		Task<Void> startParent = Entities.invokeEffector(this, this.getParent(), Startable.START,MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)")));
 		startParent.blockUntilEnded();
