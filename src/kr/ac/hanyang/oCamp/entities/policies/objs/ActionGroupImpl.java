@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.core.entity.AbstractEntity;
-import kr.ac.hanyang.oCamp.api.objs.Action;
+
 
 public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	
@@ -38,10 +38,12 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 
 	@Override
 	public Action getAction(Sensor policySensor){
-		for(Action action: actions)
+		for(Action action: config().get(ACTIONS))
 			return action.getProperty().equals(policySensor) ? action : null;
 		return null;
 	}
+	
+	
 	
 	@Override
 	public void setWeight(int weight){

@@ -8,8 +8,9 @@ import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
-import kr.ac.hanyang.oCamp.api.objs.Action;
-import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
+
+import kr.ac.hanyang.oCamp.entities.policies.objs.Action;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 import kr.ac.hanyang.oCamp.api.policy.Constraint;
@@ -75,8 +76,10 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 			boolean badGroup = false;
 			int taskCount = 0;
 			for(Constraint constraint: policy.getDesiredState()){
-				Sensor policySensor = constraint.getProperty();
+				Sensor policySensor = constraint.getProperty(); //get the sensor the policy is based on
+				//List<Action> actionsList = actionGroup.getActions();
 				Action action = actionGroup.getAction(policySensor); //this may be null so there is risk of null pointer
+				
 				if (! constraint.isViolated(policySensor, entity)){ // if the constraint is not violated on the entity we have a different approach
 					if (action.getLastTransition().evaluate(constraint,null)){// FIXME change this to the desired state
 						taskCount += action.getWeight(); //Continue from here

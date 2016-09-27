@@ -22,6 +22,7 @@ public class DeploymentPlan extends  org.apache.brooklyn.camp.spi.pdp.Deployment
 	List<Artifact> artifacts;
 	List<Service> services;
 	List<Policy> policies;
+	List<ActionGroup> actionGroups;
 	Map<String,Object> customAttributes;
 		   
 	   
@@ -81,6 +82,21 @@ public class DeploymentPlan extends  org.apache.brooklyn.camp.spi.pdp.Deployment
             throw new UserFacingException("Policies block should contain a list, not "+JavaClassNames.superSimpleClassName(policies));
         }
         
+        result.actionGroups = new ArrayList<ActionGroup>();
+        Object actionGroups = attrs.remove("actiongroups");
+        if (actionGroups instanceof Iterable) {
+            for (Object actionGroup: (Iterable<Object>)actionGroups) {
+                if (actionGroup instanceof Map) {
+                    result.actionGroups.add(ActionGroup.of((Map<String,Object>) actionGroup));
+                } else {
+                    throw new UserFacingException("ActionGroup list should have a map for each entry, not "+JavaClassNames.superSimpleClassName(actionGroup));
+                }
+            }
+        } else if (actionGroups!=null) {
+            // TODO "map" short form
+            throw new UserFacingException("ActionGroups block should be a list, not "+JavaClassNames.superSimpleClassName(actionGroups));
+        }
+        
         result.customAttributes = attrs;
         
         return result;
@@ -112,6 +128,10 @@ public class DeploymentPlan extends  org.apache.brooklyn.camp.spi.pdp.Deployment
     
     public List<Policy> getPolicies() {
         return MutableList.copyOf(policies).asUnmodifiable();
+    }
+    
+    public List<ActionGroup> getActionGroups() {
+        return MutableList.copyOf(actionGroups).asUnmodifiable();
     }
 
     public Map<String, Object> getCustomAttributes() {

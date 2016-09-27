@@ -9,7 +9,6 @@ import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
-import kr.ac.hanyang.oCamp.api.objs.Action;
 import com.google.common.reflect.TypeToken;
 
 @ImplementedBy(ActionGroupImpl.class)
@@ -27,7 +26,15 @@ public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup{
 	public static final Sensor<Object> ACTIONS_ADDED = new BasicNotificationSensor<Object>(
 			Object.class, "actions.added", "The actions were added");
 	
-//	public void setAction(Effector action);
-//	public Effector getAction();
+	public boolean setActionID(Effector actionEffector);	
+	//public boolean removeActionID(Effector actionEffector);
+	
+	public boolean setActions(List<Action> actions);
+	//public boolean removeAction(Action action);
+	
+	public Action getAction(Sensor policySensor);
+	
+	public void setWeight(int weight);
+	public int getWeight();
 
 }

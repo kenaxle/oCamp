@@ -14,13 +14,10 @@ import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
-
 import com.google.common.reflect.TypeToken;
-
-import kr.ac.hanyang.oCamp.api.objs.Action;
-import kr.ac.hanyang.oCamp.api.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.api.transition.Transition;
-
+import kr.ac.hanyang.oCamp.entities.policies.objs.Action;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroupImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionImpl;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;

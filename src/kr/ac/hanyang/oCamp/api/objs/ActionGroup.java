@@ -8,17 +8,8 @@ import org.apache.brooklyn.api.policy.Policy;
 import org.apache.brooklyn.api.sensor.Sensor;
 
 
-public interface ActionGroup extends Entity{
+public interface ActionGroup /*extends Entity*/{
 	
-	public boolean setActionID(Effector actionEffector);	
-	//public boolean removeActionID(Effector actionEffector);
 	
-	public boolean setActions(List<Action> actions);
-	//public boolean removeAction(Action action);
-	
-	public Action getAction(Sensor policySensor);
-	
-	public void setWeight(int weight);
-	public int getWeight();
 	
 }

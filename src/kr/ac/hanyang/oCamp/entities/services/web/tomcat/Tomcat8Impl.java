@@ -2,17 +2,11 @@ package kr.ac.hanyang.oCamp.entities.services.web.tomcat;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
-
 import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.webapp.JavaWebAppDriver;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
 import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.api.client.repackaged.com.google.common.base.Throwables;
-import com.google.common.collect.Sets;
 
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.location.Location;

@@ -26,26 +26,14 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Preconditions;
 
 import kr.ac.hanyang.oCamp.api.policyManager.PolicyManager;
-import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponent;
-import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
-import kr.ac.hanyang.oCamp.camp.spi.oCampAbstractPlatformTransaction;
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
+
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.oCampMatcher;
 
 public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManagementContext{
 	
 	private static final Logger log = LoggerFactory.getLogger(oCampPlatform.class);
-	
-	BasicResourceLookup<PolicyManagerComponentTemplate> policyManagerComponentTemplates = new BasicResourceLookup<PolicyManagerComponentTemplate>();
-    BasicResourceLookup<PolicyManagerComponent> policyManagerComponents = new BasicResourceLookup<PolicyManagerComponent>();
-    
-    public BasicResourceLookup<PolicyManagerComponentTemplate> policyManagerComponentTemplates() {
-        return policyManagerComponentTemplates;
-    }
-	
-    public BasicResourceLookup<PolicyManagerComponent> policyManagerComponents() {
-        return policyManagerComponents;
-    }
     
 	private PdpProcessor pdp;
 	private final PlatformRootSummary root;
@@ -61,19 +49,19 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
 		this.mgmt = mgmt;
 		addMatchers();
 		addInterpreters();
-		//add the base policy manager all services created will subscribe to this
-		PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Base Policy Manager")
-                																		.id("BasePolicyManager")
-																		                .name("BasePolicyManager")
-																		                .type("kr.ac.hanyang.oCamp.entities.policies.PolicyManager")
-																		                .build();
-		
-		BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
-		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
-		
-		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
-		//TODO PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
-		transaction.add(polMCT).commit();
+//		//add the base policy manager all services created will subscribe to this
+//		PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Base Policy Manager")
+//                																		.id("BasePolicyManager")
+//																		                .name("BasePolicyManager")
+//																		                .type("kr.ac.hanyang.oCamp.entities.policies.PolicyManager")
+//																		                .build();
+//		
+//		BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
+//		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
+//		
+//		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
+//		//TODO PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
+//		transaction.add(polMCT).commit();
 		//System.out.println("PolicyManager");
 	}
 	
@@ -107,7 +95,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         return new oCampPlatformTransaction(this);
     }
 	
-    public static class oCampPlatformTransaction extends oCampAbstractPlatformTransaction {
+    public static class oCampPlatformTransaction extends PlatformTransaction {
         private final oCampPlatform platform;
         private final AtomicBoolean committed = new AtomicBoolean(false);
         
@@ -142,10 +130,6 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                     platform.applicationComponentTemplates().add((ApplicationComponentTemplate) o);
                     continue;
                 }
-                if (o instanceof PolicyManagerComponentTemplate) {
-                    platform.policyManagerComponentTemplates().add((PolicyManagerComponentTemplate) o);
-                    continue;
-                }
                 
                 if (o instanceof Assembly) {
                     platform.assemblies().add((Assembly) o);
@@ -157,10 +141,6 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                 }
                 if (o instanceof ApplicationComponent) {
                     platform.applicationComponents().add((ApplicationComponent) o);
-                    continue;
-                }
-                if (o instanceof PolicyManagerComponent) {
-                    platform.policyManagerComponents().add((PolicyManagerComponent) o);
                     continue;
                 }
                 

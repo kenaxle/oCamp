@@ -19,35 +19,22 @@
 package kr.ac.hanyang.oCamp.camp.spi;
 
 import org.apache.brooklyn.camp.spi.AbstractResource;
+import org.apache.brooklyn.camp.spi.ApplicationComponent;
+import org.apache.brooklyn.camp.spi.AssemblyTemplate;
+import org.apache.brooklyn.camp.spi.PlatformComponent;
+import org.apache.brooklyn.camp.spi.AssemblyTemplate.Builder;
+import org.apache.brooklyn.camp.spi.collection.BasicResourceLookup;
+import org.apache.brooklyn.camp.spi.collection.ResourceLookup;
+import org.apache.brooklyn.camp.spi.collection.ResourceLookup.EmptyResourceLookup;
+import org.apache.brooklyn.camp.spi.instantiate.AssemblyTemplateInstantiator;
+
 
 /** Holds the metadata (name, description, etc) for a PCT
  * as well as fields pointing to behaviour (eg creation of PlatformComponent).
  * <p>
  * See {@link AbstractResource} for more general information.
  */
-public class PolicyManagerComponentTemplate extends AbstractResource {
-
-    public static final String CAMP_TYPE = "PolicyManagerComponentTemplate";
-    static { assert CAMP_TYPE.equals(PolicyManagerComponentTemplate.class.getSimpleName()); }
-    
-    /** Use {@link #builder()} to create */
-    protected PolicyManagerComponentTemplate() {}
+public class PolicyManagerTemplate extends AssemblyTemplate {
 
     
-    // no fields beyond basic resource
-    
-    
-    // builder
-    
-    public static Builder<? extends PolicyManagerComponentTemplate> builder() {
-        return new PolicyManagerComponentTemplate().new Builder<PolicyManagerComponentTemplate>(CAMP_TYPE);
-    }
-    
-    public class Builder<T extends PolicyManagerComponentTemplate> extends AbstractResource.Builder<T,Builder<T>> {
-        
-        protected Builder(String type) { super(type); }
-        
-//        public Builder<T> foo(String x) { instance().setFoo(x); return thisBuilder(); }
-    }
-
 }

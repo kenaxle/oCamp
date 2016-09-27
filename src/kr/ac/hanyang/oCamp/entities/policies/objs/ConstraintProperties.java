@@ -8,6 +8,7 @@ import org.apache.brooklyn.entity.machine.MachineAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.software.SoftwareProcess;
 
 public class ConstraintProperties {
@@ -18,6 +19,7 @@ public class ConstraintProperties {
 	public static final Sensor SERVICE_UP = Attributes.SERVICE_UP;
 	public static final Sensor SERVICE_STATE = Attributes.SERVICE_STATE_ACTUAL;
 	public static final Sensor CPU_USAGE = MachineAttributes.CPU_USAGE;
+	public static final Sensor ENTITY_STARTED = IService.ENTITY_STARTED;
 	
 	public static Sensor getProperty(String name){
 		Sensor result = null;

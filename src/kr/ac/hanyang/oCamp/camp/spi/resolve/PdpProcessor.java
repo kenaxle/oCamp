@@ -27,6 +27,7 @@ import org.yaml.snakeyaml.error.YAMLException;
 
 import com.google.api.client.repackaged.com.google.common.annotations.VisibleForTesting;
 
+import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
@@ -94,6 +95,12 @@ public class PdpProcessor{
         if (plan.getPolicies()!=null){
         	for (Policy pol: plan.getPolicies()) {
         		applyMatchers(pol, atc);
+        	}
+        }
+        
+        if (plan.getActionGroups()!=null){
+        	for (ActionGroup actionGroup: plan.getActionGroups()) {
+        		applyMatchers(actionGroup, atc);
         	}
         }
 

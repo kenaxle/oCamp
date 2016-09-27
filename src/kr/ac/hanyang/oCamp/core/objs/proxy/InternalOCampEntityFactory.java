@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.EntityInitializer;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.entity.EntityTypeRegistry;
 import org.apache.brooklyn.api.policy.Policy;
+import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.config.BasicConfigKey;
 import org.apache.brooklyn.core.config.ConfigConstraints;
@@ -28,11 +30,16 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.Action;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
+import kr.ac.hanyang.oCamp.entities.transitions.Transition;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class InternalOCampEntityFactory extends InternalEntityFactory {
@@ -93,6 +100,27 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 			}
 	        return (T) entity;
 			
+        }else if(entity instanceof ActionGroup || entity instanceof Action || entity instanceof Transition){
+        	if(entity instanceof ActionGroup){
+        		entity.config().set(ActionGroup.ACTION_ID, (Effector) spec.getConfig().get(ActionGroup.ACTION_ID));
+        		List<EntitySpec<?>> childList = spec.getChildren();
+        		for (EntitySpec<?> childSpec : childList) {
+        			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));	
+        		}
+        		return (T) entity;
+        	}
+        	if(entity instanceof Action){
+        		entity.config().set(Action.PROPERTY, (Sensor) spec.getConfig().get(Action.PROPERTY));
+        		List<EntitySpec<?>> childList = spec.getChildren();
+        		for (EntitySpec<?> childSpec : childList) {
+        			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));	
+        		}
+        		return (T) entity;
+        	}
+        	
+        		entity.config().set(Transition.VALUE, spec.getConfig().get(Transition.VALUE));
+        		return (T) entity;
+
         }else{
 	        
 	        	List<EntitySpec<?>> childList = spec.getChildren();

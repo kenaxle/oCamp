@@ -36,22 +36,21 @@ public interface Action extends kr.ac.hanyang.oCamp.api.objs.Action{
 			Object.class, "transition.added", "The transition was added");
 	
 	
-//	org.apache.brooklyn.api.effector.Effector<Void> ACTION = Effectors.effector(new MethodEffector<Void>(ActionImpl.class, "action"))
-//		        .impl(new ActionBody())
-//		        .build();
+	public boolean setProperty(Sensor property);	
 	
-		
-//	public static class ActionBody extends EffectorBody<Void> {
-//        @Override 
-//        public Void call(ConfigBag parameters) {
-//            return new MethodEffector<Void>(ActionImpl.class, "action").call(entity(), parameters.getAllConfig());
-//        }
-//    }
-//	
+	public boolean addTransitions(List<Transition> transition);
 	
-//	 
-//	@org.apache.brooklyn.core.annotation.Effector(description="action effector")
-//	    void action(@EffectorParam(name="actionName") MethodEffector effectorName);
+	public boolean setConfig(ConfigKey config);
+	
+	public Sensor getProperty();
+	
+	public ConfigKey getConfig();
+	
+	public Transition getFirstTransition();
+	
+	public Transition getLastTransition();
+	
+	public int getWeight();
 	
 	
 }

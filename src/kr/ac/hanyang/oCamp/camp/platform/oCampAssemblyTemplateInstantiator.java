@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 import org.apache.brooklyn.api.entity.Application;
+import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.Task;
@@ -16,7 +17,6 @@ import org.apache.brooklyn.api.objs.SpecParameter;
 import org.apache.brooklyn.camp.CampPlatform;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampReservedKeys;
 import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynAssemblyTemplateInstantiator;
-import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateResolver;
 import org.apache.brooklyn.camp.spi.Assembly;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate.Builder;
@@ -24,12 +24,9 @@ import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.collection.ResolvableLink;
 import org.apache.brooklyn.core.config.BasicConfigKey;
 import org.apache.brooklyn.core.entity.Entities;
-import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.mgmt.EntityManagementUtils;
 import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
-import org.apache.brooklyn.core.mgmt.EntityManagementUtils.CreationResult;
 import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
-import org.apache.brooklyn.entity.stock.BasicApplicationImpl;
 import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.collections.MutableSet;
@@ -44,6 +41,7 @@ import com.google.common.collect.Lists;
 
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
+import kr.ac.hanyang.oCamp.entities.requirements.IService;
 
 public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateInstantiator {
 
@@ -59,7 +57,14 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        Application app = create(template, platform);
 	        //***************** 
 	        
-	        CreationResult<Application, Void> start = startup(app);
+	        for(Entity child: app.getChildren()){
+	        	
+	        		child.sensors().set(IService.ENTITY_STARTED, true);
+
+	        }
+	        // TODO Change back when done testing
+	        //TODO CreationResult<Application, Void> start = startup(app);
+	        
 	        // log.debug("CAMP created "+app+"; starting in "+start.task());
 	        return platform.assemblies().get(app.getApplicationId());
 	    }
@@ -108,6 +113,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        return instance;
 	    }
 	    
+	    
 	    public List<EntitySpec<?>> createComponentSpecs(
 	            AssemblyTemplate template,
 	            CampPlatform platform, BrooklynClassLoadingContext itemLoader,
@@ -128,16 +134,11 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 
 	        EntitySpec<? extends Application> app = /*CampInternalUtils.*/createWrapperApp(template, loader);
 	        app.configure(EntityManagementUtils.WRAPPER_APP_MARKER, Boolean.TRUE);
-
-	        // first build the children into an empty shell app
 	        
-	        List<EntitySpec<?>> childSpecs = createComponentSpecs(template, platform, loader, encounteredTypeSymbolicNames);
+	        List<EntitySpec<?>>	 childSpecs = createComponentSpecs(template, platform, loader, encounteredTypeSymbolicNames);
 	        
 	        for (EntitySpec<?> childSpec : childSpecs) {
-//	            // children get parsed and unwrapped irrespective of the NEVER_UNWRAP_APPS setting;
-//	            // we could support a NEVER_UNWRAP_NESTED_ENTITIES item but i don't know if there's a use case
-	            app.child(EntityManagementUtils.unwrapEntity(childSpec));
-	       
+	            app.child(EntityManagementUtils.unwrapEntity(childSpec));   
 	        }
 	        
 	        
@@ -147,6 +148,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 
 	        return app;
 	    }
+	    
 
 	    private boolean allowedToUnwrap(AssemblyTemplate template, EntitySpec<? extends Application> app) {
 	        return !(Boolean.TRUE.equals(TypeCoercions.coerce(template.getCustomAttributes().get(NEVER_UNWRAP_APPS_PROPERTY), Boolean.class)));
@@ -177,7 +179,8 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            	spec.children(buildReqSpec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
 	            	result.add(spec);
 	            }else{
-	            	//this is a policy we need to create and link
+	            	//this is a policy or policyManager component we need to create and link
+	            	// this is not needed. no need to separate
 	            	EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
 	            	spec.children(buildReqSpec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
 	            	result.add(spec);
@@ -212,7 +215,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    		oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
 	    		EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
 	    		EntitySpec<?> childSpec = buildTemplateSpecRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds);
-	    		if (childSpec == null){
+	    		if (childSpec == null && spec.getConfig().containsKey(new BasicConfigKey<String>(String.class,"content"))){
 		    		//if (childSpec.getChildren().isEmpty()){
 		    			//the this is an Artifact see if it exists before.
 		    			for(EntitySpec<?> artSpec:artifactList){
@@ -264,6 +267,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        return wrapTemplate;
 	    }
 	    
+	    
 	    //I may not need this as this mainly adds brooklyn parameters and the name
 	    //I will keep it for the time being
 	    private EntitySpec<? extends Application> createWrapperApp(AssemblyTemplate template, BrooklynClassLoadingContext loader) {
@@ -274,4 +278,5 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        // caller always sets WRAPPER_APP config; should we do it here?
 	        return wrapperSpec;
 	    }
+
 }

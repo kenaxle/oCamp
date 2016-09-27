@@ -13,6 +13,7 @@ import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
 
+
 public class oCampAssemblyTemplateConstructor extends AssemblyTemplateConstructor {
 	
 	private final oCampPlatform campPlatform;

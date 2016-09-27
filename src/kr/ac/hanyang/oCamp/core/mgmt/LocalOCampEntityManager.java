@@ -39,7 +39,7 @@ import com.google.common.collect.Sets;
 
 
 import kr.ac.hanyang.oCamp.camp.platform.oCampComponentTemplateResolver;
-import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerComponentTemplate;
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.core.objs.proxy.InternalOCampEntityFactory;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
@@ -239,7 +239,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         		policyManager.addOCampPolicy((Policy)e); // I think I should add the proxy and not the actual entity.}
         	}else{
         		// create the policy manager and add to the platform
-        		PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Base Policy Manager")
+        		PolicyManagerTemplate polMCT = (PolicyManagerTemplate) PolicyManagerTemplate.builder().description("Base Policy Manager")
 						.id("PolicyManager")
 		                .name("PolicyManager")
 		                .type(policyManagerType)
