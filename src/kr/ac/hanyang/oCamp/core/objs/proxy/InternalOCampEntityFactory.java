@@ -14,6 +14,7 @@ import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.config.BasicConfigKey;
 import org.apache.brooklyn.core.config.ConfigConstraints;
+import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.AbstractApplication;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.entity.EntityInternal;
@@ -33,6 +34,7 @@ import com.google.common.collect.Lists;
 
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Action;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
@@ -96,13 +98,13 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 		            specsByEntityId.put(entity.getId(), spec);
 				} 
 			}else{
-				entity.config().set(ConstraintImpl.PROPERTY,ConstraintProperties.getProperty((String) spec.getConfig().get(new BasicConfigKey(String.class, "property"))));
+				entity.config().set(Constraint.PROPERTY,(Sensor) ConstraintProperties.getProperty((String) spec.getConfig().get(Constraint.PROPERTY)));
 			}
 	        return (T) entity;
 			
         }else if(entity instanceof ActionGroup || entity instanceof Action || entity instanceof Transition){
         	if(entity instanceof ActionGroup){
-        		entity.config().set(ActionGroup.ACTION_ID, (Effector) spec.getConfig().get(ActionGroup.ACTION_ID));
+        		entity.config().set(ActionGroup.ACTION_ID, (Effector) ConstraintProperties.getProperty((String) spec.getConfig().get(ActionGroup.ACTION_ID)));
         		List<EntitySpec<?>> childList = spec.getChildren();
         		for (EntitySpec<?> childSpec : childList) {
         			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));	
@@ -110,14 +112,14 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
         		return (T) entity;
         	}
         	if(entity instanceof Action){
-        		entity.config().set(Action.PROPERTY, (Sensor) spec.getConfig().get(Action.PROPERTY));
+        		entity.config().set(Action.PROPERTY, (Sensor) ConstraintProperties.getProperty((String) spec.getConfig().get(Action.PROPERTY)));
         		List<EntitySpec<?>> childList = spec.getChildren();
         		for (EntitySpec<?> childSpec : childList) {
         			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));	
         		}
         		return (T) entity;
         	}
-        	
+        		//need to add a config key to keep the order of the transitions
         		entity.config().set(Transition.VALUE, spec.getConfig().get(Transition.VALUE));
         		return (T) entity;
 
@@ -128,6 +130,7 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 					entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));
 					if (entity instanceof PolicyImpl){
 						//set the targets and constraints
+						entity.config().set(PolicyManager.POLMGRTYPE,(String) spec.getConfig().get(PolicyManager.POLMGRTYPE));
 						List<Entity> targetList = Lists.newArrayList();
 						List<Constraint> constraintList = Lists.newArrayList();
 						for (String id: (List<String>) spec.getConfig().get(PolicyImpl.TARGETS)){
@@ -163,9 +166,10 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 	                ((AbstractEntity)entity).setCatalogItemId(spec.getCatalogItemId());
 	            }
 	            
-	            for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
-	                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
-	            }
+	            //evaluating if this is needed
+//	            for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
+//	                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
+//	            }
 	            
 	            Entity parent = spec.getParent();
 	            if (parent != null) {
@@ -279,4 +283,6 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
             return entityTypeRegistry.getImplementedBy(spec.getType());
         }
     }
+	
+
 }

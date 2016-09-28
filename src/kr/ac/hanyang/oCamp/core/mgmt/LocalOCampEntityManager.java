@@ -2,6 +2,7 @@ package kr.ac.hanyang.oCamp.core.mgmt;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,8 @@ import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
+import org.apache.brooklyn.camp.CampPlatform;
+import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.core.BrooklynLogging;
 import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.AbstractEntity;
@@ -36,10 +39,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-
-
+import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
 import kr.ac.hanyang.oCamp.camp.platform.oCampComponentTemplateResolver;
+import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
+import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.core.objs.proxy.InternalOCampEntityFactory;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
@@ -82,7 +86,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         return entityFactory;
     }
 	
-	@Override
+	//I need to pass the platform so I can build Policy Managers if they don't exist as yet. 
     public <T extends Entity> T createEntity(EntitySpec<T> spec) {
 		try {
             T entity = this.entityFactory.createEntity(spec);
@@ -239,17 +243,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         		policyManager.addOCampPolicy((Policy)e); // I think I should add the proxy and not the actual entity.}
         	}else{
         		// create the policy manager and add to the platform
-        		PolicyManagerTemplate polMCT = (PolicyManagerTemplate) PolicyManagerTemplate.builder().description("Base Policy Manager")
-						.id("PolicyManager")
-		                .name("PolicyManager")
-		                .type(policyManagerType)
-		                .build();
-        		BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(managementContext);
-        		oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, polMCT);       		
-        		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
-        		policyManager = createEntity(polMgrSpec); // create the policy Manager
-        		policyManager.addOCampPolicy((Policy)e); 
-        		//Entities.invokeEffector(this, policyManager, STARTUP);
+        		policyManager = buildPolicyManager(policyManagerType);
         	}
         }
         if (!entities.contains(proxyE)) 
@@ -261,6 +255,29 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         }
         
         return true;
+    }
+    
+    private PolicyManager buildPolicyManager(String policyManagerType){
+    	try{
+    		String yaml;
+    		Class clazz = Class.forName(policyManagerType);
+    		Field field = clazz.getDeclaredField("DEFAULT");
+			field.setAccessible(true);
+			if (field.isAccessible()){
+				yaml = (String) field.get(null);
+				// get the platform and use it to create the policy manager using the Yaml default
+				oCampPlatform platform = ((BaseEntityManager) managementContext).getParentPlatform();
+				PdpProcessor pdp = platform.oCampPdp();
+				PolicyManagerTemplate pmt = (PolicyManagerTemplate) pdp.registerDeploymentPlan(pdp.parseDeploymentPlan(yaml));
+				PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiate(pmt, platform);
+				return polMgr;
+			}else{
+				yaml = null;
+			}
+    	}catch(Exception e){
+    		log.error("Some Exception occurred "+e.getMessage());
+    	}
+    	return null;
     }
     
     

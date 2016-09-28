@@ -4,38 +4,36 @@ import java.util.Map;
 
 import org.apache.brooklyn.camp.CampPlatform;
 import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
-import org.apache.brooklyn.camp.spi.AssemblyTemplate;
-
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate.Builder;
 import org.apache.brooklyn.camp.spi.instantiate.AssemblyTemplateInstantiator;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
-import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
-import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate.Builder;
 
 
-public class oCampAssemblyTemplateConstructor extends AssemblyTemplateConstructor {
+public class oCampPMTemplateConstructor extends AssemblyTemplateConstructor {
 	
 	private final oCampPlatform campPlatform;
-	private final Builder<? extends oCampAssemblyTemplate> builder;
+	private final Builder<? extends PolicyManagerTemplate> builder;
     protected oCampPlatformTransaction transaction;
     
-	public oCampAssemblyTemplateConstructor(CampPlatform campPlatform) {
+	public oCampPMTemplateConstructor(CampPlatform campPlatform) {
 		super(campPlatform);
 		this.campPlatform = (oCampPlatform)campPlatform;
-		this.builder = oCampAssemblyTemplate.templateBuilder();
+		this.builder = PolicyManagerTemplate.templateBuilder();
         this.transaction = this.campPlatform.transaction();
 	}
     
     /** records all the templates to the underlying platform */
-    public AssemblyTemplate commit() {
+    public PolicyManagerTemplate commit() {
         checkState();
-        AssemblyTemplate at = builder.build();
-        transaction.add(at).commit();
+        PolicyManagerTemplate pmt = builder.build();
+        transaction.add(pmt).commit();
         transaction = null;
-        return at;
+        return pmt;
     }
 
     public void name(String name) {

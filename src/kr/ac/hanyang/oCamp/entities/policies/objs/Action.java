@@ -3,6 +3,7 @@ package kr.ac.hanyang.oCamp.entities.policies.objs;
 import java.util.List;
 
 import org.apache.brooklyn.api.effector.Effector;
+import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
@@ -17,7 +18,7 @@ import kr.ac.hanyang.oCamp.api.transition.Transition;
 import com.google.common.reflect.TypeToken;
 
 @ImplementedBy(ActionImpl.class)
-public interface Action extends kr.ac.hanyang.oCamp.api.objs.Action{
+public interface Action extends kr.ac.hanyang.oCamp.api.objs.Action, Entity{
 	
 	@SetFromFlag("property")
 	ConfigKey<Sensor> PROPERTY = ConfigKeys.newConfigKey(Sensor.class,"property","represents the property that was sensed");

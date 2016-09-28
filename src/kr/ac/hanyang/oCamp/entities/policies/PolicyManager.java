@@ -2,6 +2,7 @@ package kr.ac.hanyang.oCamp.entities.policies;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.brooklyn.api.effector.Effector;
@@ -13,6 +14,8 @@ import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
+import org.apache.brooklyn.util.collections.MutableList;
+import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 import com.google.common.reflect.TypeToken;
 import kr.ac.hanyang.oCamp.api.transition.Transition;
@@ -28,6 +31,8 @@ import kr.ac.hanyang.oCamp.entities.transitions.SetImpl;
 @ImplementedBy(PolicyManagerImpl.class)
 public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.PolicyManager{
 	
+	public static final ConfigKey<Object> POLMGRTYPE = ConfigKeys.newConfigKey(Object.class,"policymanager.type","used only to get the policy manager type from the spec");
+	
 	public static final Sensor<Policy> POLICY_ADDED = new BasicNotificationSensor<Policy>(
 			Policy.class, "policy.added", "The policy was added");
 	
@@ -36,6 +41,46 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 	
 	public static final Sensor<Object> ACTIONGROUPS_SET = new BasicNotificationSensor<Object>(
 			Object.class, "actiongroups.set", "The actiongroups were set");
+	
+//	public static final Map<String, Object> DEFAULT_ACTIONGROUPS = MutableMap.builder().put("actionGroups", MutableList.builder().add(MutableMap.of));
+	//public static final Map<String, Object> DEFAULT_ACTIONGROUPS = MutableMap.of(               "actionGroups", 
+//																   MutableList.of(MutableMap.of(   "id","START",
+//																								   "actions",
+//																				  MutableList.of(            ))));
+//	
+	public static final String DEFAULT = "type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager\n"
+									   + "actiongroups:\n"
+									   + "- id: START\n"
+									   + "  actions:\n"
+									   + "  - property: SERVICE_UP\n"
+									   + "    transitions:\n"
+									   + "    - type: Initial\n"
+									   + "      value: false\n"
+									   + "    - type: Set\n"
+									   + "      value: true\n"
+									   + "  - property: PROVISIONING_LOCATION\n"
+									   + "    transitions:\n"
+									   + "    - type: Initial\n"
+									   + "      value: null\n"
+									   + "    - type: Set\n"
+									   + "      value: OPTIONAL\n"
+									   + "- id: STOP\n"
+									   + "  actions:\n"
+									   + "  - property: SERVICE_UP\n"
+									   + "    transitions:\n"
+									   + "    - type: Initial\n"
+									   + "      value: true\n"
+									   + "    - type: Set\n"
+									   + "      value: false\n"
+									   + "  - property: PROVISIONING_LOCATION\n"
+									   + "    transitions:\n"
+									   + "    - type: Initial\n"
+									   + "      value: OPTIONAL\n"
+									   + "    - type: Set\n"
+									   + "      value: null\n";
+	
+	
+	
 	
 	@SetFromFlag("actiongroups")
 	ConfigKey<List<ActionGroup>> ACTIONGROUPS = ConfigKeys.newConfigKey(new TypeToken<List<ActionGroup>>(){ },

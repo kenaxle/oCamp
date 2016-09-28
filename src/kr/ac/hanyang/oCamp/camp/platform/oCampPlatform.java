@@ -2,11 +2,8 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
-import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
 import org.apache.brooklyn.camp.BasicCampPlatform;
-import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynComponentTemplateResolver;
 import org.apache.brooklyn.camp.brooklyn.spi.dsl.BrooklynDslInterpreter;
 import org.apache.brooklyn.camp.spi.ApplicationComponent;
 import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
@@ -18,18 +15,18 @@ import org.apache.brooklyn.camp.spi.PlatformRootSummary;
 import org.apache.brooklyn.camp.spi.PlatformTransaction;
 import org.apache.brooklyn.camp.spi.collection.BasicResourceLookup;
 import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
-import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
-import org.apache.brooklyn.util.collections.MutableSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 
-import kr.ac.hanyang.oCamp.api.policyManager.PolicyManager;
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
-
+import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.oCampMatcher;
+import kr.ac.hanyang.oCamp.core.mgmt.BaseEntityManager;
+
 
 public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManagementContext{
 	
@@ -41,35 +38,25 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
     									  // the management context is created outside so we need a handle to it
 	
 	// need to add a resourcelookup for the policies
+	BasicResourceLookup<PolicyManagerTemplate> policyManagerTemplates = new BasicResourceLookup<PolicyManagerTemplate>();
+	BasicResourceLookup<PolicyManager> policyManagers = new BasicResourceLookup<PolicyManager>();
+	
+	
 	//constructor
 	public oCampPlatform(PlatformRootSummary root, ManagementContext mgmt) {
 		this(root);
 		oCampPlatformTransaction transaction = (oCampPlatformTransaction) transaction();
 		//this.addPlatform(new BasicCampPlatform(root));
 		this.mgmt = mgmt;
+		((BaseEntityManager) mgmt).setParentPlatform(this);
 		addMatchers();
 		addInterpreters();
-//		//add the base policy manager all services created will subscribe to this
-//		PolicyManagerComponentTemplate polMCT = PolicyManagerComponentTemplate.builder().description("Base Policy Manager")
-//                																		.id("BasePolicyManager")
-//																		                .name("BasePolicyManager")
-//																		                .type("kr.ac.hanyang.oCamp.entities.policies.PolicyManager")
-//																		                .build();
-//		
-//		BrooklynClassLoadingContext loader = JavaBrooklynClassLoadingContext.create(mgmt);
-//		BrooklynComponentTemplateResolver entityResolver = BrooklynComponentTemplateResolver.Factory.newInstance(loader, polMCT);
-//		
-//		EntitySpec<? extends PolicyManager> polMgrSpec = entityResolver.resolveSpec(MutableSet.<String>of());
-//		//TODO PolicyManager polMgr = mgmt.getEntityManager().createEntity(polMgrSpec);
-//		transaction.add(polMCT).commit();
-		//System.out.println("PolicyManager");
 	}
 	
 	 public oCampPlatform(PlatformRootSummary root){  
 		 super(root);
 		 this.root = Preconditions.checkNotNull(root, "root");
 	     pdp = new PdpProcessor(this);
-
 	}
 	
 	@Override
@@ -89,6 +76,13 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         pdp.addInterpreter(new BrooklynDslInterpreter());
     }
     
+    public BasicResourceLookup<PolicyManagerTemplate> policyManagerTemplates(){
+    	return policyManagerTemplates;
+    }
+    
+    public BasicResourceLookup<PolicyManager> policyManagers(){
+    	return policyManagers;
+    }
     
     @Override
     public oCampPlatformTransaction transaction() {
@@ -118,7 +112,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                 throw new IllegalStateException("transaction being committed multiple times");
             
             for (Object o: additions) {
-                if (o instanceof AssemblyTemplate) {
+                if (o instanceof oCampAssemblyTemplate) {
                     platform.assemblyTemplates().add((AssemblyTemplate) o);
                     continue;
                 }
@@ -130,7 +124,6 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                     platform.applicationComponentTemplates().add((ApplicationComponentTemplate) o);
                     continue;
                 }
-                
                 if (o instanceof Assembly) {
                     platform.assemblies().add((Assembly) o);
                     continue;
@@ -141,6 +134,14 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                 }
                 if (o instanceof ApplicationComponent) {
                     platform.applicationComponents().add((ApplicationComponent) o);
+                    continue;
+                }
+                if (o instanceof PolicyManagerTemplate) {
+                    platform.policyManagerTemplates().add((PolicyManagerTemplate) o);
+                    continue;
+                }
+                if (o instanceof PolicyManager) {
+                    platform.policyManagers().add((PolicyManager) o);
                     continue;
                 }
                 

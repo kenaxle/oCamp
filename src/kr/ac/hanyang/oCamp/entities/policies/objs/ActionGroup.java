@@ -3,6 +3,7 @@ package kr.ac.hanyang.oCamp.entities.policies.objs;
 import java.util.List;
 
 import org.apache.brooklyn.api.effector.Effector;
+import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
@@ -12,10 +13,10 @@ import org.apache.brooklyn.util.core.flags.SetFromFlag;
 import com.google.common.reflect.TypeToken;
 
 @ImplementedBy(ActionGroupImpl.class)
-public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup{
+public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup, Entity{
 	
-	@SetFromFlag("actionID")
-	public static final ConfigKey<Effector> ACTION_ID = ConfigKeys.newConfigKey(Effector.class,"actionID","represents the ID of the action");
+	@SetFromFlag("actionId")
+	public static final ConfigKey<Effector> ACTION_ID = ConfigKeys.newConfigKey(Effector.class,"actionId","represents the ID of the action");
 	
 	@SetFromFlag("actions")
 	public static final ConfigKey<List<Action>> ACTIONS = ConfigKeys.newConfigKey(new TypeToken<List<Action>>(){ },"actions","represents the list of actions");	

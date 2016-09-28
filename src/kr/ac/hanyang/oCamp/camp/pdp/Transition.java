@@ -19,7 +19,7 @@ public class Transition {
 	String name;
 	String description;
 	String transitionType;
-	String value;
+	Object value;
 	Map<String,Object> customAttributes;
 		   
 	   
@@ -33,7 +33,7 @@ public class Transition {
         result.transitionType = (String) Yamls.removeMultinameAttribute(attrs, "transition_type", "transitionType", "type");
         // TODO version
         
-        result.value = (String) attrs.remove("value");
+        result.value = attrs.remove("value");
         result.customAttributes = attrs;
         
         return result;
@@ -46,8 +46,12 @@ public class Transition {
     public String getDescription() {
         return description;
     }
+    
+    public String getTransitionType() {
+        return transitionType;
+    }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 

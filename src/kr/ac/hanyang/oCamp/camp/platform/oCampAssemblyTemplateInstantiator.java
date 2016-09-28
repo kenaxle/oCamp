@@ -39,8 +39,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManager;
+import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
+import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
 
 public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateInstantiator {
@@ -68,6 +71,11 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        // log.debug("CAMP created "+app+"; starting in "+start.task());
 	        return platform.assemblies().get(app.getApplicationId());
 	    }
+	
+	public PolicyManager instantiate(PolicyManagerTemplate template, oCampPlatform platform) {
+        Application polMgr = create(template, platform);      
+        return platform.policyManagers().get(polMgr.getApplicationId());
+    }
 	
 	 private <T extends Application> CreationResult<T,Void> startup(T app) {
 		 	log.info("****** Application Startup*********");
@@ -174,9 +182,9 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	            
 	            //appChildComponentTemplate.getType();
 	            
-	            if(appChildComponentTemplate.getType().contains("services")){
+	            if(appChildComponentTemplate.getType().contains("ActionGroup")){
 	            	EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
-	            	spec.children(buildReqSpec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	            	spec.children(buildRecSpecs(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
 	            	result.add(spec);
 	            }else{
 	            	//this is a policy or policyManager component we need to create and link
@@ -237,6 +245,19 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    	}
 	    	return null;//result;
 	    }
+	    
+	    private List<EntitySpec<?>> buildRecSpecs(BrooklynClassLoadingContext loader, oCampPlatformComponentTemplate pctl, Set<String> encounteredRegisteredTypeIds){
+	    	List<EntitySpec<?>> result = Lists.newArrayList();
+	    	for (ResolvableLink<PlatformComponentTemplate> ctl: pctl.getPlatformComponentTemplates().links()) {
+	    		PlatformComponentTemplate appChildComponentTemplate = ctl.resolve();
+	    		//should not just launch new instance. need to determine if it was already built.
+	    		oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, appChildComponentTemplate);
+	    		EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
+	    		spec.children(buildRecSpecs(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds));
+	    		result.add(spec);
+	    	}
+	    	return result;
+	    }
 
 
 	    private static ManagementContext getManagementContext(CampPlatform platform) {
@@ -255,7 +276,10 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    
 	    private static AssemblyTemplate buildWrapperAppTemplate(AssemblyTemplate template) {
 	        Builder<? extends AssemblyTemplate> builder = AssemblyTemplate.builder();
-	        builder.type("brooklyn:" + BasicOCampApplicationImpl.class.getName());  //FIXME leaving brooklyn tags for now 
+	        if (template.getCustomAttributes().containsKey("policyMgr"))
+	        	builder.type("brooklyn:" + PolicyManagerImpl.class.getName());
+	        else
+	        	builder.type("brooklyn:" + BasicOCampApplicationImpl.class.getName());  //FIXME leaving brooklyn tags for now 
 	        builder.id(template.getId());
 	        builder.name(template.getName());
 	        builder.sourceCode(template.getSourceCode());

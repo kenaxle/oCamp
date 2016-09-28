@@ -11,14 +11,16 @@ import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.exceptions.UserFacingException;
 import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.javalang.JavaClassNames;
+import org.apache.brooklyn.util.yaml.Yamls;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class DeploymentPlan extends  org.apache.brooklyn.camp.spi.pdp.DeploymentPlan{
+public class DeploymentPlan {
 	
 	String name;
 	String origin;
 	String description;
 	String sourceCode;
+	String type;
 	List<Artifact> artifacts;
 	List<Service> services;
 	List<Policy> policies;
@@ -34,6 +36,7 @@ public class DeploymentPlan extends  org.apache.brooklyn.camp.spi.pdp.Deployment
         result.name = (String) attrs.remove("name");
         result.description = (String) attrs.remove("description");
         result.origin = (String) attrs.remove("origin");
+        result. type = (String) Yamls.removeMultinameAttribute(attrs, "policyManager_type", "policyManagerType", "type");
         result.sourceCode = optionalSourceCode;
         // TODO version
         
@@ -116,6 +119,10 @@ public class DeploymentPlan extends  org.apache.brooklyn.camp.spi.pdp.Deployment
 
     public String getSourceCode() {
         return sourceCode;
+    }
+    
+    public String getType(){
+    	return type;
     }
     
     public List<Artifact> getArtifacts() {

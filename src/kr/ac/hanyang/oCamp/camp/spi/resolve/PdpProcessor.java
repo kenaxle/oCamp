@@ -31,6 +31,7 @@ import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
+import kr.ac.hanyang.oCamp.camp.pdp.oCampPMTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 
 public class PdpProcessor{
@@ -73,8 +74,12 @@ public class PdpProcessor{
     
     /** applies matchers to the given deployment plan to create an assembly template */
     public AssemblyTemplate registerDeploymentPlan(DeploymentPlan plan) {
-        oCampAssemblyTemplateConstructor atc = new oCampAssemblyTemplateConstructor(campPlatform);
-        
+    	AssemblyTemplateConstructor atc;
+    	if(plan.getType() != null){
+    		atc = new oCampPMTemplateConstructor(campPlatform);
+    	}else{
+    		atc = new oCampAssemblyTemplateConstructor(campPlatform);
+    	}
         if (plan.getName()!=null) atc.name(plan.getName());
         if (plan.getDescription()!=null) atc.description(plan.getDescription());
         if (plan.getSourceCode()!=null) atc.sourceCode(plan.getSourceCode());
@@ -121,8 +126,6 @@ public class PdpProcessor{
             // set a default instantiator which just invokes the component's instantiators
             // (or throws unsupported exceptions, currently!)
             atc.instantiator(BasicAssemblyTemplateInstantiator.class);
-        
-       
         
         return atc.commit();
     }

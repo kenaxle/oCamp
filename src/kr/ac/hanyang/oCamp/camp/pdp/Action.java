@@ -14,6 +14,8 @@ import org.apache.brooklyn.util.javalang.JavaClassNames;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
+
 public class Action {
 	
 	String name;
@@ -31,7 +33,7 @@ public class Action {
         Action result = new Action();
         result.name = (String) attrs.remove("name");
         result.description = (String) attrs.remove("description");
-        result.actionType = (String) Yamls.removeMultinameAttribute(attrs, "actiongroup_type", "actionGroupType", "type");
+        result.actionType = oCampReserved.POLICY_PREFIX+"Action";
         result.property = (String) attrs.remove("property");
         // TODO version
         
@@ -66,6 +68,10 @@ public class Action {
     
     public String getProperty() {
         return property;
+    }
+    
+    public String getActionType() {
+        return actionType;
     }
 
     public List<Transition> getTransitions() {

@@ -14,6 +14,8 @@ import org.apache.brooklyn.util.javalang.JavaClassNames;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
+
 public class ActionGroup {
 	
 	String name;
@@ -31,7 +33,7 @@ public class ActionGroup {
         ActionGroup result = new ActionGroup();
         result.name = (String) attrs.remove("name");
         result.description = (String) attrs.remove("description");
-        result.actionGroupType = (String) Yamls.removeMultinameAttribute(attrs, "actiongroup_type", "actionGroupType", "type");
+        result.actionGroupType = oCampReserved.POLICY_PREFIX+"ActionGroup";
         result.actionId = (String) Yamls.removeMultinameAttribute(attrs, "actiong_id", "actionId", "id");
         // TODO version
         
@@ -66,6 +68,10 @@ public class ActionGroup {
     
     public String getActionId() {
         return actionId;
+    }
+    
+    public String getActionGroupType() {
+        return actionGroupType;
     }
 
     public List<Action> getActions() {

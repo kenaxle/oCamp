@@ -33,8 +33,11 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import kr.ac.hanyang.oCamp.camp.pdp.Action;
+import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
+import kr.ac.hanyang.oCamp.camp.pdp.Transition;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
@@ -95,7 +98,20 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, policyType) != null)
                 return policyType;
 		}
-		log.debug( "Not an artifact or Service. unable to match "+deploymentItem);
+		
+		if (deploymentItem instanceof ActionGroup){
+			ActionGroup actionGroup = (ActionGroup) deploymentItem;
+			String actionGroupType = actionGroup.getActionGroupType();
+			// now can we load the class 
+			BrooklynClassLoadingContext loader = BasicBrooklynCatalog.BrooklynLoaderTracker.getLoader();
+            if (loader == null) 
+            	loader = JavaBrooklynClassLoadingContext.create(mgmt);
+            if (BrooklynComponentTemplateResolver.Factory.newInstance(loader, actionGroupType) != null)
+                return actionGroupType;
+		}
+		
+		
+		log.debug( "Not an oCamp Matchable type. unable to match "+deploymentItem);
 		return null;
 	}
 	
@@ -138,7 +154,8 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	public boolean apply(Object deploymentPlanItem, AssemblyTemplateConstructor atc) {
 		if (!(deploymentPlanItem instanceof Service) && 
 		    !(deploymentPlanItem instanceof Artifact) && 
-		    !(deploymentPlanItem instanceof Policy))	return false;
+		    !(deploymentPlanItem instanceof Policy) &&
+		    !(deploymentPlanItem instanceof ActionGroup))	return false;
 		
 		atc.instantiator(oCampAssemblyTemplateInstantiator.class);
 		String type = lookupType(deploymentPlanItem);
@@ -273,6 +290,38 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 
 	        
 	        atc.add(builder.build()); // add the policytemplate
+        }else if(deploymentPlanItem instanceof ActionGroup){
+        	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
+            builder.type(type); //reform the type string: this forces the types to only be brooklyn types
+        	name = ((ActionGroup)deploymentPlanItem).getName(); // this is not needed FIXME
+        	if (!Strings.isBlank(name)) 
+        		builder.name(name);
+        	
+        	builder.customAttribute("actionId", ((ActionGroup)deploymentPlanItem).getActionId());
+        	Map<String, Object> attrs = MutableMap.copyOf( ((ActionGroup)deploymentPlanItem).getCustomAttributes() ); 
+        	List<Action> actions = MutableList.copyOf( ((ActionGroup)deploymentPlanItem).getActions());
+        	if (actions != null ){
+        		for(Action action: actions){
+        			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> actionBuilder = oCampPlatformComponentTemplate.builder(); 
+        			actionBuilder.type( action.getActionType());
+        			actionBuilder.customAttribute("property", action.getProperty());
+        			
+        			List<Transition> transitions = MutableList.copyOf(action.getTransitions());
+        			if (transitions != null ){
+                		for(Transition transition: transitions){
+                			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> transBuilder = oCampPlatformComponentTemplate.builder(); 
+                			transBuilder.type( oCampReserved.TRANSITION_PREFIX+transition.getTransitionType());
+                			transBuilder.customAttribute("value", transition.getValue());
+                			
+                			actionBuilder.add(transBuilder.build());
+                		}
+        			}        	     
+        	  
+        			builder.add(actionBuilder.build());
+        		}
+        	}
+        	atc.addCustomAttributes(MutableMap.of("policyMgr",true));
+        	atc.add(builder.build());
         }
 
         return true;
