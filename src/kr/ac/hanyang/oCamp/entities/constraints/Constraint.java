@@ -13,8 +13,8 @@ import org.apache.brooklyn.util.core.flags.SetFromFlag;
 @ImplementedBy(ConstraintImpl.class)
 public interface Constraint<T> extends kr.ac.hanyang.oCamp.api.policy.Constraint{
 	
-	public static final BasicNotificationSensor<SensorEvent> CONSTRAINT_VIOLATED = new BasicNotificationSensor<SensorEvent>(
-	            SensorEvent.class, "constraint.was.violated", "The constraint was violated");
+	public static final BasicNotificationSensor<Entity> CONSTRAINT_VIOLATED = new BasicNotificationSensor<Entity>(
+	            Entity.class, "constraint.was.violated", "The constraint was violated");
 	
 	public static final BasicNotificationSensor<Sensor> PROPERTY_SET = new BasicNotificationSensor<Sensor>(
             Sensor.class, "property.set", "The property sensor was set");
@@ -28,6 +28,11 @@ public interface Constraint<T> extends kr.ac.hanyang.oCamp.api.policy.Constraint
 	@SetFromFlag("value")
 	public static final ConfigKey<Object> VALUE = ConfigKeys.newConfigKey(Object.class,"value","represents the desired value of the constraint");
 	
+	public Sensor getProperty();
+
+	public Object getValue();
+	
+	public ConstraintVector Violated(Entity entity);
 	
 	public void register(Entity entity);
 	

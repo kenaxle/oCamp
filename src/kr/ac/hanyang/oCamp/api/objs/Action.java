@@ -11,20 +11,20 @@ import kr.ac.hanyang.oCamp.api.transition.Transition;
 
 public interface Action extends Entity{
 	
-	public boolean setProperty(Sensor property);	
-	
-	public boolean addTransitions(List<Transition> transition);
-	
-	public boolean setConfig(ConfigKey config);
-	
-	public Sensor getProperty();
-	
-	public ConfigKey getConfig();
-	
-	public Transition getFirstTransition();
-	
-	public Transition getLastTransition();
-	
-	public int getWeight();
+//	public boolean setProperty(Sensor property);	
+//	
+//	//public boolean addTransitions(List<Transition> transition);
+//	
+//	public boolean setConfig(ConfigKey config);
+//	
+//	public Sensor getProperty();
+//	
+//	public ConfigKey getConfig();
+//	
+//	public Transition getFirstTransition();
+//	
+//	public Transition getLastTransition();
+//	
+//	public int getWeight();
 	
 }

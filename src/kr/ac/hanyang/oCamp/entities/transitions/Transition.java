@@ -20,7 +20,12 @@ public interface Transition<T> extends kr.ac.hanyang.oCamp.api.transition.Transi
 	
 	public T getValue();
 	
+	public boolean setValue(Object value);	
+	public boolean removeValue(Object value);
 	
+	public boolean evaluate(Object obj);
+	
+	public int getWeight();
 	//public boolean evaluate(SensorEvent event);
 	
 }

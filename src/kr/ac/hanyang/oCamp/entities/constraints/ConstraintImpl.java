@@ -9,13 +9,10 @@ import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
-import kr.ac.hanyang.oCamp.entities.requirements.DeployOnImpl;
-
 //import kr.ac.hanyang.oCamp.api.policy.Policy;
 
 public abstract class ConstraintImpl<T> extends AbstractEntity implements Constraint{
-	private static final Logger log = LoggerFactory.getLogger(DeployOnImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(ConstraintImpl.class);
 	
 	public ConstraintImpl(){}
 	
@@ -24,12 +21,12 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 		super.init();
 	}
 	
-	public BasicAttributeSensor getProperty(){
-		return (BasicAttributeSensor) config().get(PROPERTY);
+	public Sensor getProperty(){
+		return  config().get(PROPERTY);
 	}
 
 	//TODO need to fix this
-	public T getValue(){
+	public Object getValue(){
 		return null;//value;
 	}
 	
@@ -50,8 +47,8 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 				log.info("*********Sensor Event**********");
 				log.info("Sensor Event: "+event.getValue());
 				if (! listener.evaluate(event)){
-					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event);
-					log.info("*********Sensor Evaluated**********");
+					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event.getSource());
+					log.info("*********Emitted Constraint Violated **********");
 					log.info("Sensor Event: "+event.getValue());
 				}
 			}
@@ -59,7 +56,7 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 	}
 	
 	
-	public abstract boolean isViolated(Sensor propertySensor, Entity entity);
+	public abstract ConstraintVector Violated(Entity entity);
 		
 	
 	

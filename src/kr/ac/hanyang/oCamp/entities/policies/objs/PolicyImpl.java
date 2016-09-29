@@ -15,10 +15,7 @@ import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableable{
 	
 	private static final Logger log = LoggerFactory.getLogger(PolicyImpl.class);
-	//private String name;
-	//private String type; //FIXME this is the policy manager.
-	//private List<Entity> targets; //FIXME may have to use a higher class
-	//private List<Constraint> desiredState;
+	
 	
 	
 	//public ConstraintSet getDesiredState(){return desiredState;}
@@ -30,25 +27,30 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 	@Override
 	public void init(){
 		super.init();
+		initConstraints();
 	}
 	
 	private SensorEventListener<Object> policyListener(Policy listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
+				log.info("*********Sensor Event**********");
+				log.info("Sensor Event: "+event.getValue());
 				listener.sensors().emit(POLICY_VIOLATED, event.getValue());
+				log.info("*********Emitted Policy Violated **********");
+				log.info("Sensor Event: "+event.getValue());
 			}
 		};
 	}
 
 	/* The set of constraints is immutable and required therefore there is no need to 
-	   connect the sensors there. the sensors will be connected when targets are set */
+	   connect the sensors there. the sensors will be connected when targets are set 
+	   this this will be done during initialization*/
 	//@Override
-	public void setConstraints(List<Constraint> constraints) {
-		config().set(CONSTRAINTS, constraints);
-		for (Constraint constraint: constraints){
+	public void initConstraints() {
+		for (Entity constraint: this.getChildren()){
 			subscriptions().subscribe(constraint,  Constraint.CONSTRAINT_VIOLATED, policyListener(this));
 		}
-		sensors().emit(CONSTRAINTS_SET, constraints);
+		sensors().emit(CONSTRAINTS_INIT, this.getChildren());
 	}
 	
 	//@Override
@@ -90,9 +92,10 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 	
 	
 	private void connectSensors(){
-		for (Constraint constraint: config().get(CONSTRAINTS)){
+		for (Entity constraint: this.getChildren()){
+			Constraint constr = (Constraint) constraint;
 			for (Entity entity: config().get(TARGETS)){
-				constraint.register(entity);
+				constr.register(entity);
 				//constraint.subscriptions().subscribe(entity, constraint.getProperty(), constraint.getListener());
 			}
 		}

@@ -29,8 +29,8 @@ public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 	public static final Sensor<Object> POLICY_VIOLATED = new BasicNotificationSensor<Object>(
             Object.class, "policy.violated", "The policy was violated");
 	
-	public static final Sensor<Object> CONSTRAINTS_SET = new BasicNotificationSensor<Object>(
-			Object.class, "constraint.set", "The list of constraints was set");
+	public static final Sensor<Object> CONSTRAINTS_INIT = new BasicNotificationSensor<Object>(
+			Object.class, "constraint.init", "initialized the constraints.");
 	
 	public static final Sensor<Object> SUBSCRIBERS_SET = new BasicNotificationSensor<Object>(
 			Object.class, "subscriber.set", "The list of entities was set");
@@ -41,7 +41,7 @@ public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 	public static final Sensor<Entity> SUBSCRIBER_REMOVED = new BasicNotificationSensor<Entity>(
 			Entity.class, "subscriber.removed", "The subscriber was removed");
 
-	public void setConstraints(List<Constraint> constraints);
+	public void initConstraints();
 	
 	public void setTargets(List<Entity> targets);
 	

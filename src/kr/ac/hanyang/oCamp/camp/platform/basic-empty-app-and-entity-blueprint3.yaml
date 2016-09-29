@@ -37,6 +37,9 @@ policies:
   - property: ENTITY_STARTED
     type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
     value: true
+  - property: SERVICE_UP
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
   targets: [tomcat]
             
 

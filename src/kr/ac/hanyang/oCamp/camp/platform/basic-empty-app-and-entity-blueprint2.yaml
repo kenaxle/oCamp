@@ -13,7 +13,7 @@ actiongroups:
     - type: Initial
       value: null 
     - type: Set
-      value: OPTIONAL 
+      value: Optional 
 - id: STOP
   actions:  
   - property: SERVICE_UP
@@ -25,6 +25,6 @@ actiongroups:
   - property: PROVISIONING_LOCATION
     transitions:
     - type: Initial
-      value: OPTIONAL 
+      value: Optional 
     - type: Set
       value: null

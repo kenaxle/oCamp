@@ -1,37 +1,19 @@
-#
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#  http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-#
+
 name: Simple Service specification
 #location: AWS Tokyo (ap-northeast-1)
 
-
+name: Simple War on Tomcat8
+artifacts:
+- type: kr.ac.hanyang.oCamp.entities.artifacts.War
+  content: http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war
+  requirements:
+  - type: kr.ac.hanyang.oCamp.entities.requirements.DeployOn
+    target: /webapps
+    fulfillment: id:tomcat
+          
 services:
 - id: tomcat
   characteristics:
       - type: kr.ac.hanyang.oCamp.entities.services.web.tomcat.Tomcat8
-        version: 7.0.65
-        
-policies: 
-- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
-  constraints:
-  - property: PROVISIONING_LOCATION
-    type: kr.ac.hanyang.oCamp.entities.constraints.Within
-    value: ["AWS Tokyo (ap-northeast-1)","AWS Virginia (us-east-1)"]
-  targets: [tomcat]
-        
+        version: 8.0.37
      

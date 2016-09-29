@@ -18,30 +18,19 @@ public class InitialImpl<T> extends TransitionImpl implements Initial{
 		
 	}
 	
-	@Override
-	public boolean evaluate(SensorEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
-	public boolean evaluate(Object obj, Entity entity) {
-		if (obj instanceof Sensor){
-			Sensor propertySensor = (AttributeSensor) obj;			
-			T propertyValue = entity.sensors().get((AttributeSensor<T>) propertySensor);
-			Object value = config().get(VALUE);
-			if(value == null){
-				return propertyValue == null; // or whatever a sensor uses to represent that it has no value
-			}else
-			if(value.getClass().getName().equals("java.util.Optional")){
-				return propertyValue != null; // or whatever a sensor uses to represent that it has no value
-			}else
-			if (propertyValue.getClass() == value.getClass()){
-						return propertyValue.equals(value);
-			}
-			
+	public boolean evaluate(Object obj) {
+		Object value = config().get(VALUE);
+		if(value == null){
+			return obj == null; // or whatever a sensor uses to represent that it has no value
+		}else
+		if(value.getClass().getName().equals("java.util.Optional")){
+			return obj != null; // or whatever a sensor uses to represent that it has no value
+		}else
+		if (obj.getClass() == value.getClass()){
+			return obj.equals(value);
 		}
-			
 		return false;
 	}
 

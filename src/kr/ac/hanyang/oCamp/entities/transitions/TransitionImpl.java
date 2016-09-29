@@ -37,19 +37,15 @@ public abstract class TransitionImpl<T> extends AbstractEntity implements Transi
 	}
 
 	
-	public boolean evaluate(SensorEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	public boolean evaluate(SensorEvent event) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 	@Override
 	public boolean setValue(Object value) {
 		return (config().set((ConfigKey)VALUE, value) != null);
 	}
-	
-//	public boolean setConfigKey(ConfigKey conf){
-//		return (config().set((ConfigKey)CONFIGKEY, conf) != null);
-//	}
 
 	
 	//will have to remove this
@@ -59,27 +55,8 @@ public abstract class TransitionImpl<T> extends AbstractEntity implements Transi
 	}
 
 	@Override
-	public abstract boolean evaluate(Object obj, Entity entity);
+	public abstract boolean evaluate(Object obj);
 
 	
-//	@Override
-//	public boolean addTransition(Transition transition) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean removeTransition(Transition transition) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-
-
-
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

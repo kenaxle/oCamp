@@ -45,6 +45,7 @@ public class PolicyManagerTemplate extends AssemblyTemplate {
     Class<? extends AssemblyTemplateInstantiator> instantiator;
     ResourceLookup<ApplicationComponentTemplate> applicationComponentTemplates;
     ResourceLookup<PlatformComponentTemplate> platformComponentTemplates;
+    ResourceLookup<PolicyManagerTemplate> policyManagerTemplates;
     
     // TODO
 //    "parameterDefinitionUri": URI,
@@ -62,6 +63,9 @@ public class PolicyManagerTemplate extends AssemblyTemplate {
     public ResourceLookup<PlatformComponentTemplate> getPlatformComponentTemplates() {
         return platformComponentTemplates != null ? platformComponentTemplates : new EmptyResourceLookup<PlatformComponentTemplate>();
     }
+    public ResourceLookup<PolicyManagerTemplate> getPolicyManagerTemplates() {
+        return policyManagerTemplates != null ? policyManagerTemplates : new EmptyResourceLookup<PolicyManagerTemplate>();
+    }
     
     private void setInstantiator(Class<? extends AssemblyTemplateInstantiator> instantiator) {
         this.instantiator = instantiator;
@@ -71,6 +75,9 @@ public class PolicyManagerTemplate extends AssemblyTemplate {
     }
     private void setPlatformComponentTemplates(ResourceLookup<PlatformComponentTemplate> platformComponentTemplates) {
         this.platformComponentTemplates = platformComponentTemplates;
+    }
+    private void setPolicyManagerTemplates(ResourceLookup<PolicyManagerTemplate> policyManagerTemplates) {
+        this.policyManagerTemplates = policyManagerTemplates;
     }
     
     // builder
@@ -85,6 +92,7 @@ public class PolicyManagerTemplate extends AssemblyTemplate {
         public Builder<T> instantiator(Class<? extends AssemblyTemplateInstantiator> x) { PolicyManagerTemplate.this.setInstantiator(x); return thisBuilder(); }
         public Builder<T> applicationComponentTemplates(ResourceLookup<ApplicationComponentTemplate> x) { PolicyManagerTemplate.this.setApplicationComponentTemplates(x); return thisBuilder(); }
         public Builder<T> platformComponentTemplates(ResourceLookup<PlatformComponentTemplate> x) { PolicyManagerTemplate.this.setPlatformComponentTemplates(x); return thisBuilder(); }
+        public Builder<T> policyManagerTemplates(ResourceLookup<PolicyManagerTemplate> x) { PolicyManagerTemplate.this.setPolicyManagerTemplates(x); return thisBuilder(); }
 
         /** allows callers to see the partially formed instance when needed, for example to query instantiators;
          *  could be replaced by specific methods as and when that is preferred */
@@ -110,6 +118,17 @@ public class PolicyManagerTemplate extends AssemblyTemplate {
                 throw new IllegalStateException("Cannot add to resource lookup "+PolicyManagerTemplate.this.platformComponentTemplates);
             }
             ((BasicResourceLookup<PlatformComponentTemplate>)PolicyManagerTemplate.this.platformComponentTemplates).add(x);
+            return thisBuilder();
+        }
+        
+        public synchronized Builder<T> add(PolicyManagerTemplate x) {
+            if (PolicyManagerTemplate.this.policyManagerTemplates==null) {
+            	PolicyManagerTemplate.this.policyManagerTemplates = new BasicResourceLookup<PolicyManagerTemplate>();
+            }
+            if (!(PolicyManagerTemplate.this.policyManagerTemplates instanceof BasicResourceLookup)) {
+                throw new IllegalStateException("Cannot add to resource lookup "+PolicyManagerTemplate.this.policyManagerTemplates);
+            }
+            ((BasicResourceLookup<PolicyManagerTemplate>)PolicyManagerTemplate.this.policyManagerTemplates).add(x);
             return thisBuilder();
         }
         

@@ -2,6 +2,7 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.camp.BasicCampPlatform;
 import org.apache.brooklyn.camp.brooklyn.spi.dsl.BrooklynDslInterpreter;
@@ -39,7 +40,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
 	
 	// need to add a resourcelookup for the policies
 	BasicResourceLookup<PolicyManagerTemplate> policyManagerTemplates = new BasicResourceLookup<PolicyManagerTemplate>();
-	BasicResourceLookup<PolicyManager> policyManagers = new BasicResourceLookup<PolicyManager>();
+	//BasicResourceLookup<PolicyManager> policyManagers = new BasicResourceLookup<PolicyManager>();
 	
 	
 	//constructor
@@ -80,9 +81,9 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
     	return policyManagerTemplates;
     }
     
-    public BasicResourceLookup<PolicyManager> policyManagers(){
-    	return policyManagers;
-    }
+//    public BasicResourceLookup<PolicyManager> policyManagers(){
+//    	return policyManagers;
+//    }
     
     @Override
     public oCampPlatformTransaction transaction() {
@@ -106,6 +107,21 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         	return null;
         }
         
+//        public PlatformTransaction add(Application as) {
+//            additions.add(as);
+//            return this;
+//        }
+//        
+//        public PlatformTransaction add(PolicyManager pm) {
+//            additions.add(pm);
+//            return this;
+//        }
+
+        public PlatformTransaction add(PolicyManagerTemplate pmt) {
+            additions.add(pmt);
+            return this;
+        }
+        
         @Override
         public void commit() {
             if (committed.getAndSet(true)) 
@@ -124,10 +140,10 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                     platform.applicationComponentTemplates().add((ApplicationComponentTemplate) o);
                     continue;
                 }
-                if (o instanceof Assembly) {
-                    platform.assemblies().add((Assembly) o);
-                    continue;
-                }
+//                if (o instanceof Assembly) {
+//                    platform.assemblies().add((Assembly) o);
+//                    continue;
+//                }
                 if (o instanceof PlatformComponent) {
                     platform.platformComponents().add((PlatformComponent) o);
                     continue;
@@ -140,10 +156,10 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                     platform.policyManagerTemplates().add((PolicyManagerTemplate) o);
                     continue;
                 }
-                if (o instanceof PolicyManager) {
-                    platform.policyManagers().add((PolicyManager) o);
-                    continue;
-                }
+//                if (o instanceof PolicyManager) {
+//                    platform.policyManagers().add((PolicyManager) o);
+//                    continue;
+//                }
                 
                 throw new UnsupportedOperationException("Object "+o+" of type "+o.getClass()+" cannot be added to "+platform);
             }

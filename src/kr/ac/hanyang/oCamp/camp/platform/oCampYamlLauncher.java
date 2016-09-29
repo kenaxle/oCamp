@@ -66,11 +66,8 @@ public class oCampYamlLauncher {
     public Application launchAppYaml(Reader input, boolean waitForTasksToComplete) {
         try {
             AssemblyTemplate at = platform.oCampPdp().registerDeploymentPlan(input);
-
-            // this should be changed to the policy manager 
-            // let the policy manager instantiate and manage the application
-            Assembly assembly = at.getInstantiator().newInstance().instantiate(at, platform);
-            Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId()); // an exception is thrown here...if the app is not actually deployed 
+            Application app = ((oCampAssemblyTemplateInstantiator)at.getInstantiator().newInstance()).instantiateApp(at, platform);
+            //Entity app = oCampManagement.getEntityManager().getEntity(assembly.getId()); // an exception is thrown here...if the app is not actually deployed 
             log.info("Launching "+app);
 
             if (getShutdownAppsOnExit()) BrooklynShutdownHooks.invokeStopOnShutdown(app);

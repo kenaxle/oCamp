@@ -1,28 +1,35 @@
 package kr.ac.hanyang.oCamp.entities.policies.objs;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.brooklyn.api.effector.Effector;
+import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensor;
 
-import kr.ac.hanyang.oCamp.api.transition.Transition;
+import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
+import kr.ac.hanyang.oCamp.entities.transitions.Transition;
 
 public class ActionImpl extends AbstractEntity implements Action{
 	
 	//private BasicAttributeSensor property; //TODO this should be a Brooklyn attribute or sensor.
 	private Effector action;
-	private List<Transition> transitions; // this is the value/values of the property.
+	private List<Transition> transitionsAsList; // this is the value/values of the property.
 	
 	
 	public ActionImpl(){ }
 
 	public void init(){
-		//transitions = new ArrayList<Transition>();
+		transitionsAsList = new ArrayList<Transition>();
+		for(Entity child: this.getChildren()){
+			transitionsAsList.add((Transition) child);
+		}
 	}
 	
 	public void setAction(Effector action){
@@ -54,33 +61,18 @@ public class ActionImpl extends AbstractEntity implements Action{
 		return config().get(CONFIGKEY);
 	}
 	
-
-	@Override
-	public boolean addTransitions(List<Transition> transitions) {
-		if (config().set(TRANSITIONS, transitions) != null){
-			sensors().emit(Action.TRANSITIONS_ADDED, transitions);
-			return true;
+	public int getScore(ConstraintVector constVect){
+		int score = -1;
+		//compare the initial transition
+		Transition first = transitionsAsList.get(0);
+		Transition last = transitionsAsList.get(transitionsAsList.size()-1);
+		if (first.evaluate(constVect.getViolatedValue()) && last.evaluate(constVect.getDesiredValue())){
+			score = 0;
+			for(Transition transition: transitionsAsList){
+				score += transition.getWeight();
+			}
 		}
-			return false;
-	}
-
-	@Override
-	public Transition getFirstTransition() {
-		return transitions.get(0);
-	}
-
-	@Override
-	public Transition getLastTransition() {
-		return transitions.get(transitions.size()-1);
-	}
-	
-	@Override
-	public int getWeight(){
-		int count = 0;
-		for (Transition transition: transitions){
-			count += transition.getWeight();
-		}
-		return count;
+		return score;
 	}
 
 

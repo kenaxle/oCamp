@@ -11,15 +11,11 @@ import java.util.Set;
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.EntitySpec;
-import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
-import org.apache.brooklyn.camp.CampPlatform;
-import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.core.BrooklynLogging;
 import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.entity.EntityInternal;
 import org.apache.brooklyn.core.internal.storage.BrooklynStorage;
-import org.apache.brooklyn.core.mgmt.classloading.JavaBrooklynClassLoadingContext;
 import org.apache.brooklyn.core.mgmt.internal.LocalEntityManager;
 import org.apache.brooklyn.core.mgmt.internal.LocalManagementContext;
 import org.apache.brooklyn.core.mgmt.internal.ManagementTransitionInfo;
@@ -28,7 +24,6 @@ import org.apache.brooklyn.core.objs.BasicEntityTypeRegistry;
 import org.apache.brooklyn.core.objs.proxy.EntityProxy;
 import org.apache.brooklyn.core.objs.proxy.EntityProxyImpl;
 import org.apache.brooklyn.core.objs.proxy.InternalPolicyFactory;
-import org.apache.brooklyn.util.collections.MutableSet;
 import org.apache.brooklyn.util.collections.SetFromLiveMap;
 import org.apache.brooklyn.util.exceptions.Exceptions;
 import org.slf4j.Logger;
@@ -40,7 +35,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
-import kr.ac.hanyang.oCamp.camp.platform.oCampComponentTemplateResolver;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
@@ -244,6 +238,8 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         	}else{
         		// create the policy manager and add to the platform
         		policyManager = buildPolicyManager(policyManagerType);
+        		policyManager.addOCampPolicy((Policy)e);
+        		// add the proxy
         	}
         }
         if (!entities.contains(proxyE)) 
@@ -269,7 +265,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
 				oCampPlatform platform = ((BaseEntityManager) managementContext).getParentPlatform();
 				PdpProcessor pdp = platform.oCampPdp();
 				PolicyManagerTemplate pmt = (PolicyManagerTemplate) pdp.registerDeploymentPlan(pdp.parseDeploymentPlan(yaml));
-				PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiate(pmt, platform);
+				PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiateApp(pmt, platform);
 				return polMgr;
 			}else{
 				yaml = null;

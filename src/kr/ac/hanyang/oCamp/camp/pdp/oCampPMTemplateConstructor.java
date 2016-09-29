@@ -8,7 +8,6 @@ import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate.Builder;
 import org.apache.brooklyn.camp.spi.instantiate.AssemblyTemplateInstantiator;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
-import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformComponentTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
@@ -78,11 +77,11 @@ public class oCampPMTemplateConstructor extends AssemblyTemplateConstructor {
         builder.add(pct);
         transaction.add(pct);
     }
-
-    public void addRequirement(PlatformComponentTemplate rct, String id){
-    	checkState();
-    	oCampPlatformComponentTemplate platTemp = (oCampPlatformComponentTemplate) transaction.getPlatformComponentTemplate(id);
-    	platTemp.add(rct);
+    
+    public void add(PolicyManagerTemplate pmt) {
+        checkState();
+        builder.add(pmt);
+        transaction.add(pmt);
     }
     
     protected void checkState() {

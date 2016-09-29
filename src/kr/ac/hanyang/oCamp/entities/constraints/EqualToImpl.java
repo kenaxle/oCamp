@@ -28,9 +28,14 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 	}
 
 	@Override
-	public boolean isViolated(Sensor propertySensor, Entity entity) {
-		T value = entity.sensors().get((AttributeSensor<T>) propertySensor);
-		return ! value.equals(getValue());
+	public ConstraintVector Violated(Entity entity) {
+		Sensor propertySensor = this.PROPERTY.getDefaultValue();
+		Object actualValue = entity.sensors().get((AttributeSensor<T>) propertySensor);
+		Object defaultValue = this.VALUE.getDefaultValue();
+		boolean violated = actualValue.equals(defaultValue);
+		
+		return new ConstraintVector(propertySensor,actualValue,defaultValue,violated);
+										 
 	}
 
 }

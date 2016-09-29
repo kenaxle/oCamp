@@ -123,8 +123,7 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
         		entity.config().set(Transition.VALUE, spec.getConfig().get(Transition.VALUE));
         		return (T) entity;
 
-        }else{
-	        
+        }else{	        
 	        	List<EntitySpec<?>> childList = spec.getChildren();
 	        	for (EntitySpec<?> childSpec : childList) {
 					entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));
@@ -132,17 +131,11 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 						//set the targets and constraints
 						entity.config().set(PolicyManager.POLMGRTYPE,(String) spec.getConfig().get(PolicyManager.POLMGRTYPE));
 						List<Entity> targetList = Lists.newArrayList();
-						List<Constraint> constraintList = Lists.newArrayList();
 						for (String id: (List<String>) spec.getConfig().get(PolicyImpl.TARGETS)){
 							targetList.add(entitiesByEntityId.get(planId2serviceId.get(id)));
 						}
-						for (Entity polConstraint: entity.getChildren()){
-							constraintList.add((Constraint) polConstraint);
-						}
-						((PolicyImpl)entity).setConstraints(constraintList);
 						((PolicyImpl) entity).setTargets(targetList);	
-					}
-					
+					}					
 	        	}
 	        	for(Entity child: entity.getChildren()){
 	        		child.setParent(entity);

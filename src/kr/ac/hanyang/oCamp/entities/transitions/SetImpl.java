@@ -17,17 +17,24 @@ public class SetImpl<T> extends TransitionImpl implements Set{
 	}
 	
 	@Override
-	public boolean evaluate(SensorEvent event) {
-		// TODO Auto-generated method stub
+	public boolean evaluate(Object obj) {
+		Object value = config().get(VALUE);
+		if(value == null){
+			return obj == null; // or whatever a sensor uses to represent that it has no value
+		}else
+		if(value.getClass().getName().equals("java.util.Optional")){
+			return obj != null; // or whatever a sensor uses to represent that it has no value
+		}else
+		if (obj.getClass() == value.getClass()){
+			return obj.equals(value);
+		}
 		return false;
 	}
-
+	
 	@Override
-	public boolean evaluate(Object obj, Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
+	public int getWeight(){
+		return Set.WEIGHT;
 	}
-
 //	@Override
 //	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
 //		// TODO Auto-generated method stub

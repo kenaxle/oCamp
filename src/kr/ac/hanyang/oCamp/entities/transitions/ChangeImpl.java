@@ -11,15 +11,9 @@ public class ChangeImpl<T> extends TransitionImpl implements Change{
 	public void init(){
 		
 	}
-	
-	@Override
-	public boolean evaluate(SensorEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
-	public boolean evaluate(Object obj, Entity entity) {
+	public boolean evaluate(Object obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}

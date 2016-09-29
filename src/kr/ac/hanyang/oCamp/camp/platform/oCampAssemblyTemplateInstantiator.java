@@ -22,7 +22,9 @@ import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate.Builder;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
 import org.apache.brooklyn.camp.spi.collection.ResolvableLink;
+import org.apache.brooklyn.camp.spi.instantiate.AssemblyTemplateInstantiator;
 import org.apache.brooklyn.core.config.BasicConfigKey;
+import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.entity.Entities;
 import org.apache.brooklyn.core.mgmt.EntityManagementUtils;
 import org.apache.brooklyn.core.mgmt.HasBrooklynManagementContext;
@@ -39,42 +41,58 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
+import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
+import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
 
-public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateInstantiator {
+public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstantiator {
 
 	private static final Logger log = LoggerFactory.getLogger(BrooklynAssemblyTemplateInstantiator.class);
 
 	public static final String NEVER_UNWRAP_APPS_PROPERTY = "wrappedApp"; 
 	
-	//private List<EntitySpec<?>> servicesList;// = Lists.newArrayList();
+
 	private List<EntitySpec<?>> artifactList = Lists.newArrayList();
 	
-	public Assembly instantiate(AssemblyTemplate template, CampPlatform platform) {
-//			return super.instantiate(template, platform);
+	
+		public Application instantiateApp(AssemblyTemplate template, CampPlatform platform) {
+			// TODO Auto-generated method stub
+			if (template instanceof PolicyManagerTemplate)
+				return instantiatePolicyManager(template, platform);
+			else
+				return instantiateAssembly(template, platform);
+		}
+	
+	public Application instantiateAssembly(AssemblyTemplate template, CampPlatform platform) {
+			
 	        Application app = create(template, platform);
 	        //***************** 
 	        
 	        for(Entity child: app.getChildren()){
 	        	
 	        		child.sensors().set(IService.ENTITY_STARTED, true);
+	        		child.sensors().set(Attributes.SERVICE_UP, true);
 
 	        }
 	        // TODO Change back when done testing
 	        //TODO CreationResult<Application, Void> start = startup(app);
 	        
 	        // log.debug("CAMP created "+app+"; starting in "+start.task());
-	        return platform.assemblies().get(app.getApplicationId());
+	        
+	        return app;//getManagementContext(platform).getApplications();
 	    }
 	
-	public PolicyManager instantiate(PolicyManagerTemplate template, oCampPlatform platform) {
-        Application polMgr = create(template, platform);      
-        return platform.policyManagers().get(polMgr.getApplicationId());
+	public Application instantiatePolicyManager(AssemblyTemplate template, CampPlatform platform) {
+		//transaction = (oCampPlatformTransaction) platform.transaction();
+        Application polMgr = create(template, platform);    
+        //transaction.add((PolicyManager)polMgr).commit();
+        return polMgr;
     }
 	
 	 private <T extends Application> CreationResult<T,Void> startup(T app) {
@@ -130,7 +148,7 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	    }
 	   
 	    
-	    @Override
+	    
 	    public EntitySpec<? extends Application> createApplicationSpec(
 	            AssemblyTemplate template,
 	            CampPlatform platform,
@@ -302,5 +320,13 @@ public class oCampAssemblyTemplateInstantiator extends BrooklynAssemblyTemplateI
 	        // caller always sets WRAPPER_APP config; should we do it here?
 	        return wrapperSpec;
 	    }
+
+		@Override
+		public Assembly instantiate(AssemblyTemplate template, CampPlatform platform) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		
 
 }
