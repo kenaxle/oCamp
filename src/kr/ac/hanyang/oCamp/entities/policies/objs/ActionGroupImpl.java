@@ -47,8 +47,8 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 				int score = action.getScore(constVect);
 				if ( score >= 0)
 					weight += score;
-			}
-			return -1;
+			}else
+				return -1;
 		}
 		return weight;
 	}

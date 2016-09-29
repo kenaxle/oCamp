@@ -34,9 +34,6 @@ services:
 policies: 
 - type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
-  - property: ENTITY_STARTED
-    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
-    value: true
   - property: SERVICE_UP
     type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
     value: true

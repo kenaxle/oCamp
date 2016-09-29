@@ -266,6 +266,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
 				PdpProcessor pdp = platform.oCampPdp();
 				PolicyManagerTemplate pmt = (PolicyManagerTemplate) pdp.registerDeploymentPlan(pdp.parseDeploymentPlan(yaml));
 				PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiateApp(pmt, platform);
+				
 				return polMgr;
 			}else{
 				yaml = null;

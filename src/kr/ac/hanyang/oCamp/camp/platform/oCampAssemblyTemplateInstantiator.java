@@ -76,8 +76,8 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	        
 	        for(Entity child: app.getChildren()){
 	        	
-	        		child.sensors().set(IService.ENTITY_STARTED, true);
-	        		child.sensors().set(Attributes.SERVICE_UP, true);
+	        		//child.sensors().set(IService.ENTITY_STARTED, false);
+	        		child.sensors().set(Attributes.SERVICE_UP, false);
 
 	        }
 	        // TODO Change back when done testing

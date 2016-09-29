@@ -99,7 +99,10 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 				} 
 			}else{
 				entity.config().set(Constraint.PROPERTY,(Sensor) ConstraintProperties.getProperty((String) spec.getConfig().get(Constraint.PROPERTY)));
+				entity.config().set(Constraint.VALUE, spec.getConfig().get(Constraint.VALUE));
 			}
+			entitiesByEntityId.put(entity.getId(), entity);
+            specsByEntityId.put(entity.getId(), spec);
 	        return (T) entity;
 			
         }else if(entity instanceof ActionGroup || entity instanceof Action || entity instanceof Transition){
@@ -109,6 +112,8 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
         		for (EntitySpec<?> childSpec : childList) {
         			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));	
         		}
+        		entitiesByEntityId.put(entity.getId(), entity);
+	            specsByEntityId.put(entity.getId(), spec);
         		return (T) entity;
         	}
         	if(entity instanceof Action){
@@ -117,10 +122,14 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
         		for (EntitySpec<?> childSpec : childList) {
         			entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));	
         		}
+        		entitiesByEntityId.put(entity.getId(), entity);
+	            specsByEntityId.put(entity.getId(), spec);
         		return (T) entity;
         	}
         		//need to add a config key to keep the order of the transitions
         		entity.config().set(Transition.VALUE, spec.getConfig().get(Transition.VALUE));
+        		entitiesByEntityId.put(entity.getId(), entity);
+	            specsByEntityId.put(entity.getId(), spec);
         		return (T) entity;
 
         }else{	        
@@ -279,3 +288,4 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 	
 
 }
+

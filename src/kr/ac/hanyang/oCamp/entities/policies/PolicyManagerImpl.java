@@ -1,22 +1,18 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
-import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.api.sensor.SensorEventListener;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.entity.Entities;
-import org.apache.brooklyn.util.collections.MutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
-import kr.ac.hanyang.oCamp.entities.policies.objs.Action;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
@@ -60,26 +56,13 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 			public void onEvent(SensorEvent<Object> event){
 				log.info("*********Sensor Event**********");
 				log.info("Sensor Event: "+event.getValue());
-				//Object value = ((SensorEvent<Object>)event.getValue()).getValue();
 				Entity violator = (Entity) event.getValue();
-				//Sensor sensor = ((SensorEvent<Object>)event.getValue()).getSensor();
 				Policy policy = (Policy)event.getSource();
-				listener.doAction(listener.evaluateActions(violator,policy).get(0).getActionEffector(),violator);
-				log.info("*********I should do something but I dont know what to do **********");
-				log.info("Sensor Event: "+event.getValue());
+				listener.doAction(listener.evaluateActions(violator,policy).get(0).config().get(ActionGroup.ACTION_ID),violator);
 			}
 		};
 	}
 	
-
-//	@Override
-//	public boolean setActionGroups(List<ActionGroup> actionGroups) {
-//		if(config().set(ACTIONGROUPS, actionGroups) != null){
-//			sensors().emit(PolicyManager.ACTIONGROUPS_SET, actionGroups);
-//			return true;
-//		}
-//		return false;
-//	}
 
 	@Override
 	public List<ActionGroup> evaluateActions(Entity entity, Policy policy) {
@@ -96,7 +79,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		
 		//Collection<Entity> actionGroups = this.getChildren();
 		for(Entity actionGroup: this.getChildren()){
-			if (((ActionGroup) actionGroup).canFulfill(violatedConstraints) >= 0){
+			if (((ActionGroup) actionGroup).canFulfill(violatedConstraints) > 0){
 				suggestedActions.add((ActionGroup) actionGroup);
 			}
 		}
@@ -107,12 +90,8 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 // policy actions **********
 	@Override
 	public void doAction(Effector effector, Entity entity){
+		log.info("*********Performing action: "+effector+"**********");		
 		Entities.invokeEffector(this, entity, effector);
-		// map to config key.
-		// get the new config for the entity 
-		// the locations should be treated differently to other configs 
-		
-		//then invoke the effector on the entity
 	}
 
 	
