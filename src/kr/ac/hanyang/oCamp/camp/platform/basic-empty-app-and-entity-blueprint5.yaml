@@ -1,55 +1,53 @@
-#
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#  http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-#
-name: Complex demo app
+Camp_Version: CAMP 1.1
+name: Simple WebApp example
+
 artifacts:
 - type: kr.ac.hanyang.entities.artifacts.War
   content: http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war
   requirements:
-  - type: kr.ac.hanyang.entities.requirements.HostedOn
-    fulfillment: service1
-  - type: kr.ac.hanyang.entities.requirements.DependsOn
-    fulfillment: service1
-  - type: kr.ac.hanyang.entities.requirements.ConnectsTo
-    fulfillment: service1
+  - type: kr.ac.hanyang.entities.requirements.DeployedOn
+    target: /webapps
+    fulfillment: id:tomcat          
     
-- type: kr.ac.hanyang.entities.artifacts.Script
-  content: {PHP script file}
+  - type: kr.ac.hanyang.entities.requirements.ConnectsTo
+    port: 3306
+    fulfillment: mySQL_DBMS
+    
+- type: kr.ac.hanyang.entities.artifacts.SQL
+  content: file://webshop_database.sql
   requirements:
-  - type: kr.ac.hanyang.entities.requirements.HostedOn
-    fulfillment: service1
-      
-- type: kr.ac.hanyang.entities.artifacts.DB
-  content: {DB file}
-  requirements:
-  - type: kr.ac.hanyang.entities.requirements.HostedOn
-    fulfillment: service2      
+  - type: kr.ac.hanyang.entities.requirements.DeployedOn
+    server.port: 3306
+    fulfillment: mySQL_DBMS   
 
 services:
-- name: Simple Server 1
-  id: service1
-  characteristics:
-  - type: kr.ac.hanyang.entities.services.web.tomcat.Tomcat8
-    install.version: 8.0.22
-    
-- name: Simple Server 2
-  id: service2
-  characteristics:
-  - type: kr.ac.hanyang.entities.services.web.database.MySQL
-    
-  
+  - id: tomcat
+    characteristics:
+      - characteristic_type: kr.ac.hanyang.entities.services.Tomcat8
+        version: 8.0.37
+
+  - id: mySQL_DBMS
+    characteristics:
+      - characteristic_type: kr.ac.hanyang.entities.services.MySQL      
+        mysql.port: 3306    
+
+policies:
+  - type: kr.ac.hanyang.oCamp.entities.policies.Placement
+    constraints:
+      - property: SERVICE_UP 
+        type: kr.ac.hanyang.oCamp.constraints.EqualTo
+        value: true
+      - property: PROVISIONING_LOCATION
+        type: kr.ac.hanyang.oCamp.constraints.Within  
+        value: [AWS Tokyo (ap-northeast-1),AWS Seoul (ap-northeast-2),AWS Singapore (ap-southeast-1),AWS Sydney (ap-southeast-2)]
+    targets: [tomcat]
+
+  - type: kr.ac.hanyang.oCamp.entities.policies.Placement
+    constraints:
+      - property: SERVICE_UP 
+        type: kr.ac.hanyang.oCamp.constraints.EqualTo
+        value: true
+      - property: PROVISIONING_LOCATION
+        type: kr.ac.hanyang.oCamp.constraints.Within  
+        value: [rackspace-cloudservers-HKG, rackspace-cloudservers-SYD]
+    targets: [mySQl_DBMS]

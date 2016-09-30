@@ -21,7 +21,7 @@ public interface IExecutable{
             "string to find the item to execute.");
         
         @Override public Void call(ConfigBag parameters) {
-            parameters.put(COMMAND, (String)((DeployOn)entity().getParent()).getContentUrl());            
+            //parameters.put(COMMAND, (String)((DeployOn)entity().getParent()).getContentUrl());            
             return new MethodEffector<Void>(IExecutable.class, "executeScript").call(entity(), parameters.getAllConfig());
         }
     }

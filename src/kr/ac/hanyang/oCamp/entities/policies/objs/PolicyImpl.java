@@ -9,18 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 
-public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableable{
+public class PolicyImpl extends AbstractEntity implements Policy{
 	
 	private static final Logger log = LoggerFactory.getLogger(PolicyImpl.class);
-	
-	
-	
-	//public ConstraintSet getDesiredState(){return desiredState;}
-	
-	
 	
 	public PolicyImpl(){}
 	
@@ -59,34 +52,7 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 		connectSensors();
 		sensors().emit(SUBSCRIBERS_SET, targets);
 	}
-
-//	@Override
-//	public boolean addTarget(Entity entity) {
-//		if (this.config().add(entity)){
-//			for (Constraint constraint: CONSTRAINTS.getDefaultValue()){
-//				constraint.subscriptions().subscribe(entity, ((ConstraintImpl)constraint).getProperty(), ((ConstraintImpl)constraint).getListener());
-//			}
-//			sensors().emit(Policy.SUBSCRIBER_ADDED, entity);
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean removeTarget(Entity entity) {
-//		if (targets.remove(entity)){
-//			for (Constraint constraint: CONSTRAINTS.getDefaultValue()){
-//				constraint.subscriptions().unsubscribe(entity);
-//			}
-//			sensors().emit(Policy.SUBSCRIBER_REMOVED, entity);
-//			return true;
-//		}
-//		return false;	
-//	}
 	
-	@Override
-	public List<Constraint> getDesiredState(){return (List<Constraint>) config().get(CONSTRAINTS);}
-
 	@Override
 	public List<Entity> getTargets(){return config().get(TARGETS);}
 	
@@ -96,24 +62,9 @@ public class PolicyImpl extends AbstractEntity implements Policy, oCampEnableabl
 			Constraint constr = (Constraint) constraint;
 			for (Entity entity: config().get(TARGETS)){
 				constr.register(entity);
-				//constraint.subscriptions().subscribe(entity, constraint.getProperty(), constraint.getListener());
+				
 			}
 		}
 	}
-
-	@Override
-	public void enable() {
-		for (Constraint constraint: config().get(CONSTRAINTS)){
-			
-		}
-		//connectSensors();
-	}
-
-	@Override
-	public void disable() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

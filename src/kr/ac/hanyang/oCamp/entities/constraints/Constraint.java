@@ -28,19 +28,5 @@ public interface Constraint<T> extends kr.ac.hanyang.oCamp.api.policy.Constraint
 	@SetFromFlag("value")
 	public static final ConfigKey<Object> VALUE = ConfigKeys.newConfigKey(Object.class,"value","represents the desired value of the constraint");
 	
-	public Sensor getProperty();
-
-	public Object getValue();
 	
-	public ConstraintVector Violated(Entity entity);
-	
-	public void register(Entity entity);
-	
-	public void unregister(Entity entity);
-	
-	public boolean evaluate(SensorEvent event);
-	
-	public boolean isAlignedWith(Constraint constraint);
-	
-	public SensorEventListener<T> getListener();
 }

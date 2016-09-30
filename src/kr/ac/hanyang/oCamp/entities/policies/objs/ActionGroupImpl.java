@@ -14,11 +14,7 @@ import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
 
 public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	
-	//private Effector actionId;
-	
 	private Map<Sensor, Action> actionsAsMap;
-	
-	private int weight;
 	
 	public ActionGroupImpl(){ }
 	
@@ -52,20 +48,5 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 		}
 		return weight;
 	}
-	
-//	private int getScore(ConstraintVector constVect){ //score to fix the sick sensor
-//		((Action) actionsAsMap.get(constraint.getProperty()).get
-//	}
-	
-	@Override
-	public void setWeight(int weight){
-		this.weight = weight;
-	}
-	
-	@Override
-	public int getWeight(){
-		return weight;
-	}
-	
 	
 }

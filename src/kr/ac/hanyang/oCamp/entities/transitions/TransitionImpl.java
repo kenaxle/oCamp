@@ -13,7 +13,6 @@ import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
 public abstract class TransitionImpl<T> extends AbstractEntity implements Transition{
 
-	//private T value; // this is the value/values of the transition.
 	
 	public TransitionImpl(){}
 	
@@ -27,36 +26,13 @@ public abstract class TransitionImpl<T> extends AbstractEntity implements Transi
 		return config().get(VALUE);
 	}
 	
-//	public ConfigKey getConfigKey(){
-//		return config().get(CONFIGKEY);
-//	}
-	
 	@Override
 	public int getWeight(){
 		return WEIGHT;
-	}
-
-	
-//	public boolean evaluate(SensorEvent event) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-
-	@Override
-	public boolean setValue(Object value) {
-		return (config().set((ConfigKey)VALUE, value) != null);
-	}
-
-	
-	//will have to remove this
-	@Override
-	public boolean removeValue(Object value) {
-		return true;
 	}
 
 	@Override
 	public abstract boolean evaluate(Object obj);
 
 	
-
 }

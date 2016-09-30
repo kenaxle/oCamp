@@ -2,13 +2,11 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.camp.BasicCampPlatform;
 import org.apache.brooklyn.camp.brooklyn.spi.dsl.BrooklynDslInterpreter;
 import org.apache.brooklyn.camp.spi.ApplicationComponent;
 import org.apache.brooklyn.camp.spi.ApplicationComponentTemplate;
-import org.apache.brooklyn.camp.spi.Assembly;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.camp.spi.PlatformComponent;
 import org.apache.brooklyn.camp.spi.PlatformComponentTemplate;
@@ -21,7 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 
-import kr.ac.hanyang.oCamp.camp.spi.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
@@ -35,19 +32,16 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
     
 	private PdpProcessor pdp;
 	private final PlatformRootSummary root;
-	private ManagementContext mgmt; // need a management context. this is a brooklyn object that manages brooklyn components
-    									  // the management context is created outside so we need a handle to it
+	private ManagementContext mgmt; 
 	
 	// need to add a resourcelookup for the policies
 	BasicResourceLookup<PolicyManagerTemplate> policyManagerTemplates = new BasicResourceLookup<PolicyManagerTemplate>();
-	//BasicResourceLookup<PolicyManager> policyManagers = new BasicResourceLookup<PolicyManager>();
 	
 	
 	//constructor
 	public oCampPlatform(PlatformRootSummary root, ManagementContext mgmt) {
 		this(root);
 		oCampPlatformTransaction transaction = (oCampPlatformTransaction) transaction();
-		//this.addPlatform(new BasicCampPlatform(root));
 		this.mgmt = mgmt;
 		((BaseEntityManager) mgmt).setParentPlatform(this);
 		addMatchers();
@@ -81,10 +75,6 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
     	return policyManagerTemplates;
     }
     
-//    public BasicResourceLookup<PolicyManager> policyManagers(){
-//    	return policyManagers;
-//    }
-    
     @Override
     public oCampPlatformTransaction transaction() {
         return new oCampPlatformTransaction(this);
@@ -106,16 +96,6 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
         	}
         	return null;
         }
-        
-//        public PlatformTransaction add(Application as) {
-//            additions.add(as);
-//            return this;
-//        }
-//        
-//        public PlatformTransaction add(PolicyManager pm) {
-//            additions.add(pm);
-//            return this;
-//        }
 
         public PlatformTransaction add(PolicyManagerTemplate pmt) {
             additions.add(pmt);
@@ -140,10 +120,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                     platform.applicationComponentTemplates().add((ApplicationComponentTemplate) o);
                     continue;
                 }
-//                if (o instanceof Assembly) {
-//                    platform.assemblies().add((Assembly) o);
-//                    continue;
-//                }
+
                 if (o instanceof PlatformComponent) {
                     platform.platformComponents().add((PlatformComponent) o);
                     continue;
@@ -156,11 +133,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
                     platform.policyManagerTemplates().add((PolicyManagerTemplate) o);
                     continue;
                 }
-//                if (o instanceof PolicyManager) {
-//                    platform.policyManagers().add((PolicyManager) o);
-//                    continue;
-//                }
-                
+
                 throw new UnsupportedOperationException("Object "+o+" of type "+o.getClass()+" cannot be added to "+platform);
             }
         }

@@ -9,7 +9,7 @@ import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
-public class InitialImpl<T> extends TransitionImpl implements Initial{
+public class InitialImpl extends TransitionImpl implements Initial{
 	
 	public InitialImpl(){}
 	
@@ -38,11 +38,5 @@ public class InitialImpl<T> extends TransitionImpl implements Initial{
 	public int getWeight(){
 		return Initial.WEIGHT;
 	}
-
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

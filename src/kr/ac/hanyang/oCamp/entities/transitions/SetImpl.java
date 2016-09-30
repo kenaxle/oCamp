@@ -7,7 +7,7 @@ import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
-public class SetImpl<T> extends TransitionImpl implements Set{
+public class SetImpl extends TransitionImpl implements Set{
 
 	public SetImpl(){}
 	
@@ -35,10 +35,5 @@ public class SetImpl<T> extends TransitionImpl implements Set{
 	public int getWeight(){
 		return Set.WEIGHT;
 	}
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

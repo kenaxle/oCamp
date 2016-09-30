@@ -20,27 +20,8 @@ public interface ActionGroup extends kr.ac.hanyang.oCamp.api.objs.ActionGroup, E
 	
 	@SetFromFlag("actionId")
 	public static final ConfigKey<Effector> ACTION_ID = ConfigKeys.newConfigKey(Effector.class,"actionId","represents the ID of the action");
-	
-//	@SetFromFlag("actions")
-//	public static final ConfigKey<List<Action>> ACTIONS = ConfigKeys.newConfigKey(new TypeToken<List<Action>>(){ },"actions","represents the list of actions");	
-	
+		
 	public static final Sensor<Effector> ACTION_ID_SET = new BasicNotificationSensor<Effector>(
             Effector.class, "actionID.set", "The actionID was set");
-	
-//	public static final Sensor<Object> ACTIONS_ADDED = new BasicNotificationSensor<Object>(
-//			Object.class, "actions.added", "The actions were added");
-	
-	public boolean setActionID(Effector actionEffector);	
-	//public boolean removeActionID(Effector actionEffector);
-	
-	//public boolean setActions(List<Action> actions);
-	//public boolean removeAction(Action action);
-	
-	public int canFulfill(Collection<ConstraintVector> violatedConstraints);
-	
-	public Effector getActionEffector();
-	
-	public void setWeight(int weight);
-	public int getWeight();
 
 }

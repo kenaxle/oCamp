@@ -3,7 +3,7 @@ package kr.ac.hanyang.oCamp.entities.transitions;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.SensorEvent;
 
-public class ChangeImpl<T> extends TransitionImpl implements Change{
+public class ChangeImpl extends TransitionImpl implements Change{
 
 	public ChangeImpl(){}
 	
@@ -22,11 +22,5 @@ public class ChangeImpl<T> extends TransitionImpl implements Change{
 	public int getWeight(){
 		return Change.WEIGHT;
 	}
-
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

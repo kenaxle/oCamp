@@ -41,7 +41,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 			return false;
 	}
 	
-	//@Override
+	@Override
 	public boolean removeOCampPolicy(Policy policy) {
 		if (this.policyList.remove(policy)){
 			this.subscriptions().unsubscribe((PolicyImpl) policy);

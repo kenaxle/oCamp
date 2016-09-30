@@ -1,14 +1,10 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
-import java.util.List;
-import org.apache.brooklyn.api.effector.Effector;
-import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.ImplementedBy;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
-import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 
 @ImplementedBy(PolicyManagerImpl.class)
@@ -56,33 +52,4 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 									   + "    - type: Set\n"
 									   + "      value: null\n";
 	
-	
-
-// FIXME no moveable exists				
-//				add(new ActionGroupImpl(){{	setActionID(Startable.MOVE); 
-//					addAction(new ActionImpl(){{ setProperty(Attributes.SERVICE_UP);
-//						addTransition(new InitialImpl(){{	setValue(new Boolean(false));	}});
-//						addTransition(new SetImpl(){{	    setValue(new Boolean(true));	}});
-//					}});
-//					addAction(new ActionImpl(){{ setProperty(SoftwareProcess.PROVISIONING_LOCATION);
-//						addTransition(new InitialImpl(){{	setValue(Optional.of(Object.class));	}});
-//						addTransition(new SetImpl(){{	    setValue(null);							}});
-//					}});	
-//				}});
-//			}});
-	
-	// = new ActionGroupImpl();
-	//public Set<ActionGroup> AGroups;// [];
-	
-
-	public List<ActionGroup> evaluateActions(Entity entity, Policy policy);
-	
-	public void doAction(Effector effector, Entity entity);
-	
-	public boolean addOCampPolicy(Policy policy);	
-	public boolean removeOCampPolicy(Policy policy);
-	
-	//public boolean setActionGroups(List<ActionGroup> actionGroups);
-	
-
 }

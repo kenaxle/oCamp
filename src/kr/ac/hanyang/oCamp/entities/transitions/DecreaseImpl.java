@@ -7,7 +7,7 @@ import org.apache.brooklyn.api.sensor.SensorEvent;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.objs.BrooklynObjectInternal;
 
-public class DecreaseImpl<T> extends TransitionImpl implements Decrease{
+public class DecreaseImpl extends TransitionImpl implements Decrease{
 
 	public DecreaseImpl(){}
 	
@@ -26,11 +26,5 @@ public class DecreaseImpl<T> extends TransitionImpl implements Decrease{
 	public int getWeight(){
 		return Decrease.WEIGHT;
 	}
-
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

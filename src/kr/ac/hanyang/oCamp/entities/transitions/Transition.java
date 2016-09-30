@@ -10,22 +10,13 @@ import org.apache.brooklyn.core.config.SetConfigKey;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
 @ImplementedBy(TransitionImpl.class)
-public interface Transition<T> extends kr.ac.hanyang.oCamp.api.transition.Transition, Entity{
+public interface Transition extends kr.ac.hanyang.oCamp.api.transition.Transition, Entity{
 	
 	@SetFromFlag("value")
 	ConfigKey<Object> VALUE = ConfigKeys.newConfigKey(Object.class,"value","represents the value of the transition");
 	
-	
 	public static final int WEIGHT = 0;
 	
-	public T getValue();
 	
-	public boolean setValue(Object value);	
-	public boolean removeValue(Object value);
-	
-	public boolean evaluate(Object obj);
-	
-	public int getWeight();
-	//public boolean evaluate(SensorEvent event);
 	
 }

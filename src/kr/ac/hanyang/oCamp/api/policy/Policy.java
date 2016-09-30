@@ -5,14 +5,10 @@ import org.apache.brooklyn.api.entity.Entity;
 
 public interface Policy extends Entity{
 	
-	//public void setConstraints(List<Constraint> constraints);
-	//public boolean removeConstraint(Constraint constraint);
+	public void initConstraints();
 	
-	//public void setTargets(List<Entity> targets);
-	//public boolean addTarget(Entity entity);
-	//public boolean removeTarget(Entity entity);
+	public void setTargets(List<Entity> targets);
 	
-	//public List<Constraint> getDesiredState();
-	//public List<Entity> getTargets();
+	public List<Entity> getTargets();
 	
 }
