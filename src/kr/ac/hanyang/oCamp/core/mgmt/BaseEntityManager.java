@@ -1,5 +1,8 @@
 package kr.ac.hanyang.oCamp.core.mgmt;
 
+import java.util.Map;
+
+import org.apache.brooklyn.core.internal.BrooklynProperties.Factory.Builder;
 import org.apache.brooklyn.core.mgmt.internal.LocalEntityManager;
 import org.apache.brooklyn.core.mgmt.internal.LocalManagementContext;
 import org.apache.brooklyn.core.objs.proxy.InternalEntityFactory;
@@ -15,6 +18,12 @@ public class BaseEntityManager extends LocalManagementContext{// implements Poli
 		super();
 	}
 	
+	
+	
+	public BaseEntityManager(Builder brooklynPropertiesBuilder, Map<String, Object> brooklynAdditionalProperties) {
+		super(brooklynPropertiesBuilder, brooklynAdditionalProperties);
+	}
+
 	public void setParentPlatform(oCampPlatform platform){
 		this.parentPlatform = platform;
 	}
