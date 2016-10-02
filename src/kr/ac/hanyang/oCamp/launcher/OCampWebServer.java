@@ -31,7 +31,7 @@ import org.apache.brooklyn.launcher.WebAppContextProvider;
 import org.apache.brooklyn.launcher.config.CustomResourceLocator;
 import org.apache.brooklyn.location.localhost.LocalhostMachineProvisioningLocation;
 import org.apache.brooklyn.rest.BrooklynWebConfig;
-
+//import org.apache.brooklyn.rest.RestApiSetup;
 import org.apache.brooklyn.rest.filter.BrooklynPropertiesSecurityFilter;
 import org.apache.brooklyn.rest.filter.HaHotCheckResourceFilter;
 import org.apache.brooklyn.rest.filter.HaMasterCheckFilter;
@@ -71,17 +71,17 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.annotations.VisibleForTesting;
+import com.google.api.client.repackaged.com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 
 import kr.ac.hanyang.oCamp.rest.RestApiSetup;
 
-public class OCampWebServer {
+public class OCampWebServer extends BrooklynWebServer{
 
-	private static final Logger log = LoggerFactory.getLogger(BrooklynWebServer.class);
-	
+    private static final Logger log = LoggerFactory.getLogger(OCampWebServer.class);
+
     public static final String BROOKLYN_WAR_URL = "classpath://brooklyn.war";
     static {
         // support loading the WAR in dev mode from an alternate location 
@@ -190,7 +190,8 @@ public class OCampWebServer {
      * attrs (map of attribute-name : object pairs passed to the servlet)
      */
     public OCampWebServer(Map<?,?> flags, ManagementContext managementContext) {
-        this.managementContext = managementContext;
+        super(flags, managementContext);
+    	this.managementContext = managementContext;
         Map<?,?> leftovers = FlagUtils.setFieldsFromFlags(flags, this);
         if (!leftovers.isEmpty())
             log.warn("Ignoring unknown flags " + leftovers);
@@ -387,9 +388,7 @@ public class OCampWebServer {
         }
 
         rootContext = deploy(rootWar);
-        //**** I can inject my handlers here
         deployRestApi(rootContext);
-        
         rootContext.setTempDirectory(Os.mkdirs(new File(webappTempDir, "war-root")));
 
         server.setHandler(handlers);
@@ -605,6 +604,5 @@ public class OCampWebServer {
     public WebAppContext getRootContext() {
         return rootContext;
     }
-	
-	
+
 }

@@ -3,12 +3,15 @@ package kr.ac.hanyang.oCamp.rest;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.brooklyn.rest.BrooklynRestApi;
+import org.apache.brooklyn.rest.BrooklynRestApp;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 
 import kr.ac.hanyang.oCamp.rest.api.OCampRestApi;
 
-public class OCampRestApp {
+public class OCampRestApp extends BrooklynRestApp{
 	 private Set<Object> singletons;
 
 	    public OCampRestApp() {

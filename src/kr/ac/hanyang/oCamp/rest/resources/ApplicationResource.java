@@ -1,11 +1,18 @@
 package kr.ac.hanyang.oCamp.rest.resources;
 
+import static javax.ws.rs.core.Response.created;
+import static org.apache.brooklyn.rest.util.WebResourceUtils.serviceAbsoluteUriBuilder;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
+import org.apache.brooklyn.rest.api.ApplicationApi;
+import org.apache.brooklyn.rest.transform.TaskTransformer;
 import org.apache.brooklyn.util.core.ResourceUtils;
 import org.apache.brooklyn.util.exceptions.Exceptions;
 import org.apache.brooklyn.util.exceptions.UserFacingException;
@@ -60,7 +67,12 @@ public class ApplicationResource extends org.apache.brooklyn.rest.resources.Appl
         Application app = OCampEntityManagementUtils.instantiateApp(at, platform);
         CreationResult<Application,Void> result = OCampEntityManagementUtils.startup(app);
         
-        return null;
+        
+        URI ref = serviceAbsoluteUriBuilder(ui.getBaseUriBuilder(), ApplicationApi.class, "get").build(app.getApplicationId());
+        ResponseBuilder response = created(ref);
+        if (result.task() != null)
+            response.entity(TaskTransformer.fromTask(ui.getBaseUriBuilder()).apply(result.task()));
+        return response.build();
         
         
         

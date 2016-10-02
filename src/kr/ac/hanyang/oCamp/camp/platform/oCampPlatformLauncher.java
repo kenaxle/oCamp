@@ -16,8 +16,15 @@ public class oCampPlatformLauncher{
 			System.out.println("There is an exception here. the platform already exists");
 		if (mgmt == null)
 			mgmt = new BaseEntityManager();
+			
 		platform = new oCampPlatform(PlatformRootSummary.builder().name("oCAMP Platform").build(),
                 getManagement());
+		((BaseEntityManager) mgmt).setParentPlatform(platform);
+		return this;
+	}
+	
+	public oCampPlatformLauncher useManagementContext(ManagementContext mgmt){
+		this.mgmt = mgmt;
 		return this;
 	}
 	

@@ -2,12 +2,13 @@ package kr.ac.hanyang.oCamp.launcher;
 
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 
-public class OCampServerDetails {
+public class OCampServerDetails {//extends BrooklynServerDetails{
 
 	protected OCampWebServer webServer;
 	protected ManagementContext mgmtContext;
 	
     public OCampServerDetails(OCampWebServer webServer, ManagementContext mgmtContext) {
+    	//super(webServer, mgmtContext);
     	this.webServer = webServer;
         this.mgmtContext = mgmtContext;
     }

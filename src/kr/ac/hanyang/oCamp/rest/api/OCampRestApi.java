@@ -3,6 +3,7 @@ package kr.ac.hanyang.oCamp.rest.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.brooklyn.rest.BrooklynRestApi;
 import org.apache.brooklyn.rest.resources.AbstractBrooklynRestResource;
 import org.apache.brooklyn.rest.resources.AccessResource;
 import org.apache.brooklyn.rest.resources.ActivityResource;
@@ -29,7 +30,7 @@ import com.google.common.collect.Iterables;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 import kr.ac.hanyang.oCamp.rest.resources.ApplicationResource;
 
-public class OCampRestApi {
+public class OCampRestApi extends BrooklynRestApi{
 	
 	 public static Iterable<AbstractBrooklynRestResource> getBrooklynRestResources() {
 	        List<AbstractBrooklynRestResource> resources = new ArrayList<>();
