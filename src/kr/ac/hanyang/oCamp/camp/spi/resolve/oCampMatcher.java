@@ -176,7 +176,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             if (attrs.containsKey("id"))
             builder.customAttribute("planId", attrs.remove("id"));
 	        //******************************************************************
-            builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
+            //builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
             //******************************************************************
             //add custom tags
 	        Collection<String> keys = getTagIDs();

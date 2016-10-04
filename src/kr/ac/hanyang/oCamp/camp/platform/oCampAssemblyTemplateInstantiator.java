@@ -62,7 +62,6 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	
 	
 		public Application instantiateApp(AssemblyTemplate template, CampPlatform platform) {
-			// TODO Auto-generated method stub
 			if (template instanceof PolicyManagerTemplate)
 				return instantiatePolicyManager(template, platform);
 			else
@@ -72,7 +71,6 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	public Application instantiateAssembly(AssemblyTemplate template, CampPlatform platform) {
 			
 	        Application app = create(template, platform);
-	        //***************** 
 	        
 	        for(Entity child: app.getChildren()){
 	        	
@@ -242,22 +240,21 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	    		EntitySpec<?> spec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
 	    		EntitySpec<?> childSpec = buildTemplateSpecRec(loader, (oCampPlatformComponentTemplate)appChildComponentTemplate, encounteredRegisteredTypeIds);
 	    		if (childSpec == null && spec.getConfig().containsKey(new BasicConfigKey<String>(String.class,"content"))){
-		    		//if (childSpec.getChildren().isEmpty()){
-		    			//the this is an Artifact see if it exists before.
-		    			for(EntitySpec<?> artSpec:artifactList){
-		    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
-		    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
-		    					//found the artifact in the list
-		    					return artSpec;
-		    				}
-		    			}
-		    			artifactList.add(spec);
-		    			return spec;
-		    		//}/*else{
-			    		//spec.child(childSpec);
-			    		
-			    		//result.add(spec);
-		    		//}//*/
+	    			//the this is an Artifact see if it exists before.
+	    			for(EntitySpec<?> artSpec:artifactList){
+	    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
+	    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
+	    					//found the artifact in the list
+	    					return artSpec;
+	    				}
+	    			}
+	    			artifactList.add(spec);
+	    			return spec;
+	    		//}/*else{
+		    		//spec.child(childSpec);
+		    		
+		    		//result.add(spec);
+	    		//}//*/
 	    		}
 	    		return spec;
 	    	}
