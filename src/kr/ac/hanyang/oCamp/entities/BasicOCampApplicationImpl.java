@@ -20,7 +20,7 @@ public class BasicOCampApplicationImpl extends BasicApplicationImpl implements o
 	//private List policyList;
 	
 	@Override
-	public void startup(Collection<? extends Location> locations) {
+	public void startup(/*Collection<? extends Location> locations*/) {
 		log.info("**** INFO INFO **** Starting Application...");
 
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();

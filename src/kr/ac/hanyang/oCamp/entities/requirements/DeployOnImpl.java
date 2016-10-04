@@ -27,20 +27,12 @@ public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable,
 	@SuppressWarnings("unchecked")
 	public void init(){
 		super.init();
-		//this.getParent().config().set(TARGET, TARGET.getDefaultValue());
-		//this.getParent().config().set(IDeployable.URL, this.getChildren().iterator().next().config().get(BasicOCampArtifact.CONTENT));
 	}
 	
 
 	@Override
 	public void start(Collection<? extends Location> locations) {
 		log.info("**** INFO INFO **** Starting DeployOn...");
-//		try {
-//		    Thread.sleep(1000);                 //1000 milliseconds is one second.
-//		} catch(InterruptedException ex) {
-//		    Thread.currentThread().interrupt();
-//		}
-			
 		Task<Void> startParent = Entities.invokeEffector(this, this.getParent(), Startable.START,MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)")));
 		startParent.blockUntilEnded();
 		if (startParent.isDone( )&& !startParent.isError()){

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class PolicyImpl extends AbstractEntity implements Policy{
 	
@@ -56,6 +57,20 @@ public class PolicyImpl extends AbstractEntity implements Policy{
 	@Override
 	public List<Entity> getTargets(){return config().get(TARGETS);}
 	
+	public void initTargetLocations(){
+		Constraint constraint; 
+		String location = "";
+		for (Entity ent: getChildren()){
+			if (((Constraint)ent).getProperty().equals(ConstraintProperties.PROVISIONING_LOCATION)){
+				constraint = (Constraint)ent;
+				location = (String) constraint.initialValue();
+				
+			}
+		}
+		for(Entity entity: getTargets()){
+			entity.config().set(BasicOCampService.LOCATIONS, location);
+		}
+	}
 	
 	private void connectSensors(){
 		for (Entity constraint: this.getChildren()){
@@ -66,5 +81,7 @@ public class PolicyImpl extends AbstractEntity implements Policy{
 			}
 		}
 	}
+	
+	
 
 }

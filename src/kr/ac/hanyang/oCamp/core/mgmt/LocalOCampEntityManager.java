@@ -41,6 +41,7 @@ import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.core.objs.proxy.InternalOCampEntityFactory;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
+import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class LocalOCampEntityManager extends LocalEntityManager {
 
@@ -219,7 +220,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         entitiesById.put(e.getId(), realE);
 
         preManagedEntitiesById.remove(e.getId());
-        if ((e instanceof Application) && (e.getParent()==null)) {
+        if ((e instanceof Application) && (e.getParent()==null) && !(e instanceof PolicyManager)) {
             applications.add((Application)proxyE);
             applicationIds.add(e.getId());
         }
@@ -229,17 +230,15 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         }
         if ((e instanceof Policy)){
         	log.info("Policy");
-        	// find the appropriate policy manager 
-        	// add the policy
+        	//configureLocations((Policy) e);
+        	((Policy) e).initTargetLocations();
         	String policyManagerType = e.config().get(ConfigKeys.newConfigKey(String.class, "policymanager.type"));
         	PolicyManager policyManager = (PolicyManager) getPolicyManagerByType(policyManagerType);
         	if (policyManager != null){
-        		policyManager.addOCampPolicy((Policy)e); // I think I should add the proxy and not the actual entity.}
+        		policyManager.addOCampPolicy((Policy)e); 
         	}else{
-        		// create the policy manager and add to the platform
         		policyManager = buildPolicyManager(policyManagerType);
         		policyManager.addOCampPolicy((Policy)e);
-        		// add the proxy
         	}
         }
         if (!entities.contains(proxyE)) 
@@ -277,7 +276,11 @@ public class LocalOCampEntityManager extends LocalEntityManager {
     	return null;
     }
     
-    
+//    private void configureLocations(Policy policy){
+//    	for (Entity entity: policy.getTargets()){
+//    		entity.config().set(BasicOCampService.LOCATIONS, val)
+//    	}
+//    }
     
     private <T extends Entity> T getPolicyManagerByType(String type){
     	for(PolicyManager policyManager: policyManagers){

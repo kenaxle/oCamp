@@ -16,10 +16,8 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 	
 	@Override
 	public boolean evaluate(SensorEvent event){
-		//FIXME revert this after testing
-		//if (event.getValue().getClass() != getValue().getClass()) return false;
-		//return ((T)event.getValue()).equals((T)getValue());
-		return false;
+		if (event.getValue().getClass() != getValue().getClass()) return false;
+		return ((T)event.getValue()).equals((T)getValue());
 	}
 	
 	public boolean isAlignedWith(ConstraintImpl constraint){
@@ -36,6 +34,10 @@ public class EqualToImpl<T> extends ConstraintImpl<T> implements EqualTo {
 		
 		return new ConstraintVector(propertySensor,actualValue,defaultValue,violated);
 										 
+	}
+	
+	public Object initialValue(){
+		return this.config().get(VALUE);
 	}
 
 }

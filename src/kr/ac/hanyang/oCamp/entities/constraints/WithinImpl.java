@@ -39,4 +39,9 @@ public class WithinImpl<T> extends ConstraintImpl<T> implements Within {
 										 
 	}
 	
+	//FIXME
+	public Object initialValue(){
+		return null;
+	}
+	
 }

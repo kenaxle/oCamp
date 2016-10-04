@@ -27,12 +27,15 @@ import org.yaml.snakeyaml.error.YAMLException;
 
 import com.google.api.client.repackaged.com.google.common.annotations.VisibleForTesting;
 
+import groovy.util.logging.Log;
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampPMTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
+import org.apache.brooklyn.core.location.BasicLocationDefinition;
+
 
 public class PdpProcessor{
 	
@@ -61,9 +64,54 @@ public class PdpProcessor{
             Exceptions.propagateIfFatal(e);
             throw new YAMLException("Plan not in acceptable format: "+(e.getMessage()!=null ? e.getMessage() : ""+e), e);
         }
-        Map<String, Object> dpRootInterpreted = applyInterpreters(dpRootUninterpreted);
+        //add the base policy manager here 
+        if (!(dpRootUninterpreted.containsKey("type")&& dpRootUninterpreted.containsKey("actiongroups")))
+        	configureBasePolicy(dpRootUninterpreted);
         
+        Map<String, Object> dpRootInterpreted = applyInterpreters(dpRootUninterpreted);
+       
         return DeploymentPlan.of(dpRootInterpreted, yaml);
+    }
+    
+    
+    private void configureBasePolicy(Map<String, Object> dpRoot){
+		List services = ((List) dpRoot.get("services"));
+		List policies = ((List) dpRoot.get("policies"));
+		if (policies == null) policies = new ArrayList<Map<String,Object>>();
+		Map<String, Object> basePolicy = Yamls.getAs(((List)Yamls.parseAll(kr.ac.hanyang.oCamp.entities.policies.objs.Policy.BASE_PLACEMENT_POLICY)).get(0),Map.class);
+		for(Object service: services){
+			boolean managed = false;
+			String serviceName = (String)((Map<String, Object>) service).get("id");
+			for (Object policy: policies){
+				List targets = (List) ((Map<String, Object>) policy).get("targets");
+				if (targets.contains(serviceName)) managed = true;
+			}
+			if(! managed){
+				((List) basePolicy.get("targets")).add(serviceName);
+			}
+
+		}
+		if (!((List) basePolicy.get("targets")).isEmpty()){
+			List<String> locations =  new ArrayList<String>();
+			for(Object locationDef : campPlatform.getBrooklynManagementContext().getLocationRegistry().getDefinedLocations().values()){
+				String locationName = ((BasicLocationDefinition) locationDef).getName();
+				locations.add(locationName);
+			}
+			for (Object constraint: (List)basePolicy.get("constraints")){
+				Map<String, Object> constMap = (Map<String,Object>) constraint;
+				if (constMap.get("property").equals("PROVISIONING_LOCATION"))
+					constMap.put("value", locations);
+			}
+			
+			//basePolicy.put("targets", locations);
+			policies.add(basePolicy);
+			dpRoot.put("policies", policies);
+			//dpRoot.
+			//List locations = (List);
+			//configure the locations
+			//then return 
+			//System.out.println("");
+		}
     }
     
     /** create and return an AssemblyTemplate based on the given DP (yaml) */
@@ -120,6 +168,7 @@ public class PdpProcessor{
                 customAttrs.put("planId", customAttrs.remove("id"));
             }
             atc.addCustomAttributes(customAttrs);
+            
         }
         
         if (atc.getInstantiator()==null)

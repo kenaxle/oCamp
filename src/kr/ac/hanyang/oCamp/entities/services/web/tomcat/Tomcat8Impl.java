@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
+import org.apache.brooklyn.util.collections.MutableList;
+import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.task.TaskBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,23 +55,6 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
             @EffectorParam(name="url", description="URL of WAR file") String url, 
             @EffectorParam(name="targetName", description="context path where WAR should be deployed (/ for ROOT)") String targetName) {
 		super.deploy(url, targetName);
-//	       try {
-//	            
-//	            JavaWebAppDriver driver = getDriver();
-//	            String deployedName = driver.deploy(url, targetName);
-//	            
-//	            // Update attribute
-//	            Set<String> deployedWars = getAttribute(DEPLOYED_WARS);
-//	            if (deployedWars == null) {
-//	                deployedWars = Sets.newLinkedHashSet();
-//	            }
-//	            deployedWars.add(deployedName);
-//	            sensors().set(DEPLOYED_WARS, deployedWars);
-//	        } catch (RuntimeException e) {
-//	            // Log and propagate, so that log says which entity had problems...
-//	            log.warn("Error deploying '"+url+"' to "+targetName+" on "+toString()+"; rethrowing...", e);
-//	            throw Throwables.propagate(e);
-//	        }
 	}
 	
 
@@ -78,12 +63,13 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	// this will initiate the start on the requirements and Artifacts then call 
 	// start on itself
 	//builds a parallel startup task and waits for the completion of the members.
-	public void startup(Collection<? extends Location> locations){
+	public void startup(/*Collection<? extends Location> locations*/){
 		log.info("**** INFO INFO **** Starting Tomcat...");
 
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
 		for(Entity e: this.getChildren()){
-			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START));	
+			taskBuilder.add(Entities.invokeEffector(this, e, Startable.START,
+					MutableMap.of("locations", MutableList.of(e.config().get(BasicOCampService.LOCATIONS)))));	//locations are set by the placement policy
 		}
 		Task<Void> task = taskBuilder.parallel(true)
 				   					 .build();
@@ -96,35 +82,6 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 			
 		}
 	}
-
-	
-	
-	
-	
-//	@Override
-//	public ConstraintSetImpl getConstraintSet() {
-//		return CONSTRAINTSET;
-//	}
-//	
-//	public void subscribe(PolicyManagerImpl subscriber){
-//		policyManagers.put(subscriber.getType(), subscriber);
-//	}
-//	
-//	public void unsubscribe(PolicyManagerImpl subscriber){
-//		policyManagers.remove(subscriber.getType());
-//	}
-//	
-//	
-//	//the entity is a constraint entity that is forwarded by the constraintset
-//	// extract the policy manager and then initiate the policy manager's process
-//	//for handling the 
-//	@Override
-//	public void notification(Entity entity) {
-//		if (!(entity instanceof ConstraintImpl)) return; //this should be logged as an error
-//		ConstraintImpl policyConstraint = (ConstraintImpl) entity;
-//		PolicyManager policyManager = policyConstraint.getPolicyManager();
-//		policyManager.evaluateActions(policyConstraint.getPolicy(), this);
-//	}
 
 
 }

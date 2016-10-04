@@ -62,6 +62,8 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
     @Override
 	public abstract boolean evaluate(SensorEvent event);
   
+    
+    public abstract Object initialValue();
 	
 	public SensorEventListener<T> getListener(){
 		return (SensorEventListener<T>) constraintListener(this);

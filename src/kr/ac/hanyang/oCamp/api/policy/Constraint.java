@@ -21,4 +21,6 @@ public interface Constraint<T> extends Entity{
 	public boolean evaluate(SensorEvent event);
 	
 	public SensorEventListener<T> getListener();
+	
+	public Object initialValue();
 }

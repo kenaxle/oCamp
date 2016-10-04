@@ -727,7 +727,7 @@ public class OCampLauncher2<T> {
 
                 try {
                     LOG.info("Starting brooklyn application {} in location{} {}", new Object[] { app, locations.size()!=1?"s":"", locations });
-                    ((oCampStartable)app).startup(locations);
+                    ((oCampStartable)app).startup();
                 } catch (Exception e) {
                     LOG.error("Error starting "+app+": "+Exceptions.collapseText(e), Exceptions.getFirstInteresting(e));
                     appExceptions.add(Exceptions.collapse(e));

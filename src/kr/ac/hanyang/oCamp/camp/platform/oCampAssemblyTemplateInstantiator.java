@@ -72,14 +72,14 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 			
 	        Application app = create(template, platform);
 	        
-	        for(Entity child: app.getChildren()){
-	        	
-	        		//child.sensors().set(IService.ENTITY_STARTED, false);
-	        		child.sensors().set(Attributes.SERVICE_UP, false);
-
-	        }
+//	        for(Entity child: app.getChildren()){
+//	        	
+//	        		//child.sensors().set(IService.ENTITY_STARTED, false);
+//	        		child.sensors().set(Attributes.SERVICE_UP, false);
+//
+//	        }
 	        // TODO Change back when done testing
-	        //TODO CreationResult<Application, Void> start = startup(app);
+	        CreationResult<Application, Void> start = startup(app);
 	        
 	        // log.debug("CAMP created "+app+"; starting in "+start.task());
 	        
@@ -96,10 +96,10 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	 private <T extends Application> CreationResult<T,Void> startup(T app) {
 		 	log.info("****** Application Startup*********");
 		 	
-	        Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP,
+	        Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP//,
 	            // locations already set in the entities themselves;
 	            // TODO make it so that this arg does not have to be supplied to START !
-	            MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)"))
+	            //MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)"))
 	            );
 	        task.blockUntilEnded();
 	        log.info("****ENDED *****");

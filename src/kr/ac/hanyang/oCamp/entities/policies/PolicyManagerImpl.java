@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
+import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 
@@ -85,7 +86,16 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		}
 		return suggestedActions;
 	}
-
+	
+//	public String evaluateStartUp(Entity entity, Policy policy){
+//		String location = "";
+//		for(Entity actionGroup: this.getChildren()){
+//			if(((ActionGroup) actionGroup).getActionEffector().equals(ConstraintProperties.START)){
+//				ActionGroup group = (ActionGroup) actionGroup;
+//				group.
+//			}
+//		}
+//	}
 
 // policy actions **********
 	@Override

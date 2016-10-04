@@ -11,4 +11,5 @@ public interface Policy extends Entity{
 	
 	public List<Entity> getTargets();
 	
+	public void initTargetLocations();
 }
