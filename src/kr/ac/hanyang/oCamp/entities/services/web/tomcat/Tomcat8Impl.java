@@ -2,11 +2,14 @@ package kr.ac.hanyang.oCamp.entities.services.web.tomcat;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
 import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.task.TaskBuilder;
+import org.apache.brooklyn.util.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +30,8 @@ import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
 public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomcat8, IService, oCampStartable, IEntity{
 	
-	private static final Logger log = LoggerFactory.getLogger(WarImpl.class);
-	private Map<String,PolicyManagerImpl> policyManagers;
+	private static final Logger log = LoggerFactory.getLogger(Tomcat8Impl.class);
+	//private Map<String,PolicyManagerImpl> policyManagers;
 	
 	public Tomcat8Impl(){
 		super();
@@ -36,7 +39,7 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	
 	public void init(){
 		super.init(); 
-		int count = 0; boolean val;
+		//int count = 0; boolean val;
 	}
 
 	@Override
@@ -63,7 +66,7 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	// this will initiate the start on the requirements and Artifacts then call 
 	// start on itself
 	//builds a parallel startup task and waits for the completion of the members.
-	public void startup(/*Collection<? extends Location> locations*/){
+	public void startup(){
 		log.info("**** INFO INFO **** Starting Tomcat...");
 
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
@@ -74,7 +77,7 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 		Task<Void> task = taskBuilder.parallel(true)
 				   					 .build();
 		task.blockUntilEnded();
-		if (task.isDone() && !task.isError()){
+		if (task.isDone() /*&& !task.isError()*/){
 			log.info("**** SUCCESS SUCCESS **** "+task.getStatusSummary());
 			
 		}else{

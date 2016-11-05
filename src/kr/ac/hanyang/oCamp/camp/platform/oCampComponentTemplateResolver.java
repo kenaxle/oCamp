@@ -52,8 +52,11 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationRe
 	import com.google.common.base.Function;
 	import com.google.common.collect.Iterables;
 	import com.google.common.collect.Maps;
-	
-	/*
+
+import kr.ac.hanyang.oCamp.core.mgmt.oCampConfigKeys;
+import kr.ac.hanyang.oCamp.core.mgmt.oCampReservedKeys;
+
+/*
 	 * Licensed to the Apache Software Foundation (ASF) under one
 	 * or more contributor license agreements.  See the NOTICE file
 	 * distributed with this work for additional information
@@ -90,7 +93,7 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationRe
 	 * to parse the {@code serviceType} line in the template.
 	 */
 	@SuppressWarnings("deprecation")  // Because of ServiceTypeResolver 
-									  // I am reintroducing Service, Artifact and relarionship resolution
+									  // I am reintroducing Service, Artifact and relationship resolution
 
 
 	    private static final Logger log = LoggerFactory.getLogger(oCampComponentTemplateResolver.class);
@@ -216,16 +219,18 @@ import org.apache.brooklyn.camp.brooklyn.spi.creation.BrooklynEntityDecorationRe
 	        if (planId==null)
 	            planId = (String) attrs.getStringKey(BrooklynCampConstants.PLAN_ID_FLAG);
 	        //if the template is an artifact or a relationship or a service then do something FIXME
-	        Object childrenObj = attrs.getStringKey(BrooklynCampReservedKeys.BROOKLYN_CHILDREN); // FIXME dont think I need this
-	        if (childrenObj != null) {
-	            Iterable<Map<String,?>> children = (Iterable<Map<String,?>>)childrenObj;
-	            for (Map<String,?> childAttrs : children) {
-	                oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, childAttrs);
+	        Object member = attrs.getStringKey(oCampReservedKeys.MEMBER); 
+	        if (member != null) {
+	            //Iterable<Map<String,?>> children = (Iterable<Map<String,?>>)member;
+	            Map<String,Object> memberAttrs = ((oCampPlatformComponentTemplate)member).getCustomAttributes(); 
+	            oCampComponentTemplateResolver entityResolver = oCampComponentTemplateResolver.Factory.newInstance(loader, (oCampPlatformComponentTemplate)member);
 	                // encounteredRegisteredTypeIds must contain the items currently being loaded (the dependency chain),
 	                // but not parent items in this type already resolved.
-	                EntitySpec<? extends Entity> childSpec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
-	                spec.child(EntityManagementUtils.unwrapEntity(childSpec));
-	            }
+	            EntitySpec<? extends Entity> memberSpec = entityResolver.resolveSpec(encounteredRegisteredTypeIds);
+	            spec.configure(oCampConfigKeys.MEMBER, memberSpec);
+	            
+	                //spec.child(EntityManagementUtils.unwrapEntity(memberSpec));
+	            
 	        }
 	        
 	        

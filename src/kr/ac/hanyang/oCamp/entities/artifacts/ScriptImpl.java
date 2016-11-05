@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifactImpl;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
 
-public class ScriptImpl<T> extends BasicOCampArtifactImpl<Object> implements Startable, Software{
+public class ScriptImpl<T> extends BasicOCampArtifactImpl<Object> implements Startable, Software, Script{
 	private static final Logger log = LoggerFactory.getLogger(ScriptImpl.class);
 	
 	boolean connectedSensors = false; // not sure if I need sensors as yet

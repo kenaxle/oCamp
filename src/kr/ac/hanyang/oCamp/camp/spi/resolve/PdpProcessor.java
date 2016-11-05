@@ -31,6 +31,7 @@ import groovy.util.logging.Log;
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampPMTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
@@ -84,7 +85,7 @@ public class PdpProcessor{
 			String serviceName = (String)((Map<String, Object>) service).get("id");
 			for (Object policy: policies){
 				List targets = (List) ((Map<String, Object>) policy).get("targets");
-				if (targets.contains(serviceName)) managed = true;
+				if (targets.contains(serviceName) && isPlacement(policy)) managed = true;
 			}
 			if(! managed){
 				((List) basePolicy.get("targets")).add(serviceName);
@@ -112,6 +113,15 @@ public class PdpProcessor{
 			//then return 
 			//System.out.println("");
 		}
+    }
+    
+    private boolean isPlacement(Object policy){
+    	for (Object constraint: (List)((Map<String, Object>) policy).get("constraints")){
+    		Map<String, Object> constMap = (Map<String,Object>) constraint;
+			if (constMap.get("property").equals("PROVISIONING_LOCATION"))
+				return true;
+    	}
+    	return false;
     }
     
     /** create and return an AssemblyTemplate based on the given DP (yaml) */

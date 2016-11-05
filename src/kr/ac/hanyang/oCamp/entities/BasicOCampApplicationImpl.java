@@ -14,10 +14,14 @@ import org.slf4j.LoggerFactory;
 import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 
-public class BasicOCampApplicationImpl extends BasicApplicationImpl implements oCampStartable {
+public class BasicOCampApplicationImpl extends BasicApplicationImpl implements oCampStartable, BasicOCampApplication {
 	
 	private static final Logger log = LoggerFactory.getLogger(BasicOCampApplicationImpl.class);
 	//private List policyList;
+	
+	public void init(){
+		super.init();
+	}
 	
 	@Override
 	public void startup(/*Collection<? extends Location> locations*/) {

@@ -1,5 +1,8 @@
 package kr.ac.hanyang.oCamp.entities.constraints;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.api.sensor.SensorEvent;
@@ -27,7 +30,8 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 
 	//TODO need to fix this
 	public Object getValue(){
-		return null;//value;
+		//return null;//value;
+		return config().get(VALUE);//.getDefaultValue().getClass();//.getType();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -46,10 +50,20 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 			public void onEvent(SensorEvent<Object> event){
 				log.info("*********Sensor Event**********");
 				log.info("Sensor Event: "+event.getValue());
-				if (! listener.evaluate(event)){
-					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event.getSource());
+				if (!listener.evaluate(event)){
 					log.info("*********Emitted Constraint Violated **********");
 					log.info("Sensor Event: "+event.getValue());
+					//try {Thread.sleep(5000);} catch (InterruptedException e) {e.printStackTrace();}
+					try{
+						PrintWriter outStream = new PrintWriter(new FileOutputStream("/users/kena/datafile_detect.txt"));
+						outStream.println("failure detected on at time "+ System.currentTimeMillis());
+						outStream.close();
+					}catch(Exception e){
+						
+					}
+					
+					listener.sensors().emit(Constraint.CONSTRAINT_VIOLATED, event.getSource());
+					
 				}
 			}
 		};
@@ -60,8 +74,10 @@ public abstract class ConstraintImpl<T> extends AbstractEntity implements Constr
 		
 	
     @Override
+    
 	public abstract boolean evaluate(SensorEvent event);
   
+    public abstract Object evaluateOptional(Object oldValue);
     
     public abstract Object initialValue();
 	

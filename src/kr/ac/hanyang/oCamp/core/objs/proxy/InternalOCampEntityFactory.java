@@ -9,6 +9,7 @@ import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.entity.EntityInitializer;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.entity.EntityTypeRegistry;
+import org.apache.brooklyn.api.entity.Group;
 import org.apache.brooklyn.api.policy.Policy;
 import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.config.ConfigKey;
@@ -72,7 +73,14 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
             for (Entity child: entity.getChildren()){
             	child.setParent(entity);
             }
-
+            
+//            for (Entity member: spec.getMembers()) {
+//                if (!(entity instanceof Group)) {
+//                    throw new IllegalStateException("Entity "+entity+" must be a group to add members "+spec.getMembers());
+//                }
+//                ((Group)entity).addMember(member);
+//            }
+            
             entitiesByEntityId.put(entity.getId(), entity);
             specsByEntityId.put(entity.getId(), spec);
 
@@ -168,10 +176,11 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 	                ((AbstractEntity)entity).setCatalogItemId(spec.getCatalogItemId());
 	            }
 	            
-	            //evaluating if this is needed
-//	            for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
-//	                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
-//	            }
+	            if (!(entity instanceof ActionGroup || entity instanceof Action || entity instanceof Transition)){
+		            for (Map.Entry<ConfigKey<?>, Object> entry : spec.getConfig().entrySet()) {
+		                entity.config().set((ConfigKey)entry.getKey(), entry.getValue());
+		            }
+	            }
 	            
 	            Entity parent = spec.getParent();
 	            if (parent != null) {

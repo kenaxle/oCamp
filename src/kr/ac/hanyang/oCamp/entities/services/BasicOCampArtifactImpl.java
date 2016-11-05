@@ -32,16 +32,12 @@ public class BasicOCampArtifactImpl<T> extends EffectorStartableImpl implements 
 	
 	@SuppressWarnings("unchecked")
 	public T getContent(){
-		//return (T) this.getConfig(new BasicConfigKey(null, "content"));
 		return (T) this.content;
 	}
 	
 	@Override
 	public void start(Collection<? extends Location> locations ){
-//		for(Entity e: this.getChildren()){
-//			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
-//			//task.blockUntilEnded(null);
-//		}
+		/**Noop*/
 	}
 
 	@Override
@@ -49,9 +45,4 @@ public class BasicOCampArtifactImpl<T> extends EffectorStartableImpl implements 
 		return BasicOCampArtifact.REQUIREMENTS;
 	}
 
-//	@Override
-//	protected BrooklynObjectInternal configure(Map<?, ?> flags) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

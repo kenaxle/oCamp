@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,6 +17,7 @@ import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.entity.AbstractEntity;
 import org.apache.brooklyn.core.entity.EntityInternal;
 import org.apache.brooklyn.core.internal.storage.BrooklynStorage;
+import org.apache.brooklyn.core.location.BasicLocationRegistry;
 import org.apache.brooklyn.core.mgmt.internal.LocalEntityManager;
 import org.apache.brooklyn.core.mgmt.internal.LocalManagementContext;
 import org.apache.brooklyn.core.mgmt.internal.ManagementTransitionInfo;
@@ -30,10 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import kr.ac.hanyang.oCamp.camp.platform.OCampEntityManagementUtils;
 import kr.ac.hanyang.oCamp.camp.platform.oCampAssemblyTemplateInstantiator;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
@@ -70,6 +74,9 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         policyManagerIds = SetFromLiveMap.create(storage.<String,Boolean>getMap("policyManagers"));
 	}
 	
+	Collection<Application> getPolicyManagers() {
+        return ImmutableList.copyOf(policyManagers);
+    }
 	
 	 boolean isPreRegistered(Entity e) {
 	     return preRegisteredEntitiesById.containsKey(e.getId());
@@ -231,7 +238,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         if ((e instanceof Policy)){
         	log.info("Policy");
         	//configureLocations((Policy) e);
-        	((Policy) e).initTargetLocations();
+        	((Policy) e).initTargetLocations((BasicLocationRegistry) this.managementContext.getLocationRegistry());
         	String policyManagerType = e.config().get(ConfigKeys.newConfigKey(String.class, "policymanager.type"));
         	PolicyManager policyManager = (PolicyManager) getPolicyManagerByType(policyManagerType);
         	if (policyManager != null){
@@ -256,7 +263,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
     	try{
     		String yaml;
     		Class clazz = Class.forName(policyManagerType);
-    		Field field = clazz.getDeclaredField("DEFAULT");
+    		Field field = clazz.getDeclaredField("DEFAULT"); // the specifications for the default placement policy
 			field.setAccessible(true);
 			if (field.isAccessible()){
 				yaml = (String) field.get(null);
@@ -264,7 +271,8 @@ public class LocalOCampEntityManager extends LocalEntityManager {
 				oCampPlatform platform = ((BaseEntityManager) managementContext).getParentPlatform();
 				PdpProcessor pdp = platform.oCampPdp();
 				PolicyManagerTemplate pmt = (PolicyManagerTemplate) pdp.registerDeploymentPlan(pdp.parseDeploymentPlan(yaml));
-				PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiateApp(pmt, platform);
+				//PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiateApp(pmt, platform);
+				PolicyManager polMgr = (PolicyManager) OCampEntityManagementUtils.instantiateApp(pmt, platform);
 				
 				return polMgr;
 			}else{

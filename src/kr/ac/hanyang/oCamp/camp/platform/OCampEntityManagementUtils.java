@@ -2,8 +2,9 @@ package kr.ac.hanyang.oCamp.camp.platform;
 
 	import java.util.List;
 	import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
-	import javax.annotation.Nullable;
+import javax.annotation.Nullable;
 
 	import java.util.Set;
 
@@ -45,7 +46,8 @@ package kr.ac.hanyang.oCamp.camp.platform;
 	import kr.ac.hanyang.oCamp.camp.spi.PolicyManager;
 	import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 	import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
-	import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
+import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
+import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 	import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
 	import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
 	import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
@@ -67,46 +69,25 @@ package kr.ac.hanyang.oCamp.camp.platform;
 					return instantiateAssembly(template, platform);
 		}
 		
-		public static Application instantiateAssembly(AssemblyTemplate template, CampPlatform platform) {
-				
-		        Application app = create(template, platform);
-		        
-		        
-		        for(Entity child: app.getChildren()){
-		        	
-		        		//child.sensors().set(IService.ENTITY_STARTED, false);
-		        		child.sensors().set(Attributes.SERVICE_UP, false);
-
-		        }
-		        // TODO Change back when done testing
-		        //TODO CreationResult<Application, Void> start = startup(app);
-		        
-		        // log.debug("CAMP created "+app+"; starting in "+start.task());
-		        
-		        return app;
-		    }
+		public static Application instantiateAssembly(AssemblyTemplate template, CampPlatform platform) {		
+		    Application app = create(template, platform);
+		    return app;
+		}
 		
 		public static Application instantiatePolicyManager(AssemblyTemplate template, CampPlatform platform) {
-
-	        Application polMgr = create(template, platform);    
-	        
+	        Application polMgr = create(template, platform);    	        
 	        return polMgr;
 	    }
 		
 		
 		public static <T extends Application> CreationResult<T,Void> startup(T app) {
 			 	log.info("****** Application Startup*********");
-			 	if (app instanceof PolicyManager){
-			 		return CreationResult.of(app, null);
-			 	}
+			 	//if (app instanceof PolicyManager){
+			 	//	return CreationResult.of(app, null);
+			 	//}
 		        
-			 	Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP,
-		            // locations already set in the entities themselves;
-		            // TODO make it so that this arg does not have to be supplied to START !
-		            MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)"))
-		            );
-		        task.blockUntilEnded();
-		        log.info("****ENDED *****");
+			 	Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP);
+			 	task.blockUntilEnded();
 		        return CreationResult.of(app, task);
 		    }
 		 
@@ -157,8 +138,6 @@ package kr.ac.hanyang.oCamp.camp.platform;
 		            BrooklynClassLoadingContext loader,
 		            Set<String> encounteredTypeSymbolicNames) {
 		        log.debug("CAMP creating application instance for {} ({})", template.getId(), template);
-
-		        // AssemblyTemplates created via PDP, _specifying_ then entities to put in
 
 		        EntitySpec<? extends Application> app = /*CampInternalUtils.*/createWrapperApp(template, loader);
 		        app.configure(EntityManagementUtils.WRAPPER_APP_MARKER, Boolean.TRUE);
@@ -247,11 +226,12 @@ package kr.ac.hanyang.oCamp.camp.platform;
 			    		//if (childSpec.getChildren().isEmpty()){
 			    			//the this is an Artifact see if it exists before.
 			    			for(EntitySpec<?> artSpec:artifactList){
-			    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
-			    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
-			    					//found the artifact in the list
-			    					return artSpec;
-			    				}
+			    				if (spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")) != null)
+				    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
+				    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
+				    					//found the artifact in the list
+				    					return artSpec;
+				    				}
 			    			}
 			    			artifactList.add(spec);
 			    			return spec;

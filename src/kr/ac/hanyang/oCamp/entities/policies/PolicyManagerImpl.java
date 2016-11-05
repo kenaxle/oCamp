@@ -1,7 +1,11 @@
 package kr.ac.hanyang.oCamp.entities.policies;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.brooklyn.api.effector.Effector;
 import org.apache.brooklyn.api.entity.Entity;
 import org.apache.brooklyn.api.sensor.SensorEvent;
@@ -15,6 +19,7 @@ import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
+import kr.ac.hanyang.oCamp.entities.policies.objs.FulfillmentVector;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 
@@ -55,20 +60,31 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	private SensorEventListener<Object> policyManagerListener(PolicyManager listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
-				log.info("*********Sensor Event**********");
+				log.info("*********Sensor Event Detected**********");
 				log.info("Sensor Event: "+event.getValue());
+				try{
+					PrintWriter outStream = new PrintWriter(new FileOutputStream("/users/kena/datafile_detect2.txt"));
+					outStream.println("Making decision "+ System.currentTimeMillis());
+					
+				
+				//try {Thread.sleep(5000);} catch (InterruptedException e) {e.printStackTrace();}
 				Entity violator = (Entity) event.getValue();
 				Policy policy = (Policy)event.getSource();
-				listener.doAction(listener.evaluateActions(violator,policy).get(0).config().get(ActionGroup.ACTION_ID),violator);
+				listener.doAction(listener.evaluateActions(violator,policy),violator);
+				outStream.println("made decision "+ System.currentTimeMillis());
+				outStream.close();
+				}catch(Exception e){
+					
+				}
 			}
 		};
 	}
 	
 
 	@Override
-	public List<ActionGroup> evaluateActions(Entity entity, Policy policy) {
+	public List<FulfillmentVector> evaluateActions(Entity entity, Policy policy) {
 		List<ConstraintVector> violatedConstraints = new ArrayList<ConstraintVector>();
-		List<ActionGroup> suggestedActions = new ArrayList<ActionGroup>();
+		List<FulfillmentVector> suggestedActions = new ArrayList<FulfillmentVector>();
 		for(Entity constr: policy.getChildren()){
 			Constraint constraint = (Constraint) constr;
 			ConstraintVector constVect = constraint.Violated(entity);
@@ -80,28 +96,23 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 		
 		//Collection<Entity> actionGroups = this.getChildren();
 		for(Entity actionGroup: this.getChildren()){
-			if (((ActionGroup) actionGroup).canFulfill(violatedConstraints) > 0){
-				suggestedActions.add((ActionGroup) actionGroup);
+			FulfillmentVector fulfillment = ((ActionGroup) actionGroup).canFulfill(violatedConstraints);
+			if ( fulfillment.getWeight() > 0){
+				suggestedActions.add(fulfillment);
 			}
 		}
 		return suggestedActions;
 	}
 	
-//	public String evaluateStartUp(Entity entity, Policy policy){
-//		String location = "";
-//		for(Entity actionGroup: this.getChildren()){
-//			if(((ActionGroup) actionGroup).getActionEffector().equals(ConstraintProperties.START)){
-//				ActionGroup group = (ActionGroup) actionGroup;
-//				group.
-//			}
-//		}
-//	}
 
 // policy actions **********
+	@SuppressWarnings("unchecked")
 	@Override
-	public void doAction(Effector effector, Entity entity){
-		log.info("*********Performing action: "+effector+"**********");		
-		Entities.invokeEffector(this, entity, effector);
+	public void doAction(List<FulfillmentVector> suggestedActions, Entity entity){
+		Effector actionEffector = suggestedActions.get(0).getActionId();
+		Map<String, Object> parameters = suggestedActions.get(0).getParameters();
+		log.info("*********Performing action: "+actionEffector+"**********");		
+		Entities.invokeEffector(this, entity, actionEffector, parameters);   
 	}
 
 	

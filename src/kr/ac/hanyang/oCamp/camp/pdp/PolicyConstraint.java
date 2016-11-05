@@ -19,7 +19,6 @@ public class PolicyConstraint{
     
     Map<String,Object> customAttributes;
     
-    @SuppressWarnings("unchecked")
     public static PolicyConstraint of(Map<String, Object> policyConstraint) {
         Map<String,Object> fields = MutableMap.copyOf(policyConstraint);
         
@@ -52,7 +51,9 @@ public class PolicyConstraint{
         return ImmutableMap.copyOf(customAttributes);
     }
     
-    @Override
+ 
+
+	@Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }

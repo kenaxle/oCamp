@@ -8,6 +8,7 @@ import org.apache.brooklyn.config.ConfigKey;
 
 import kr.ac.hanyang.oCamp.api.transition.Transition;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
+import kr.ac.hanyang.oCamp.entities.policies.objs.FulfillmentVector;
 
 
 public interface Action extends Entity{
@@ -16,6 +17,6 @@ public interface Action extends Entity{
 	
 	public Sensor getProperty();
 	
-	public int getScore(ConstraintVector constVect);
+	public int getScore(ConstraintVector constVect, FulfillmentVector fulfillment);
 	
 }

@@ -36,7 +36,7 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 									   + "    - type: Initial\n"
 									   + "      value: null\n"
 									   + "    - type: Set\n"
-									   + "      value: OPTIONAL\n"
+									   + "      value: ANYTHING\n"
 									   + "- id: STOP\n"
 									   + "  actions:\n"
 									   + "  - property: SERVICE_UP\n"
@@ -48,7 +48,7 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 									   + "  - property: PROVISIONING_LOCATION\n"
 									   + "    transitions:\n"
 									   + "    - type: Initial\n"
-									   + "      value: OPTIONAL\n"
+									   + "      value: ANYTHING\n"
 									   + "    - type: Set\n"
 									   + "      value: null\n";
 	

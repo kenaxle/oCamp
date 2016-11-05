@@ -33,16 +33,16 @@ public class DeployOnImpl<T> extends EffectorStartableImpl implements Startable,
 	@Override
 	public void start(Collection<? extends Location> locations) {
 		log.info("**** INFO INFO **** Starting DeployOn...");
-		Task<Void> startParent = Entities.invokeEffector(this, this.getParent(), Startable.START,MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)")));
+		Task<Void> startParent = Entities.invokeEffector(this, this.getParent(), Startable.START,MutableMap.of("locations", locations));
 		startParent.blockUntilEnded();
-		if (startParent.isDone( )&& !startParent.isError()){
+		if (startParent.isDone( )/*&& !startParent.isError()*/){
 			Task<Void> deployContent = Entities.invokeEffector(this, this.getParent(), IDeployable.DEPLOY, MutableMap.of("url",this.getChildren().iterator().next().config().get(BasicOCampArtifact.CONTENT),
 							 								   															 "target",this.config().get(ConfigKeys.newConfigKey(String.class, "target"))));
 			deployContent.blockUntilEnded();
-			if (deployContent.isDone( )&& !deployContent.isError()){
+			if (deployContent.isDone( )/*&& !deployContent.isError()*/){
 				Entity child = this.getChildren().iterator().next(); // get my only child this will be the Artifact
 				Task<Void> childTask = Entities.invokeEffector(this,child , Startable.START);
-				childTask.blockUntilEnded(null);
+				childTask.blockUntilEnded();
 				if (childTask.isDone() && !childTask.isError()){
 					log.info("**** INFO INFO ****"+childTask.getStatusSummary());
 				}else{

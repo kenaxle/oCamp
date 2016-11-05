@@ -15,6 +15,7 @@ import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
 public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 	
 	private Map<Sensor, Action> actionsAsMap;
+	private Map<String, Object> parameters;
 	
 	public ActionGroupImpl(){ }
 	
@@ -32,21 +33,27 @@ public class ActionGroupImpl extends AbstractEntity implements ActionGroup {
 
 	@Override
 	public Effector getActionEffector(){
-		return this.ACTION_ID.getDefaultValue();
+		return this.config().get(ACTION_ID);
 	}
 	
-	public int canFulfill(Collection<ConstraintVector> violatedConstraints){
+	public FulfillmentVector canFulfill(Collection<ConstraintVector> violatedConstraints){
+		FulfillmentVector fulfillment =  new FulfillmentVector(getActionEffector());
 		int weight = 0;
 		for (ConstraintVector constVect: violatedConstraints){
 			if (actionsAsMap.containsKey(constVect.getConstraintSensor())){
 				Action action = actionsAsMap.get(constVect.getConstraintSensor());
-				int score = action.getScore(constVect);
+				int score = action.getScore(constVect, fulfillment);
 				if ( score >= 0)
 					weight += score;
-			}else
-				return -1;
+					
+			}else{
+				fulfillment.setWeight(-1);
+				return fulfillment;
+			}
 		}
-		return weight;
+		fulfillment.setWeight(weight);
+		
+		return fulfillment;
 	}
 	
 }

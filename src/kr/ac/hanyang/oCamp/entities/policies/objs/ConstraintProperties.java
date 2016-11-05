@@ -7,9 +7,11 @@ import org.apache.brooklyn.api.sensor.Sensor;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.entity.machine.MachineAttributes;
+import org.apache.brooklyn.entity.webapp.DynamicWebAppCluster;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.ac.hanyang.oCamp.core.traits.Scalable;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.software.SoftwareProcess;
 
@@ -23,12 +25,13 @@ public class ConstraintProperties {
 	public static final Sensor SERVICE_STATE = Attributes.SERVICE_STATE_ACTUAL;
 	public static final Sensor CPU_USAGE = MachineAttributes.CPU_USAGE;
 	public static final Sensor ENTITY_STARTED = IService.ENTITY_STARTED;
-	
+	public static final Sensor REQUEST_PER_SECOND = DynamicWebAppCluster.REQUESTS_PER_SECOND_LAST_PER_NODE;
 	//----------Effectors----------
 	
 	public static final Effector START = Startable.START;
 	public static final Effector STOP = Startable.STOP;
-	
+	public static final Effector SCALE_UP = Scalable.SCALE_UP;
+	public static final Effector SCALE_DOWN = Scalable.SCALE_DOWN;
 	
 	public static Object getProperty(String name){
 		Object result = null;

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import javax.annotation.Nullable;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.Entity;
@@ -45,6 +46,7 @@ import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform.oCampPlatformTransaction;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManager;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
+import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
 import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
@@ -72,14 +74,8 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 			
 	        Application app = create(template, platform);
 	        
-//	        for(Entity child: app.getChildren()){
-//	        	
-//	        		//child.sensors().set(IService.ENTITY_STARTED, false);
-//	        		child.sensors().set(Attributes.SERVICE_UP, false);
-//
-//	        }
-	        // TODO Change back when done testing
-	        CreationResult<Application, Void> start = startup(app);
+
+	        //CreationResult<Application, Void> start = startup(app);
 	        
 	        // log.debug("CAMP created "+app+"; starting in "+start.task());
 	        
@@ -101,7 +97,8 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	            // TODO make it so that this arg does not have to be supplied to START !
 	            //MutableMap.of("locations", MutableList.of("AWS Tokyo (ap-northeast-1)"))
 	            );
-	        task.blockUntilEnded();
+	        task.blockUntilEnded(new Duration(15, TimeUnit.MINUTES));
+	        Task<Void> policyStartTask = Entities.invokeEffector(app, app, oCampEnableable.ENABLE);
 	        log.info("****ENDED *****");
 	        return CreationResult.of(app, task);
 	    }
@@ -242,12 +239,20 @@ public class oCampAssemblyTemplateInstantiator implements AssemblyTemplateInstan
 	    		if (childSpec == null && spec.getConfig().containsKey(new BasicConfigKey<String>(String.class,"content"))){
 	    			//the this is an Artifact see if it exists before.
 	    			for(EntitySpec<?> artSpec:artifactList){
-	    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
-	    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
-	    					//found the artifact in the list
-	    					return artSpec;
-	    				}
+	    				if (spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")) != null)
+		    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
+		    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
+		    					//found the artifact in the list
+		    					return artSpec;
+		    				}
 	    			}
+//	    			for(EntitySpec<?> artSpec:artifactList){
+//	    				if(artSpec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id"))
+//	    						.equals(spec.getConfig().get(new BasicConfigKey<String>(String.class,"camp.template.id")))){
+//	    					//found the artifact in the list
+//	    					return artSpec;
+//	    				}
+//	    			}
 	    			artifactList.add(spec);
 	    			return spec;
 	    		//}/*else{

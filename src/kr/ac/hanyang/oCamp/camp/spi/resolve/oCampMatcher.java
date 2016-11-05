@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.api.mgmt.classloading.BrooklynClassLoadingContext;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampReservedKeys;
@@ -18,6 +19,7 @@ import org.apache.brooklyn.camp.spi.pdp.ArtifactContent;
 import org.apache.brooklyn.camp.spi.pdp.ArtifactRequirement;
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
 import org.apache.brooklyn.camp.spi.pdp.Service;
+import org.apache.brooklyn.camp.spi.pdp.ServiceCharacteristic;
 import org.apache.brooklyn.camp.spi.resolve.PdpMatcher;
 import org.apache.brooklyn.config.ConfigKey;
 import org.apache.brooklyn.core.catalog.internal.BasicBrooklynCatalog;
@@ -27,6 +29,7 @@ import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.text.Strings;
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -119,6 +122,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 	
 	// matches the best service to the requirement type and takes 
 	// into consideration the characteristics 
+	@Deprecated
 	protected List<String> matchService(String typeName, Collection<String> charTypes){
 		String[] services = {"web.tomcat.Tomcat8","software.SoftwareProcess"};
 		List<String> matches = new MutableList<String>();
@@ -170,16 +174,32 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
     		oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> builder = oCampPlatformComponentTemplate.builder(); 
             builder.type( type ); 
         	name = ((Service)deploymentPlanItem).getName();
+        	Collection<String> keys = getTagIDs();
             if (!Strings.isBlank(name)) 
             	builder.name(name);
-            Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
-            if (attrs.containsKey("id"))
-            builder.customAttribute("planId", attrs.remove("id"));
+            List<Object> characteristics = MutableList.copyOf(((Service)deploymentPlanItem).getCharacteristics());
+            for(Object servChar: characteristics){
+            	Map<String, Object> attrs = MutableMap.copyOf( ((ServiceCharacteristic)servChar).getCustomAttributes() );           	
+	            if (attrs.containsKey("member")){ // this is a cluster of group. parse the spec of the member
+	            	Service memberService = Service.of((Map<String, Object>) attrs.remove("member"));
+	            	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> memberBuilder = oCampPlatformComponentTemplate.builder();
+	            	memberBuilder.type(lookupType(memberService));
+	            	Map<String, Object> memberAttrs = MutableMap.copyOf( memberService.getCustomAttributes() ); 
+	            	for(String key: keys){
+	     	        	addCustomMapAttributeIfNonNull(memberBuilder, memberAttrs, key);
+	     	        }
+	            	builder.customAttribute("member", memberBuilder.build());
+	            }
+           	
+            }
+            if (((Service)deploymentPlanItem).getCustomAttributes().containsKey("id"))
+            builder.customAttribute("planId", ((Service)deploymentPlanItem).getCustomAttributes().get("id"));
+  
 	        //******************************************************************
             //builder.customAttribute("location", "AWS Tokyo (ap-northeast-1)");
             //******************************************************************
             //add custom tags
-	        Collection<String> keys = getTagIDs();
+            Map<String, Object> attrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
 	        for(String key: keys){
 	        	addCustomMapAttributeIfNonNull(builder, attrs, key);
 	        }
@@ -229,18 +249,32 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		        			Service service = Service.of(fulfillment);	        				
 
 		        			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> servBuilder = oCampPlatformComponentTemplate.builder(); 
-		                    builder.type( service.getServiceType()); 
+		        			servBuilder.type( service.getServiceType()); 
 		                	name = service.getName();
 		                    if (!Strings.isBlank(name)) 
-		                    	builder.name(name);
-		                    Map<String, Object> servAttrs = MutableMap.copyOf( service.getCustomAttributes() ); 
-		                    if (attrs.containsKey("id"))
-		                    builder.customAttribute("planId", attrs.remove("id"));
+		                    	servBuilder.name(name);
+		                    List<Object> characteristics = MutableList.copyOf(((Service)deploymentPlanItem).getCharacteristics());
+		                    for(Object servChar: characteristics){
+		                    	Map<String, Object> fulfillAttrs = MutableMap.copyOf( ((ServiceCharacteristic)servChar).getCustomAttributes() );           	
+		        	            if (fulfillAttrs.containsKey("member")){ // this is a cluster of group. parse the spec of the member
+		        	            	Service memberService = Service.of((Map<String, Object>) fulfillAttrs.remove("member"));
+		        	            	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> memberBuilder = oCampPlatformComponentTemplate.builder();
+		        	            	memberBuilder.type(lookupType(memberService));
+		        	            	Map<String, Object> memberAttrs = MutableMap.copyOf( memberService.getCustomAttributes() ); 
+		        	            	for(String key: keys){
+		        	     	        	addCustomMapAttributeIfNonNull(memberBuilder, memberAttrs, key);
+		        	     	        }
+		        	            	builder.customAttribute("member", memberBuilder.build());
+		        	            }
+		                   	
+		                    }
+		                    if (service.getCustomAttributes().containsKey("id"))
+		                    	builder.customAttribute("planId", service.getCustomAttributes().get("id"));
 		        	        
 		        	        //add custom tags
-		        	        Collection<String> servKeys = getTagIDs();
-		        	        for(String key: servKeys){
-		        	        	addCustomMapAttributeIfNonNull(servBuilder, attrs, key);
+		                    Map<String, Object> servAttrs = MutableMap.copyOf( ((Service)deploymentPlanItem).getCustomAttributes() ); 
+		        	        for(String key: keys){
+		        	        	addCustomMapAttributeIfNonNull(servBuilder, servAttrs, key);
 		        	        }
 		        	        servBuilder.add(reqBuilder.build());
 		        	        atc.add(servBuilder.build()); // Add the service to the AssemblyTemplate
@@ -328,9 +362,6 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		
 	}
 	
-	public void invertApp(oCampAssemblyTemplateConstructor atc){
-		
-	}
 	
 	 /**
      * Looks for the given key in the map of attributes and adds it to the given builder
@@ -379,14 +410,16 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		ArrayList<String> result = new ArrayList<String>();
 		BrooklynClassLoadingContext bclc = JavaBrooklynClassLoadingContext.create(mgmt);
 		//load the configKeys class
-		Maybe<Class<?>> mby = bclc.tryLoadClass("org.apache.brooklyn.core.entity.BrooklynConfigKeys");
+		Maybe<Class<?>> mby = bclc.tryLoadClass("kr.ac.hanyang.oCamp.core.mgmt.oCampConfigKeys"/*"org.apache.brooklyn.core.entity.BrooklynConfigKeys"*/);
 		if (mby.isPresentAndNonNull()){
 			Class<?> clazz = mby.get();
 			try {
 				Field[] fields = clazz.getDeclaredFields();
-				for(int i = 0; i<fields.length-1; i++){
+				Field[] fields_super = clazz.getSuperclass().getDeclaredFields();
+				Field[] all_fields = (Field[]) ArrayUtils.addAll(fields, fields_super);
+				for(int i = 0; i<all_fields.length-1; i++){
 	
-					Field field = fields[i];
+					Field field = all_fields[i];
 					field.setAccessible(true);
 					if(! field.isAnnotationPresent(Deprecated.class)){
 					if (field.get(null) instanceof ConfigKey)

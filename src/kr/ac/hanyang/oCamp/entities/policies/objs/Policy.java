@@ -32,14 +32,17 @@ public interface Policy extends kr.ac.hanyang.oCamp.api.policy.Policy {
 	public static final Sensor<Object> SUBSCRIBERS_SET = new BasicNotificationSensor<Object>(
 			Object.class, "subscriber.set", "The list of entities was set");
 	
-	public static final String BASE_PLACEMENT_POLICY = //"policies:\n"
-													  "- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager\n"
-			  										  +"  constraints:\n"
-			  										  +"  - property: SERVICE_UP\n"
-			  										  +"    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo\n"
-			  										  +"    value: true\n"
-			  										  +"  - property: PROVISIONING_LOCATION\n"
-			  										  +"    type: kr.ac.hanyang.oCamp.entities.constraints.Within\n"
-			  										  +"    value: []\n"
+	public static final String BASE_PLACEMENT_TYPE = "- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager\n"
+			  										+"  constraints:\n";
+	
+	public static final String BASE_PLACEMENT_SETTINGS = "  - property: SERVICE_UP\n"
+													    +"    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo\n"
+													    +"    value: true\n"
+													    +"  - property: PROVISIONING_LOCATION\n"
+													    +"    type: kr.ac.hanyang.oCamp.entities.constraints.Within\n"
+													    +"    value: []\n";
+	
+	public static final String BASE_PLACEMENT_POLICY = BASE_PLACEMENT_TYPE
+													  +BASE_PLACEMENT_SETTINGS 
 			  										  +"  targets: []";
 }

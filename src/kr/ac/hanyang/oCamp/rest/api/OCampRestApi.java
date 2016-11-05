@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 import kr.ac.hanyang.oCamp.rest.resources.ApplicationResource;
+import kr.ac.hanyang.oCamp.rest.resources.PolicyManagerResource;
 
 public class OCampRestApi extends BrooklynRestApi{
 	
@@ -43,6 +44,7 @@ public class OCampRestApi extends BrooklynRestApi{
 	        resources.add(new EffectorResource());
 	        resources.add(new PolicyResource());
 	        resources.add(new PolicyConfigResource());
+	        resources.add(new PolicyManagerResource());
 	        resources.add(new ActivityResource());
 	        resources.add(new AccessResource());
 	        resources.add(new ScriptResource());

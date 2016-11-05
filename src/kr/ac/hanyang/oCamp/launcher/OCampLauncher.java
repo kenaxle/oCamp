@@ -420,6 +420,7 @@ public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 	    public static void main(String [] args){
 	    	OCampLauncher launcher = OCampLauncher.newInstance()
 	    			.managementContext(new BaseEntityManager())
+	    			//.webapp("/home", "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war")
 	    			.start();
 	    			 
 	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))

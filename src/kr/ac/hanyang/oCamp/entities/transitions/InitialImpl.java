@@ -25,7 +25,7 @@ public class InitialImpl extends TransitionImpl implements Initial{
 		if(value == null){
 			return obj == null; // or whatever a sensor uses to represent that it has no value
 		}else
-		if(value.getClass().getName().equals("java.util.Optional")){
+		if(value.equals("ANYTHING")){
 			return obj != null; // or whatever a sensor uses to represent that it has no value
 		}else
 		if (obj.getClass() == value.getClass()){

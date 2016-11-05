@@ -24,7 +24,7 @@ services:
   - id: tomcat
     characteristics:
       - characteristic_type: kr.ac.hanyang.entities.services.Tomcat8
-        version: 8.0.37
+        version: 8.0.22
 
   - id: mySQL_DBMS
     characteristics:

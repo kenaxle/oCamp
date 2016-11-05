@@ -1,29 +1,18 @@
 package kr.ac.hanyang.oCamp.entities.services.web.jetty;
 
-import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.webapp.jetty.Jetty6ServerImpl;
+import org.apache.brooklyn.api.catalog.Catalog;
+import org.apache.brooklyn.api.entity.ImplementedBy;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.ConfigKeys;
+import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
+import org.apache.brooklyn.entity.software.base.SoftwareProcess;
+import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server;
+import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
-import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
-import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
+@Catalog(name="Jetty Entity", description="Represents a Jetty server")
+@ImplementedBy(Jetty6Impl.class)
+public interface Jetty6 extends Tomcat8Server {
 
-public class Jetty6 extends Jetty6ServerImpl implements IDeployable, IJetty6, IService, Startable{
-
-
-	@Override
-	public String[] getCapabilities() {
-
-		String[] result = new String[BasicOCampService.CAPABILITIES.length+IJetty6.CAPABILITIES.length];
-		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
-		System.arraycopy(IJetty6.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, IJetty6.CAPABILITIES.length); 
-		return result;
-
-	}
-	
-	@Override
-	public void deploy(String url, String targetName) {
-		super.deploy(url, targetName);
-	}
-
-
+	public static final String[] CAPABILITIES = {"DeployOn"};
+		
 }

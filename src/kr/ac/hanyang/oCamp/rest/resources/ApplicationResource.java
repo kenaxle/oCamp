@@ -5,22 +5,31 @@ import static org.apache.brooklyn.rest.util.WebResourceUtils.serviceAbsoluteUriB
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.apache.brooklyn.api.entity.Application;
 import org.apache.brooklyn.api.entity.EntitySpec;
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
+import org.apache.brooklyn.core.entity.EntityPredicates;
+import org.apache.brooklyn.core.mgmt.entitlement.EntitlementPredicates;
+import org.apache.brooklyn.core.mgmt.entitlement.Entitlements;
 import org.apache.brooklyn.rest.api.ApplicationApi;
+import org.apache.brooklyn.rest.domain.ApplicationSummary;
+import org.apache.brooklyn.rest.transform.ApplicationTransformer;
 import org.apache.brooklyn.rest.transform.TaskTransformer;
 import org.apache.brooklyn.util.core.ResourceUtils;
 import org.apache.brooklyn.util.exceptions.Exceptions;
 import org.apache.brooklyn.util.exceptions.UserFacingException;
 import org.apache.brooklyn.util.net.Urls;
+import org.apache.brooklyn.util.text.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.FluentIterable;
 
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.platform.OCampEntityManagementUtils;
@@ -34,6 +43,17 @@ public class ApplicationResource extends org.apache.brooklyn.rest.resources.Appl
 	private static final Logger log = LoggerFactory.getLogger(ApplicationResource.class);
 	
 	
+	public List<ApplicationSummary> listPolicyManagers(String typeRegex) {
+        if (Strings.isBlank(typeRegex)) {
+            typeRegex = ".*";
+        }
+        return FluentIterable
+                .from(((BaseEntityManager)mgmt()).getPolicyManagers())
+                .filter(EntitlementPredicates.isEntitled(mgmt().getEntitlementManager(), Entitlements.SEE_ENTITY))
+                .filter(EntityPredicates.hasInterfaceMatching(typeRegex))
+                .transform(ApplicationTransformer.fromApplication(ui.getBaseUriBuilder()))
+                .toList();
+    }
 	
 	@Override
     public Response createFromYaml(String yaml) {
@@ -74,29 +94,5 @@ public class ApplicationResource extends org.apache.brooklyn.rest.resources.Appl
             response.entity(TaskTransformer.fromTask(ui.getBaseUriBuilder()).apply(result.task()));
         return response.build();
         
-        
-        
-//        try {
-//            spec = createEntitySpecForApplication(yaml);
-//        } catch (Exception e) {
-//            Exceptions.propagateIfFatal(e);
-//            UserFacingException userFacing = Exceptions.getFirstThrowableOfType(e, UserFacingException.class);
-//            if (userFacing!=null) {
-//                log.debug("Throwing "+userFacing+", wrapped in "+e);
-//                throw userFacing;
-//            }
-//            throw WebResourceUtils.badRequest(e, "Error in blueprint");
-//        }
-//        
-//        if (!Entitlements.isEntitled(mgmt().getEntitlementManager(), Entitlements.DEPLOY_APPLICATION, spec)) {
-//            throw WebResourceUtils.forbidden("User '%s' is not authorized to start application %s",
-//                Entitlements.getEntitlementContext().user(), yaml);
-//        }
-//
-//        try {
-//            return launch(yaml, spec);
-//        } catch (Exception e) {
-//            throw WebResourceUtils.badRequest(e, "Error launching blueprint");
-//        }
     }
 }

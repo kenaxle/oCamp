@@ -37,8 +37,7 @@ public class WarImpl extends BasicOCampArtifactImpl<Object> implements Startable
 		
 		@Override
 		public void start(Collection<? extends Location> locations){
-			// need to set the lifecycle state
-			log.info("**** SUCCESS SUCCESS **** "/*+task.getStatusSummary()*/);
+			log.info("**** Sucessfully started Artifact "+ this);
 				
 		}
 		

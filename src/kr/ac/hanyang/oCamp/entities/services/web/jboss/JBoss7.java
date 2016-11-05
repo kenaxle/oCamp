@@ -1,30 +1,28 @@
 package kr.ac.hanyang.oCamp.entities.services.web.jboss;
 
-import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8ServerImpl;
+import org.apache.brooklyn.api.catalog.Catalog;
+import org.apache.brooklyn.api.entity.ImplementedBy;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.ConfigKeys;
+import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
+import org.apache.brooklyn.entity.software.base.SoftwareProcess;
+import org.apache.brooklyn.entity.webapp.jboss.JBoss6Server;
+import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server;
+import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
-import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
-import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
-import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
+@Catalog(name="JBoss Entity", description="Represents a server")
+@ImplementedBy(JBoss7Impl.class)
+public interface JBoss7 extends JBoss6Server {
 
-public class JBoss7 extends Tomcat8ServerImpl implements IDeployable, IJBoss6, IService, Startable{
+//	@SetFromFlag("version")
+//    ConfigKey<String> SUGGESTED_VERSION = ConfigKeys.newConfigKeyWithDefault(SoftwareProcess.SUGGESTED_VERSION, "8.0.36");
+//
+//	@SetFromFlag("downloadUrl")
+//    AttributeSensorAndConfigKey<String, String> DOWNLOAD_URL = ConfigKeys.newSensorAndConfigKeyWithDefault(SoftwareProcess.DOWNLOAD_URL,
+//            "http://mirror.apache-kr.org/tomcat/tomcat-8/v${version}/bin/apache-tomcat-${version}.tar.gz");
 
-
-	@Override
-	public String[] getCapabilities() {
-
-		String[] result = new String[BasicOCampService.CAPABILITIES.length+IJBoss6.CAPABILITIES.length];
-		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
-		System.arraycopy(IJBoss6.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, IJBoss6.CAPABILITIES.length); 
-		return result;
-
-	}
-	
-	@Override
-	public void deploy(String url, String targetName) {
-		super.deploy(url, targetName);
-	}
-
+	public static final String[] CAPABILITIES = {"DeployOn"};
+		//need to add the characteristics also
+		//characteristics should be added as AttributeSensorAndConfigKey
 
 }

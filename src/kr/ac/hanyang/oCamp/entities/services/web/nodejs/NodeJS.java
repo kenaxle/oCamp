@@ -1,23 +1,20 @@
 package kr.ac.hanyang.oCamp.entities.services.web.nodejs;
 
-import org.apache.brooklyn.core.entity.trait.Startable;
-import org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppServiceImpl;
+import org.apache.brooklyn.api.catalog.Catalog;
+import org.apache.brooklyn.api.entity.ImplementedBy;
+import org.apache.brooklyn.config.ConfigKey;
+import org.apache.brooklyn.core.config.ConfigKeys;
+import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
+import org.apache.brooklyn.entity.software.base.SoftwareProcess;
+import org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppService;
+import org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server;
+import org.apache.brooklyn.util.core.flags.SetFromFlag;
 
-import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
+@Catalog(name="NodeJS Entity", description="Represents a Node.js")
+@ImplementedBy(NodeJSImpl.class)
+public interface NodeJS extends NodeJsWebAppService {
 
-public class NodeJS extends NodeJsWebAppServiceImpl implements INodeJS, IService, Startable{
-
-
-	@Override
-	public String[] getCapabilities() {
-		String[] result = new String[BasicOCampService.CAPABILITIES.length+INodeJS.CAPABILITIES.length];
-		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
-		System.arraycopy(INodeJS.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, INodeJS.CAPABILITIES.length); 
-		return result;
-
-	}
+	public static final String[] CAPABILITIES = {};
+		
 	
-	
-
 }

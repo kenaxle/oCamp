@@ -18,36 +18,22 @@
 #
 name: Complex demo app
 artifacts:
-- type: kr.ac.hanyang.entities.artifacts.War
+- type: kr.ac.hanyang.oCamp.entities.artifacts.War
   content: http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war
   requirements:
-  - type: kr.ac.hanyang.entities.requirements.HostedOn
-    fulfillment: service1
-    
-  - type: kr.ac.hanyang.entities.requirements.DependsOn
-    php_config: config
-    fulfillment: service1
-    
-  - type: kr.ac.hanyang.entities.requirements.ConnectsTo
-    fulfillment: service2
-      
-- type: kr.ac.hanyang.entities.artifacts.DB
-  content: {DB file}
-  requirements:
-  - type: kr.ac.hanyang.entities.requirements.HostedOn
-    fulfillment: service2      
+  - type: kr.ac.hanyang.oCamp.entities.requirements.DeployOn
+    fulfillment: service1     
 
 services:
-- name: Simple Server 1
+- name: cluster
   id: service1
   characteristics:
-  - type: kr.ac.hanyang.entities.services.web.tomcat.Tomcat8
-    install.version: 8.0.22
-  - type: kr.ac.hanyang.entities.services.web.PHP
+  - type: kr.ac.hanyang.oCamp.entities.services.web.WebAppCluster
+    initialSize: 2
+    member: 
+      characteristics: 
+      - type: kr.ac.hanyang.oCamp.entities.services.web.tomcat.Tomcat8
+        version: 8.0.37
     
-- name: Simple Server 2
-  id: service2
-  characteristics:
-  - type: kr.ac.hanyang.entities.services.web.database.MySQL
     
   

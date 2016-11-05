@@ -9,13 +9,14 @@ import org.apache.brooklyn.api.policy.Policy;
 import org.apache.brooklyn.api.sensor.Sensor;
 
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
+import kr.ac.hanyang.oCamp.entities.policies.objs.FulfillmentVector;
 
 
 public interface ActionGroup extends Entity{
 	
 	public boolean setActionID(Effector actionEffector);	
 	
-	public int canFulfill(Collection<ConstraintVector> violatedConstraints);
+	public FulfillmentVector canFulfill(Collection<ConstraintVector> violatedConstraints);
 	
 	public Effector getActionEffector();
 	
