@@ -15,6 +15,20 @@ import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampArtifact;
 
+/**
+ * 
+ * @author kena
+ * 
+ * @param <T>
+ * 
+ * TODO I need to provide properties for 
+ * 		port: 
+ * 		root_password: credentials
+ * 		this is to facilitate connections 
+ * 		also make use of default port and password in configuration file.
+ */
+
+
 public class ConnectToImpl<T> extends EffectorStartableImpl implements Startable, ConnectTo{
 	private static final Logger log = LoggerFactory.getLogger(ConnectToImpl.class);
 	
@@ -41,7 +55,7 @@ public class ConnectToImpl<T> extends EffectorStartableImpl implements Startable
 		if(script instanceof String){
 				if (child instanceof IDeployable){
 					IExecutable fulfillment = (IExecutable) child;
-					log.info("**** INFO INFO **** Executecuting task on DeployOn...");
+					log.info("**** INFO INFO **** Executecuting task on ConnectTo...");
 					fulfillment.executeScript((String) script);
 					return true;
 				}
@@ -53,7 +67,7 @@ public class ConnectToImpl<T> extends EffectorStartableImpl implements Startable
 	public void start(Collection<? extends Location> locations) {
 		
 		for(Entity e: this.getChildren()){
-			log.info("**** INFO INFO **** Starting DeployOn...");
+			log.info("**** INFO INFO **** Starting ConnectTo...");
 			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
 			task.blockUntilEnded(null);
 			

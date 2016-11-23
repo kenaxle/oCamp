@@ -1,0 +1,39 @@
+type: kr.ac.hanyang.oCamp.entities.policies.Placement
+actiongroups:
+- id: START
+  actions:
+  - property: SERVICE_UP
+    transitions:
+    - type: Initial
+      value: false
+    - type: Set
+      value: true
+  - property: PROVISIONING_LOCATION
+    transitions:
+    - type: Initial
+      value: null
+    - type: Set
+      value: ANYTHING
+- id: STOP
+  actions:
+  - property: SERVICE_UP
+    transitions:
+    - type: Initial
+      value: true
+    - type: Set
+      value: false
+  - property: PROVISIONING_LOCATION
+    transitions:
+    - type: Initial
+      value: ANYTHING
+    - type: Set
+      value: null
+- id: MOVE
+  actions:
+  - property: PROVISIONING_LOCATION
+    transitions:
+    - type: Initial
+      value: ANYTHING
+    - type: Change
+      value: ANYTHING
+      

@@ -7,11 +7,14 @@ artifacts:
     target: /webapps
     fulfillment: id:web_cluster
     
+  - type: kr.ac.hanyang.oCamp.entities.requirements.ConnectsTo
+    port: 3306
+    fulfillment: id:mySQL_DBMS        
+    
 - type: kr.ac.hanyang.oCamp.entities.artifacts.Script
   content: db_deploy.sh
   requirements:
   - type: kr.ac.hanyang.oCamp.entities.requirements.DeployOn
-    #target: /webapps
     fulfillment: id:mySQL_DBMS          
 
 services:
@@ -27,28 +30,28 @@ services:
 - id: mySQL_DBMS
   characteristics:
   - type: kr.ac.hanyang.oCamp.entities.services.database.mysql.MySQL      
-    #mysql.port: 3306            
+    mysql.port: 3306            
         
 policies: 
-#- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
-#  constraints:
-#  - property: SERVICE_UP
-#    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
-#    value: true
-#  - property: PROVISIONING_LOCATION
-#    type: kr.ac.hanyang.oCamp.entities.constraints.Within
-#    value: [AWS Virginia (us-east-1), AWS Tokyo (ap-northeast-1)]
-#  targets: [webapp_cluster]
+- type: kr.ac.hanyang.oCamp.entities.policies.Placement
+  constraints:
+  - property: SERVICE_UP
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
+  - property: PROVISIONING_LOCATION
+    type: kr.ac.hanyang.oCamp.entities.constraints.Within
+    value: [AWS Virginia (us-east-1), AWS Tokyo (ap-northeast-1)]
+  targets: [webapp_cluster]
   
-#- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
-#  constraints:
-#  - property: SERVICE_UP 
-#    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
-#    value: true
-#  - property: PROVISIONING_LOCATION
-#    type: kr.ac.hanyang.oCamp.entities.constraints.Within  
-#    value: [rackspace-cloudservers-HKG, rackspace-cloudservers-SYD, AWS Tokyo (ap-northeast-1)]
-#  targets: [mySQl_DBMS]
+- type: kr.ac.hanyang.oCamp.entities.policies.Placement
+  constraints:
+  - property: SERVICE_UP 
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
+  - property: PROVISIONING_LOCATION
+    type: kr.ac.hanyang.oCamp.entities.constraints.Within  
+    value: [rackspace-cloudservers-HKG, rackspace-cloudservers-SYD]
+  targets: [mySQl_DBMS]
      
 - type: kr.ac.hanyang.oCamp.entities.policies.QoS
   constraints:

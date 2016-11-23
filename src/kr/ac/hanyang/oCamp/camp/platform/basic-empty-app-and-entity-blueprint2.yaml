@@ -1,32 +1,19 @@
-type: kr.ac.hanyang.oCamp.entities.policies.Placement
+type: kr.ac.hanyang.oCamp.entities.policies.QoS
 actiongroups:
-- id: START
+- id: SCALE_UP
   actions:
-  - property: SERVICE_UP
-    transitions:
-    - type: Initial
-      value: false
-    - type: Set
-      value: true
-  - property: PROVISIONING_LOCATION
-    transitions:
-    - type: Initial
-      value: null
-    - type: Set
-      value: ANYTHING
-- id: STOP
-  actions:
-  - property: SERVICE_UP
-    transitions:
-    - type: Initial
-      value: true
-    - type: Set
-      value: false
-  - property: PROVISIONING_LOCATION
+  - property: REQUEST_PER_SECOND
     transitions:
     - type: Initial
       value: ANYTHING
-    - type: Set
-      value: null
-      
+    - type: Decrease
+      value: ANYTHING
+- id: SCALE_DOWN
+  actions:
+  - property: REQUEST_PER_SECOND
+    transitions:
+    - type: Initial
+      value: ANYTHING
+    - type: Increase
+      value: ANYTHING
       
