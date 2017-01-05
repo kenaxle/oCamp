@@ -9,7 +9,6 @@ import org.apache.brooklyn.rest.resources.AccessResource;
 import org.apache.brooklyn.rest.resources.ActivityResource;
 import org.apache.brooklyn.rest.resources.ApidocResource;
 
-import org.apache.brooklyn.rest.resources.CatalogResource;
 import org.apache.brooklyn.rest.resources.EffectorResource;
 import org.apache.brooklyn.rest.resources.EntityConfigResource;
 import org.apache.brooklyn.rest.resources.EntityResource;
@@ -28,30 +27,47 @@ import org.apache.brooklyn.rest.util.json.BrooklynJacksonJsonProvider;
 import com.google.common.collect.Iterables;
 
 import io.swagger.jaxrs.listing.SwaggerSerializers;
-import kr.ac.hanyang.oCamp.rest.resources.ApplicationResource;
+import org.apache.brooklyn.rest.resources.ApplicationResource;
+import org.apache.brooklyn.rest.resources.CatalogResource;
+
 import kr.ac.hanyang.oCamp.rest.resources.PolicyManagerResource;
+import kr.ac.hanyang.oCamp.rest.resources.ServiceCatalogResource;
 
 public class OCampRestApi extends BrooklynRestApi{
 	
 	 public static Iterable<AbstractBrooklynRestResource> getBrooklynRestResources() {
 	        List<AbstractBrooklynRestResource> resources = new ArrayList<>();
 	        resources.add(new LocationResource());
-	        resources.add(new CatalogResource());
 	        resources.add(new ApplicationResource());
 	        resources.add(new EntityResource());
 	        resources.add(new EntityConfigResource());
 	        resources.add(new SensorResource());
 	        resources.add(new EffectorResource());
-	        resources.add(new PolicyResource());
-	        resources.add(new PolicyConfigResource());
 	        resources.add(new PolicyManagerResource());
 	        resources.add(new ActivityResource());
 	        resources.add(new AccessResource());
 	        resources.add(new ScriptResource());
+	        resources.add(new ServiceCatalogResource());
 	        resources.add(new ServerResource());
 	        resources.add(new UsageResource());
-	        resources.add(new VersionResource());
 	        return resources;
+//		 List<AbstractBrooklynRestResource> resources = new ArrayList<>();
+//	        resources.add(new LocationResource());
+//	        resources.add(new CatalogResource());
+//	        resources.add(new ApplicationResource());
+//	        resources.add(new EntityResource());
+//	        resources.add(new EntityConfigResource());
+//	        resources.add(new SensorResource());
+//	        resources.add(new EffectorResource());
+//	        resources.add(new PolicyResource());
+//	        resources.add(new PolicyConfigResource());
+//	        resources.add(new ActivityResource());
+//	        resources.add(new AccessResource());
+//	        resources.add(new ScriptResource());
+//	        resources.add(new ServerResource());
+//	        resources.add(new UsageResource());
+//	        resources.add(new VersionResource());
+//	        return resources;
 	    }
 
 	    public static Iterable<Object> getApidocResources() {

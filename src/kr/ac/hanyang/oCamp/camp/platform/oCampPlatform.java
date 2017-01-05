@@ -19,14 +19,16 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 
+import kr.ac.hanyang.oCamp.api.platform.OCampPlatform;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
+import kr.ac.hanyang.oCamp.camp.spi.ServiceComponentTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.oCampAssemblyTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.oCampMatcher;
 import kr.ac.hanyang.oCamp.core.mgmt.BaseEntityManager;
 
 
-public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManagementContext{
+public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManagementContext, OCampPlatform{
 	
 	private static final Logger log = LoggerFactory.getLogger(oCampPlatform.class);
     
@@ -36,7 +38,6 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
 	
 	// need to add a resourcelookup for the policies
 	BasicResourceLookup<PolicyManagerTemplate> policyManagerTemplates = new BasicResourceLookup<PolicyManagerTemplate>();
-	
 	
 	//constructor
 	public oCampPlatform(PlatformRootSummary root, ManagementContext mgmt) {
@@ -74,6 +75,7 @@ public class oCampPlatform extends BasicCampPlatform implements HasBrooklynManag
     public BasicResourceLookup<PolicyManagerTemplate> policyManagerTemplates(){
     	return policyManagerTemplates;
     }
+ 
     
     @Override
     public oCampPlatformTransaction transaction() {

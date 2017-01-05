@@ -15,6 +15,7 @@ import org.apache.brooklyn.api.location.PortRange;
 import org.apache.brooklyn.api.mgmt.ManagementContext;
 import org.apache.brooklyn.camp.CampPlatform;
 import org.apache.brooklyn.camp.brooklyn.BrooklynCampPlatformLauncherNoServer;
+import org.apache.brooklyn.core.catalog.internal.CatalogInitialization;
 import org.apache.brooklyn.core.config.ConfigPredicates;
 import org.apache.brooklyn.core.entity.trait.Startable;
 import org.apache.brooklyn.core.internal.BrooklynProperties;
@@ -418,19 +419,21 @@ public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 	    }
 	    
 	    public static void main(String [] args){
-	    	OCampLauncher launcher = OCampLauncher.newInstance()
-	    			.managementContext(new BaseEntityManager())
+	    	//OCampLauncher launcher = OCampLauncher.newInstance()
+	    	//		.managementContext(new BaseEntityManager())
+	    			//.catalogInitialization(catInit)
 	    			//.webapp("/home", "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war")
-	    			.start();
+	    			//.start();
 	    			 
 	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
 	    			 //.location("localhost"))
 	    			 //.start();
-	 //   	BrooklynLauncher launcher = BrooklynLauncher.newInstance()
-//	   			 .managementContext(new BaseEntityManager())
+	    	BrooklynLauncher launcher = BrooklynLauncher.newInstance()
+	   			 .managementContext(new BaseEntityManager())
+	   			// .catalogInitialization(new CatalogInitialization())
 //	   			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
 //	   			 .location("localhost")
-	 // 			 .start();
+	  			 .start();
 	    }
 	    
 }

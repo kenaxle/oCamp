@@ -12,4 +12,9 @@ public abstract class oCampAbstractPlatformTransaction extends PlatformTransacti
         return this;
     }
 	
+	public PlatformTransaction add(ServiceComponentTemplate scomp){
+		additions.add(scomp);
+		return this;
+	}
+	
 }

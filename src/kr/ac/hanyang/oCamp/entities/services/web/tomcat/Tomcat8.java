@@ -16,8 +16,6 @@ import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 @Catalog(name="Tomcat Entity", description="Represents a server")
 @ImplementedBy(Tomcat8Impl.class)
 public interface Tomcat8 extends Tomcat8Server, BasicOCampService {
-
-
 	
 	@SetFromFlag("version")
     ConfigKey<String> SUGGESTED_VERSION = ConfigKeys.newConfigKeyWithDefault(SoftwareProcess.SUGGESTED_VERSION, "8.0.37");

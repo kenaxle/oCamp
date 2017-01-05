@@ -33,7 +33,7 @@ services:
     mysql.port: 3306            
         
 policies: 
-- type: kr.ac.hanyang.oCamp.entities.policies.Placement
+- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
   - property: SERVICE_UP
     type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
@@ -43,7 +43,7 @@ policies:
     value: [AWS Virginia (us-east-1), AWS Tokyo (ap-northeast-1)]
   targets: [webapp_cluster]
   
-- type: kr.ac.hanyang.oCamp.entities.policies.Placement
+- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
   constraints:
   - property: SERVICE_UP 
     type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo

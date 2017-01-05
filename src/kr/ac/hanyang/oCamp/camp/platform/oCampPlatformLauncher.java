@@ -20,6 +20,7 @@ public class oCampPlatformLauncher{
 		platform = new oCampPlatform(PlatformRootSummary.builder().name("oCAMP Platform").build(),
                 getManagement());
 		((BaseEntityManager) mgmt).setParentPlatform(platform);
+		
 		return this;
 	}
 	

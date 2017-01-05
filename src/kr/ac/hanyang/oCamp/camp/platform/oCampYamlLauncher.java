@@ -128,7 +128,7 @@ public class oCampYamlLauncher {
 			String choice = myScanner.next();
 			switch (choice){
 				case "1":
-					app = l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/basic-empty-app-and-entity-blueprint.yaml");
+					app = l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/basic-empty-app-and-entity-blueprint3.yaml");
 					break;
 				case "2":
 					outStream.println("Starting Appliction"+ System.currentTimeMillis());

@@ -8,7 +8,7 @@ import kr.ac.hanyang.oCamp.entities.requirements.IExecutable;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
-public class JBoss7Impl extends Tomcat8ServerImpl implements IDeployable, JBoss6, IService, Startable{
+public class JBoss7Impl extends Tomcat8ServerImpl implements IDeployable, JBoss7, IService, Startable{
 
 
 	@Override
