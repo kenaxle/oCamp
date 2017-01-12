@@ -12,6 +12,7 @@ import org.apache.brooklyn.core.config.MapConfigKey;
 import org.apache.brooklyn.core.entity.Attributes;
 import org.apache.brooklyn.core.entity.BrooklynConfigKeys;
 import org.apache.brooklyn.core.entity.trait.Startable;
+import org.apache.brooklyn.core.location.cloud.CloudLocationConfig;
 import org.apache.brooklyn.core.sensor.AttributeSensorAndConfigKey;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensorAndConfigKey;
 import org.apache.brooklyn.core.sensor.BasicAttributeSensorAndConfigKey.StringAttributeSensorAndConfigKey;
@@ -20,10 +21,12 @@ import org.apache.brooklyn.entity.database.mysql.MySqlNode;
 import org.apache.brooklyn.entity.group.DynamicCluster;
 import org.apache.brooklyn.entity.software.base.SoftwareProcess;
 import org.apache.brooklyn.entity.software.base.SoftwareProcessDriverLifecycleEffectorTasks;
+import org.apache.brooklyn.location.jclouds.JcloudsLocationConfig;
 import org.apache.brooklyn.entity.software.base.SoftwareProcess.ChildStartableMode;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.core.flags.SetFromFlag;
 import org.apache.brooklyn.util.time.Duration;
+import org.jclouds.compute.domain.OsFamily;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableSet;
@@ -43,6 +46,16 @@ public class oCampConfigKeys extends BrooklynConfigKeys {
 	public static final PortAttributeSensorAndConfigKey AMQP_PORT = Attributes.AMQP_PORT;
 	public static final PortAttributeSensorAndConfigKey MYSQL_PORT = MySqlNode.MYSQL_PORT;
 	public static final StringAttributeSensorAndConfigKey MYSQL_PASSWORD = MySqlNode.PASSWORD;
+	public static final ConfigKey<Integer> MYSQL_ID = MySqlNode.MYSQL_SERVER_ID;
+	
+	public static final ConfigKey<OsFamily> OS_FAMILY = JcloudsLocationConfig.OS_FAMILY;
+	public static final ConfigKey<String> OS_VERSION = JcloudsLocationConfig.OS_VERSION_REGEX;
+	public static final ConfigKey<Boolean> OS_64BIT = CloudLocationConfig.OS_64_BIT;
+	public static final ConfigKey<Object> MIN_RAM = CloudLocationConfig.MIN_RAM;	
+	public static final ConfigKey<Integer> MIN_CORES = CloudLocationConfig.MIN_CORES;		    
+	public static final ConfigKey<Object> MIN_DISK = CloudLocationConfig.MIN_DISK;
+	public static final ConfigKey<String> DOMAIN_NAME = CloudLocationConfig.DOMAIN_NAME;
+	
 	
 	public static final ConfigKey<String> TARGET  = DeployOn.TARGET;
 	

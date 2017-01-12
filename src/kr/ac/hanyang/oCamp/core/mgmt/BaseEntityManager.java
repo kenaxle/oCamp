@@ -124,7 +124,7 @@ public class BaseEntityManager extends LocalManagementContext{// implements Poli
   	ArrayList<String> toReturn = new ArrayList<String>();
 		for(File file: services){
 			String path = file.getPath();
-			String uri = path.substring(path.indexOf(oCampReservedKeys.PREFIX), path.length()-6).replace('/', '.');
+			String uri = path.substring(path.indexOf(oCampReservedKeys.PREFIX), path.length()-6).replace('\\'/*'/'*/, '.');
 			if (! uri.contains("Impl") && ! toOmit(uri)){
 				toReturn.add(uri);
 			}

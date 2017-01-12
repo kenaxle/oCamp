@@ -18,6 +18,7 @@ public interface ActionGroup extends Entity{
 	
 	public FulfillmentVector canFulfill(Collection<ConstraintVector> violatedConstraints);
 	
+
 	public Effector getActionEffector();
 	
 	

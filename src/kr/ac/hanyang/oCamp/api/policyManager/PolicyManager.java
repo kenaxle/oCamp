@@ -11,7 +11,6 @@ import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.FulfillmentVector;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 
-
 public interface PolicyManager extends Application{
 	
 	ManagementContext getManagementContext();

@@ -11,12 +11,14 @@ import kr.ac.hanyang.oCamp.entities.constraints.ConstraintVector;
 import kr.ac.hanyang.oCamp.entities.policies.objs.FulfillmentVector;
 
 
+
 public interface Action extends Entity{
 	
 	public boolean setProperty(Sensor property);	
 	
+
 	public Sensor getProperty();
-	
+
 	public int getScore(ConstraintVector constVect, FulfillmentVector fulfillment);
 	
 }
