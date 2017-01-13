@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.brooklyn.camp.spi.pdp.Artifact;
-import org.apache.brooklyn.camp.spi.pdp.Service;
 import org.apache.brooklyn.util.collections.MutableList;
 import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.exceptions.UserFacingException;
@@ -14,6 +12,9 @@ import org.apache.brooklyn.util.javalang.JavaClassNames;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * @model kind="class" 
+ */
 public class DeploymentPlan {
 	
 	String name;
@@ -105,42 +106,72 @@ public class DeploymentPlan {
         return result;
     }
 
+    /**
+     * @model 
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @model 
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @model 
+     */
     public String getOrigin() {
         return origin;
     }
 
+    /**
+     * @model 
+     */
     public String getSourceCode() {
         return sourceCode;
     }
-    
+   
+    /**
+     * @model 
+     */
     public String getType(){
     	return type;
     }
     
+    /**
+     * @model 
+     */
     public List<Artifact> getArtifacts() {
         return MutableList.copyOf(artifacts).asUnmodifiable();
     }
 
+    /**
+     * @model 
+     */
     public List<Service> getServices() {
         return MutableList.copyOf(services).asUnmodifiable();
     }
     
+    /**
+     * @model 
+     */
     public List<Policy> getPolicies() {
         return MutableList.copyOf(policies).asUnmodifiable();
     }
     
+    /**
+     * @model 
+     */
     public List<ActionGroup> getActionGroups() {
         return MutableList.copyOf(actionGroups).asUnmodifiable();
     }
 
+    /**
+     * @model 
+     */
     public Map<String, Object> getCustomAttributes() {
         return MutableMap.copyOf(customAttributes).asUnmodifiable();
     }
@@ -150,6 +181,9 @@ public class DeploymentPlan {
      * non-null and is an instance of the given type. Otherwise returns absent.
      * <p/>
      * Does not remove the attribute from the custom attribute map.
+     */
+    /**
+     * @model 
      */
     @SuppressWarnings("unchecked")
     public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {

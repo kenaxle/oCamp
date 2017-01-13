@@ -15,7 +15,9 @@ import org.apache.brooklyn.util.yaml.Yamls;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
-
+/**
+ * @model kind="class"
+ */
 public class ActionGroup {
 	
 	String name;
@@ -58,26 +60,44 @@ public class ActionGroup {
         return result;
     }
 
+    /**
+     * @model 
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @model 
+     */
     public String getDescription() {
         return description;
     }
     
+    /**
+     * @model 
+     */
     public String getActionId() {
         return actionId;
     }
     
+    /**
+     * @model 
+     */
     public String getActionGroupType() {
         return actionGroupType;
     }
 
+    /**
+     * @model 
+     */
     public List<Action> getActions() {
         return MutableList.copyOf(actions).asUnmodifiable();
     }
 
+    /**
+     * @model 
+     */
     public Map<String, Object> getCustomAttributes() {
         return MutableMap.copyOf(customAttributes).asUnmodifiable();
     }
@@ -87,6 +107,9 @@ public class ActionGroup {
      * non-null and is an instance of the given type. Otherwise returns absent.
      * <p/>
      * Does not remove the attribute from the custom attribute map.
+     */
+    /**
+     * @model 
      */
     @SuppressWarnings("unchecked")
     public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {

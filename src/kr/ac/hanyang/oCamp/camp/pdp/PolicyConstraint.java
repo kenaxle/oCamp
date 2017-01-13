@@ -9,6 +9,9 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.google.common.collect.ImmutableMap;
 
+/**
+ * @model kind="class"
+ */
 public class PolicyConstraint{
 	String name;
     String description;
@@ -35,18 +38,37 @@ public class PolicyConstraint{
         return result;
     }
     
+    /**
+     * @model 
+     */
     public String getName() {
         return name;
     }
+    
+    /**
+     * @model 
+     */
     public String getDescription() {
         return description;
     }
+    
+    /**
+     * @model 
+     */
     public String getPolicyConstraintType() {
         return policyConstraintType;
     }
+    
+    /**
+     * @model 
+     */
     public Object getValue() {
         return value;
     }
+    
+    /**
+     * @model 
+     */
     public Map<String, Object> getCustomAttributes() {
         return ImmutableMap.copyOf(customAttributes);
     }

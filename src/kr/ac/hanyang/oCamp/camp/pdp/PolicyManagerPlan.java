@@ -14,6 +14,9 @@ import org.apache.brooklyn.util.javalang.JavaClassNames;
 import org.apache.brooklyn.util.yaml.Yamls;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * @model kind="class" 
+ */
 public class PolicyManagerPlan {
 	
 	String name;
@@ -58,26 +61,44 @@ public class PolicyManagerPlan {
         return result;
     }
 
+    /**
+     * @model 
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @model 
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @model 
+     */
     public String getOrigin() {
         return origin;
     }
 
+    /**
+     * @model 
+     */
     public String getSourceCode() {
         return sourceCode;
     }
     
+    /**
+     * @model 
+     */
     public List<ActionGroup> getActionGroups() {
         return MutableList.copyOf(actionGroups).asUnmodifiable();
     }
 
+    /**
+     * @model 
+     */
     public Map<String, Object> getCustomAttributes() {
         return MutableMap.copyOf(customAttributes).asUnmodifiable();
     }
@@ -87,6 +108,9 @@ public class PolicyManagerPlan {
      * non-null and is an instance of the given type. Otherwise returns absent.
      * <p/>
      * Does not remove the attribute from the custom attribute map.
+     */
+    /**
+     * @model 
      */
     @SuppressWarnings("unchecked")
     public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {

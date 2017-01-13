@@ -14,7 +14,9 @@ import com.google.common.collect.ImmutableMap;
 // This class actually represents the policy manager that is responsible for 
 // processing the policy in case of a violation. The type of the policy object
 // refers to the type of the policy manager entity. 
-
+/**
+ * @model kind="class"
+ */
 public class Policy{
 
     String name;
@@ -72,23 +74,44 @@ public class Policy{
         return result;
     }
     
+    /**
+     * @model 
+     */
     public String getName() {
         return name;
     }
+    
+    /**
+     * @model 
+     */
     public String getDescription() {
         return description;
     }
+    
+    /**
+     * @model 
+     */
     public String getPolicyType() {
         return policyType;
     }
+    
+    /**
+     * @model 
+     */
     public List<PolicyConstraint> getPolicyConstraints() {
         return ImmutableList.copyOf(policyConstraints);
     }
     
+    /**
+     * @model 
+     */
     public List<String> getTargets() {
         return ImmutableList.copyOf(targets);
     }
     
+    /**
+     * @model 
+     */
     public Map<String, Object> getCustomAttributes() {
         return ImmutableMap.copyOf(customAttributes);
     }
