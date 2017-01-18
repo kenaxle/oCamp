@@ -1,23 +1,13 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.brooklyn.util.collections.MutableMap;
-import org.apache.brooklyn.util.yaml.Yamls;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 
 // This class actually represents the policy manager that is responsible for 
 // processing the policy in case of a violation. The type of the policy object
 // refers to the type of the policy manager entity. 
 /**
- * @model kind="class"
+ * @model 
  */
 public interface Policy extends EObject{
 
@@ -131,22 +121,9 @@ public interface Policy extends EObject{
      */
     public EList<String> getTargets() ;
     
-    /**
-     * @model 
-     */
-    public Map<String, Object> getCustomAttributes() ;
+   
     
-    /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getCustomAttributes <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Custom Attributes</em>' attribute.
-	 * @see #getCustomAttributes()
-	 * @generated
-	 */
-	void setCustomAttributes(Map<String, Object> value);
-
-				@Override
+    @Override
     public String toString() ;
     	
 }

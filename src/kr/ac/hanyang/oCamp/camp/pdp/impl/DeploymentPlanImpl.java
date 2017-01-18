@@ -2,20 +2,13 @@
  */
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import java.util.Collection;
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.Artifact;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.Service;
-
-import org.apache.brooklyn.util.guava.Maybe;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.EList;
@@ -44,7 +37,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl#getServices <em>Services</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl#getPolicies <em>Policies</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl#getActionGroups <em>Action Groups</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -191,16 +183,6 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 	protected EList<ActionGroup> actionGroups;
 
 	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -208,6 +190,7 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 	protected DeploymentPlanImpl() {
 		super();
 	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -372,48 +355,7 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 		return actionGroups;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 */
-	@SuppressWarnings("unchecked")
-	public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {
-		Object attribute = customAttributes.get(attributeName);
-        if (attribute == null) {
-            return Maybe.absent("Custom attributes does not contain " + attributeName);
-        } else if (!type.isAssignableFrom(attribute.getClass())) {
-            String message = "Custom attribute " + attributeName + " is not of expected type: " +
-                    "expected=" + type.getName() + " actual=" + attribute.getClass().getName();
-            if (throwIfTypeMismatch) {
-                throw new IllegalArgumentException(message);
-            }
-            return Maybe.absent(message);
-        } else {
-            return Maybe.of((T) attribute);
-        }
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -441,8 +383,6 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 				return getPolicies();
 			case PdpPackage.DEPLOYMENT_PLAN__ACTION_GROUPS:
 				return getActionGroups();
-			case PdpPackage.DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -487,9 +427,6 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 				getActionGroups().clear();
 				getActionGroups().addAll((Collection<? extends ActionGroup>)newValue);
 				return;
-			case PdpPackage.DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -529,9 +466,6 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 			case PdpPackage.DEPLOYMENT_PLAN__ACTION_GROUPS:
 				getActionGroups().clear();
 				return;
-			case PdpPackage.DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -562,25 +496,8 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 				return policies != null && !policies.isEmpty();
 			case PdpPackage.DEPLOYMENT_PLAN__ACTION_GROUPS:
 				return actionGroups != null && !actionGroups.isEmpty();
-			case PdpPackage.DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case PdpPackage.DEPLOYMENT_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN:
-				return getCustomAttribute((String)arguments.get(0), (Class)arguments.get(1), (Boolean)arguments.get(2));
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -603,8 +520,6 @@ public class DeploymentPlanImpl extends MinimalEObjectImpl.Container implements 
 		result.append(sourceCode);
 		result.append(", type: ");
 		result.append(type);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
 		result.append(')');
 		return result.toString();
 	}

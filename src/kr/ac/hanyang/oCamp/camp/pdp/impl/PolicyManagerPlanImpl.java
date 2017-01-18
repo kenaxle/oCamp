@@ -2,17 +2,10 @@
  */
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import java.util.Collection;
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 import kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan;
-
-import org.apache.brooklyn.util.guava.Maybe;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.EList;
@@ -36,8 +29,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl#getOrigin <em>Origin</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl#getSourceCode <em>Source Code</em>}</li>
+ *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl#getPolicyManagerType <em>Policy Manager Type</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl#getActionGroups <em>Action Groups</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -124,6 +117,27 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 	protected String sourceCode = SOURCE_CODE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getPolicyManagerType() <em>Policy Manager Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPolicyManagerType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String POLICY_MANAGER_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPolicyManagerType() <em>Policy Manager Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPolicyManagerType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String policyManagerType = POLICY_MANAGER_TYPE_EDEFAULT;
+
+	
+	/**
 	 * The cached value of the '{@link #getActionGroups() <em>Action Groups</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,16 +146,6 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected EList<ActionGroup> actionGroups;
-
-	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -251,6 +255,27 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getPolicyManagerType() {
+		return policyManagerType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPolicyManagerType(String newPolicyManagerType) {
+		String oldPolicyManagerType = policyManagerType;
+		policyManagerType = newPolicyManagerType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE, oldPolicyManagerType, policyManagerType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ActionGroup> getActionGroups() {
 		if (actionGroups == null) {
 			actionGroups = new EObjectResolvingEList<ActionGroup>(ActionGroup.class, this, PdpPackage.POLICY_MANAGER_PLAN__ACTION_GROUPS);
@@ -258,49 +283,7 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 		return actionGroups;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 */
-	@SuppressWarnings("unchecked")
-	public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {
-		 Object attribute = customAttributes.get(attributeName);
-	        if (attribute == null) {
-	            return Maybe.absent("Custom attributes does not contain " + attributeName);
-	        } else if (!type.isAssignableFrom(attribute.getClass())) {
-	            String message = "Custom attribute " + attributeName + " is not of expected type: " +
-	                    "expected=" + type.getName() + " actual=" + attribute.getClass().getName();
-	            if (throwIfTypeMismatch) {
-	                throw new IllegalArgumentException(message);
-	            }
-	            return Maybe.absent(message);
-	        } else {
-	            return Maybe.of((T) attribute);
-	        }
-	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -317,10 +300,10 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 				return getOrigin();
 			case PdpPackage.POLICY_MANAGER_PLAN__SOURCE_CODE:
 				return getSourceCode();
+			case PdpPackage.POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE:
+				return getPolicyManagerType();
 			case PdpPackage.POLICY_MANAGER_PLAN__ACTION_GROUPS:
 				return getActionGroups();
-			case PdpPackage.POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -346,12 +329,12 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 			case PdpPackage.POLICY_MANAGER_PLAN__SOURCE_CODE:
 				setSourceCode((String)newValue);
 				return;
+			case PdpPackage.POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE:
+				setPolicyManagerType((String)newValue);
+				return;
 			case PdpPackage.POLICY_MANAGER_PLAN__ACTION_GROUPS:
 				getActionGroups().clear();
 				getActionGroups().addAll((Collection<? extends ActionGroup>)newValue);
-				return;
-			case PdpPackage.POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -377,11 +360,11 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 			case PdpPackage.POLICY_MANAGER_PLAN__SOURCE_CODE:
 				setSourceCode(SOURCE_CODE_EDEFAULT);
 				return;
+			case PdpPackage.POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE:
+				setPolicyManagerType(POLICY_MANAGER_TYPE_EDEFAULT);
+				return;
 			case PdpPackage.POLICY_MANAGER_PLAN__ACTION_GROUPS:
 				getActionGroups().clear();
-				return;
-			case PdpPackage.POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -403,27 +386,12 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 				return ORIGIN_EDEFAULT == null ? origin != null : !ORIGIN_EDEFAULT.equals(origin);
 			case PdpPackage.POLICY_MANAGER_PLAN__SOURCE_CODE:
 				return SOURCE_CODE_EDEFAULT == null ? sourceCode != null : !SOURCE_CODE_EDEFAULT.equals(sourceCode);
+			case PdpPackage.POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE:
+				return POLICY_MANAGER_TYPE_EDEFAULT == null ? policyManagerType != null : !POLICY_MANAGER_TYPE_EDEFAULT.equals(policyManagerType);
 			case PdpPackage.POLICY_MANAGER_PLAN__ACTION_GROUPS:
 				return actionGroups != null && !actionGroups.isEmpty();
-			case PdpPackage.POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case PdpPackage.POLICY_MANAGER_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN:
-				return getCustomAttribute((String)arguments.get(0), (Class)arguments.get(1), (Boolean)arguments.get(2));
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -444,8 +412,8 @@ public class PolicyManagerPlanImpl extends MinimalEObjectImpl.Container implemen
 		result.append(origin);
 		result.append(", sourceCode: ");
 		result.append(sourceCode);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
+		result.append(", policyManagerType: ");
+		result.append(policyManagerType);
 		result.append(')');
 		return result.toString();
 	}

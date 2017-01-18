@@ -1,16 +1,10 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import java.util.Map;
-
-import org.apache.brooklyn.util.collections.MutableMap;
-import org.apache.brooklyn.util.yaml.Yamls;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import org.eclipse.emf.ecore.EObject;
-import com.google.common.collect.ImmutableMap;
 
 /**
- * @model kind="class" 
+ * @model 
+ * 
  */
 public interface ServiceCharacteristic extends EObject {
 //	String name;
@@ -79,22 +73,9 @@ public interface ServiceCharacteristic extends EObject {
 	 */
 	void setCharacteristicType(String value);
 
-				/**
-     * @model 
-     */
-    public Map<String, Object> getCustomAttributes();
+	
     
-    /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Custom Attributes</em>' attribute.
-	 * @see #getCustomAttributes()
-	 * @generated
-	 */
-	void setCustomAttributes(Map<String, Object> value);
-
-				@Override
+    @Override
     public String toString() ;
 
 }

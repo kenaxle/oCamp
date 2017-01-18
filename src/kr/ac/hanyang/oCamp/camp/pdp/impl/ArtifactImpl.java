@@ -3,8 +3,6 @@
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
 import java.util.Collection;
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.Artifact;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement;
@@ -35,7 +33,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl#getArtifactType <em>Artifact Type</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl#getContent <em>Content</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl#getRequirements <em>Requirements</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -120,16 +117,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 	 * @ordered
 	 */
 	protected EList<ArtifactRequirement> requirements;
-
-	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -268,27 +255,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.ARTIFACT__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -303,8 +269,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 				return basicGetContent();
 			case PdpPackage.ARTIFACT__REQUIREMENTS:
 				return getRequirements();
-			case PdpPackage.ARTIFACT__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -334,9 +298,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 				getRequirements().clear();
 				getRequirements().addAll((Collection<? extends ArtifactRequirement>)newValue);
 				return;
-			case PdpPackage.ARTIFACT__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -364,9 +325,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 			case PdpPackage.ARTIFACT__REQUIREMENTS:
 				getRequirements().clear();
 				return;
-			case PdpPackage.ARTIFACT__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -389,8 +347,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 				return content != null;
 			case PdpPackage.ARTIFACT__REQUIREMENTS:
 				return requirements != null && !requirements.isEmpty();
-			case PdpPackage.ARTIFACT__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -411,8 +367,6 @@ public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifa
 		result.append(description);
 		result.append(", artifactType: ");
 		result.append(artifactType);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
 		result.append(')');
 		return result.toString();
 	}

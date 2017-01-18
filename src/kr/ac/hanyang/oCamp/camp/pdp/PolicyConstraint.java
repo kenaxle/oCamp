@@ -1,17 +1,9 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import java.util.Map;
-
-import org.apache.brooklyn.util.collections.MutableMap;
-import org.apache.brooklyn.util.yaml.Yamls;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 import org.eclipse.emf.ecore.EObject;
-import com.google.common.collect.ImmutableMap;
 
 /**
- * @model kind="class"
+ * @model 
  */
 public interface PolicyConstraint extends EObject{
 //	String name;
@@ -99,22 +91,8 @@ public interface PolicyConstraint extends EObject{
 	 */
 	void setValue(Object value);
 
-				/**
-     * @model 
-     */
-    public Map<String, Object> getCustomAttributes() ;
-    
+	
  
-
-	/**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getCustomAttributes <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Custom Attributes</em>' attribute.
-	 * @see #getCustomAttributes()
-	 * @generated
-	 */
-	void setCustomAttributes(Map<String, Object> value);
 
 	@Override
     public String toString() ;

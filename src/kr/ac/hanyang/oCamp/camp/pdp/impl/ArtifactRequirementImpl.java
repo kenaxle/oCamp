@@ -2,8 +2,6 @@
  */
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 
@@ -25,7 +23,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl#getName <em>Name</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl#getRequirementType <em>Requirement Type</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -90,16 +87,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 	 * @ordered
 	 */
 	protected String requirementType = REQUIREMENT_TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,27 +175,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -218,8 +184,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 				return getDescription();
 			case PdpPackage.ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE:
 				return getRequirementType();
-			case PdpPackage.ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -242,9 +206,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 			case PdpPackage.ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE:
 				setRequirementType((String)newValue);
 				return;
-			case PdpPackage.ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -266,9 +227,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 			case PdpPackage.ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE:
 				setRequirementType(REQUIREMENT_TYPE_EDEFAULT);
 				return;
-			case PdpPackage.ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,8 +245,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case PdpPackage.ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE:
 				return REQUIREMENT_TYPE_EDEFAULT == null ? requirementType != null : !REQUIREMENT_TYPE_EDEFAULT.equals(requirementType);
-			case PdpPackage.ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -309,8 +265,6 @@ public class ArtifactRequirementImpl extends MinimalEObjectImpl.Container implem
 		result.append(description);
 		result.append(", requirementType: ");
 		result.append(requirementType);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
 		result.append(')');
 		return result.toString();
 	}

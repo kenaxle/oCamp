@@ -3,8 +3,6 @@
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
 import java.util.Collection;
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 import kr.ac.hanyang.oCamp.camp.pdp.Service;
 import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic;
@@ -32,7 +30,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl#getServiceType <em>Service Type</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl#getCharacteristics <em>Characteristics</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -107,16 +104,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	 * @ordered
 	 */
 	protected EList<ServiceCharacteristic> characteristics;
-
-	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -217,27 +204,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.SERVICE__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -249,8 +215,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 				return getServiceType();
 			case PdpPackage.SERVICE__CHARACTERISTICS:
 				return getCharacteristics();
-			case PdpPackage.SERVICE__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -277,9 +241,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 				getCharacteristics().clear();
 				getCharacteristics().addAll((Collection<? extends ServiceCharacteristic>)newValue);
 				return;
-			case PdpPackage.SERVICE__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -304,9 +265,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 			case PdpPackage.SERVICE__CHARACTERISTICS:
 				getCharacteristics().clear();
 				return;
-			case PdpPackage.SERVICE__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -327,8 +285,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 				return SERVICE_TYPE_EDEFAULT == null ? serviceType != null : !SERVICE_TYPE_EDEFAULT.equals(serviceType);
 			case PdpPackage.SERVICE__CHARACTERISTICS:
 				return characteristics != null && !characteristics.isEmpty();
-			case PdpPackage.SERVICE__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -349,8 +305,6 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 		result.append(description);
 		result.append(", serviceType: ");
 		result.append(serviceType);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
 		result.append(')');
 		return result.toString();
 	}

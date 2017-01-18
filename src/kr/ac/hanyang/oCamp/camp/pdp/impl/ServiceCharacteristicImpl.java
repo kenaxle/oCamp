@@ -2,8 +2,6 @@
  */
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic;
 
@@ -25,7 +23,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl#getName <em>Name</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl#getCharacteristicType <em>Characteristic Type</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -90,16 +87,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected String characteristicType = CHARACTERISTIC_TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,27 +175,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -218,8 +184,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 				return getDescription();
 			case PdpPackage.SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE:
 				return getCharacteristicType();
-			case PdpPackage.SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -242,9 +206,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 			case PdpPackage.SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE:
 				setCharacteristicType((String)newValue);
 				return;
-			case PdpPackage.SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -266,9 +227,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 			case PdpPackage.SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE:
 				setCharacteristicType(CHARACTERISTIC_TYPE_EDEFAULT);
 				return;
-			case PdpPackage.SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,8 +245,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case PdpPackage.SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE:
 				return CHARACTERISTIC_TYPE_EDEFAULT == null ? characteristicType != null : !CHARACTERISTIC_TYPE_EDEFAULT.equals(characteristicType);
-			case PdpPackage.SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -309,8 +265,6 @@ public class ServiceCharacteristicImpl extends MinimalEObjectImpl.Container impl
 		result.append(description);
 		result.append(", characteristicType: ");
 		result.append(characteristicType);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
 		result.append(')');
 		return result.toString();
 	}

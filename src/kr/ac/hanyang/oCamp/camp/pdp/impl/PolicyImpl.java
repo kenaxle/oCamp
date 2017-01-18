@@ -3,8 +3,6 @@
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
 import java.util.Collection;
-import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
@@ -34,7 +32,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl#getPolicyType <em>Policy Type</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl#getPolicyConstraints <em>Policy Constraints</em>}</li>
  *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl#getTargets <em>Targets</em>}</li>
- *   <li>{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl#getCustomAttributes <em>Custom Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -119,16 +116,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 	 * @ordered
 	 */
 	protected EList<String> targets;
-
-	/**
-	 * The cached value of the '{@link #getCustomAttributes() <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<String, Object> customAttributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -241,27 +228,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<String, Object> getCustomAttributes() {
-		return customAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomAttributes(Map<String, Object> newCustomAttributes) {
-		Map<String, Object> oldCustomAttributes = customAttributes;
-		customAttributes = newCustomAttributes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PdpPackage.POLICY__CUSTOM_ATTRIBUTES, oldCustomAttributes, customAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -275,8 +241,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 				return getPolicyConstraints();
 			case PdpPackage.POLICY__TARGETS:
 				return getTargets();
-			case PdpPackage.POLICY__CUSTOM_ATTRIBUTES:
-				return getCustomAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -307,9 +271,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 				getTargets().clear();
 				getTargets().addAll((Collection<? extends String>)newValue);
 				return;
-			case PdpPackage.POLICY__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -337,9 +298,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 			case PdpPackage.POLICY__TARGETS:
 				getTargets().clear();
 				return;
-			case PdpPackage.POLICY__CUSTOM_ATTRIBUTES:
-				setCustomAttributes((Map<String, Object>)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -362,8 +320,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 				return policyConstraints != null && !policyConstraints.isEmpty();
 			case PdpPackage.POLICY__TARGETS:
 				return targets != null && !targets.isEmpty();
-			case PdpPackage.POLICY__CUSTOM_ATTRIBUTES:
-				return customAttributes != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -386,8 +342,6 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 		result.append(policyType);
 		result.append(", targets: ");
 		result.append(targets);
-		result.append(", customAttributes: ");
-		result.append(customAttributes);
 		result.append(')');
 		return result.toString();
 	}

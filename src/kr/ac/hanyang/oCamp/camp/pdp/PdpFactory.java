@@ -38,6 +38,7 @@ public interface PdpFactory extends EFactory {
 	 * @generated
 	 */
 	Action createAction();
+	
 
 	/**
 	 * Returns a new object of class '<em>Action Group</em>'.

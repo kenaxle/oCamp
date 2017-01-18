@@ -25,12 +25,8 @@ import org.apache.brooklyn.util.guava.Maybe;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.ETypeParameter;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -283,24 +279,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractOCampPlan_CustomAttributes() {
-		return (EAttribute)abstractOCampPlanEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractOCampPlan__GetCustomAttribute__String_Class_boolean() {
-		return abstractOCampPlanEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getAction() {
 		return actionEClass;
 	}
@@ -348,24 +326,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 */
 	public EReference getAction_Transitions() {
 		return (EReference)actionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAction_CustomAttributes() {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAction__GetCustomAttribute__String_Class_boolean() {
-		return actionEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -427,24 +387,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActionGroup_CustomAttributes() {
-		return (EAttribute)actionGroupEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getActionGroup__GetCustomAttribute__String_Class_boolean() {
-		return actionGroupEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getArtifact() {
 		return artifactEClass;
 	}
@@ -499,15 +441,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifact_CustomAttributes() {
-		return (EAttribute)artifactEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getArtifactContent() {
 		return artifactContentEClass;
 	}
@@ -519,15 +452,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 */
 	public EAttribute getArtifactContent_Href() {
 		return (EAttribute)artifactContentEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArtifactContent_CustomAttributes() {
-		return (EAttribute)artifactContentEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -564,15 +488,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 */
 	public EAttribute getArtifactRequirement_RequirementType() {
 		return (EAttribute)artifactRequirementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArtifactRequirement_CustomAttributes() {
-		return (EAttribute)artifactRequirementEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -670,24 +585,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeploymentPlan_CustomAttributes() {
-		return (EAttribute)deploymentPlanEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getDeploymentPlan__GetCustomAttribute__String_Class_boolean() {
-		return deploymentPlanEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPolicy() {
 		return policyEClass;
 	}
@@ -742,15 +639,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicy_CustomAttributes() {
-		return (EAttribute)policyEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPolicyConstraint() {
 		return policyConstraintEClass;
 	}
@@ -789,15 +677,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 */
 	public EAttribute getPolicyConstraint_Value() {
 		return (EAttribute)policyConstraintEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPolicyConstraint_CustomAttributes() {
-		return (EAttribute)policyConstraintEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -850,26 +729,17 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPolicyManagerPlan_PolicyManagerType() {
+		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getPolicyManagerPlan_ActionGroups() {
-		return (EReference)policyManagerPlanEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPolicyManagerPlan_CustomAttributes() {
-		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getPolicyManagerPlan__GetCustomAttribute__String_Class_boolean() {
-		return policyManagerPlanEClass.getEOperations().get(0);
+		return (EReference)policyManagerPlanEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -922,15 +792,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getService_CustomAttributes() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getServiceCharacteristic() {
 		return serviceCharacteristicEClass;
 	}
@@ -960,15 +821,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 */
 	public EAttribute getServiceCharacteristic_CharacteristicType() {
 		return (EAttribute)serviceCharacteristicEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getServiceCharacteristic_CustomAttributes() {
-		return (EAttribute)serviceCharacteristicEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1014,24 +866,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 */
 	public EAttribute getTransition_Value() {
 		return (EAttribute)transitionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTransition_CustomAttributes() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getTransition__GetCustomAttribute__String_Class_boolean() {
-		return transitionEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1088,8 +922,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEReference(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__ARTIFACTS);
 		createEReference(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__SERVICES);
 		createEReference(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__POLICIES);
-		createEAttribute(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__CUSTOM_ATTRIBUTES);
-		createEOperation(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN);
 
 		actionEClass = createEClass(ACTION);
 		createEAttribute(actionEClass, ACTION__NAME);
@@ -1097,8 +929,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEAttribute(actionEClass, ACTION__PROPERTY);
 		createEAttribute(actionEClass, ACTION__ACTION_TYPE);
 		createEReference(actionEClass, ACTION__TRANSITIONS);
-		createEAttribute(actionEClass, ACTION__CUSTOM_ATTRIBUTES);
-		createEOperation(actionEClass, ACTION___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN);
 
 		actionGroupEClass = createEClass(ACTION_GROUP);
 		createEAttribute(actionGroupEClass, ACTION_GROUP__NAME);
@@ -1106,8 +936,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEAttribute(actionGroupEClass, ACTION_GROUP__ACTION_ID);
 		createEAttribute(actionGroupEClass, ACTION_GROUP__ACTION_GROUP_TYPE);
 		createEReference(actionGroupEClass, ACTION_GROUP__ACTIONS);
-		createEAttribute(actionGroupEClass, ACTION_GROUP__CUSTOM_ATTRIBUTES);
-		createEOperation(actionGroupEClass, ACTION_GROUP___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN);
 
 		artifactEClass = createEClass(ARTIFACT);
 		createEAttribute(artifactEClass, ARTIFACT__NAME);
@@ -1115,17 +943,14 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEAttribute(artifactEClass, ARTIFACT__ARTIFACT_TYPE);
 		createEReference(artifactEClass, ARTIFACT__CONTENT);
 		createEReference(artifactEClass, ARTIFACT__REQUIREMENTS);
-		createEAttribute(artifactEClass, ARTIFACT__CUSTOM_ATTRIBUTES);
 
 		artifactContentEClass = createEClass(ARTIFACT_CONTENT);
 		createEAttribute(artifactContentEClass, ARTIFACT_CONTENT__HREF);
-		createEAttribute(artifactContentEClass, ARTIFACT_CONTENT__CUSTOM_ATTRIBUTES);
 
 		artifactRequirementEClass = createEClass(ARTIFACT_REQUIREMENT);
 		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__NAME);
 		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__DESCRIPTION);
 		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE);
-		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES);
 
 		deploymentPlanEClass = createEClass(DEPLOYMENT_PLAN);
 		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__NAME);
@@ -1137,8 +962,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__SERVICES);
 		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__POLICIES);
 		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__ACTION_GROUPS);
-		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES);
-		createEOperation(deploymentPlanEClass, DEPLOYMENT_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN);
 
 		policyEClass = createEClass(POLICY);
 		createEAttribute(policyEClass, POLICY__NAME);
@@ -1146,44 +969,37 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEAttribute(policyEClass, POLICY__POLICY_TYPE);
 		createEReference(policyEClass, POLICY__POLICY_CONSTRAINTS);
 		createEAttribute(policyEClass, POLICY__TARGETS);
-		createEAttribute(policyEClass, POLICY__CUSTOM_ATTRIBUTES);
 
 		policyConstraintEClass = createEClass(POLICY_CONSTRAINT);
 		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__NAME);
 		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__DESCRIPTION);
 		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__POLICY_CONSTRAINT_TYPE);
 		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__VALUE);
-		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__CUSTOM_ATTRIBUTES);
 
 		policyManagerPlanEClass = createEClass(POLICY_MANAGER_PLAN);
 		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__NAME);
 		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__DESCRIPTION);
 		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__ORIGIN);
 		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__SOURCE_CODE);
+		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE);
 		createEReference(policyManagerPlanEClass, POLICY_MANAGER_PLAN__ACTION_GROUPS);
-		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES);
-		createEOperation(policyManagerPlanEClass, POLICY_MANAGER_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN);
 
 		serviceEClass = createEClass(SERVICE);
 		createEAttribute(serviceEClass, SERVICE__NAME);
 		createEAttribute(serviceEClass, SERVICE__DESCRIPTION);
 		createEAttribute(serviceEClass, SERVICE__SERVICE_TYPE);
 		createEReference(serviceEClass, SERVICE__CHARACTERISTICS);
-		createEAttribute(serviceEClass, SERVICE__CUSTOM_ATTRIBUTES);
 
 		serviceCharacteristicEClass = createEClass(SERVICE_CHARACTERISTIC);
 		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__NAME);
 		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__DESCRIPTION);
 		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE);
-		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEAttribute(transitionEClass, TRANSITION__NAME);
 		createEAttribute(transitionEClass, TRANSITION__DESCRIPTION);
 		createEAttribute(transitionEClass, TRANSITION__TRANSITION_TYPE);
 		createEAttribute(transitionEClass, TRANSITION__VALUE);
-		createEAttribute(transitionEClass, TRANSITION__CUSTOM_ATTRIBUTES);
-		createEOperation(transitionEClass, TRANSITION___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN);
 
 		// Create data types
 		mapEDataType = createEDataType(MAP);
@@ -1231,25 +1047,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEReference(getAbstractOCampPlan_Artifacts(), this.getArtifact(), null, "artifacts", null, 0, -1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractOCampPlan_Services(), this.getService(), null, "services", null, 0, -1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractOCampPlan_Policies(), this.getPolicy(), null, "policies", null, 0, -1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		EGenericType g1 = createEGenericType(this.getMap());
-		EGenericType g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getAbstractOCampPlan_CustomAttributes(), g1, "customAttributes", null, 0, 1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		EOperation op = initEOperation(getAbstractOCampPlan__GetCustomAttribute__String_Class_boolean(), null, "getCustomAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
-		ETypeParameter t1 = addETypeParameter(op, "T");
-		addEParameter(op, ecorePackage.getEString(), "attributeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEJavaClass());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "throwIfTypeMismatch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getMaybe());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAction_Name(), ecorePackage.getEString(), "name", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1257,25 +1054,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEAttribute(getAction_Property(), ecorePackage.getEString(), "property", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAction_ActionType(), ecorePackage.getEString(), "actionType", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAction_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getAction_CustomAttributes(), g1, "customAttributes", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = initEOperation(getAction__GetCustomAttribute__String_Class_boolean(), null, "getCustomAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "T");
-		addEParameter(op, ecorePackage.getEString(), "attributeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEJavaClass());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "throwIfTypeMismatch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getMaybe());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		initEClass(actionGroupEClass, ActionGroup.class, "ActionGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActionGroup_Name(), ecorePackage.getEString(), "name", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1283,25 +1061,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEAttribute(getActionGroup_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActionGroup_ActionGroupType(), ecorePackage.getEString(), "actionGroupType", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActionGroup_Actions(), this.getAction(), null, "actions", null, 0, -1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getActionGroup_CustomAttributes(), g1, "customAttributes", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = initEOperation(getActionGroup__GetCustomAttribute__String_Class_boolean(), null, "getCustomAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "T");
-		addEParameter(op, ecorePackage.getEString(), "attributeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEJavaClass());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "throwIfTypeMismatch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getMaybe());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1309,32 +1068,14 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEAttribute(getArtifact_ArtifactType(), ecorePackage.getEString(), "artifactType", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArtifact_Content(), this.getArtifactContent(), null, "content", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArtifact_Requirements(), this.getArtifactRequirement(), null, "requirements", null, 0, -1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getArtifact_CustomAttributes(), g1, "customAttributes", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(artifactContentEClass, ArtifactContent.class, "ArtifactContent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArtifactContent_Href(), ecorePackage.getEString(), "href", null, 0, 1, ArtifactContent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getArtifactContent_CustomAttributes(), g1, "customAttributes", null, 0, 1, ArtifactContent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(artifactRequirementEClass, ArtifactRequirement.class, "ArtifactRequirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArtifactRequirement_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifactRequirement_Description(), ecorePackage.getEString(), "description", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifactRequirement_RequirementType(), ecorePackage.getEString(), "requirementType", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getArtifactRequirement_CustomAttributes(), g1, "customAttributes", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deploymentPlanEClass, DeploymentPlan.class, "DeploymentPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeploymentPlan_Name(), ecorePackage.getEString(), "name", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1346,25 +1087,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEReference(getDeploymentPlan_Services(), this.getService(), null, "services", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeploymentPlan_Policies(), this.getPolicy(), null, "policies", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeploymentPlan_ActionGroups(), this.getActionGroup(), null, "actionGroups", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getDeploymentPlan_CustomAttributes(), g1, "customAttributes", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = initEOperation(getDeploymentPlan__GetCustomAttribute__String_Class_boolean(), null, "getCustomAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "T");
-		addEParameter(op, ecorePackage.getEString(), "attributeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEJavaClass());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "throwIfTypeMismatch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getMaybe());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		initEClass(policyEClass, Policy.class, "Policy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPolicy_Name(), ecorePackage.getEString(), "name", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1372,98 +1094,37 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEAttribute(getPolicy_PolicyType(), ecorePackage.getEString(), "policyType", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPolicy_PolicyConstraints(), this.getPolicyConstraint(), null, "policyConstraints", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicy_Targets(), ecorePackage.getEString(), "targets", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getPolicy_CustomAttributes(), g1, "customAttributes", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(policyConstraintEClass, PolicyConstraint.class, "PolicyConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPolicyConstraint_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicyConstraint_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicyConstraint_PolicyConstraintType(), ecorePackage.getEString(), "policyConstraintType", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicyConstraint_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getPolicyConstraint_CustomAttributes(), g1, "customAttributes", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(policyManagerPlanEClass, PolicyManagerPlan.class, "PolicyManagerPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPolicyManagerPlan_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicyManagerPlan_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicyManagerPlan_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPolicyManagerPlan_SourceCode(), ecorePackage.getEString(), "sourceCode", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyManagerPlan_PolicyManagerType(), ecorePackage.getEString(), "policyManagerType", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPolicyManagerPlan_ActionGroups(), this.getActionGroup(), null, "actionGroups", null, 0, -1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getPolicyManagerPlan_CustomAttributes(), g1, "customAttributes", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = initEOperation(getPolicyManagerPlan__GetCustomAttribute__String_Class_boolean(), null, "getCustomAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "T");
-		addEParameter(op, ecorePackage.getEString(), "attributeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEJavaClass());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "throwIfTypeMismatch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getMaybe());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getService_Name(), ecorePackage.getEString(), "name", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_Description(), ecorePackage.getEString(), "description", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_ServiceType(), ecorePackage.getEString(), "serviceType", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getService_Characteristics(), this.getServiceCharacteristic(), null, "characteristics", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getService_CustomAttributes(), g1, "customAttributes", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(serviceCharacteristicEClass, ServiceCharacteristic.class, "ServiceCharacteristic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getServiceCharacteristic_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getServiceCharacteristic_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getServiceCharacteristic_CharacteristicType(), ecorePackage.getEString(), "characteristicType", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getServiceCharacteristic_CustomAttributes(), g1, "customAttributes", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_Description(), ecorePackage.getEString(), "description", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_TransitionType(), ecorePackage.getEString(), "transitionType", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getMap());
-		g2 = createEGenericType(ecorePackage.getEString());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getTransition_CustomAttributes(), g1, "customAttributes", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = initEOperation(getTransition__GetCustomAttribute__String_Class_boolean(), null, "getCustomAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
-		t1 = addETypeParameter(op, "T");
-		addEParameter(op, ecorePackage.getEString(), "attributeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEJavaClass());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "throwIfTypeMismatch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getMaybe());
-		g2 = createEGenericType(t1);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		// Initialize data types
 		initEDataType(mapEDataType, Map.class, "Map", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

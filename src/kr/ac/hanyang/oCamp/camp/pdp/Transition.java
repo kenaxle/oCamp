@@ -1,14 +1,9 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import java.util.Map;
-import org.apache.brooklyn.util.collections.MutableMap;
-import org.apache.brooklyn.util.guava.Maybe;
-import org.apache.brooklyn.util.yaml.Yamls;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * @model kind="class" 
+ * @model 
  */
 public interface Transition extends EObject {
 //	
@@ -95,33 +90,7 @@ public interface Transition extends EObject {
 	 */
 	void setValue(Object value);
 
-				/**
-     * @model 
-     */
-    public Map<String, Object> getCustomAttributes() ;
-
-    /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getCustomAttributes <em>Custom Attributes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Custom Attributes</em>' attribute.
-	 * @see #getCustomAttributes()
-	 * @generated
-	 */
-	void setCustomAttributes(Map<String, Object> value);
-
-				/**
-     * Returns a present {@link Maybe} of the custom attribute with the given name if the attribute is
-     * non-null and is an instance of the given type. Otherwise returns absent.
-     * <p/>
-     * Does not remove the attribute from the custom attribute map.
-     */
-    /**
-     * @model 
-     */
-    @SuppressWarnings("unchecked")
-    public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) ;
-
+	
     @Override
     public String toString() ;
 

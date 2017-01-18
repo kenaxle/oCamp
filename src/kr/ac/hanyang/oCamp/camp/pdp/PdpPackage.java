@@ -5,7 +5,6 @@ package kr.ac.hanyang.oCamp.camp.pdp;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -132,31 +131,13 @@ public interface PdpPackage extends EPackage {
 	int ABSTRACT_OCAMP_PLAN__POLICIES = 6;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_OCAMP_PLAN__CUSTOM_ATTRIBUTES = 7;
-
-	/**
 	 * The number of structural features of the '<em>Abstract OCamp Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN_FEATURE_COUNT = 8;
-
-	/**
-	 * The operation id for the '<em>Get Custom Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_OCAMP_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = 0;
+	int ABSTRACT_OCAMP_PLAN_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Abstract OCamp Plan</em>' class.
@@ -165,7 +146,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN_OPERATION_COUNT = 1;
+	int ABSTRACT_OCAMP_PLAN_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionImpl <em>Action</em>}' class.
@@ -223,31 +204,13 @@ public interface PdpPackage extends EPackage {
 	int ACTION__TRANSITIONS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__CUSTOM_ATTRIBUTES = 5;
-
-	/**
 	 * The number of structural features of the '<em>Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 6;
-
-	/**
-	 * The operation id for the '<em>Get Custom Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = 0;
+	int ACTION_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Action</em>' class.
@@ -256,7 +219,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_OPERATION_COUNT = 1;
+	int ACTION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupImpl <em>Action Group</em>}' class.
@@ -314,31 +277,13 @@ public interface PdpPackage extends EPackage {
 	int ACTION_GROUP__ACTIONS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP__CUSTOM_ATTRIBUTES = 5;
-
-	/**
 	 * The number of structural features of the '<em>Action Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_GROUP_FEATURE_COUNT = 6;
-
-	/**
-	 * The operation id for the '<em>Get Custom Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = 0;
+	int ACTION_GROUP_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Action Group</em>' class.
@@ -347,7 +292,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_GROUP_OPERATION_COUNT = 1;
+	int ACTION_GROUP_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl <em>Artifact</em>}' class.
@@ -405,22 +350,13 @@ public interface PdpPackage extends EPackage {
 	int ARTIFACT__REQUIREMENTS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__CUSTOM_ATTRIBUTES = 5;
-
-	/**
 	 * The number of structural features of the '<em>Artifact</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_FEATURE_COUNT = 6;
+	int ARTIFACT_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Artifact</em>' class.
@@ -451,22 +387,13 @@ public interface PdpPackage extends EPackage {
 	int ARTIFACT_CONTENT__HREF = 0;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_CONTENT__CUSTOM_ATTRIBUTES = 1;
-
-	/**
 	 * The number of structural features of the '<em>Artifact Content</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_CONTENT_FEATURE_COUNT = 2;
+	int ARTIFACT_CONTENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Artifact Content</em>' class.
@@ -515,22 +442,13 @@ public interface PdpPackage extends EPackage {
 	int ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES = 3;
-
-	/**
 	 * The number of structural features of the '<em>Artifact Requirement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_REQUIREMENT_FEATURE_COUNT = 4;
+	int ARTIFACT_REQUIREMENT_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Artifact Requirement</em>' class.
@@ -633,31 +551,13 @@ public interface PdpPackage extends EPackage {
 	int DEPLOYMENT_PLAN__ACTION_GROUPS = 8;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES = 9;
-
-	/**
 	 * The number of structural features of the '<em>Deployment Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOYMENT_PLAN_FEATURE_COUNT = 10;
-
-	/**
-	 * The operation id for the '<em>Get Custom Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = 0;
+	int DEPLOYMENT_PLAN_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Deployment Plan</em>' class.
@@ -666,7 +566,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEPLOYMENT_PLAN_OPERATION_COUNT = 1;
+	int DEPLOYMENT_PLAN_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl <em>Policy</em>}' class.
@@ -724,22 +624,13 @@ public interface PdpPackage extends EPackage {
 	int POLICY__TARGETS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY__CUSTOM_ATTRIBUTES = 5;
-
-	/**
 	 * The number of structural features of the '<em>Policy</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POLICY_FEATURE_COUNT = 6;
+	int POLICY_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Policy</em>' class.
@@ -797,22 +688,13 @@ public interface PdpPackage extends EPackage {
 	int POLICY_CONSTRAINT__VALUE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT__CUSTOM_ATTRIBUTES = 4;
-
-	/**
 	 * The number of structural features of the '<em>Policy Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POLICY_CONSTRAINT_FEATURE_COUNT = 5;
+	int POLICY_CONSTRAINT_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Policy Constraint</em>' class.
@@ -870,22 +752,22 @@ public interface PdpPackage extends EPackage {
 	int POLICY_MANAGER_PLAN__SOURCE_CODE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Policy Manager Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE = 4;
+
+	/**
 	 * The feature id for the '<em><b>Action Groups</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POLICY_MANAGER_PLAN__ACTION_GROUPS = 4;
-
-	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES = 5;
+	int POLICY_MANAGER_PLAN__ACTION_GROUPS = 5;
 
 	/**
 	 * The number of structural features of the '<em>Policy Manager Plan</em>' class.
@@ -897,22 +779,13 @@ public interface PdpPackage extends EPackage {
 	int POLICY_MANAGER_PLAN_FEATURE_COUNT = 6;
 
 	/**
-	 * The operation id for the '<em>Get Custom Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = 0;
-
-	/**
 	 * The number of operations of the '<em>Policy Manager Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POLICY_MANAGER_PLAN_OPERATION_COUNT = 1;
+	int POLICY_MANAGER_PLAN_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl <em>Service</em>}' class.
@@ -961,22 +834,13 @@ public interface PdpPackage extends EPackage {
 	int SERVICE__CHARACTERISTICS = 3;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__CUSTOM_ATTRIBUTES = 4;
-
-	/**
 	 * The number of structural features of the '<em>Service</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = 5;
+	int SERVICE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Service</em>' class.
@@ -1025,22 +889,13 @@ public interface PdpPackage extends EPackage {
 	int SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES = 3;
-
-	/**
 	 * The number of structural features of the '<em>Service Characteristic</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_CHARACTERISTIC_FEATURE_COUNT = 4;
+	int SERVICE_CHARACTERISTIC_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Service Characteristic</em>' class.
@@ -1098,31 +953,13 @@ public interface PdpPackage extends EPackage {
 	int TRANSITION__VALUE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Custom Attributes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__CUSTOM_ATTRIBUTES = 4;
-
-	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = 5;
-
-	/**
-	 * The operation id for the '<em>Get Custom Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = 0;
+	int TRANSITION_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Transition</em>' class.
@@ -1131,7 +968,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_OPERATION_COUNT = 1;
+	int TRANSITION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '<em>Map</em>' data type.
@@ -1242,27 +1079,6 @@ public interface PdpPackage extends EPackage {
 	EReference getAbstractOCampPlan_Policies();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getCustomAttributes()
-	 * @see #getAbstractOCampPlan()
-	 * @generated
-	 */
-	EAttribute getAbstractOCampPlan_CustomAttributes();
-
-	/**
-	 * Returns the meta object for the '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getCustomAttribute(java.lang.String, java.lang.Class, boolean) <em>Get Custom Attribute</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Custom Attribute</em>' operation.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getCustomAttribute(java.lang.String, java.lang.Class, boolean)
-	 * @generated
-	 */
-	EOperation getAbstractOCampPlan__GetCustomAttribute__String_Class_boolean();
-
-	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Action <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1326,27 +1142,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAction_Transitions();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getCustomAttributes()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EAttribute getAction_CustomAttributes();
-
-	/**
-	 * Returns the meta object for the '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getCustomAttribute(java.lang.String, java.lang.Class, boolean) <em>Get Custom Attribute</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Custom Attribute</em>' operation.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getCustomAttribute(java.lang.String, java.lang.Class, boolean)
-	 * @generated
-	 */
-	EOperation getAction__GetCustomAttribute__String_Class_boolean();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup <em>Action Group</em>}'.
@@ -1414,27 +1209,6 @@ public interface PdpPackage extends EPackage {
 	EReference getActionGroup_Actions();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getCustomAttributes()
-	 * @see #getActionGroup()
-	 * @generated
-	 */
-	EAttribute getActionGroup_CustomAttributes();
-
-	/**
-	 * Returns the meta object for the '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getCustomAttribute(java.lang.String, java.lang.Class, boolean) <em>Get Custom Attribute</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Custom Attribute</em>' operation.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getCustomAttribute(java.lang.String, java.lang.Class, boolean)
-	 * @generated
-	 */
-	EOperation getActionGroup__GetCustomAttribute__String_Class_boolean();
-
-	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact <em>Artifact</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1500,17 +1274,6 @@ public interface PdpPackage extends EPackage {
 	EReference getArtifact_Requirements();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact#getCustomAttributes()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EAttribute getArtifact_CustomAttributes();
-
-	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent <em>Artifact Content</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1530,17 +1293,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArtifactContent_Href();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent#getCustomAttributes()
-	 * @see #getArtifactContent()
-	 * @generated
-	 */
-	EAttribute getArtifactContent_CustomAttributes();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement <em>Artifact Requirement</em>}'.
@@ -1584,17 +1336,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArtifactRequirement_RequirementType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getCustomAttributes()
-	 * @see #getArtifactRequirement()
-	 * @generated
-	 */
-	EAttribute getArtifactRequirement_CustomAttributes();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan <em>Deployment Plan</em>}'.
@@ -1706,27 +1447,6 @@ public interface PdpPackage extends EPackage {
 	EReference getDeploymentPlan_ActionGroups();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getCustomAttributes()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EAttribute getDeploymentPlan_CustomAttributes();
-
-	/**
-	 * Returns the meta object for the '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getCustomAttribute(java.lang.String, java.lang.Class, boolean) <em>Get Custom Attribute</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Custom Attribute</em>' operation.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getCustomAttribute(java.lang.String, java.lang.Class, boolean)
-	 * @generated
-	 */
-	EOperation getDeploymentPlan__GetCustomAttribute__String_Class_boolean();
-
-	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy <em>Policy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1792,17 +1512,6 @@ public interface PdpPackage extends EPackage {
 	EAttribute getPolicy_Targets();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy#getCustomAttributes()
-	 * @see #getPolicy()
-	 * @generated
-	 */
-	EAttribute getPolicy_CustomAttributes();
-
-	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint <em>Policy Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1855,17 +1564,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPolicyConstraint_Value();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getCustomAttributes()
-	 * @see #getPolicyConstraint()
-	 * @generated
-	 */
-	EAttribute getPolicyConstraint_CustomAttributes();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan <em>Policy Manager Plan</em>}'.
@@ -1922,6 +1620,17 @@ public interface PdpPackage extends EPackage {
 	EAttribute getPolicyManagerPlan_SourceCode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getPolicyManagerType <em>Policy Manager Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Policy Manager Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getPolicyManagerType()
+	 * @see #getPolicyManagerPlan()
+	 * @generated
+	 */
+	EAttribute getPolicyManagerPlan_PolicyManagerType();
+
+	/**
 	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getActionGroups <em>Action Groups</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1931,27 +1640,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPolicyManagerPlan_ActionGroups();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getCustomAttributes()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EAttribute getPolicyManagerPlan_CustomAttributes();
-
-	/**
-	 * Returns the meta object for the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getCustomAttribute(java.lang.String, java.lang.Class, boolean) <em>Get Custom Attribute</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Custom Attribute</em>' operation.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getCustomAttribute(java.lang.String, java.lang.Class, boolean)
-	 * @generated
-	 */
-	EOperation getPolicyManagerPlan__GetCustomAttribute__String_Class_boolean();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Service <em>Service</em>}'.
@@ -2008,17 +1696,6 @@ public interface PdpPackage extends EPackage {
 	EReference getService_Characteristics();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service#getCustomAttributes()
-	 * @see #getService()
-	 * @generated
-	 */
-	EAttribute getService_CustomAttributes();
-
-	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic <em>Service Characteristic</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2060,17 +1737,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getServiceCharacteristic_CharacteristicType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes()
-	 * @see #getServiceCharacteristic()
-	 * @generated
-	 */
-	EAttribute getServiceCharacteristic_CustomAttributes();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition <em>Transition</em>}'.
@@ -2125,27 +1791,6 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTransition_Value();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getCustomAttributes <em>Custom Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition#getCustomAttributes()
-	 * @see #getTransition()
-	 * @generated
-	 */
-	EAttribute getTransition_CustomAttributes();
-
-	/**
-	 * Returns the meta object for the '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getCustomAttribute(java.lang.String, java.lang.Class, boolean) <em>Get Custom Attribute</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Custom Attribute</em>' operation.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition#getCustomAttribute(java.lang.String, java.lang.Class, boolean)
-	 * @generated
-	 */
-	EOperation getTransition__GetCustomAttribute__String_Class_boolean();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Map <em>Map</em>}'.
@@ -2259,22 +1904,6 @@ public interface PdpPackage extends EPackage {
 		EReference ABSTRACT_OCAMP_PLAN__POLICIES = eINSTANCE.getAbstractOCampPlan_Policies();
 
 		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ABSTRACT_OCAMP_PLAN__CUSTOM_ATTRIBUTES = eINSTANCE.getAbstractOCampPlan_CustomAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Custom Attribute</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_OCAMP_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = eINSTANCE.getAbstractOCampPlan__GetCustomAttribute__String_Class_boolean();
-
-		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionImpl <em>Action</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2323,22 +1952,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTION__TRANSITIONS = eINSTANCE.getAction_Transitions();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION__CUSTOM_ATTRIBUTES = eINSTANCE.getAction_CustomAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Custom Attribute</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ACTION___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = eINSTANCE.getAction__GetCustomAttribute__String_Class_boolean();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupImpl <em>Action Group</em>}' class.
@@ -2391,22 +2004,6 @@ public interface PdpPackage extends EPackage {
 		EReference ACTION_GROUP__ACTIONS = eINSTANCE.getActionGroup_Actions();
 
 		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION_GROUP__CUSTOM_ATTRIBUTES = eINSTANCE.getActionGroup_CustomAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Custom Attribute</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ACTION_GROUP___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = eINSTANCE.getActionGroup__GetCustomAttribute__String_Class_boolean();
-
-		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl <em>Artifact</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2457,14 +2054,6 @@ public interface PdpPackage extends EPackage {
 		EReference ARTIFACT__REQUIREMENTS = eINSTANCE.getArtifact_Requirements();
 
 		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT__CUSTOM_ATTRIBUTES = eINSTANCE.getArtifact_CustomAttributes();
-
-		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentImpl <em>Artifact Content</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2481,14 +2070,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARTIFACT_CONTENT__HREF = eINSTANCE.getArtifactContent_Href();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT_CONTENT__CUSTOM_ATTRIBUTES = eINSTANCE.getArtifactContent_CustomAttributes();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl <em>Artifact Requirement</em>}' class.
@@ -2523,14 +2104,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE = eINSTANCE.getArtifactRequirement_RequirementType();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES = eINSTANCE.getArtifactRequirement_CustomAttributes();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl <em>Deployment Plan</em>}' class.
@@ -2615,22 +2188,6 @@ public interface PdpPackage extends EPackage {
 		EReference DEPLOYMENT_PLAN__ACTION_GROUPS = eINSTANCE.getDeploymentPlan_ActionGroups();
 
 		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPLOYMENT_PLAN__CUSTOM_ATTRIBUTES = eINSTANCE.getDeploymentPlan_CustomAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Custom Attribute</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DEPLOYMENT_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = eINSTANCE.getDeploymentPlan__GetCustomAttribute__String_Class_boolean();
-
-		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl <em>Policy</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2681,14 +2238,6 @@ public interface PdpPackage extends EPackage {
 		EAttribute POLICY__TARGETS = eINSTANCE.getPolicy_Targets();
 
 		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY__CUSTOM_ATTRIBUTES = eINSTANCE.getPolicy_CustomAttributes();
-
-		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintImpl <em>Policy Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2729,14 +2278,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute POLICY_CONSTRAINT__VALUE = eINSTANCE.getPolicyConstraint_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_CONSTRAINT__CUSTOM_ATTRIBUTES = eINSTANCE.getPolicyConstraint_CustomAttributes();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl <em>Policy Manager Plan</em>}' class.
@@ -2781,28 +2322,20 @@ public interface PdpPackage extends EPackage {
 		EAttribute POLICY_MANAGER_PLAN__SOURCE_CODE = eINSTANCE.getPolicyManagerPlan_SourceCode();
 
 		/**
+		 * The meta object literal for the '<em><b>Policy Manager Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE = eINSTANCE.getPolicyManagerPlan_PolicyManagerType();
+
+		/**
 		 * The meta object literal for the '<em><b>Action Groups</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference POLICY_MANAGER_PLAN__ACTION_GROUPS = eINSTANCE.getPolicyManagerPlan_ActionGroups();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_MANAGER_PLAN__CUSTOM_ATTRIBUTES = eINSTANCE.getPolicyManagerPlan_CustomAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Custom Attribute</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation POLICY_MANAGER_PLAN___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = eINSTANCE.getPolicyManagerPlan__GetCustomAttribute__String_Class_boolean();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl <em>Service</em>}' class.
@@ -2847,14 +2380,6 @@ public interface PdpPackage extends EPackage {
 		EReference SERVICE__CHARACTERISTICS = eINSTANCE.getService_Characteristics();
 
 		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE__CUSTOM_ATTRIBUTES = eINSTANCE.getService_CustomAttributes();
-
-		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl <em>Service Characteristic</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2887,14 +2412,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE = eINSTANCE.getServiceCharacteristic_CharacteristicType();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES = eINSTANCE.getServiceCharacteristic_CustomAttributes();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionImpl <em>Transition</em>}' class.
@@ -2937,22 +2454,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRANSITION__VALUE = eINSTANCE.getTransition_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TRANSITION__CUSTOM_ATTRIBUTES = eINSTANCE.getTransition_CustomAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Custom Attribute</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TRANSITION___GET_CUSTOM_ATTRIBUTE__STRING_CLASS_BOOLEAN = eINSTANCE.getTransition__GetCustomAttribute__String_Class_boolean();
 
 		/**
 		 * The meta object literal for the '<em>Map</em>' data type.
