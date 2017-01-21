@@ -2,6 +2,7 @@
  */
 package kr.ac.hanyang.oCamp.camp.pdp.util;
 
+import java.util.Map;
 import kr.ac.hanyang.oCamp.camp.pdp.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -118,6 +119,10 @@ public class PdpAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransition(Transition object) {
 				return createTransitionAdapter();
+			}
+			@Override
+			public Adapter caseStringToEObjectMap(Map.Entry<String, Object> object) {
+				return createStringToEObjectMapAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -318,6 +323,20 @@ public class PdpAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>String To EObject Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createStringToEObjectMapAdapter() {
 		return null;
 	}
 

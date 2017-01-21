@@ -6,12 +6,12 @@
   <foreignModel>@model</foreignModel>
   <genPackages prefix="Pdp" basePackage="kr.ac.hanyang.oCamp.camp" disposableProviderFactory="true"
       ecorePackage="CAMP.ecore#/">
+    <genDataTypes ecoreDataType="CAMP.ecore#//Maybe">
+      <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Maybe/T"/>
+    </genDataTypes>
     <genDataTypes ecoreDataType="CAMP.ecore#//Map">
       <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Map/T"/>
       <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Map/T1"/>
-    </genDataTypes>
-    <genDataTypes ecoreDataType="CAMP.ecore#//Maybe">
-      <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Maybe/T"/>
     </genDataTypes>
     <genClasses ecoreClass="CAMP.ecore#//AbstractOCampPlan">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//AbstractOCampPlan/name"/>
@@ -93,6 +93,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/characteristicType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//Transition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Transition/name"/>

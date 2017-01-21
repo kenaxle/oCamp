@@ -87,6 +87,7 @@ public class PdpFactoryImpl extends EFactoryImpl implements PdpFactory {
 			case PdpPackage.SERVICE: return createService();
 			case PdpPackage.SERVICE_CHARACTERISTIC: return createServiceCharacteristic();
 			case PdpPackage.TRANSITION: return createTransition();
+			case PdpPackage.STRING_TO_EOBJECT_MAP: return (EObject)createStringToEObjectMap();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -100,8 +101,6 @@ public class PdpFactoryImpl extends EFactoryImpl implements PdpFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case PdpPackage.MAP:
-				return createMapFromString(eDataType, initialValue);
 			case PdpPackage.MAYBE:
 				return createMaybeFromString(eDataType, initialValue);
 			default:
@@ -117,8 +116,6 @@ public class PdpFactoryImpl extends EFactoryImpl implements PdpFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case PdpPackage.MAP:
-				return convertMapToString(eDataType, instanceValue);
 			case PdpPackage.MAYBE:
 				return convertMaybeToString(eDataType, instanceValue);
 			default:
@@ -666,6 +663,16 @@ public class PdpFactoryImpl extends EFactoryImpl implements PdpFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, Object> createStringToEObjectMap() {
+		StringToEObjectMapImpl stringToEObjectMap = new StringToEObjectMapImpl();
+		return stringToEObjectMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 */
 	public Transition createTransition(Map<String,Object> root) {
@@ -683,24 +690,6 @@ public class PdpFactoryImpl extends EFactoryImpl implements PdpFactory {
         return result;
     }
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Map<?, ?> createMapFromString(EDataType eDataType, String initialValue) {
-		return (Map<?, ?>)super.createFromString(initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertMapToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(instanceValue);
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

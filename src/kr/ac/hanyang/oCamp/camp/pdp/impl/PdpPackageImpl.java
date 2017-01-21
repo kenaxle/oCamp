@@ -3,7 +3,6 @@
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
 import java.util.Map;
-
 import kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan;
 import kr.ac.hanyang.oCamp.camp.pdp.Action;
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
@@ -132,7 +131,7 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType mapEDataType = null;
+	private EClass stringToEObjectMapEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -828,6 +827,15 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getServiceCharacteristic_CustomAttributes() {
+		return (EReference)serviceCharacteristicEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -873,8 +881,26 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getMap() {
-		return mapEDataType;
+	public EClass getStringToEObjectMap() {
+		return stringToEObjectMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToEObjectMap_Key() {
+		return (EAttribute)stringToEObjectMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToEObjectMap_Value() {
+		return (EAttribute)stringToEObjectMapEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -994,6 +1020,7 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__NAME);
 		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__DESCRIPTION);
 		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE);
+		createEReference(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEAttribute(transitionEClass, TRANSITION__NAME);
@@ -1001,8 +1028,11 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		createEAttribute(transitionEClass, TRANSITION__TRANSITION_TYPE);
 		createEAttribute(transitionEClass, TRANSITION__VALUE);
 
+		stringToEObjectMapEClass = createEClass(STRING_TO_EOBJECT_MAP);
+		createEAttribute(stringToEObjectMapEClass, STRING_TO_EOBJECT_MAP__KEY);
+		createEAttribute(stringToEObjectMapEClass, STRING_TO_EOBJECT_MAP__VALUE);
+
 		// Create data types
-		mapEDataType = createEDataType(MAP);
 		maybeEDataType = createEDataType(MAYBE);
 	}
 
@@ -1030,8 +1060,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
-		addETypeParameter(mapEDataType, "T");
-		addETypeParameter(mapEDataType, "T1");
 		addETypeParameter(maybeEDataType, "T");
 
 		// Set bounds for type parameters
@@ -1113,12 +1141,13 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEAttribute(getService_Name(), ecorePackage.getEString(), "name", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_Description(), ecorePackage.getEString(), "description", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_ServiceType(), ecorePackage.getEString(), "serviceType", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getService_Characteristics(), this.getServiceCharacteristic(), null, "characteristics", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Characteristics(), this.getServiceCharacteristic(), null, "characteristics", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(serviceCharacteristicEClass, ServiceCharacteristic.class, "ServiceCharacteristic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getServiceCharacteristic_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getServiceCharacteristic_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getServiceCharacteristic_CharacteristicType(), ecorePackage.getEString(), "characteristicType", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServiceCharacteristic_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1126,8 +1155,11 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		initEAttribute(getTransition_TransitionType(), ecorePackage.getEString(), "transitionType", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(stringToEObjectMapEClass, Map.Entry.class, "StringToEObjectMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringToEObjectMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringToEObjectMap_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize data types
-		initEDataType(mapEDataType, Map.class, "Map", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(maybeEDataType, Maybe.class, "Maybe", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource

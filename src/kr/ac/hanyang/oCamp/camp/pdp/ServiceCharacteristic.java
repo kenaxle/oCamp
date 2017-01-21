@@ -1,5 +1,6 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -75,7 +76,24 @@ public interface ServiceCharacteristic extends EObject {
 
 	
     
-    @Override
+    /**
+	 * Returns the value of the '<em><b>Custom Attributes</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.Object},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Custom Attributes</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Custom Attributes</em>' map.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PdpPackage#getServiceCharacteristic_CustomAttributes()
+	 * @model mapType="kr.ac.hanyang.oCamp.camp.pdp.StringToEObjectMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject>"
+	 * @generated
+	 */
+	EMap<String, Object> getCustomAttributes();
+
+				@Override
     public String toString() ;
 
 }

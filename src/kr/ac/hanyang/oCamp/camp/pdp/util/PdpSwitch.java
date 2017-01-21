@@ -2,6 +2,7 @@
  */
 package kr.ac.hanyang.oCamp.camp.pdp.util;
 
+import java.util.Map;
 import kr.ac.hanyang.oCamp.camp.pdp.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -141,6 +142,12 @@ public class PdpSwitch<T> extends Switch<T> {
 			case PdpPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PdpPackage.STRING_TO_EOBJECT_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<String, Object> stringToEObjectMap = (Map.Entry<String, Object>)theEObject;
+				T result = caseStringToEObjectMap(stringToEObjectMap);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -340,6 +347,21 @@ public class PdpSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTransition(Transition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String To EObject Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String To EObject Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringToEObjectMap(Map.Entry<String, Object> object) {
 		return null;
 	}
 

@@ -825,7 +825,7 @@ public interface PdpPackage extends EPackage {
 	int SERVICE__SERVICE_TYPE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Characteristics</b></em>' reference list.
+	 * The feature id for the '<em><b>Characteristics</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -889,13 +889,22 @@ public interface PdpPackage extends EPackage {
 	int SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES = 3;
+
+	/**
 	 * The number of structural features of the '<em>Service Characteristic</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_CHARACTERISTIC_FEATURE_COUNT = 3;
+	int SERVICE_CHARACTERISTIC_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Service Characteristic</em>' class.
@@ -971,14 +980,50 @@ public interface PdpPackage extends EPackage {
 	int TRANSITION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '<em>Map</em>' data type.
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.StringToEObjectMapImpl <em>String To EObject Map</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.util.Map
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getMap()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.StringToEObjectMapImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getStringToEObjectMap()
 	 * @generated
 	 */
-	int MAP = 13;
+	int STRING_TO_EOBJECT_MAP = 13;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_EOBJECT_MAP__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_EOBJECT_MAP__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>String To EObject Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_EOBJECT_MAP_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>String To EObject Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_EOBJECT_MAP_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '<em>Maybe</em>' data type.
@@ -1685,10 +1730,10 @@ public interface PdpPackage extends EPackage {
 	EAttribute getService_ServiceType();
 
 	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getCharacteristics <em>Characteristics</em>}'.
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getCharacteristics <em>Characteristics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Characteristics</em>'.
+	 * @return the meta object for the containment reference list '<em>Characteristics</em>'.
 	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service#getCharacteristics()
 	 * @see #getService()
 	 * @generated
@@ -1737,6 +1782,17 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getServiceCharacteristic_CharacteristicType();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes()
+	 * @see #getServiceCharacteristic()
+	 * @generated
+	 */
+	EReference getServiceCharacteristic_CustomAttributes();
 
 	/**
 	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition <em>Transition</em>}'.
@@ -1793,15 +1849,38 @@ public interface PdpPackage extends EPackage {
 	EAttribute getTransition_Value();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Map <em>Map</em>}'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>String To EObject Map</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Map</em>'.
-	 * @see java.util.Map
-	 * @model instanceClass="java.util.Map" typeParameters="T T1"
+	 * @return the meta object for class '<em>String To EObject Map</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueDataType="org.eclipse.emf.ecore.EJavaObject"
 	 * @generated
 	 */
-	EDataType getMap();
+	EClass getStringToEObjectMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToEObjectMap()
+	 * @generated
+	 */
+	EAttribute getStringToEObjectMap_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToEObjectMap()
+	 * @generated
+	 */
+	EAttribute getStringToEObjectMap_Value();
 
 	/**
 	 * Returns the meta object for data type '{@link org.apache.brooklyn.util.guava.Maybe <em>Maybe</em>}'.
@@ -2372,7 +2451,7 @@ public interface PdpPackage extends EPackage {
 		EAttribute SERVICE__SERVICE_TYPE = eINSTANCE.getService_ServiceType();
 
 		/**
-		 * The meta object literal for the '<em><b>Characteristics</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Characteristics</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2412,6 +2491,14 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE = eINSTANCE.getServiceCharacteristic_CharacteristicType();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES = eINSTANCE.getServiceCharacteristic_CustomAttributes();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionImpl <em>Transition</em>}' class.
@@ -2456,14 +2543,30 @@ public interface PdpPackage extends EPackage {
 		EAttribute TRANSITION__VALUE = eINSTANCE.getTransition_Value();
 
 		/**
-		 * The meta object literal for the '<em>Map</em>' data type.
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.StringToEObjectMapImpl <em>String To EObject Map</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.util.Map
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getMap()
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.StringToEObjectMapImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getStringToEObjectMap()
 		 * @generated
 		 */
-		EDataType MAP = eINSTANCE.getMap();
+		EClass STRING_TO_EOBJECT_MAP = eINSTANCE.getStringToEObjectMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_EOBJECT_MAP__KEY = eINSTANCE.getStringToEObjectMap_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_EOBJECT_MAP__VALUE = eINSTANCE.getStringToEObjectMap_Value();
 
 		/**
 		 * The meta object literal for the '<em>Maybe</em>' data type.

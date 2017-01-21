@@ -9,14 +9,17 @@ import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,7 +99,7 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected String serviceType = SERVICE_TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCharacteristics() <em>Characteristics</em>}' reference list.
+	 * The cached value of the '{@link #getCharacteristics() <em>Characteristics</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCharacteristics()
@@ -194,9 +197,23 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	 */
 	public EList<ServiceCharacteristic> getCharacteristics() {
 		if (characteristics == null) {
-			characteristics = new EObjectResolvingEList<ServiceCharacteristic>(ServiceCharacteristic.class, this, PdpPackage.SERVICE__CHARACTERISTICS);
+			characteristics = new EObjectContainmentEList<ServiceCharacteristic>(ServiceCharacteristic.class, this, PdpPackage.SERVICE__CHARACTERISTICS);
 		}
 		return characteristics;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PdpPackage.SERVICE__CHARACTERISTICS:
+				return ((InternalEList<?>)getCharacteristics()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
