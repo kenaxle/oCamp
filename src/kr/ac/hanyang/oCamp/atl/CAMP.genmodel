@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/oCamp/src" modelPluginID="oCamp" modelName="CAMP"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.java"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
-  <foreignModel>@model</foreignModel>
+  <foreignModel>CAMP.ecore</foreignModel>
   <genPackages prefix="Pdp" basePackage="kr.ac.hanyang.oCamp.camp" disposableProviderFactory="true"
       ecorePackage="CAMP.ecore#/">
-    <genDataTypes ecoreDataType="CAMP.ecore#//Maybe">
-      <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Maybe/T"/>
-    </genDataTypes>
     <genDataTypes ecoreDataType="CAMP.ecore#//Map">
       <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Map/T"/>
       <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Map/T1"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="CAMP.ecore#//Maybe">
+      <genTypeParameters ecoreTypeParameter="CAMP.ecore#//Maybe/T"/>
     </genDataTypes>
     <genClasses ecoreClass="CAMP.ecore#//AbstractOCampPlan">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//AbstractOCampPlan/name"/>
@@ -21,6 +21,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//AbstractOCampPlan/artifacts"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//AbstractOCampPlan/services"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//AbstractOCampPlan/policies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//AbstractOCampPlan/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//Action">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Action/name"/>
@@ -28,6 +29,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Action/property"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Action/actionType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//Action/transitions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Action/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//ActionGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ActionGroup/name"/>
@@ -35,6 +37,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ActionGroup/actionId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ActionGroup/actionGroupType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//ActionGroup/actions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//ActionGroup/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//Artifact">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Artifact/name"/>
@@ -42,14 +45,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Artifact/artifactType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Artifact/content"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Artifact/requirements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Artifact/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//ArtifactContent">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ArtifactContent/href"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//ArtifactContent/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//ArtifactRequirement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ArtifactRequirement/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ArtifactRequirement/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ArtifactRequirement/requirementType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ArtifactRequirement/fulfillment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//ArtifactRequirement/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//DeploymentPlan">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//DeploymentPlan/name"/>
@@ -61,6 +68,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//DeploymentPlan/services"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//DeploymentPlan/policies"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//DeploymentPlan/actionGroups"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//DeploymentPlan/customAttributes"/>
+      <genOperations ecoreOperation="CAMP.ecore#//DeploymentPlan/getCustomAttribute">
+        <genParameters ecoreParameter="CAMP.ecore#//DeploymentPlan/getCustomAttribute/attributeName"/>
+        <genParameters ecoreParameter="CAMP.ecore#//DeploymentPlan/getCustomAttribute/type"/>
+        <genParameters ecoreParameter="CAMP.ecore#//DeploymentPlan/getCustomAttribute/throwIfTypeMismatch"/>
+        <genTypeParameters ecoreTypeParameter="CAMP.ecore#//DeploymentPlan/getCustomAttribute/T"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//Policy">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Policy/name"/>
@@ -68,38 +82,46 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Policy/policyType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//Policy/policyConstraints"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Policy/targets"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Policy/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//PolicyConstraint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyConstraint/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyConstraint/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyConstraint/policyConstraintType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyConstraint/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//PolicyConstraint/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//PolicyManagerPlan">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyManagerPlan/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyManagerPlan/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyManagerPlan/origin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyManagerPlan/sourceCode"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//PolicyManagerPlan/policyManagerType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CAMP.ecore#//PolicyManagerPlan/actionGroups"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//PolicyManagerPlan/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//Service">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Service/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Service/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Service/serviceType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Service/characteristics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Service/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//ServiceCharacteristic">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/characteristicType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//ServiceCharacteristic/customAttributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//ServiceCharacteristic/customAttributes"/>
     </genClasses>
     <genClasses ecoreClass="CAMP.ecore#//Transition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Transition/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Transition/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Transition/transitionType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//Transition/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference CAMP.ecore#//Transition/customAttributes"/>
+    </genClasses>
+    <genClasses ecoreClass="CAMP.ecore#//StringToEObjectMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//StringToEObjectMap/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CAMP.ecore#//StringToEObjectMap/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

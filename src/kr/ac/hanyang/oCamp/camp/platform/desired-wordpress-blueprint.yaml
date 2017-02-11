@@ -1,0 +1,60 @@
+name: desired wordpress blueprint
+artifacts:
+- type: kr.ac.hanyang.oCamp.entities.artifacts.Script
+  content: \wordpress_install.sh
+  requirements:
+  - type: kr.ac.hanyang.oCamp.entities.requirements.DeployOn
+    target: /wordpress
+    fulfillment: id:serverpool
+    
+  - type: kr.ac.hanyang.oCamp.entities.requirements.ConnectsTo
+    custom_config: \wordpress_configure.sh
+    fulfillment: id:mySQL_DBMS        
+    
+- type: kr.ac.hanyang.oCamp.entities.artifacts.Script
+  content: \mysql_database_configure.sh
+  requirements:
+  - type: kr.ac.hanyang.oCamp.entities.requirements.DeployOn
+    fulfillment: id:mySQL_DBMS          
+
+services:
+- id: serverpool
+  characteristics:
+  - type: kr.ac.hanyang.oCamp.entities.services.DynamicCluster
+    #inboundPorts: XYZ
+    member: 
+      characteristics: 
+      - type: kr.ac.hanyang.oCamp.entities.services.software.VanillaSoftware
+             
+- id: mySQL_DBMS
+  characteristics:
+  - type: kr.ac.hanyang.oCamp.entities.services.database.mysql.MySQL  
+    install_command: \mysql_dbms_install.sh                
+        
+policies: 
+- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
+  constraints:
+  - property: SERVICE_UP
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
+  - property: PROVISIONING_LOCATION
+    type: kr.ac.hanyang.oCamp.entities.constraints.Within
+    value: [AWS Virginia (us-east-1), AWS Tokyo (ap-northeast-1)]
+  targets: [webapp_cluster]
+  
+- type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager
+  constraints:
+  - property: SERVICE_UP 
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
+  - property: PROVISIONING_LOCATION
+    type: kr.ac.hanyang.oCamp.entities.constraints.Within  
+    value: [rackspace-cloudservers-HKG, rackspace-cloudservers-SYD]
+  targets: [mySQl_DBMS]
+     
+- type: kr.ac.hanyang.oCamp.entities.policies.QoS
+  constraints:
+  - property: REQUEST_PER_SECOND
+    type: kr.ac.hanyang.oCamp.entities.constraints.Within_Range
+    value: [2,5]
+  targets: [webapp_cluster]

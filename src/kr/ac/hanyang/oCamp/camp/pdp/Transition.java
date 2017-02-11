@@ -1,98 +1,112 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import org.eclipse.emf.ecore.EObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.brooklyn.camp.spi.pdp.Artifact;
+import org.apache.brooklyn.camp.spi.pdp.Service;
+import org.apache.brooklyn.util.collections.MutableList;
+import org.apache.brooklyn.util.collections.MutableMap;
+import org.apache.brooklyn.util.exceptions.UserFacingException;
+import org.apache.brooklyn.util.guava.Maybe;
+import org.apache.brooklyn.util.javalang.JavaClassNames;
+import org.apache.brooklyn.util.yaml.Yamls;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * @model 
+ * @model kind="class" 
  */
-public interface Transition extends EObject {
-//	
-//	String name;
-//	String description;
-//	String transitionType;
-//	Object value;
-//	Map<String,Object> customAttributes;
-//		   
-//	   
-//    @SuppressWarnings("unchecked")
-//    public static Transition of(Map<String,Object> root) {
-//        Map<String,Object> attrs = MutableMap.copyOf(root);
-//        
-//        Transition result = new Transition();
-//        result.name = (String) attrs.remove("name");
-//        result.description = (String) attrs.remove("description");
-//        result.transitionType = (String) Yamls.removeMultinameAttribute(attrs, "transition_type", "transitionType", "type");
-//        // TODO version
-//        
-//        result.value = attrs.remove("value");
-//        result.customAttributes = attrs;
-//        
-//        return result;
-//    }
+public class Transition {
+	
+	String name;
+	String description;
+	String transitionType;
+	Object value;
+	Map<String,Object> customAttributes;
+		   
+	   
+    @SuppressWarnings("unchecked")
+    public static Transition of(Map<String,Object> root) {
+        Map<String,Object> attrs = MutableMap.copyOf(root);
+        
+        Transition result = new Transition();
+        result.name = (String) attrs.remove("name");
+        result.description = (String) attrs.remove("description");
+        result.transitionType = (String) Yamls.removeMultinameAttribute(attrs, "transition_type", "transitionType", "type");
+        // TODO version
+        
+        result.value = attrs.remove("value");
+        result.customAttributes = attrs;
+        
+        return result;
+    }
 
     /**
      * @model 
      */
-    public String getName();
+    public String getName() {
+        return name;
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-				/**
      * @model 
      */
-    public String getDescription();
+    public String getDescription() {
+        return description;
+    }
     
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
-
-				/**
      * @model 
      */
-    public String getTransitionType();
+    public String getTransitionType() {
+        return transitionType;
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getTransitionType <em>Transition Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Transition Type</em>' attribute.
-	 * @see #getTransitionType()
-	 * @generated
-	 */
-	void setTransitionType(String value);
-
-				/**
      * @model 
      */
-    public Object getValue();
+    public Object getValue() {
+        return value;
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(Object value);
+     * @model 
+     */
+    public Map<String, Object> getCustomAttributes() {
+        return MutableMap.copyOf(customAttributes).asUnmodifiable();
+    }
 
-	
+    /**
+     * Returns a present {@link Maybe} of the custom attribute with the given name if the attribute is
+     * non-null and is an instance of the given type. Otherwise returns absent.
+     * <p/>
+     * Does not remove the attribute from the custom attribute map.
+     */
+    /**
+     * @model 
+     */
+    @SuppressWarnings("unchecked")
+    public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {
+        Object attribute = customAttributes.get(attributeName);
+        if (attribute == null) {
+            return Maybe.absent("Custom attributes does not contain " + attributeName);
+        } else if (!type.isAssignableFrom(attribute.getClass())) {
+            String message = "Custom attribute " + attributeName + " is not of expected type: " +
+                    "expected=" + type.getName() + " actual=" + attribute.getClass().getName();
+            if (throwIfTypeMismatch) {
+                throw new IllegalArgumentException(message);
+            }
+            return Maybe.absent(message);
+        } else {
+            return Maybe.of((T) attribute);
+        }
+    }
+
     @Override
-    public String toString() ;
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
  
 }

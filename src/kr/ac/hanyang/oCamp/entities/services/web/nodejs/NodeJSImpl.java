@@ -9,15 +9,4 @@ import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 public class NodeJSImpl extends NodeJsWebAppServiceImpl implements NodeJS, IService, Startable{
 
 
-	@Override
-	public String[] getCapabilities() {
-		String[] result = new String[BasicOCampService.CAPABILITIES.length+NodeJS.CAPABILITIES.length];
-		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
-		System.arraycopy(NodeJS.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, NodeJS.CAPABILITIES.length); 
-		return result;
-
-	}
-	
-	
-
 }

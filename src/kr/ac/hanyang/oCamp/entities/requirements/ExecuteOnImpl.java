@@ -11,7 +11,7 @@ import org.apache.brooklyn.entity.stock.EffectorStartableImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.ac.hanyang.oCamp.entities.services.software.ISoftwareProcess;
+import kr.ac.hanyang.oCamp.entities.services.software.VanillaSoftware;
 
 public class ExecuteOnImpl<T> extends EffectorStartableImpl implements Startable, ExecuteOn{
 	private static final Logger log = LoggerFactory.getLogger(ExecuteOnImpl.class);
@@ -49,7 +49,7 @@ public class ExecuteOnImpl<T> extends EffectorStartableImpl implements Startable
 		
 		for(Entity e: this.getChildren()){
 			log.info("Starting ExecuteOn...");
-			e.config().set((ConfigKey<T>)ISoftwareProcess.INSTALL_COMMAND,content);
+			e.config().set((ConfigKey<T>)VanillaSoftware.INSTALL_COMMAND,content);
 			//e.setConfig((T)ISoftwareProcess.INSTALL_COMMAND,content);
 			Task<Void> task = Entities.invokeEffector(this, e, Startable.START);	
 			task.blockUntilEnded(null);

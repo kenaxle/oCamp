@@ -8,9 +8,13 @@ import java.util.Map;
 
 import org.apache.brooklyn.camp.spi.AssemblyTemplate;
 import org.apache.brooklyn.camp.spi.instantiate.BasicAssemblyTemplateInstantiator;
-import org.apache.brooklyn.camp.spi.pdp.Artifact;
+import kr.ac.hanyang.oCamp.camp.pdp.Artifact;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel;
+
 import org.apache.brooklyn.camp.spi.pdp.AssemblyTemplateConstructor;
-import org.apache.brooklyn.camp.spi.pdp.Service;
+import kr.ac.hanyang.oCamp.camp.pdp.Service;
+import kr.ac.hanyang.oCamp.camp.pdp.ServiceModel;
+
 import org.apache.brooklyn.camp.spi.resolve.PdpMatcher;
 import org.apache.brooklyn.camp.spi.resolve.PlanInterpreter;
 import org.apache.brooklyn.camp.spi.resolve.interpret.PlanInterpretationContext;
@@ -29,12 +33,17 @@ import com.google.api.client.repackaged.com.google.common.annotations.VisibleFor
 
 import groovy.util.logging.Log;
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
+import kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
+import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyModel;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampAssemblyTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.pdp.oCampPMTemplateConstructor;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
+import kr.ac.hanyang.oCamp.camp.spi.DeploymentPlanTransformer;
+
 import org.apache.brooklyn.core.location.BasicLocationDefinition;
 
 
@@ -71,7 +80,7 @@ public class PdpProcessor{
         
         Map<String, Object> dpRootInterpreted = applyInterpreters(dpRootUninterpreted);
        
-        return DeploymentPlan.of(dpRootInterpreted, yaml);
+        return DeploymentPlanTransformer.getDeploymentPlan(dpRootInterpreted, yaml);
     }
     
     
@@ -130,7 +139,7 @@ public class PdpProcessor{
         return registerDeploymentPlan(plan);
     }
     
-    /** applies matchers to the given deployment plan to create an assembly template */
+	   /** applies matchers to the given deployment plan to create an assembly template */
     public AssemblyTemplate registerDeploymentPlan(DeploymentPlan plan) {
     	AssemblyTemplateConstructor atc;
     	if(plan.getType() != null){
@@ -167,7 +176,66 @@ public class PdpProcessor{
         	}
         }
 
-        Map<String, Object> attrs = plan.getCustomAttributes();
+        Map<String, Object> attrs = (Map<String, Object>) plan.getCustomAttributes();
+        if (attrs!=null && !attrs.isEmpty()) {
+            Map<String, Object> customAttrs = attrs;
+            if (customAttrs.containsKey("id")) {
+                // id shouldn't be leaking to entities, see InternalEntityFactory.createEntityAndDescendantsUninitialized.
+                // If set it will go through to the spec because AbstractBrooklynObject has @SetFromFlag("id") on the id property.
+                // Follows logic in BrooklynEntityMatcher.apply(...).
+                customAttrs = MutableMap.copyOf(attrs);
+                customAttrs.put("planId", customAttrs.remove("id"));
+            }
+            atc.addCustomAttributes(customAttrs);
+            
+        }
+        
+        if (atc.getInstantiator()==null)
+            // set a default instantiator which just invokes the component's instantiators
+            // (or throws unsupported exceptions, currently!)
+            atc.instantiator(BasicAssemblyTemplateInstantiator.class);
+        
+        return atc.commit();
+    }
+	
+    /** applies matchers to the given deployment plan to create an assembly template */
+    public AssemblyTemplate registerDeploymentPlan(DeploymentPlanModel plan) {
+    	AssemblyTemplateConstructor atc;
+    	if(plan.getType() != null){
+    		atc = new oCampPMTemplateConstructor(campPlatform);
+    	}else{
+    		atc = new oCampAssemblyTemplateConstructor(campPlatform);
+    	}
+        if (plan.getName()!=null) atc.name(plan.getName());
+        if (plan.getDescription()!=null) atc.description(plan.getDescription());
+        if (plan.getSourceCode()!=null) atc.sourceCode(plan.getSourceCode());
+        // nothing done with origin just now...
+        
+        if (plan.getServices()!=null) {
+            for (ServiceModel svc: plan.getServices()) {
+                applyMatchers(svc, atc);
+            }
+        }
+
+        if (plan.getArtifacts()!=null) {
+            for (ArtifactModel art: plan.getArtifacts()) {
+                applyMatchers(art, atc);
+            }
+        }
+        
+        if (plan.getPolicies()!=null){
+        	for (PolicyModel pol: plan.getPolicies()) {
+        		applyMatchers(pol, atc);
+        	}
+        }
+        
+        if (plan.getActionGroups()!=null){
+        	for (ActionGroupModel actionGroup: plan.getActionGroups()) {
+        		applyMatchers(actionGroup, atc);
+        	}
+        }
+
+        Map<String, Object> attrs = plan.getCustomAttributes().map();
         if (attrs!=null && !attrs.isEmpty()) {
             Map<String, Object> customAttrs = attrs;
             if (customAttrs.containsKey("id")) {

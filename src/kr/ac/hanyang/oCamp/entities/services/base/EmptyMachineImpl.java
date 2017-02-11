@@ -65,12 +65,5 @@ public class EmptyMachineImpl extends VanillaSoftwareProcessImpl implements Empt
 		}
 	}
 
-	@Override
-	public String[] getCapabilities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 
 }

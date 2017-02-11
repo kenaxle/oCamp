@@ -67,81 +67,82 @@ public class PdpSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case PdpPackage.ABSTRACT_OCAMP_PLAN: {
-				AbstractOCampPlan abstractOCampPlan = (AbstractOCampPlan)theEObject;
-				T result = caseAbstractOCampPlan(abstractOCampPlan);
+			case PdpPackage.ABSTRACT_OCAMP_PLAN_MODEL: {
+				AbstractOCampPlanModel abstractOCampPlanModel = (AbstractOCampPlanModel)theEObject;
+				T result = caseAbstractOCampPlanModel(abstractOCampPlanModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.ACTION: {
-				Action action = (Action)theEObject;
-				T result = caseAction(action);
+			case PdpPackage.ACTION_MODEL: {
+				ActionModel actionModel = (ActionModel)theEObject;
+				T result = caseActionModel(actionModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.ACTION_GROUP: {
-				ActionGroup actionGroup = (ActionGroup)theEObject;
-				T result = caseActionGroup(actionGroup);
+			case PdpPackage.ACTION_GROUP_MODEL: {
+				ActionGroupModel actionGroupModel = (ActionGroupModel)theEObject;
+				T result = caseActionGroupModel(actionGroupModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.ARTIFACT: {
-				Artifact artifact = (Artifact)theEObject;
-				T result = caseArtifact(artifact);
+			case PdpPackage.ARTIFACT_MODEL: {
+				ArtifactModel artifactModel = (ArtifactModel)theEObject;
+				T result = caseArtifactModel(artifactModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.ARTIFACT_CONTENT: {
-				ArtifactContent artifactContent = (ArtifactContent)theEObject;
-				T result = caseArtifactContent(artifactContent);
+			case PdpPackage.ARTIFACT_CONTENT_MODEL: {
+				ArtifactContentModel artifactContentModel = (ArtifactContentModel)theEObject;
+				T result = caseArtifactContentModel(artifactContentModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.ARTIFACT_REQUIREMENT: {
-				ArtifactRequirement artifactRequirement = (ArtifactRequirement)theEObject;
-				T result = caseArtifactRequirement(artifactRequirement);
+			case PdpPackage.ARTIFACT_REQUIREMENT_MODEL: {
+				ArtifactRequirementModel artifactRequirementModel = (ArtifactRequirementModel)theEObject;
+				T result = caseArtifactRequirementModel(artifactRequirementModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.DEPLOYMENT_PLAN: {
-				DeploymentPlan deploymentPlan = (DeploymentPlan)theEObject;
-				T result = caseDeploymentPlan(deploymentPlan);
+			case PdpPackage.DEPLOYMENT_PLAN_MODEL: {
+				DeploymentPlanModel deploymentPlanModel = (DeploymentPlanModel)theEObject;
+				T result = caseDeploymentPlanModel(deploymentPlanModel);
+				if (result == null) result = caseAbstractOCampPlanModel(deploymentPlanModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.POLICY: {
-				Policy policy = (Policy)theEObject;
-				T result = casePolicy(policy);
+			case PdpPackage.POLICY_MODEL: {
+				PolicyModel policyModel = (PolicyModel)theEObject;
+				T result = casePolicyModel(policyModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.POLICY_CONSTRAINT: {
-				PolicyConstraint policyConstraint = (PolicyConstraint)theEObject;
-				T result = casePolicyConstraint(policyConstraint);
+			case PdpPackage.POLICY_CONSTRAINT_MODEL: {
+				PolicyConstraintModel policyConstraintModel = (PolicyConstraintModel)theEObject;
+				T result = casePolicyConstraintModel(policyConstraintModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.POLICY_MANAGER_PLAN: {
-				PolicyManagerPlan policyManagerPlan = (PolicyManagerPlan)theEObject;
-				T result = casePolicyManagerPlan(policyManagerPlan);
+			case PdpPackage.POLICY_MANAGER_PLAN_MODEL: {
+				PolicyManagerPlanModel policyManagerPlanModel = (PolicyManagerPlanModel)theEObject;
+				T result = casePolicyManagerPlanModel(policyManagerPlanModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.SERVICE: {
-				Service service = (Service)theEObject;
-				T result = caseService(service);
+			case PdpPackage.SERVICE_MODEL: {
+				ServiceModel serviceModel = (ServiceModel)theEObject;
+				T result = caseServiceModel(serviceModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.SERVICE_CHARACTERISTIC: {
-				ServiceCharacteristic serviceCharacteristic = (ServiceCharacteristic)theEObject;
-				T result = caseServiceCharacteristic(serviceCharacteristic);
+			case PdpPackage.SERVICE_CHARACTERISTIC_MODEL: {
+				ServiceCharacteristicModel serviceCharacteristicModel = (ServiceCharacteristicModel)theEObject;
+				T result = caseServiceCharacteristicModel(serviceCharacteristicModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PdpPackage.TRANSITION: {
-				Transition transition = (Transition)theEObject;
-				T result = caseTransition(transition);
+			case PdpPackage.TRANSITION_MODEL: {
+				TransitionModel transitionModel = (TransitionModel)theEObject;
+				T result = caseTransitionModel(transitionModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,197 +157,197 @@ public class PdpSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract OCamp Plan</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract OCamp Plan Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract OCamp Plan</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract OCamp Plan Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractOCampPlan(AbstractOCampPlan object) {
+	public T caseAbstractOCampPlanModel(AbstractOCampPlanModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Action Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Action Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAction(Action object) {
+	public T caseActionModel(ActionModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Action Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Action Group Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Action Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Action Group Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseActionGroup(ActionGroup object) {
+	public T caseActionGroupModel(ActionGroupModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Artifact</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Artifact Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Artifact</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Artifact Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArtifact(Artifact object) {
+	public T caseArtifactModel(ArtifactModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Artifact Content</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Artifact Content Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Artifact Content</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Artifact Content Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArtifactContent(ArtifactContent object) {
+	public T caseArtifactContentModel(ArtifactContentModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Artifact Requirement</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Artifact Requirement Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Artifact Requirement</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Artifact Requirement Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArtifactRequirement(ArtifactRequirement object) {
+	public T caseArtifactRequirementModel(ArtifactRequirementModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Deployment Plan</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Deployment Plan Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Deployment Plan</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Deployment Plan Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeploymentPlan(DeploymentPlan object) {
+	public T caseDeploymentPlanModel(DeploymentPlanModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Policy</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Policy Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Policy</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Policy Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePolicy(Policy object) {
+	public T casePolicyModel(PolicyModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Policy Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Policy Constraint Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Policy Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Policy Constraint Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePolicyConstraint(PolicyConstraint object) {
+	public T casePolicyConstraintModel(PolicyConstraintModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Policy Manager Plan</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Policy Manager Plan Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Policy Manager Plan</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Policy Manager Plan Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePolicyManagerPlan(PolicyManagerPlan object) {
+	public T casePolicyManagerPlanModel(PolicyManagerPlanModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Service</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Service Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Service</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Service Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseService(Service object) {
+	public T caseServiceModel(ServiceModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Service Characteristic</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Service Characteristic Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Service Characteristic</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Service Characteristic Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseServiceCharacteristic(ServiceCharacteristic object) {
+	public T caseServiceCharacteristicModel(ServiceCharacteristicModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Transition Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Transition Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTransition(Transition object) {
+	public T caseTransitionModel(TransitionModel object) {
 		return null;
 	}
 

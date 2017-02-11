@@ -1,139 +1,138 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.brooklyn.camp.spi.pdp.Artifact;
+import org.apache.brooklyn.camp.spi.pdp.Service;
+import org.apache.brooklyn.util.collections.MutableList;
+import org.apache.brooklyn.util.collections.MutableMap;
+import org.apache.brooklyn.util.exceptions.UserFacingException;
+import org.apache.brooklyn.util.guava.Maybe;
+import org.apache.brooklyn.util.javalang.JavaClassNames;
+import org.apache.brooklyn.util.yaml.Yamls;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * @model 
+ * @model kind="class" 
  */
-public interface PolicyManagerPlan extends EObject {
+public class PolicyManagerPlan {
 	
-//	String name;
-//	String origin;
-//	String description;
-//	String sourceCode;
-//	String policyManagerType;
-//	List<ActionGroup> actionGroups;
-//	Map<String,Object> customAttributes;
-//		   
-//	   
-//    @SuppressWarnings("unchecked")
-//    public static PolicyManagerPlan of(Map<String,Object> root, String optionalSourceCode) {
-//        Map<String,Object> attrs = MutableMap.copyOf(root);
-//        
-//        PolicyManagerPlan result = new PolicyManagerPlan();
-//        result.name = (String) attrs.remove("name");
-//        result.description = (String) attrs.remove("description");
-//        result.origin = (String) attrs.remove("origin");
-//        result.sourceCode = optionalSourceCode;
-//        result.policyManagerType = (String) Yamls.removeMultinameAttribute(attrs, "policyManager_type", "policyManagerType", "type");
-//        // TODO version
-//        
-//        result.actionGroups = new ArrayList<ActionGroup>();
-//        Object actionGroups = attrs.remove("actiongroups");
-//        if (actionGroups instanceof Iterable) {
-//            for (Object actionGroup: (Iterable<Object>)actionGroups) {
-//                if (actionGroup instanceof Map) {
-//                    result.actionGroups.add(ActionGroup.of((Map<String,Object>) actionGroup));
-//                } else {
-//                    throw new UserFacingException("ActionGroup list should have a map for each entry, not "+JavaClassNames.superSimpleClassName(actionGroup));
-//                }
-//            }
-//        } else if (actionGroups!=null) {
-//            // TODO "map" short form
-//            throw new UserFacingException("ActionGroups block should be a list, not "+JavaClassNames.superSimpleClassName(actionGroups));
-//        }
-//        
-//        
-//        result.customAttributes = attrs;
-//        
-//        return result;
-//    }
+	String name;
+	String origin;
+	String description;
+	String sourceCode;
+	String policyManagerType;
+	List<ActionGroup> actionGroups;
+	Map<String,Object> customAttributes;
+		   
+	   
+    @SuppressWarnings("unchecked")
+    public static PolicyManagerPlan of(Map<String,Object> root, String optionalSourceCode) {
+        Map<String,Object> attrs = MutableMap.copyOf(root);
+        
+        PolicyManagerPlan result = new PolicyManagerPlan();
+        result.name = (String) attrs.remove("name");
+        result.description = (String) attrs.remove("description");
+        result.origin = (String) attrs.remove("origin");
+        result.sourceCode = optionalSourceCode;
+        result.policyManagerType = (String) Yamls.removeMultinameAttribute(attrs, "policyManager_type", "policyManagerType", "type");
+        // TODO version
+        
+        result.actionGroups = new ArrayList<ActionGroup>();
+        Object actionGroups = attrs.remove("actiongroups");
+        if (actionGroups instanceof Iterable) {
+            for (Object actionGroup: (Iterable<Object>)actionGroups) {
+                if (actionGroup instanceof Map) {
+                    result.actionGroups.add(ActionGroup.of((Map<String,Object>) actionGroup));
+                } else {
+                    throw new UserFacingException("ActionGroup list should have a map for each entry, not "+JavaClassNames.superSimpleClassName(actionGroup));
+                }
+            }
+        } else if (actionGroups!=null) {
+            // TODO "map" short form
+            throw new UserFacingException("ActionGroups block should be a list, not "+JavaClassNames.superSimpleClassName(actionGroups));
+        }
+        
+        
+        result.customAttributes = attrs;
+        
+        return result;
+    }
 
     /**
      * @model 
      */
-    public String getName() ;
+    public String getName() {
+        return name;
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-				/**
      * @model 
      */
-    public String getDescription() ;
+    public String getDescription() {
+        return description;
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
-
-	/**
      * @model 
      */
-    public String getOrigin() ;
+    public String getOrigin() {
+        return origin;
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getOrigin <em>Origin</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Origin</em>' attribute.
-	 * @see #getOrigin()
-	 * @generated
-	 */
-	void setOrigin(String value);
-
-				/**
      * @model 
      */
-    public String getSourceCode() ;
+    public String getSourceCode() {
+        return sourceCode;
+    }
     
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getSourceCode <em>Source Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Code</em>' attribute.
-	 * @see #getSourceCode()
-	 * @generated
-	 */
-	void setSourceCode(String value);
-	
-	/**
      * @model 
      */
-    public String getPolicyManagerType() ;
+    public List<ActionGroup> getActionGroups() {
+        return MutableList.copyOf(actionGroups).asUnmodifiable();
+    }
 
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getPolicyManagerType <em>Policy Manager Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Policy Manager Type</em>' attribute.
-	 * @see #getPolicyManagerType()
-	 * @generated
-	 */
-	void setPolicyManagerType(String value);
-
-
-				/**
      * @model 
      */
-    public EList<ActionGroup> getActionGroups() ;
+    public Map<String, Object> getCustomAttributes() {
+        return MutableMap.copyOf(customAttributes).asUnmodifiable();
+    }
 
-   
+    /**
+     * Returns a present {@link Maybe} of the custom attribute with the given name if the attribute is
+     * non-null and is an instance of the given type. Otherwise returns absent.
+     * <p/>
+     * Does not remove the attribute from the custom attribute map.
+     */
+    /**
+     * @model 
+     */
+    @SuppressWarnings("unchecked")
+    public <T> Maybe<T> getCustomAttribute(String attributeName, Class<T> type, boolean throwIfTypeMismatch) {
+        Object attribute = customAttributes.get(attributeName);
+        if (attribute == null) {
+            return Maybe.absent("Custom attributes does not contain " + attributeName);
+        } else if (!type.isAssignableFrom(attribute.getClass())) {
+            String message = "Custom attribute " + attributeName + " is not of expected type: " +
+                    "expected=" + type.getName() + " actual=" + attribute.getClass().getName();
+            if (throwIfTypeMismatch) {
+                throw new IllegalArgumentException(message);
+            }
+            return Maybe.absent(message);
+        } else {
+            return Maybe.of((T) attribute);
+        }
+    }
+
     @Override
-    public String toString() ;
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
  
 }

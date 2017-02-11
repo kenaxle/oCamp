@@ -43,16 +43,6 @@ public class Tomcat8Impl extends Tomcat8ServerImpl implements IDeployable, Tomca
 	}
 
 	@Override
-	public String[] getCapabilities() {
-
-		String[] result = new String[BasicOCampService.CAPABILITIES.length+Tomcat8.CAPABILITIES.length];
-		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
-		System.arraycopy(Tomcat8.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, Tomcat8.CAPABILITIES.length); 
-		return result;
-		
-	}
-	
-	@Override
 	@Effector(description="Deploys the given artifact, from a source URL, to a given deployment filename/context")
 	public void deploy(
             @EffectorParam(name="url", description="URL of WAR file") String url, 

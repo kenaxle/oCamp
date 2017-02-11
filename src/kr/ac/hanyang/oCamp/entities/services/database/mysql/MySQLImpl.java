@@ -26,17 +26,6 @@ public class MySQLImpl extends MySqlNodeImpl implements IExecutable, MySQL, ISer
 
 	private static final Logger log = LoggerFactory.getLogger(MySQLImpl.class);
 	
-	@Override
-	public String[] getCapabilities() {
-
-		String[] result = new String[BasicOCampService.CAPABILITIES.length+MySQL.CAPABILITIES.length];
-		System.arraycopy(BasicOCampService.CAPABILITIES, 0, result, 0, BasicOCampService.CAPABILITIES.length);
-		System.arraycopy(MySQL.CAPABILITIES, 0, result, BasicOCampService.CAPABILITIES.length, MySQL.CAPABILITIES.length); 
-		return result;
-
-	}
-
-	
 
 	@Override
 	@Effector(description="Deploys the given artifact, from a source URL, to a given deployment filename/context")

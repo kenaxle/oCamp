@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated CAMP -->
+      <package
+            uri="http:///kr/ac/hanyang/oCamp/camp/pdp.ecore"
+            class="kr.ac.hanyang.oCamp.camp.pdp.PdpPackage"
+            genModel="src/kr/ac/hanyang/oCamp/atl/CAMP.genmodel"/>
+   </extension>
+
+</plugin>

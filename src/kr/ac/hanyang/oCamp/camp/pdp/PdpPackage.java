@@ -4,7 +4,6 @@ package kr.ac.hanyang.oCamp.camp.pdp;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -58,14 +57,14 @@ public interface PdpPackage extends EPackage {
 	PdpPackage eINSTANCE = kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanImpl <em>Abstract OCamp Plan</em>}' class.
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanModelImpl <em>Abstract OCamp Plan Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getAbstractOCampPlan()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	int ABSTRACT_OCAMP_PLAN = 0;
+	int ABSTRACT_OCAMP_PLAN_MODEL = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -74,7 +73,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__NAME = 0;
+	int ABSTRACT_OCAMP_PLAN_MODEL__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -83,7 +82,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__DESCRIPTION = 1;
+	int ABSTRACT_OCAMP_PLAN_MODEL__DESCRIPTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Origin</b></em>' attribute.
@@ -92,7 +91,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__ORIGIN = 2;
+	int ABSTRACT_OCAMP_PLAN_MODEL__ORIGIN = 2;
 
 	/**
 	 * The feature id for the '<em><b>Source Code</b></em>' attribute.
@@ -101,792 +100,34 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__SOURCE_CODE = 3;
+	int ABSTRACT_OCAMP_PLAN_MODEL__SOURCE_CODE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Artifacts</b></em>' reference list.
+	 * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__ARTIFACTS = 4;
+	int ABSTRACT_OCAMP_PLAN_MODEL__ARTIFACTS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Services</b></em>' reference list.
+	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__SERVICES = 5;
+	int ABSTRACT_OCAMP_PLAN_MODEL__SERVICES = 5;
 
 	/**
-	 * The feature id for the '<em><b>Policies</b></em>' reference list.
+	 * The feature id for the '<em><b>Policies</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_OCAMP_PLAN__POLICIES = 6;
-
-	/**
-	 * The number of structural features of the '<em>Abstract OCamp Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_OCAMP_PLAN_FEATURE_COUNT = 7;
-
-	/**
-	 * The number of operations of the '<em>Abstract OCamp Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_OCAMP_PLAN_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionImpl <em>Action</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getAction()
-	 * @generated
-	 */
-	int ACTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Property</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__PROPERTY = 2;
-
-	/**
-	 * The feature id for the '<em><b>Action Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__ACTION_TYPE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Transitions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION__TRANSITIONS = 4;
-
-	/**
-	 * The number of structural features of the '<em>Action</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_FEATURE_COUNT = 5;
-
-	/**
-	 * The number of operations of the '<em>Action</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupImpl <em>Action Group</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getActionGroup()
-	 * @generated
-	 */
-	int ACTION_GROUP = 2;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Action Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP__ACTION_ID = 2;
-
-	/**
-	 * The feature id for the '<em><b>Action Group Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP__ACTION_GROUP_TYPE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Actions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP__ACTIONS = 4;
-
-	/**
-	 * The number of structural features of the '<em>Action Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP_FEATURE_COUNT = 5;
-
-	/**
-	 * The number of operations of the '<em>Action Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTION_GROUP_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl <em>Artifact</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifact()
-	 * @generated
-	 */
-	int ARTIFACT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Artifact Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__ARTIFACT_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Content</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__CONTENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Requirements</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__REQUIREMENTS = 4;
-
-	/**
-	 * The number of structural features of the '<em>Artifact</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_FEATURE_COUNT = 5;
-
-	/**
-	 * The number of operations of the '<em>Artifact</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentImpl <em>Artifact Content</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactContent()
-	 * @generated
-	 */
-	int ARTIFACT_CONTENT = 4;
-
-	/**
-	 * The feature id for the '<em><b>Href</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_CONTENT__HREF = 0;
-
-	/**
-	 * The number of structural features of the '<em>Artifact Content</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_CONTENT_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Artifact Content</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_CONTENT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl <em>Artifact Requirement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactRequirement()
-	 * @generated
-	 */
-	int ARTIFACT_REQUIREMENT = 5;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REQUIREMENT__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REQUIREMENT__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Requirement Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Artifact Requirement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REQUIREMENT_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Artifact Requirement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REQUIREMENT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl <em>Deployment Plan</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getDeploymentPlan()
-	 * @generated
-	 */
-	int DEPLOYMENT_PLAN = 6;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Origin</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__ORIGIN = 2;
-
-	/**
-	 * The feature id for the '<em><b>Source Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__SOURCE_CODE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__TYPE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Artifacts</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__ARTIFACTS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Services</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__SERVICES = 6;
-
-	/**
-	 * The feature id for the '<em><b>Policies</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__POLICIES = 7;
-
-	/**
-	 * The feature id for the '<em><b>Action Groups</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN__ACTION_GROUPS = 8;
-
-	/**
-	 * The number of structural features of the '<em>Deployment Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN_FEATURE_COUNT = 9;
-
-	/**
-	 * The number of operations of the '<em>Deployment Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPLOYMENT_PLAN_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl <em>Policy</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicy()
-	 * @generated
-	 */
-	int POLICY = 7;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Policy Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY__POLICY_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Policy Constraints</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY__POLICY_CONSTRAINTS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY__TARGETS = 4;
-
-	/**
-	 * The number of structural features of the '<em>Policy</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_FEATURE_COUNT = 5;
-
-	/**
-	 * The number of operations of the '<em>Policy</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintImpl <em>Policy Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyConstraint()
-	 * @generated
-	 */
-	int POLICY_CONSTRAINT = 8;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Policy Constraint Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT__POLICY_CONSTRAINT_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT__VALUE = 3;
-
-	/**
-	 * The number of structural features of the '<em>Policy Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT_FEATURE_COUNT = 4;
-
-	/**
-	 * The number of operations of the '<em>Policy Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_CONSTRAINT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl <em>Policy Manager Plan</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyManagerPlan()
-	 * @generated
-	 */
-	int POLICY_MANAGER_PLAN = 9;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Origin</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__ORIGIN = 2;
-
-	/**
-	 * The feature id for the '<em><b>Source Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__SOURCE_CODE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Policy Manager Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Action Groups</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN__ACTION_GROUPS = 5;
-
-	/**
-	 * The number of structural features of the '<em>Policy Manager Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN_FEATURE_COUNT = 6;
-
-	/**
-	 * The number of operations of the '<em>Policy Manager Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POLICY_MANAGER_PLAN_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl <em>Service</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getService()
-	 * @generated
-	 */
-	int SERVICE = 10;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Service Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__SERVICE_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Characteristics</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__CHARACTERISTICS = 3;
-
-	/**
-	 * The number of structural features of the '<em>Service</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_FEATURE_COUNT = 4;
-
-	/**
-	 * The number of operations of the '<em>Service</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl <em>Service Characteristic</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getServiceCharacteristic()
-	 * @generated
-	 */
-	int SERVICE_CHARACTERISTIC = 11;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_CHARACTERISTIC__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_CHARACTERISTIC__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Characteristic Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE = 2;
+	int ABSTRACT_OCAMP_PLAN_MODEL__POLICIES = 6;
 
 	/**
 	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
@@ -895,35 +136,35 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES = 3;
+	int ABSTRACT_OCAMP_PLAN_MODEL__CUSTOM_ATTRIBUTES = 7;
 
 	/**
-	 * The number of structural features of the '<em>Service Characteristic</em>' class.
+	 * The number of structural features of the '<em>Abstract OCamp Plan Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_CHARACTERISTIC_FEATURE_COUNT = 4;
+	int ABSTRACT_OCAMP_PLAN_MODEL_FEATURE_COUNT = 8;
 
 	/**
-	 * The number of operations of the '<em>Service Characteristic</em>' class.
+	 * The number of operations of the '<em>Abstract OCamp Plan Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_CHARACTERISTIC_OPERATION_COUNT = 0;
+	int ABSTRACT_OCAMP_PLAN_MODEL_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionImpl <em>Transition</em>}' class.
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionModelImpl <em>Action Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionImpl
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getTransition()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getActionModel()
 	 * @generated
 	 */
-	int TRANSITION = 12;
+	int ACTION_MODEL = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -932,7 +173,7 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__NAME = 0;
+	int ACTION_MODEL__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -941,16 +182,581 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__DESCRIPTION = 1;
+	int ACTION_MODEL__DESCRIPTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Transition Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Property</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TRANSITION_TYPE = 2;
+	int ACTION_MODEL__PROPERTY = 2;
+
+	/**
+	 * The feature id for the '<em><b>Action Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_MODEL__ACTION_TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_MODEL__TRANSITIONS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_MODEL__CUSTOM_ATTRIBUTES = 5;
+
+	/**
+	 * The number of structural features of the '<em>Action Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_MODEL_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Action Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupModelImpl <em>Action Group Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getActionGroupModel()
+	 * @generated
+	 */
+	int ACTION_GROUP_MODEL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Action Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL__ACTION_ID = 2;
+
+	/**
+	 * The feature id for the '<em><b>Action Group Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL__ACTION_GROUP_TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL__ACTIONS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL__CUSTOM_ATTRIBUTES = 5;
+
+	/**
+	 * The number of structural features of the '<em>Action Group Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Action Group Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_GROUP_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactModelImpl <em>Artifact Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactModel()
+	 * @generated
+	 */
+	int ARTIFACT_MODEL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Artifact Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL__ARTIFACT_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Content</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL__CONTENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Requirements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL__REQUIREMENTS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL__CUSTOM_ATTRIBUTES = 5;
+
+	/**
+	 * The number of structural features of the '<em>Artifact Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Artifact Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentModelImpl <em>Artifact Content Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactContentModel()
+	 * @generated
+	 */
+	int ARTIFACT_CONTENT_MODEL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Href</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_CONTENT_MODEL__HREF = 0;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_CONTENT_MODEL__CUSTOM_ATTRIBUTES = 1;
+
+	/**
+	 * The number of structural features of the '<em>Artifact Content Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_CONTENT_MODEL_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Artifact Content Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_CONTENT_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementModelImpl <em>Artifact Requirement Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactRequirementModel()
+	 * @generated
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Requirement Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL__REQUIREMENT_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL__CUSTOM_ATTRIBUTES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Fulfillment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL__FULFILLMENT = 4;
+
+	/**
+	 * The number of structural features of the '<em>Artifact Requirement Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Artifact Requirement Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT_REQUIREMENT_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanModelImpl <em>Deployment Plan Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getDeploymentPlanModel()
+	 * @generated
+	 */
+	int DEPLOYMENT_PLAN_MODEL = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__NAME = ABSTRACT_OCAMP_PLAN_MODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__DESCRIPTION = ABSTRACT_OCAMP_PLAN_MODEL__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Origin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__ORIGIN = ABSTRACT_OCAMP_PLAN_MODEL__ORIGIN;
+
+	/**
+	 * The feature id for the '<em><b>Source Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__SOURCE_CODE = ABSTRACT_OCAMP_PLAN_MODEL__SOURCE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__ARTIFACTS = ABSTRACT_OCAMP_PLAN_MODEL__ARTIFACTS;
+
+	/**
+	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__SERVICES = ABSTRACT_OCAMP_PLAN_MODEL__SERVICES;
+
+	/**
+	 * The feature id for the '<em><b>Policies</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__POLICIES = ABSTRACT_OCAMP_PLAN_MODEL__POLICIES;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__CUSTOM_ATTRIBUTES = ABSTRACT_OCAMP_PLAN_MODEL__CUSTOM_ATTRIBUTES;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__TYPE = ABSTRACT_OCAMP_PLAN_MODEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Action Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL__ACTION_GROUPS = ABSTRACT_OCAMP_PLAN_MODEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Deployment Plan Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL_FEATURE_COUNT = ABSTRACT_OCAMP_PLAN_MODEL_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Deployment Plan Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPLOYMENT_PLAN_MODEL_OPERATION_COUNT = ABSTRACT_OCAMP_PLAN_MODEL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyModelImpl <em>Policy Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyModel()
+	 * @generated
+	 */
+	int POLICY_MODEL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Policy Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL__POLICY_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Policy Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL__POLICY_CONSTRAINTS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Targets</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL__TARGETS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL__CUSTOM_ATTRIBUTES = 5;
+
+	/**
+	 * The number of structural features of the '<em>Policy Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Policy Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintModelImpl <em>Policy Constraint Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyConstraintModel()
+	 * @generated
+	 */
+	int POLICY_CONSTRAINT_MODEL = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_CONSTRAINT_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_CONSTRAINT_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Policy Constraint Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_CONSTRAINT_MODEL__POLICY_CONSTRAINT_TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -959,25 +765,335 @@ public interface PdpPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__VALUE = 3;
+	int POLICY_CONSTRAINT_MODEL__VALUE = 3;
 
 	/**
-	 * The number of structural features of the '<em>Transition</em>' class.
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = 4;
+	int POLICY_CONSTRAINT_MODEL__CUSTOM_ATTRIBUTES = 4;
 
 	/**
-	 * The number of operations of the '<em>Transition</em>' class.
+	 * The number of structural features of the '<em>Policy Constraint Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_OPERATION_COUNT = 0;
+	int POLICY_CONSTRAINT_MODEL_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Policy Constraint Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_CONSTRAINT_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanModelImpl <em>Policy Manager Plan Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	int POLICY_MANAGER_PLAN_MODEL = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Origin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__ORIGIN = 2;
+
+	/**
+	 * The feature id for the '<em><b>Source Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__SOURCE_CODE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Policy Manager Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__POLICY_MANAGER_TYPE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Action Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__ACTION_GROUPS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL__CUSTOM_ATTRIBUTES = 6;
+
+	/**
+	 * The number of structural features of the '<em>Policy Manager Plan Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL_FEATURE_COUNT = 7;
+
+	/**
+	 * The number of operations of the '<em>Policy Manager Plan Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_MANAGER_PLAN_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceModelImpl <em>Service Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getServiceModel()
+	 * @generated
+	 */
+	int SERVICE_MODEL = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Service Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL__SERVICE_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Characteristics</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL__CHARACTERISTICS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL__CUSTOM_ATTRIBUTES = 4;
+
+	/**
+	 * The number of structural features of the '<em>Service Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Service Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicModelImpl <em>Service Characteristic Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getServiceCharacteristicModel()
+	 * @generated
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Characteristic Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL__CHARACTERISTIC_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Custom Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL__CUSTOM_ATTRIBUTES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Member</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL__MEMBER = 4;
+
+	/**
+	 * The number of structural features of the '<em>Service Characteristic Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Service Characteristic Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_CHARACTERISTIC_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionModelImpl <em>Transition Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionModelImpl
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getTransitionModel()
+	 * @generated
+	 */
+	int TRANSITION_MODEL = 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_MODEL__DESCRIPTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Transition Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_MODEL__TRANSITION_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_MODEL__VALUE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Transition Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_MODEL_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Transition Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_MODEL_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.StringToEObjectMapImpl <em>String To EObject Map</em>}' class.
@@ -1025,828 +1141,873 @@ public interface PdpPackage extends EPackage {
 	 */
 	int STRING_TO_EOBJECT_MAP_OPERATION_COUNT = 0;
 
+
 	/**
-	 * The meta object id for the '<em>Maybe</em>' data type.
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel <em>Abstract OCamp Plan Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.apache.brooklyn.util.guava.Maybe
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getMaybe()
+	 * @return the meta object for class '<em>Abstract OCamp Plan Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel
 	 * @generated
 	 */
-	int MAYBE = 14;
-
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan <em>Abstract OCamp Plan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract OCamp Plan</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan
-	 * @generated
-	 */
-	EClass getAbstractOCampPlan();
+	EClass getAbstractOCampPlanModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getName()
-	 * @see #getAbstractOCampPlan()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getName()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EAttribute getAbstractOCampPlan_Name();
+	EAttribute getAbstractOCampPlanModel_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getDescription()
-	 * @see #getAbstractOCampPlan()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getDescription()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EAttribute getAbstractOCampPlan_Description();
+	EAttribute getAbstractOCampPlanModel_Description();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getOrigin <em>Origin</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getOrigin <em>Origin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Origin</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getOrigin()
-	 * @see #getAbstractOCampPlan()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getOrigin()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EAttribute getAbstractOCampPlan_Origin();
+	EAttribute getAbstractOCampPlanModel_Origin();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getSourceCode <em>Source Code</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getSourceCode <em>Source Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Source Code</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getSourceCode()
-	 * @see #getAbstractOCampPlan()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getSourceCode()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EAttribute getAbstractOCampPlan_SourceCode();
+	EAttribute getAbstractOCampPlanModel_SourceCode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getArtifacts <em>Artifacts</em>}'.
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getArtifacts <em>Artifacts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Artifacts</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getArtifacts()
-	 * @see #getAbstractOCampPlan()
+	 * @return the meta object for the containment reference list '<em>Artifacts</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getArtifacts()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EReference getAbstractOCampPlan_Artifacts();
+	EReference getAbstractOCampPlanModel_Artifacts();
 
 	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getServices <em>Services</em>}'.
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getServices <em>Services</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Services</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getServices()
-	 * @see #getAbstractOCampPlan()
+	 * @return the meta object for the containment reference list '<em>Services</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getServices()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EReference getAbstractOCampPlan_Services();
+	EReference getAbstractOCampPlanModel_Services();
 
 	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getPolicies <em>Policies</em>}'.
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getPolicies <em>Policies</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Policies</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan#getPolicies()
-	 * @see #getAbstractOCampPlan()
+	 * @return the meta object for the containment reference list '<em>Policies</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getPolicies()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EReference getAbstractOCampPlan_Policies();
+	EReference getAbstractOCampPlanModel_Policies();
 
 	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Action <em>Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Action</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action
-	 * @generated
-	 */
-	EClass getAction();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getName()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EAttribute getAction_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getDescription()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EAttribute getAction_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getProperty <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Property</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getProperty()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EAttribute getAction_Property();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getActionType <em>Action Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Action Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getActionType()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EAttribute getAction_ActionType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.Action#getTransitions <em>Transitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Transitions</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action#getTransitions()
-	 * @see #getAction()
-	 * @generated
-	 */
-	EReference getAction_Transitions();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup <em>Action Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Action Group</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup
-	 * @generated
-	 */
-	EClass getActionGroup();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getName()
-	 * @see #getActionGroup()
-	 * @generated
-	 */
-	EAttribute getActionGroup_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getDescription()
-	 * @see #getActionGroup()
-	 * @generated
-	 */
-	EAttribute getActionGroup_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getActionId <em>Action Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Action Id</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getActionId()
-	 * @see #getActionGroup()
-	 * @generated
-	 */
-	EAttribute getActionGroup_ActionId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getActionGroupType <em>Action Group Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Action Group Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getActionGroupType()
-	 * @see #getActionGroup()
-	 * @generated
-	 */
-	EAttribute getActionGroup_ActionGroupType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getActions <em>Actions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Actions</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup#getActions()
-	 * @see #getActionGroup()
-	 * @generated
-	 */
-	EReference getActionGroup_Actions();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact <em>Artifact</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Artifact</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact
-	 * @generated
-	 */
-	EClass getArtifact();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact#getName()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EAttribute getArtifact_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact#getDescription()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EAttribute getArtifact_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact#getArtifactType <em>Artifact Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Artifact Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact#getArtifactType()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EAttribute getArtifact_ArtifactType();
-
-	/**
-	 * Returns the meta object for the reference '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact#getContent <em>Content</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Content</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact#getContent()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EReference getArtifact_Content();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact#getRequirements <em>Requirements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Requirements</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact#getRequirements()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EReference getArtifact_Requirements();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent <em>Artifact Content</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Artifact Content</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent
-	 * @generated
-	 */
-	EClass getArtifactContent();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent#getHref <em>Href</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Href</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent#getHref()
-	 * @see #getArtifactContent()
-	 * @generated
-	 */
-	EAttribute getArtifactContent_Href();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement <em>Artifact Requirement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Artifact Requirement</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement
-	 * @generated
-	 */
-	EClass getArtifactRequirement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getName()
-	 * @see #getArtifactRequirement()
-	 * @generated
-	 */
-	EAttribute getArtifactRequirement_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getDescription()
-	 * @see #getArtifactRequirement()
-	 * @generated
-	 */
-	EAttribute getArtifactRequirement_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getRequirementType <em>Requirement Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Requirement Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getRequirementType()
-	 * @see #getArtifactRequirement()
-	 * @generated
-	 */
-	EAttribute getArtifactRequirement_RequirementType();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan <em>Deployment Plan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Deployment Plan</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan
-	 * @generated
-	 */
-	EClass getDeploymentPlan();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getName()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EAttribute getDeploymentPlan_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getDescription()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EAttribute getDeploymentPlan_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getOrigin <em>Origin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Origin</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getOrigin()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EAttribute getDeploymentPlan_Origin();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getSourceCode <em>Source Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Source Code</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getSourceCode()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EAttribute getDeploymentPlan_SourceCode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getType()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EAttribute getDeploymentPlan_Type();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getArtifacts <em>Artifacts</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Artifacts</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getArtifacts()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EReference getDeploymentPlan_Artifacts();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getServices <em>Services</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Services</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getServices()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EReference getDeploymentPlan_Services();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getPolicies <em>Policies</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Policies</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getPolicies()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EReference getDeploymentPlan_Policies();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getActionGroups <em>Action Groups</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Action Groups</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan#getActionGroups()
-	 * @see #getDeploymentPlan()
-	 * @generated
-	 */
-	EReference getDeploymentPlan_ActionGroups();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy <em>Policy</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Policy</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy
-	 * @generated
-	 */
-	EClass getPolicy();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy#getName()
-	 * @see #getPolicy()
-	 * @generated
-	 */
-	EAttribute getPolicy_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy#getDescription()
-	 * @see #getPolicy()
-	 * @generated
-	 */
-	EAttribute getPolicy_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getPolicyType <em>Policy Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Policy Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy#getPolicyType()
-	 * @see #getPolicy()
-	 * @generated
-	 */
-	EAttribute getPolicy_PolicyType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getPolicyConstraints <em>Policy Constraints</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Policy Constraints</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy#getPolicyConstraints()
-	 * @see #getPolicy()
-	 * @generated
-	 */
-	EReference getPolicy_PolicyConstraints();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Targets</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy#getTargets()
-	 * @see #getPolicy()
-	 * @generated
-	 */
-	EAttribute getPolicy_Targets();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint <em>Policy Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Policy Constraint</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint
-	 * @generated
-	 */
-	EClass getPolicyConstraint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getName()
-	 * @see #getPolicyConstraint()
-	 * @generated
-	 */
-	EAttribute getPolicyConstraint_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getDescription()
-	 * @see #getPolicyConstraint()
-	 * @generated
-	 */
-	EAttribute getPolicyConstraint_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getPolicyConstraintType <em>Policy Constraint Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Policy Constraint Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getPolicyConstraintType()
-	 * @see #getPolicyConstraint()
-	 * @generated
-	 */
-	EAttribute getPolicyConstraint_PolicyConstraintType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint#getValue()
-	 * @see #getPolicyConstraint()
-	 * @generated
-	 */
-	EAttribute getPolicyConstraint_Value();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan <em>Policy Manager Plan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Policy Manager Plan</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan
-	 * @generated
-	 */
-	EClass getPolicyManagerPlan();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getName()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EAttribute getPolicyManagerPlan_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getDescription()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EAttribute getPolicyManagerPlan_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getOrigin <em>Origin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Origin</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getOrigin()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EAttribute getPolicyManagerPlan_Origin();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getSourceCode <em>Source Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Source Code</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getSourceCode()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EAttribute getPolicyManagerPlan_SourceCode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getPolicyManagerType <em>Policy Manager Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Policy Manager Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getPolicyManagerType()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EAttribute getPolicyManagerPlan_PolicyManagerType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getActionGroups <em>Action Groups</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Action Groups</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan#getActionGroups()
-	 * @see #getPolicyManagerPlan()
-	 * @generated
-	 */
-	EReference getPolicyManagerPlan_ActionGroups();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Service <em>Service</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Service</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service
-	 * @generated
-	 */
-	EClass getService();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service#getName()
-	 * @see #getService()
-	 * @generated
-	 */
-	EAttribute getService_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service#getDescription()
-	 * @see #getService()
-	 * @generated
-	 */
-	EAttribute getService_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getServiceType <em>Service Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Service Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service#getServiceType()
-	 * @see #getService()
-	 * @generated
-	 */
-	EAttribute getService_ServiceType();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.Service#getCharacteristics <em>Characteristics</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Characteristics</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service#getCharacteristics()
-	 * @see #getService()
-	 * @generated
-	 */
-	EReference getService_Characteristics();
-
-	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic <em>Service Characteristic</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Service Characteristic</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic
-	 * @generated
-	 */
-	EClass getServiceCharacteristic();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getName()
-	 * @see #getServiceCharacteristic()
-	 * @generated
-	 */
-	EAttribute getServiceCharacteristic_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getDescription()
-	 * @see #getServiceCharacteristic()
-	 * @generated
-	 */
-	EAttribute getServiceCharacteristic_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCharacteristicType <em>Characteristic Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Characteristic Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCharacteristicType()
-	 * @see #getServiceCharacteristic()
-	 * @generated
-	 */
-	EAttribute getServiceCharacteristic_CharacteristicType();
-
-	/**
-	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getCustomAttributes <em>Custom Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>Custom Attributes</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic#getCustomAttributes()
-	 * @see #getServiceCharacteristic()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel#getCustomAttributes()
+	 * @see #getAbstractOCampPlanModel()
 	 * @generated
 	 */
-	EReference getServiceCharacteristic_CustomAttributes();
+	EReference getAbstractOCampPlanModel_CustomAttributes();
 
 	/**
-	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition <em>Transition</em>}'.
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel <em>Action Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Transition</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition
+	 * @return the meta object for class '<em>Action Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel
 	 * @generated
 	 */
-	EClass getTransition();
+	EClass getActionModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition#getName()
-	 * @see #getTransition()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getName()
+	 * @see #getActionModel()
 	 * @generated
 	 */
-	EAttribute getTransition_Name();
+	EAttribute getActionModel_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition#getDescription()
-	 * @see #getTransition()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getDescription()
+	 * @see #getActionModel()
 	 * @generated
 	 */
-	EAttribute getTransition_Description();
+	EAttribute getActionModel_Description();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getTransitionType <em>Transition Type</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getProperty <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Transition Type</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition#getTransitionType()
-	 * @see #getTransition()
+	 * @return the meta object for the attribute '<em>Property</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getProperty()
+	 * @see #getActionModel()
 	 * @generated
 	 */
-	EAttribute getTransition_TransitionType();
+	EAttribute getActionModel_Property();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getActionType <em>Action Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getActionType()
+	 * @see #getActionModel()
+	 * @generated
+	 */
+	EAttribute getActionModel_ActionType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getTransitions <em>Transitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Transitions</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getTransitions()
+	 * @see #getActionModel()
+	 * @generated
+	 */
+	EReference getActionModel_Transitions();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel#getCustomAttributes()
+	 * @see #getActionModel()
+	 * @generated
+	 */
+	EReference getActionModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel <em>Action Group Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Action Group Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel
+	 * @generated
+	 */
+	EClass getActionGroupModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getName()
+	 * @see #getActionGroupModel()
+	 * @generated
+	 */
+	EAttribute getActionGroupModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getDescription()
+	 * @see #getActionGroupModel()
+	 * @generated
+	 */
+	EAttribute getActionGroupModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getActionId <em>Action Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action Id</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getActionId()
+	 * @see #getActionGroupModel()
+	 * @generated
+	 */
+	EAttribute getActionGroupModel_ActionId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getActionGroupType <em>Action Group Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action Group Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getActionGroupType()
+	 * @see #getActionGroupModel()
+	 * @generated
+	 */
+	EAttribute getActionGroupModel_ActionGroupType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getActions <em>Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Actions</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getActions()
+	 * @see #getActionGroupModel()
+	 * @generated
+	 */
+	EReference getActionGroupModel_Actions();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel#getCustomAttributes()
+	 * @see #getActionGroupModel()
+	 * @generated
+	 */
+	EReference getActionGroupModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel <em>Artifact Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Artifact Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel
+	 * @generated
+	 */
+	EClass getArtifactModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getName()
+	 * @see #getArtifactModel()
+	 * @generated
+	 */
+	EAttribute getArtifactModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getDescription()
+	 * @see #getArtifactModel()
+	 * @generated
+	 */
+	EAttribute getArtifactModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getArtifactType <em>Artifact Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Artifact Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getArtifactType()
+	 * @see #getArtifactModel()
+	 * @generated
+	 */
+	EAttribute getArtifactModel_ArtifactType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getContent <em>Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Content</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getContent()
+	 * @see #getArtifactModel()
+	 * @generated
+	 */
+	EReference getArtifactModel_Content();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getRequirements <em>Requirements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Requirements</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getRequirements()
+	 * @see #getArtifactModel()
+	 * @generated
+	 */
+	EReference getArtifactModel_Requirements();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel#getCustomAttributes()
+	 * @see #getArtifactModel()
+	 * @generated
+	 */
+	EReference getArtifactModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel <em>Artifact Content Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Artifact Content Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel
+	 * @generated
+	 */
+	EClass getArtifactContentModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel#getHref <em>Href</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Href</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel#getHref()
+	 * @see #getArtifactContentModel()
+	 * @generated
+	 */
+	EAttribute getArtifactContentModel_Href();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel#getCustomAttributes()
+	 * @see #getArtifactContentModel()
+	 * @generated
+	 */
+	EReference getArtifactContentModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel <em>Artifact Requirement Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Artifact Requirement Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel
+	 * @generated
+	 */
+	EClass getArtifactRequirementModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getName()
+	 * @see #getArtifactRequirementModel()
+	 * @generated
+	 */
+	EAttribute getArtifactRequirementModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getDescription()
+	 * @see #getArtifactRequirementModel()
+	 * @generated
+	 */
+	EAttribute getArtifactRequirementModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getRequirementType <em>Requirement Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Requirement Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getRequirementType()
+	 * @see #getArtifactRequirementModel()
+	 * @generated
+	 */
+	EAttribute getArtifactRequirementModel_RequirementType();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getCustomAttributes()
+	 * @see #getArtifactRequirementModel()
+	 * @generated
+	 */
+	EReference getArtifactRequirementModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getFulfillment <em>Fulfillment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Fulfillment</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel#getFulfillment()
+	 * @see #getArtifactRequirementModel()
+	 * @generated
+	 */
+	EAttribute getArtifactRequirementModel_Fulfillment();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel <em>Deployment Plan Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Deployment Plan Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel
+	 * @generated
+	 */
+	EClass getDeploymentPlanModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel#getType()
+	 * @see #getDeploymentPlanModel()
+	 * @generated
+	 */
+	EAttribute getDeploymentPlanModel_Type();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel#getActionGroups <em>Action Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Action Groups</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel#getActionGroups()
+	 * @see #getDeploymentPlanModel()
+	 * @generated
+	 */
+	EReference getDeploymentPlanModel_ActionGroups();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel <em>Policy Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Policy Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel
+	 * @generated
+	 */
+	EClass getPolicyModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getName()
+	 * @see #getPolicyModel()
+	 * @generated
+	 */
+	EAttribute getPolicyModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getDescription()
+	 * @see #getPolicyModel()
+	 * @generated
+	 */
+	EAttribute getPolicyModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getPolicyType <em>Policy Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Policy Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getPolicyType()
+	 * @see #getPolicyModel()
+	 * @generated
+	 */
+	EAttribute getPolicyModel_PolicyType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getPolicyConstraints <em>Policy Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Policy Constraints</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getPolicyConstraints()
+	 * @see #getPolicyModel()
+	 * @generated
+	 */
+	EReference getPolicyModel_PolicyConstraints();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getTargets <em>Targets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Targets</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getTargets()
+	 * @see #getPolicyModel()
+	 * @generated
+	 */
+	EAttribute getPolicyModel_Targets();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel#getCustomAttributes()
+	 * @see #getPolicyModel()
+	 * @generated
+	 */
+	EReference getPolicyModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel <em>Policy Constraint Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Policy Constraint Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel
+	 * @generated
+	 */
+	EClass getPolicyConstraintModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getName()
+	 * @see #getPolicyConstraintModel()
+	 * @generated
+	 */
+	EAttribute getPolicyConstraintModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getDescription()
+	 * @see #getPolicyConstraintModel()
+	 * @generated
+	 */
+	EAttribute getPolicyConstraintModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getPolicyConstraintType <em>Policy Constraint Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Policy Constraint Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getPolicyConstraintType()
+	 * @see #getPolicyConstraintModel()
+	 * @generated
+	 */
+	EAttribute getPolicyConstraintModel_PolicyConstraintType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition#getValue()
-	 * @see #getTransition()
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getValue()
+	 * @see #getPolicyConstraintModel()
 	 * @generated
 	 */
-	EAttribute getTransition_Value();
+	EAttribute getPolicyConstraintModel_Value();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel#getCustomAttributes()
+	 * @see #getPolicyConstraintModel()
+	 * @generated
+	 */
+	EReference getPolicyConstraintModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel <em>Policy Manager Plan Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Policy Manager Plan Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel
+	 * @generated
+	 */
+	EClass getPolicyManagerPlanModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getName()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EAttribute getPolicyManagerPlanModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getDescription()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EAttribute getPolicyManagerPlanModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getOrigin <em>Origin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Origin</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getOrigin()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EAttribute getPolicyManagerPlanModel_Origin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getSourceCode <em>Source Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source Code</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getSourceCode()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EAttribute getPolicyManagerPlanModel_SourceCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getPolicyManagerType <em>Policy Manager Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Policy Manager Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getPolicyManagerType()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EAttribute getPolicyManagerPlanModel_PolicyManagerType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getActionGroups <em>Action Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Action Groups</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getActionGroups()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EReference getPolicyManagerPlanModel_ActionGroups();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel#getCustomAttributes()
+	 * @see #getPolicyManagerPlanModel()
+	 * @generated
+	 */
+	EReference getPolicyManagerPlanModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel <em>Service Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Service Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel
+	 * @generated
+	 */
+	EClass getServiceModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getName()
+	 * @see #getServiceModel()
+	 * @generated
+	 */
+	EAttribute getServiceModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getDescription()
+	 * @see #getServiceModel()
+	 * @generated
+	 */
+	EAttribute getServiceModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getServiceType <em>Service Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Service Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getServiceType()
+	 * @see #getServiceModel()
+	 * @generated
+	 */
+	EAttribute getServiceModel_ServiceType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getCharacteristics <em>Characteristics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Characteristics</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getCharacteristics()
+	 * @see #getServiceModel()
+	 * @generated
+	 */
+	EReference getServiceModel_Characteristics();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel#getCustomAttributes()
+	 * @see #getServiceModel()
+	 * @generated
+	 */
+	EReference getServiceModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel <em>Service Characteristic Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Service Characteristic Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel
+	 * @generated
+	 */
+	EClass getServiceCharacteristicModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getName()
+	 * @see #getServiceCharacteristicModel()
+	 * @generated
+	 */
+	EAttribute getServiceCharacteristicModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getDescription()
+	 * @see #getServiceCharacteristicModel()
+	 * @generated
+	 */
+	EAttribute getServiceCharacteristicModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getCharacteristicType <em>Characteristic Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Characteristic Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getCharacteristicType()
+	 * @see #getServiceCharacteristicModel()
+	 * @generated
+	 */
+	EAttribute getServiceCharacteristicModel_CharacteristicType();
+
+	/**
+	 * Returns the meta object for the map '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getCustomAttributes <em>Custom Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Custom Attributes</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getCustomAttributes()
+	 * @see #getServiceCharacteristicModel()
+	 * @generated
+	 */
+	EReference getServiceCharacteristicModel_CustomAttributes();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getMember <em>Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Member</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel#getMember()
+	 * @see #getServiceCharacteristicModel()
+	 * @generated
+	 */
+	EReference getServiceCharacteristicModel_Member();
+
+	/**
+	 * Returns the meta object for class '{@link kr.ac.hanyang.oCamp.camp.pdp.TransitionModel <em>Transition Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Transition Model</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.TransitionModel
+	 * @generated
+	 */
+	EClass getTransitionModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getName()
+	 * @see #getTransitionModel()
+	 * @generated
+	 */
+	EAttribute getTransitionModel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getDescription()
+	 * @see #getTransitionModel()
+	 * @generated
+	 */
+	EAttribute getTransitionModel_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getTransitionType <em>Transition Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transition Type</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getTransitionType()
+	 * @see #getTransitionModel()
+	 * @generated
+	 */
+	EAttribute getTransitionModel_TransitionType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.TransitionModel#getValue()
+	 * @see #getTransitionModel()
+	 * @generated
+	 */
+	EAttribute getTransitionModel_Value();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>String To EObject Map</em>}'.
@@ -1883,17 +2044,6 @@ public interface PdpPackage extends EPackage {
 	EAttribute getStringToEObjectMap_Value();
 
 	/**
-	 * Returns the meta object for data type '{@link org.apache.brooklyn.util.guava.Maybe <em>Maybe</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Maybe</em>'.
-	 * @see org.apache.brooklyn.util.guava.Maybe
-	 * @model instanceClass="org.apache.brooklyn.util.guava.Maybe" typeParameters="T"
-	 * @generated
-	 */
-	EDataType getMaybe();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1917,14 +2067,14 @@ public interface PdpPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanImpl <em>Abstract OCamp Plan</em>}' class.
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanModelImpl <em>Abstract OCamp Plan Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getAbstractOCampPlan()
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.AbstractOCampPlanModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getAbstractOCampPlanModel()
 		 * @generated
 		 */
-		EClass ABSTRACT_OCAMP_PLAN = eINSTANCE.getAbstractOCampPlan();
+		EClass ABSTRACT_OCAMP_PLAN_MODEL = eINSTANCE.getAbstractOCampPlanModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1932,7 +2082,7 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_OCAMP_PLAN__NAME = eINSTANCE.getAbstractOCampPlan_Name();
+		EAttribute ABSTRACT_OCAMP_PLAN_MODEL__NAME = eINSTANCE.getAbstractOCampPlanModel_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -1940,7 +2090,7 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_OCAMP_PLAN__DESCRIPTION = eINSTANCE.getAbstractOCampPlan_Description();
+		EAttribute ABSTRACT_OCAMP_PLAN_MODEL__DESCRIPTION = eINSTANCE.getAbstractOCampPlanModel_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Origin</b></em>' attribute feature.
@@ -1948,7 +2098,7 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_OCAMP_PLAN__ORIGIN = eINSTANCE.getAbstractOCampPlan_Origin();
+		EAttribute ABSTRACT_OCAMP_PLAN_MODEL__ORIGIN = eINSTANCE.getAbstractOCampPlanModel_Origin();
 
 		/**
 		 * The meta object literal for the '<em><b>Source Code</b></em>' attribute feature.
@@ -1956,541 +2106,31 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_OCAMP_PLAN__SOURCE_CODE = eINSTANCE.getAbstractOCampPlan_SourceCode();
+		EAttribute ABSTRACT_OCAMP_PLAN_MODEL__SOURCE_CODE = eINSTANCE.getAbstractOCampPlanModel_SourceCode();
 
 		/**
-		 * The meta object literal for the '<em><b>Artifacts</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Artifacts</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_OCAMP_PLAN__ARTIFACTS = eINSTANCE.getAbstractOCampPlan_Artifacts();
+		EReference ABSTRACT_OCAMP_PLAN_MODEL__ARTIFACTS = eINSTANCE.getAbstractOCampPlanModel_Artifacts();
 
 		/**
-		 * The meta object literal for the '<em><b>Services</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_OCAMP_PLAN__SERVICES = eINSTANCE.getAbstractOCampPlan_Services();
+		EReference ABSTRACT_OCAMP_PLAN_MODEL__SERVICES = eINSTANCE.getAbstractOCampPlanModel_Services();
 
 		/**
-		 * The meta object literal for the '<em><b>Policies</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Policies</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_OCAMP_PLAN__POLICIES = eINSTANCE.getAbstractOCampPlan_Policies();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionImpl <em>Action</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getAction()
-		 * @generated
-		 */
-		EClass ACTION = eINSTANCE.getAction();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION__NAME = eINSTANCE.getAction_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION__DESCRIPTION = eINSTANCE.getAction_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION__PROPERTY = eINSTANCE.getAction_Property();
-
-		/**
-		 * The meta object literal for the '<em><b>Action Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION__ACTION_TYPE = eINSTANCE.getAction_ActionType();
-
-		/**
-		 * The meta object literal for the '<em><b>Transitions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTION__TRANSITIONS = eINSTANCE.getAction_Transitions();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupImpl <em>Action Group</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getActionGroup()
-		 * @generated
-		 */
-		EClass ACTION_GROUP = eINSTANCE.getActionGroup();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION_GROUP__NAME = eINSTANCE.getActionGroup_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION_GROUP__DESCRIPTION = eINSTANCE.getActionGroup_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Action Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION_GROUP__ACTION_ID = eINSTANCE.getActionGroup_ActionId();
-
-		/**
-		 * The meta object literal for the '<em><b>Action Group Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTION_GROUP__ACTION_GROUP_TYPE = eINSTANCE.getActionGroup_ActionGroupType();
-
-		/**
-		 * The meta object literal for the '<em><b>Actions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTION_GROUP__ACTIONS = eINSTANCE.getActionGroup_Actions();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl <em>Artifact</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifact()
-		 * @generated
-		 */
-		EClass ARTIFACT = eINSTANCE.getArtifact();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT__NAME = eINSTANCE.getArtifact_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT__DESCRIPTION = eINSTANCE.getArtifact_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Artifact Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT__ARTIFACT_TYPE = eINSTANCE.getArtifact_ArtifactType();
-
-		/**
-		 * The meta object literal for the '<em><b>Content</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARTIFACT__CONTENT = eINSTANCE.getArtifact_Content();
-
-		/**
-		 * The meta object literal for the '<em><b>Requirements</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARTIFACT__REQUIREMENTS = eINSTANCE.getArtifact_Requirements();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentImpl <em>Artifact Content</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactContent()
-		 * @generated
-		 */
-		EClass ARTIFACT_CONTENT = eINSTANCE.getArtifactContent();
-
-		/**
-		 * The meta object literal for the '<em><b>Href</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT_CONTENT__HREF = eINSTANCE.getArtifactContent_Href();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl <em>Artifact Requirement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactRequirement()
-		 * @generated
-		 */
-		EClass ARTIFACT_REQUIREMENT = eINSTANCE.getArtifactRequirement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT_REQUIREMENT__NAME = eINSTANCE.getArtifactRequirement_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT_REQUIREMENT__DESCRIPTION = eINSTANCE.getArtifactRequirement_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Requirement Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE = eINSTANCE.getArtifactRequirement_RequirementType();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl <em>Deployment Plan</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getDeploymentPlan()
-		 * @generated
-		 */
-		EClass DEPLOYMENT_PLAN = eINSTANCE.getDeploymentPlan();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPLOYMENT_PLAN__NAME = eINSTANCE.getDeploymentPlan_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPLOYMENT_PLAN__DESCRIPTION = eINSTANCE.getDeploymentPlan_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Origin</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPLOYMENT_PLAN__ORIGIN = eINSTANCE.getDeploymentPlan_Origin();
-
-		/**
-		 * The meta object literal for the '<em><b>Source Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPLOYMENT_PLAN__SOURCE_CODE = eINSTANCE.getDeploymentPlan_SourceCode();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPLOYMENT_PLAN__TYPE = eINSTANCE.getDeploymentPlan_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Artifacts</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPLOYMENT_PLAN__ARTIFACTS = eINSTANCE.getDeploymentPlan_Artifacts();
-
-		/**
-		 * The meta object literal for the '<em><b>Services</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPLOYMENT_PLAN__SERVICES = eINSTANCE.getDeploymentPlan_Services();
-
-		/**
-		 * The meta object literal for the '<em><b>Policies</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPLOYMENT_PLAN__POLICIES = eINSTANCE.getDeploymentPlan_Policies();
-
-		/**
-		 * The meta object literal for the '<em><b>Action Groups</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPLOYMENT_PLAN__ACTION_GROUPS = eINSTANCE.getDeploymentPlan_ActionGroups();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl <em>Policy</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicy()
-		 * @generated
-		 */
-		EClass POLICY = eINSTANCE.getPolicy();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY__NAME = eINSTANCE.getPolicy_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY__DESCRIPTION = eINSTANCE.getPolicy_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Policy Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY__POLICY_TYPE = eINSTANCE.getPolicy_PolicyType();
-
-		/**
-		 * The meta object literal for the '<em><b>Policy Constraints</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference POLICY__POLICY_CONSTRAINTS = eINSTANCE.getPolicy_PolicyConstraints();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY__TARGETS = eINSTANCE.getPolicy_Targets();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintImpl <em>Policy Constraint</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyConstraint()
-		 * @generated
-		 */
-		EClass POLICY_CONSTRAINT = eINSTANCE.getPolicyConstraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_CONSTRAINT__NAME = eINSTANCE.getPolicyConstraint_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_CONSTRAINT__DESCRIPTION = eINSTANCE.getPolicyConstraint_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Policy Constraint Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_CONSTRAINT__POLICY_CONSTRAINT_TYPE = eINSTANCE.getPolicyConstraint_PolicyConstraintType();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_CONSTRAINT__VALUE = eINSTANCE.getPolicyConstraint_Value();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl <em>Policy Manager Plan</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyManagerPlan()
-		 * @generated
-		 */
-		EClass POLICY_MANAGER_PLAN = eINSTANCE.getPolicyManagerPlan();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_MANAGER_PLAN__NAME = eINSTANCE.getPolicyManagerPlan_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_MANAGER_PLAN__DESCRIPTION = eINSTANCE.getPolicyManagerPlan_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Origin</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_MANAGER_PLAN__ORIGIN = eINSTANCE.getPolicyManagerPlan_Origin();
-
-		/**
-		 * The meta object literal for the '<em><b>Source Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_MANAGER_PLAN__SOURCE_CODE = eINSTANCE.getPolicyManagerPlan_SourceCode();
-
-		/**
-		 * The meta object literal for the '<em><b>Policy Manager Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE = eINSTANCE.getPolicyManagerPlan_PolicyManagerType();
-
-		/**
-		 * The meta object literal for the '<em><b>Action Groups</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference POLICY_MANAGER_PLAN__ACTION_GROUPS = eINSTANCE.getPolicyManagerPlan_ActionGroups();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl <em>Service</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getService()
-		 * @generated
-		 */
-		EClass SERVICE = eINSTANCE.getService();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE__NAME = eINSTANCE.getService_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE__DESCRIPTION = eINSTANCE.getService_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Service Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE__SERVICE_TYPE = eINSTANCE.getService_ServiceType();
-
-		/**
-		 * The meta object literal for the '<em><b>Characteristics</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SERVICE__CHARACTERISTICS = eINSTANCE.getService_Characteristics();
-
-		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl <em>Service Characteristic</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getServiceCharacteristic()
-		 * @generated
-		 */
-		EClass SERVICE_CHARACTERISTIC = eINSTANCE.getServiceCharacteristic();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE_CHARACTERISTIC__NAME = eINSTANCE.getServiceCharacteristic_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE_CHARACTERISTIC__DESCRIPTION = eINSTANCE.getServiceCharacteristic_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Characteristic Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE = eINSTANCE.getServiceCharacteristic_CharacteristicType();
+		EReference ABSTRACT_OCAMP_PLAN_MODEL__POLICIES = eINSTANCE.getAbstractOCampPlanModel_Policies();
 
 		/**
 		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
@@ -2498,17 +2138,17 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES = eINSTANCE.getServiceCharacteristic_CustomAttributes();
+		EReference ABSTRACT_OCAMP_PLAN_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getAbstractOCampPlanModel_CustomAttributes();
 
 		/**
-		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionImpl <em>Transition</em>}' class.
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionModelImpl <em>Action Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionImpl
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getTransition()
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getActionModel()
 		 * @generated
 		 */
-		EClass TRANSITION = eINSTANCE.getTransition();
+		EClass ACTION_MODEL = eINSTANCE.getActionModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2516,7 +2156,7 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TRANSITION__NAME = eINSTANCE.getTransition_Name();
+		EAttribute ACTION_MODEL__NAME = eINSTANCE.getActionModel_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -2524,15 +2164,349 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TRANSITION__DESCRIPTION = eINSTANCE.getTransition_Description();
+		EAttribute ACTION_MODEL__DESCRIPTION = eINSTANCE.getActionModel_Description();
 
 		/**
-		 * The meta object literal for the '<em><b>Transition Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Property</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TRANSITION__TRANSITION_TYPE = eINSTANCE.getTransition_TransitionType();
+		EAttribute ACTION_MODEL__PROPERTY = eINSTANCE.getActionModel_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Action Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION_MODEL__ACTION_TYPE = eINSTANCE.getActionModel_ActionType();
+
+		/**
+		 * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTION_MODEL__TRANSITIONS = eINSTANCE.getActionModel_Transitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTION_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getActionModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupModelImpl <em>Action Group Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ActionGroupModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getActionGroupModel()
+		 * @generated
+		 */
+		EClass ACTION_GROUP_MODEL = eINSTANCE.getActionGroupModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION_GROUP_MODEL__NAME = eINSTANCE.getActionGroupModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION_GROUP_MODEL__DESCRIPTION = eINSTANCE.getActionGroupModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Action Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION_GROUP_MODEL__ACTION_ID = eINSTANCE.getActionGroupModel_ActionId();
+
+		/**
+		 * The meta object literal for the '<em><b>Action Group Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION_GROUP_MODEL__ACTION_GROUP_TYPE = eINSTANCE.getActionGroupModel_ActionGroupType();
+
+		/**
+		 * The meta object literal for the '<em><b>Actions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTION_GROUP_MODEL__ACTIONS = eINSTANCE.getActionGroupModel_Actions();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTION_GROUP_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getActionGroupModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactModelImpl <em>Artifact Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactModel()
+		 * @generated
+		 */
+		EClass ARTIFACT_MODEL = eINSTANCE.getArtifactModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_MODEL__NAME = eINSTANCE.getArtifactModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_MODEL__DESCRIPTION = eINSTANCE.getArtifactModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Artifact Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_MODEL__ARTIFACT_TYPE = eINSTANCE.getArtifactModel_ArtifactType();
+
+		/**
+		 * The meta object literal for the '<em><b>Content</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARTIFACT_MODEL__CONTENT = eINSTANCE.getArtifactModel_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Requirements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARTIFACT_MODEL__REQUIREMENTS = eINSTANCE.getArtifactModel_Requirements();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARTIFACT_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getArtifactModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentModelImpl <em>Artifact Content Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactContentModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactContentModel()
+		 * @generated
+		 */
+		EClass ARTIFACT_CONTENT_MODEL = eINSTANCE.getArtifactContentModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Href</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_CONTENT_MODEL__HREF = eINSTANCE.getArtifactContentModel_Href();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARTIFACT_CONTENT_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getArtifactContentModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementModelImpl <em>Artifact Requirement Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ArtifactRequirementModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getArtifactRequirementModel()
+		 * @generated
+		 */
+		EClass ARTIFACT_REQUIREMENT_MODEL = eINSTANCE.getArtifactRequirementModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_REQUIREMENT_MODEL__NAME = eINSTANCE.getArtifactRequirementModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_REQUIREMENT_MODEL__DESCRIPTION = eINSTANCE.getArtifactRequirementModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Requirement Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_REQUIREMENT_MODEL__REQUIREMENT_TYPE = eINSTANCE.getArtifactRequirementModel_RequirementType();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARTIFACT_REQUIREMENT_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getArtifactRequirementModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Fulfillment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT_REQUIREMENT_MODEL__FULFILLMENT = eINSTANCE.getArtifactRequirementModel_Fulfillment();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanModelImpl <em>Deployment Plan Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.DeploymentPlanModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getDeploymentPlanModel()
+		 * @generated
+		 */
+		EClass DEPLOYMENT_PLAN_MODEL = eINSTANCE.getDeploymentPlanModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPLOYMENT_PLAN_MODEL__TYPE = eINSTANCE.getDeploymentPlanModel_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Action Groups</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEPLOYMENT_PLAN_MODEL__ACTION_GROUPS = eINSTANCE.getDeploymentPlanModel_ActionGroups();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyModelImpl <em>Policy Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyModel()
+		 * @generated
+		 */
+		EClass POLICY_MODEL = eINSTANCE.getPolicyModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MODEL__NAME = eINSTANCE.getPolicyModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MODEL__DESCRIPTION = eINSTANCE.getPolicyModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Policy Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MODEL__POLICY_TYPE = eINSTANCE.getPolicyModel_PolicyType();
+
+		/**
+		 * The meta object literal for the '<em><b>Policy Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY_MODEL__POLICY_CONSTRAINTS = eINSTANCE.getPolicyModel_PolicyConstraints();
+
+		/**
+		 * The meta object literal for the '<em><b>Targets</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MODEL__TARGETS = eINSTANCE.getPolicyModel_Targets();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getPolicyModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintModelImpl <em>Policy Constraint Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyConstraintModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyConstraintModel()
+		 * @generated
+		 */
+		EClass POLICY_CONSTRAINT_MODEL = eINSTANCE.getPolicyConstraintModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_CONSTRAINT_MODEL__NAME = eINSTANCE.getPolicyConstraintModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_CONSTRAINT_MODEL__DESCRIPTION = eINSTANCE.getPolicyConstraintModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Policy Constraint Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_CONSTRAINT_MODEL__POLICY_CONSTRAINT_TYPE = eINSTANCE.getPolicyConstraintModel_PolicyConstraintType();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -2540,7 +2514,223 @@ public interface PdpPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TRANSITION__VALUE = eINSTANCE.getTransition_Value();
+		EAttribute POLICY_CONSTRAINT_MODEL__VALUE = eINSTANCE.getPolicyConstraintModel_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY_CONSTRAINT_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getPolicyConstraintModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanModelImpl <em>Policy Manager Plan Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PolicyManagerPlanModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getPolicyManagerPlanModel()
+		 * @generated
+		 */
+		EClass POLICY_MANAGER_PLAN_MODEL = eINSTANCE.getPolicyManagerPlanModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MANAGER_PLAN_MODEL__NAME = eINSTANCE.getPolicyManagerPlanModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MANAGER_PLAN_MODEL__DESCRIPTION = eINSTANCE.getPolicyManagerPlanModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MANAGER_PLAN_MODEL__ORIGIN = eINSTANCE.getPolicyManagerPlanModel_Origin();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MANAGER_PLAN_MODEL__SOURCE_CODE = eINSTANCE.getPolicyManagerPlanModel_SourceCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Policy Manager Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY_MANAGER_PLAN_MODEL__POLICY_MANAGER_TYPE = eINSTANCE.getPolicyManagerPlanModel_PolicyManagerType();
+
+		/**
+		 * The meta object literal for the '<em><b>Action Groups</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY_MANAGER_PLAN_MODEL__ACTION_GROUPS = eINSTANCE.getPolicyManagerPlanModel_ActionGroups();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY_MANAGER_PLAN_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getPolicyManagerPlanModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceModelImpl <em>Service Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getServiceModel()
+		 * @generated
+		 */
+		EClass SERVICE_MODEL = eINSTANCE.getServiceModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE_MODEL__NAME = eINSTANCE.getServiceModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE_MODEL__DESCRIPTION = eINSTANCE.getServiceModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Service Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE_MODEL__SERVICE_TYPE = eINSTANCE.getServiceModel_ServiceType();
+
+		/**
+		 * The meta object literal for the '<em><b>Characteristics</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE_MODEL__CHARACTERISTICS = eINSTANCE.getServiceModel_Characteristics();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getServiceModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicModelImpl <em>Service Characteristic Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.ServiceCharacteristicModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getServiceCharacteristicModel()
+		 * @generated
+		 */
+		EClass SERVICE_CHARACTERISTIC_MODEL = eINSTANCE.getServiceCharacteristicModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE_CHARACTERISTIC_MODEL__NAME = eINSTANCE.getServiceCharacteristicModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE_CHARACTERISTIC_MODEL__DESCRIPTION = eINSTANCE.getServiceCharacteristicModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Characteristic Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE_CHARACTERISTIC_MODEL__CHARACTERISTIC_TYPE = eINSTANCE.getServiceCharacteristicModel_CharacteristicType();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Attributes</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE_CHARACTERISTIC_MODEL__CUSTOM_ATTRIBUTES = eINSTANCE.getServiceCharacteristicModel_CustomAttributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Member</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE_CHARACTERISTIC_MODEL__MEMBER = eINSTANCE.getServiceCharacteristicModel_Member();
+
+		/**
+		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionModelImpl <em>Transition Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.TransitionModelImpl
+		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getTransitionModel()
+		 * @generated
+		 */
+		EClass TRANSITION_MODEL = eINSTANCE.getTransitionModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION_MODEL__NAME = eINSTANCE.getTransitionModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION_MODEL__DESCRIPTION = eINSTANCE.getTransitionModel_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Transition Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION_MODEL__TRANSITION_TYPE = eINSTANCE.getTransitionModel_TransitionType();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION_MODEL__VALUE = eINSTANCE.getTransitionModel_Value();
 
 		/**
 		 * The meta object literal for the '{@link kr.ac.hanyang.oCamp.camp.pdp.impl.StringToEObjectMapImpl <em>String To EObject Map</em>}' class.
@@ -2567,16 +2757,6 @@ public interface PdpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_TO_EOBJECT_MAP__VALUE = eINSTANCE.getStringToEObjectMap_Value();
-
-		/**
-		 * The meta object literal for the '<em>Maybe</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.apache.brooklyn.util.guava.Maybe
-		 * @see kr.ac.hanyang.oCamp.camp.pdp.impl.PdpPackageImpl#getMaybe()
-		 * @generated
-		 */
-		EDataType MAYBE = eINSTANCE.getMaybe();
 
 	}
 

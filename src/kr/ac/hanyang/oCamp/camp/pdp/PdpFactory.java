@@ -22,122 +22,112 @@ public interface PdpFactory extends EFactory {
 	PdpFactory eINSTANCE = kr.ac.hanyang.oCamp.camp.pdp.impl.PdpFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Abstract OCamp Plan</em>'.
+	 * Returns a new object of class '<em>Action Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract OCamp Plan</em>'.
+	 * @return a new object of class '<em>Action Model</em>'.
 	 * @generated
 	 */
-	AbstractOCampPlan createAbstractOCampPlan();
+	ActionModel createActionModel();
 
 	/**
-	 * Returns a new object of class '<em>Action</em>'.
+	 * Returns a new object of class '<em>Action Group Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Action</em>'.
+	 * @return a new object of class '<em>Action Group Model</em>'.
 	 * @generated
 	 */
-	Action createAction();
-	
+	ActionGroupModel createActionGroupModel();
 
 	/**
-	 * Returns a new object of class '<em>Action Group</em>'.
+	 * Returns a new object of class '<em>Artifact Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Action Group</em>'.
+	 * @return a new object of class '<em>Artifact Model</em>'.
 	 * @generated
 	 */
-	ActionGroup createActionGroup();
+	ArtifactModel createArtifactModel();
 
 	/**
-	 * Returns a new object of class '<em>Artifact</em>'.
+	 * Returns a new object of class '<em>Artifact Content Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Artifact</em>'.
+	 * @return a new object of class '<em>Artifact Content Model</em>'.
 	 * @generated
 	 */
-	Artifact createArtifact();
+	ArtifactContentModel createArtifactContentModel();
 
 	/**
-	 * Returns a new object of class '<em>Artifact Content</em>'.
+	 * Returns a new object of class '<em>Artifact Requirement Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Artifact Content</em>'.
+	 * @return a new object of class '<em>Artifact Requirement Model</em>'.
 	 * @generated
 	 */
-	ArtifactContent createArtifactContent();
+	ArtifactRequirementModel createArtifactRequirementModel();
 
 	/**
-	 * Returns a new object of class '<em>Artifact Requirement</em>'.
+	 * Returns a new object of class '<em>Deployment Plan Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Artifact Requirement</em>'.
+	 * @return a new object of class '<em>Deployment Plan Model</em>'.
 	 * @generated
 	 */
-	ArtifactRequirement createArtifactRequirement();
+	DeploymentPlanModel createDeploymentPlanModel();
 
 	/**
-	 * Returns a new object of class '<em>Deployment Plan</em>'.
+	 * Returns a new object of class '<em>Policy Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Deployment Plan</em>'.
+	 * @return a new object of class '<em>Policy Model</em>'.
 	 * @generated
 	 */
-	DeploymentPlan createDeploymentPlan();
+	PolicyModel createPolicyModel();
 
 	/**
-	 * Returns a new object of class '<em>Policy</em>'.
+	 * Returns a new object of class '<em>Policy Constraint Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Policy</em>'.
+	 * @return a new object of class '<em>Policy Constraint Model</em>'.
 	 * @generated
 	 */
-	Policy createPolicy();
+	PolicyConstraintModel createPolicyConstraintModel();
 
 	/**
-	 * Returns a new object of class '<em>Policy Constraint</em>'.
+	 * Returns a new object of class '<em>Policy Manager Plan Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Policy Constraint</em>'.
+	 * @return a new object of class '<em>Policy Manager Plan Model</em>'.
 	 * @generated
 	 */
-	PolicyConstraint createPolicyConstraint();
+	PolicyManagerPlanModel createPolicyManagerPlanModel();
 
 	/**
-	 * Returns a new object of class '<em>Policy Manager Plan</em>'.
+	 * Returns a new object of class '<em>Service Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Policy Manager Plan</em>'.
+	 * @return a new object of class '<em>Service Model</em>'.
 	 * @generated
 	 */
-	PolicyManagerPlan createPolicyManagerPlan();
+	ServiceModel createServiceModel();
 
 	/**
-	 * Returns a new object of class '<em>Service</em>'.
+	 * Returns a new object of class '<em>Service Characteristic Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Service</em>'.
+	 * @return a new object of class '<em>Service Characteristic Model</em>'.
 	 * @generated
 	 */
-	Service createService();
+	ServiceCharacteristicModel createServiceCharacteristicModel();
 
 	/**
-	 * Returns a new object of class '<em>Service Characteristic</em>'.
+	 * Returns a new object of class '<em>Transition Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Service Characteristic</em>'.
+	 * @return a new object of class '<em>Transition Model</em>'.
 	 * @generated
 	 */
-	ServiceCharacteristic createServiceCharacteristic();
-
-	/**
-	 * Returns a new object of class '<em>Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transition</em>'.
-	 * @generated
-	 */
-	Transition createTransition();
+	TransitionModel createTransitionModel();
 
 	/**
 	 * Returns the package supported by this factory.

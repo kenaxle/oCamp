@@ -69,56 +69,56 @@ public class PdpAdapterFactory extends AdapterFactoryImpl {
 	protected PdpSwitch<Adapter> modelSwitch =
 		new PdpSwitch<Adapter>() {
 			@Override
-			public Adapter caseAbstractOCampPlan(AbstractOCampPlan object) {
-				return createAbstractOCampPlanAdapter();
+			public Adapter caseAbstractOCampPlanModel(AbstractOCampPlanModel object) {
+				return createAbstractOCampPlanModelAdapter();
 			}
 			@Override
-			public Adapter caseAction(Action object) {
-				return createActionAdapter();
+			public Adapter caseActionModel(ActionModel object) {
+				return createActionModelAdapter();
 			}
 			@Override
-			public Adapter caseActionGroup(ActionGroup object) {
-				return createActionGroupAdapter();
+			public Adapter caseActionGroupModel(ActionGroupModel object) {
+				return createActionGroupModelAdapter();
 			}
 			@Override
-			public Adapter caseArtifact(Artifact object) {
-				return createArtifactAdapter();
+			public Adapter caseArtifactModel(ArtifactModel object) {
+				return createArtifactModelAdapter();
 			}
 			@Override
-			public Adapter caseArtifactContent(ArtifactContent object) {
-				return createArtifactContentAdapter();
+			public Adapter caseArtifactContentModel(ArtifactContentModel object) {
+				return createArtifactContentModelAdapter();
 			}
 			@Override
-			public Adapter caseArtifactRequirement(ArtifactRequirement object) {
-				return createArtifactRequirementAdapter();
+			public Adapter caseArtifactRequirementModel(ArtifactRequirementModel object) {
+				return createArtifactRequirementModelAdapter();
 			}
 			@Override
-			public Adapter caseDeploymentPlan(DeploymentPlan object) {
-				return createDeploymentPlanAdapter();
+			public Adapter caseDeploymentPlanModel(DeploymentPlanModel object) {
+				return createDeploymentPlanModelAdapter();
 			}
 			@Override
-			public Adapter casePolicy(Policy object) {
-				return createPolicyAdapter();
+			public Adapter casePolicyModel(PolicyModel object) {
+				return createPolicyModelAdapter();
 			}
 			@Override
-			public Adapter casePolicyConstraint(PolicyConstraint object) {
-				return createPolicyConstraintAdapter();
+			public Adapter casePolicyConstraintModel(PolicyConstraintModel object) {
+				return createPolicyConstraintModelAdapter();
 			}
 			@Override
-			public Adapter casePolicyManagerPlan(PolicyManagerPlan object) {
-				return createPolicyManagerPlanAdapter();
+			public Adapter casePolicyManagerPlanModel(PolicyManagerPlanModel object) {
+				return createPolicyManagerPlanModelAdapter();
 			}
 			@Override
-			public Adapter caseService(Service object) {
-				return createServiceAdapter();
+			public Adapter caseServiceModel(ServiceModel object) {
+				return createServiceModelAdapter();
 			}
 			@Override
-			public Adapter caseServiceCharacteristic(ServiceCharacteristic object) {
-				return createServiceCharacteristicAdapter();
+			public Adapter caseServiceCharacteristicModel(ServiceCharacteristicModel object) {
+				return createServiceCharacteristicModelAdapter();
 			}
 			@Override
-			public Adapter caseTransition(Transition object) {
-				return createTransitionAdapter();
+			public Adapter caseTransitionModel(TransitionModel object) {
+				return createTransitionModelAdapter();
 			}
 			@Override
 			public Adapter caseStringToEObjectMap(Map.Entry<String, Object> object) {
@@ -145,184 +145,184 @@ public class PdpAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan <em>Abstract OCamp Plan</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel <em>Abstract OCamp Plan Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel
 	 * @generated
 	 */
-	public Adapter createAbstractOCampPlanAdapter() {
+	public Adapter createAbstractOCampPlanModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.Action <em>Action</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionModel <em>Action Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Action
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionModel
 	 * @generated
 	 */
-	public Adapter createActionAdapter() {
+	public Adapter createActionModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroup <em>Action Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel <em>Action Group Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroup
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel
 	 * @generated
 	 */
-	public Adapter createActionGroupAdapter() {
+	public Adapter createActionGroupModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.Artifact <em>Artifact</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel <em>Artifact Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Artifact
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel
 	 * @generated
 	 */
-	public Adapter createArtifactAdapter() {
+	public Adapter createArtifactModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent <em>Artifact Content</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel <em>Artifact Content Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel
 	 * @generated
 	 */
-	public Adapter createArtifactContentAdapter() {
+	public Adapter createArtifactContentModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement <em>Artifact Requirement</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel <em>Artifact Requirement Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel
 	 * @generated
 	 */
-	public Adapter createArtifactRequirementAdapter() {
+	public Adapter createArtifactRequirementModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan <em>Deployment Plan</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel <em>Deployment Plan Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel
 	 * @generated
 	 */
-	public Adapter createDeploymentPlanAdapter() {
+	public Adapter createDeploymentPlanModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.Policy <em>Policy</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyModel <em>Policy Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Policy
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyModel
 	 * @generated
 	 */
-	public Adapter createPolicyAdapter() {
+	public Adapter createPolicyModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint <em>Policy Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel <em>Policy Constraint Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel
 	 * @generated
 	 */
-	public Adapter createPolicyConstraintAdapter() {
+	public Adapter createPolicyConstraintModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan <em>Policy Manager Plan</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel <em>Policy Manager Plan Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel
 	 * @generated
 	 */
-	public Adapter createPolicyManagerPlanAdapter() {
+	public Adapter createPolicyManagerPlanModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.Service <em>Service</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceModel <em>Service Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Service
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceModel
 	 * @generated
 	 */
-	public Adapter createServiceAdapter() {
+	public Adapter createServiceModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic <em>Service Characteristic</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel <em>Service Characteristic Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel
 	 * @generated
 	 */
-	public Adapter createServiceCharacteristicAdapter() {
+	public Adapter createServiceCharacteristicModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.Transition <em>Transition</em>}'.
+	 * Creates a new adapter for an object of class '{@link kr.ac.hanyang.oCamp.camp.pdp.TransitionModel <em>Transition Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kr.ac.hanyang.oCamp.camp.pdp.Transition
+	 * @see kr.ac.hanyang.oCamp.camp.pdp.TransitionModel
 	 * @generated
 	 */
-	public Adapter createTransitionAdapter() {
+	public Adapter createTransitionModelAdapter() {
 		return null;
 	}
 

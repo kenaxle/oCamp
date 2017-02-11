@@ -1,80 +1,68 @@
 package kr.ac.hanyang.oCamp.camp.pdp;
 
-import org.eclipse.emf.ecore.EObject;
+import java.util.Map;
+import org.apache.brooklyn.util.collections.MutableMap;
+import org.apache.brooklyn.util.yaml.Yamls;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.google.common.collect.ImmutableMap;
 
 /**
- * @model 
+ * @model kind="class"
  */
-public interface ArtifactRequirement extends EObject {
-//
-//    String name;
-//    String description;
-//    String requirementType;
-//    
-//    Map<String,Object> customAttributes;
-//    
-//    public static ArtifactRequirement of(Map<String, Object> req) {
-//        Map<String,Object> attrs = MutableMap.copyOf(req);
-//        
-//        ArtifactRequirement result = new ArtifactRequirement();
-//        result.name = (String) attrs.remove("name");
-//        result.description = (String) attrs.remove("description");
-//        result.requirementType = (String) (String) Yamls.removeMultinameAttribute(attrs, "requirementType", "type");
-//        
-//        // TODO fulfillment
-//        
-//        result.customAttributes = attrs;
-//        
-//        return result;
-//    }
+public class ArtifactRequirement {
+
+    String name;
+    String description;
+    String requirementType;
+    
+    Map<String,Object> customAttributes;
+    
+    public static ArtifactRequirement of(Map<String, Object> req) {
+        Map<String,Object> attrs = MutableMap.copyOf(req);
+        
+        ArtifactRequirement result = new ArtifactRequirement();
+        result.name = (String) attrs.remove("name");
+        result.description = (String) attrs.remove("description");
+        result.requirementType = (String) (String) Yamls.removeMultinameAttribute(attrs, "requirementType", "type");
+        
+        // TODO fulfillment
+        
+        result.customAttributes = attrs;
+        
+        return result;
+    }
 
     /**
      * @model
      */
-    public String getName() ;
+    public String getName() {
+        return name;
+    }
     
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-				/**
      * @model
      */
-    public String getDescription() ;
+    public String getDescription() {
+        return description;
+    }
     
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
-
-				/**
      * @model
      */
-    public String getRequirementType() ;
+    public String getRequirementType() {
+        return requirementType;
+    }
     
     /**
-	 * Sets the value of the '{@link kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement#getRequirementType <em>Requirement Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Requirement Type</em>' attribute.
-	 * @see #getRequirementType()
-	 * @generated
-	 */
-	void setRequirementType(String value);
-
-	
+     * @model
+     */
+    public Map<String, Object> getCustomAttributes() {
+        return ImmutableMap.copyOf(customAttributes);
+    }
+    
     @Override
-    public String toString() ;
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

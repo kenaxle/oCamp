@@ -35,8 +35,8 @@ public class BaseEntityManager extends LocalManagementContext{// implements Poli
 	public BaseEntityManager() {
 		super();
 		this.catalog = new OCampServiceCatalog();
-		for (String path: oCampReservedKeys.PATHS)
-			populateServiceCatalog(path);
+//		for (String path: oCampReservedKeys.PATHS)
+//			populateServiceCatalog(path);
 	}
 	
 	public synchronized Collection<Application> getPolicyManagers() {
@@ -47,8 +47,8 @@ public class BaseEntityManager extends LocalManagementContext{// implements Poli
 	public BaseEntityManager(Builder brooklynPropertiesBuilder, Map<String, Object> brooklynAdditionalProperties) {
 		super(brooklynPropertiesBuilder, brooklynAdditionalProperties);
 		this.catalog = new OCampServiceCatalog();
-		for (String path: oCampReservedKeys.PATHS)
-			populateServiceCatalog(path);
+//		for (String path: oCampReservedKeys.PATHS)
+//			populateServiceCatalog(path);
 	}
 
 	public void setParentPlatform(oCampPlatform platform){

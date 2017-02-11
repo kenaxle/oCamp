@@ -11,29 +11,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/kena/.m2/repository/org/apache/brooklyn/camp/camp-base/0.9.0/camp-base-0.9.0.jar" sourcepath="/Users/kena/.m2/repository/org/apache/brooklyn/camp/camp-base/0.9.0/camp-base-0.9.0-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.apache.brooklyn.camp"/>
-			<attribute name="maven.artifactId" value="camp-base"/>
-			<attribute name="maven.version" value="0.9.0"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/kena/.m2/repository/org/apache/brooklyn/brooklyn-core/0.9.0/brooklyn-core-0.9.0.jar" sourcepath="/Users/kena/.m2/repository/org/apache/brooklyn/brooklyn-core/0.9.0/brooklyn-core-0.9.0-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.apache.brooklyn"/>
-			<attribute name="maven.artifactId" value="brooklyn-core"/>
-			<attribute name="maven.version" value="0.9.0"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

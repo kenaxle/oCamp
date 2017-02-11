@@ -13,14 +13,14 @@ import org.slf4j.LoggerFactory;
 
 import kr.ac.hanyang.oCamp.core.traits.Scalable;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
-import kr.ac.hanyang.oCamp.entities.services.software.SoftwareProcess;
+import kr.ac.hanyang.oCamp.entities.services.software.VanillaSoftwareImpl;
 
 public class ConstraintProperties {
 	
 	private static final Logger log = LoggerFactory.getLogger(PolicyImpl.class);
 	
 	//----------Sensors----------
-	public static final Sensor PROVISIONING_LOCATION = SoftwareProcess.PROVISIONING_LOCATION;
+	public static final Sensor PROVISIONING_LOCATION = VanillaSoftwareImpl.PROVISIONING_LOCATION;
 	public static final Sensor SERVICE_UP = Attributes.SERVICE_UP;
 	public static final Sensor SERVICE_STATE = Attributes.SERVICE_STATE_ACTUAL;
 	public static final Sensor CPU_USAGE = MachineAttributes.CPU_USAGE;

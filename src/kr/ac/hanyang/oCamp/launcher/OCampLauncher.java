@@ -428,7 +428,7 @@ public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
 	    			 //.location("localhost"))
 	    			 //.start();
-	    	BrooklynLauncher launcher = BrooklynLauncher.newInstance()
+	    	OCampLauncher launcher = OCampLauncher.newInstance()
 	   			 .managementContext(new BaseEntityManager())
 	   			// .catalogInitialization(new CatalogInitialization())
 //	   			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))

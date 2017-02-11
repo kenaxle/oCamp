@@ -1,0 +1,19 @@
+type: kr.ac.hanyang.oCamp.entities.policies.QoS
+actiongroups:
+- id: SCALE_UP
+  actions:
+  - property: REQUEST_PER_SECOND
+    transitions:
+    - type: Initial
+      value: ANYTHING
+    - type: Decrease
+      value: ANYTHING
+- id: SCALE_DOWN
+  actions:
+  - property: REQUEST_PER_SECOND
+    transitions:
+    - type: Initial
+      value: ANYTHING
+    - type: Increase
+      value: ANYTHING
+      

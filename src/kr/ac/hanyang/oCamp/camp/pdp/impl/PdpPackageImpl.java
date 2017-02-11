@@ -3,29 +3,26 @@
 package kr.ac.hanyang.oCamp.camp.pdp.impl;
 
 import java.util.Map;
-import kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlan;
-import kr.ac.hanyang.oCamp.camp.pdp.Action;
-import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
-import kr.ac.hanyang.oCamp.camp.pdp.Artifact;
-import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent;
-import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement;
-import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
+import kr.ac.hanyang.oCamp.camp.pdp.AbstractOCampPlanModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ActionModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel;
+import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpFactory;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
-import kr.ac.hanyang.oCamp.camp.pdp.Policy;
-import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
-import kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlan;
-import kr.ac.hanyang.oCamp.camp.pdp.Service;
-import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic;
-import kr.ac.hanyang.oCamp.camp.pdp.Transition;
-
-import org.apache.brooklyn.util.guava.Maybe;
-
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyManagerPlanModel;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ServiceModel;
+import kr.ac.hanyang.oCamp.camp.pdp.TransitionModel;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -40,91 +37,91 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractOCampPlanEClass = null;
+	private EClass abstractOCampPlanModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass actionEClass = null;
+	private EClass actionModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass actionGroupEClass = null;
+	private EClass actionGroupModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass artifactEClass = null;
+	private EClass artifactModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass artifactContentEClass = null;
+	private EClass artifactContentModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass artifactRequirementEClass = null;
+	private EClass artifactRequirementModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass deploymentPlanEClass = null;
+	private EClass deploymentPlanModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass policyEClass = null;
+	private EClass policyModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass policyConstraintEClass = null;
+	private EClass policyConstraintModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass policyManagerPlanEClass = null;
+	private EClass policyManagerPlanModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass serviceEClass = null;
+	private EClass serviceModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass serviceCharacteristicEClass = null;
+	private EClass serviceCharacteristicModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass transitionEClass = null;
+	private EClass transitionModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,13 +129,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * @generated
 	 */
 	private EClass stringToEObjectMapEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType maybeEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -206,8 +196,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractOCampPlan() {
-		return abstractOCampPlanEClass;
+	public EClass getAbstractOCampPlanModel() {
+		return abstractOCampPlanModelEClass;
 	}
 
 	/**
@@ -215,8 +205,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractOCampPlan_Name() {
-		return (EAttribute)abstractOCampPlanEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAbstractOCampPlanModel_Name() {
+		return (EAttribute)abstractOCampPlanModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -224,8 +214,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractOCampPlan_Description() {
-		return (EAttribute)abstractOCampPlanEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAbstractOCampPlanModel_Description() {
+		return (EAttribute)abstractOCampPlanModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -233,8 +223,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractOCampPlan_Origin() {
-		return (EAttribute)abstractOCampPlanEClass.getEStructuralFeatures().get(2);
+	public EAttribute getAbstractOCampPlanModel_Origin() {
+		return (EAttribute)abstractOCampPlanModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -242,8 +232,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractOCampPlan_SourceCode() {
-		return (EAttribute)abstractOCampPlanEClass.getEStructuralFeatures().get(3);
+	public EAttribute getAbstractOCampPlanModel_SourceCode() {
+		return (EAttribute)abstractOCampPlanModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -251,8 +241,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractOCampPlan_Artifacts() {
-		return (EReference)abstractOCampPlanEClass.getEStructuralFeatures().get(4);
+	public EReference getAbstractOCampPlanModel_Artifacts() {
+		return (EReference)abstractOCampPlanModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -260,8 +250,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractOCampPlan_Services() {
-		return (EReference)abstractOCampPlanEClass.getEStructuralFeatures().get(5);
+	public EReference getAbstractOCampPlanModel_Services() {
+		return (EReference)abstractOCampPlanModelEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -269,8 +259,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractOCampPlan_Policies() {
-		return (EReference)abstractOCampPlanEClass.getEStructuralFeatures().get(6);
+	public EReference getAbstractOCampPlanModel_Policies() {
+		return (EReference)abstractOCampPlanModelEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -278,8 +268,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAction() {
-		return actionEClass;
+	public EReference getAbstractOCampPlanModel_CustomAttributes() {
+		return (EReference)abstractOCampPlanModelEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -287,8 +277,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAction_Name() {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(0);
+	public EClass getActionModel() {
+		return actionModelEClass;
 	}
 
 	/**
@@ -296,8 +286,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAction_Description() {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
+	public EAttribute getActionModel_Name() {
+		return (EAttribute)actionModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -305,8 +295,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAction_Property() {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
+	public EAttribute getActionModel_Description() {
+		return (EAttribute)actionModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -314,8 +304,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAction_ActionType() {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(3);
+	public EAttribute getActionModel_Property() {
+		return (EAttribute)actionModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -323,8 +313,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAction_Transitions() {
-		return (EReference)actionEClass.getEStructuralFeatures().get(4);
+	public EAttribute getActionModel_ActionType() {
+		return (EAttribute)actionModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -332,8 +322,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getActionGroup() {
-		return actionGroupEClass;
+	public EReference getActionModel_Transitions() {
+		return (EReference)actionModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -341,8 +331,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActionGroup_Name() {
-		return (EAttribute)actionGroupEClass.getEStructuralFeatures().get(0);
+	public EReference getActionModel_CustomAttributes() {
+		return (EReference)actionModelEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -350,8 +340,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActionGroup_Description() {
-		return (EAttribute)actionGroupEClass.getEStructuralFeatures().get(1);
+	public EClass getActionGroupModel() {
+		return actionGroupModelEClass;
 	}
 
 	/**
@@ -359,8 +349,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActionGroup_ActionId() {
-		return (EAttribute)actionGroupEClass.getEStructuralFeatures().get(2);
+	public EAttribute getActionGroupModel_Name() {
+		return (EAttribute)actionGroupModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -368,8 +358,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActionGroup_ActionGroupType() {
-		return (EAttribute)actionGroupEClass.getEStructuralFeatures().get(3);
+	public EAttribute getActionGroupModel_Description() {
+		return (EAttribute)actionGroupModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -377,8 +367,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActionGroup_Actions() {
-		return (EReference)actionGroupEClass.getEStructuralFeatures().get(4);
+	public EAttribute getActionGroupModel_ActionId() {
+		return (EAttribute)actionGroupModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -386,8 +376,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getArtifact() {
-		return artifactEClass;
+	public EAttribute getActionGroupModel_ActionGroupType() {
+		return (EAttribute)actionGroupModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -395,8 +385,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifact_Name() {
-		return (EAttribute)artifactEClass.getEStructuralFeatures().get(0);
+	public EReference getActionGroupModel_Actions() {
+		return (EReference)actionGroupModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -404,8 +394,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifact_Description() {
-		return (EAttribute)artifactEClass.getEStructuralFeatures().get(1);
+	public EReference getActionGroupModel_CustomAttributes() {
+		return (EReference)actionGroupModelEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -413,8 +403,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifact_ArtifactType() {
-		return (EAttribute)artifactEClass.getEStructuralFeatures().get(2);
+	public EClass getArtifactModel() {
+		return artifactModelEClass;
 	}
 
 	/**
@@ -422,8 +412,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArtifact_Content() {
-		return (EReference)artifactEClass.getEStructuralFeatures().get(3);
+	public EAttribute getArtifactModel_Name() {
+		return (EAttribute)artifactModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -431,8 +421,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArtifact_Requirements() {
-		return (EReference)artifactEClass.getEStructuralFeatures().get(4);
+	public EAttribute getArtifactModel_Description() {
+		return (EAttribute)artifactModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -440,8 +430,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getArtifactContent() {
-		return artifactContentEClass;
+	public EAttribute getArtifactModel_ArtifactType() {
+		return (EAttribute)artifactModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -449,8 +439,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifactContent_Href() {
-		return (EAttribute)artifactContentEClass.getEStructuralFeatures().get(0);
+	public EReference getArtifactModel_Content() {
+		return (EReference)artifactModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -458,8 +448,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getArtifactRequirement() {
-		return artifactRequirementEClass;
+	public EReference getArtifactModel_Requirements() {
+		return (EReference)artifactModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -467,8 +457,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifactRequirement_Name() {
-		return (EAttribute)artifactRequirementEClass.getEStructuralFeatures().get(0);
+	public EReference getArtifactModel_CustomAttributes() {
+		return (EReference)artifactModelEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -476,8 +466,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifactRequirement_Description() {
-		return (EAttribute)artifactRequirementEClass.getEStructuralFeatures().get(1);
+	public EClass getArtifactContentModel() {
+		return artifactContentModelEClass;
 	}
 
 	/**
@@ -485,8 +475,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArtifactRequirement_RequirementType() {
-		return (EAttribute)artifactRequirementEClass.getEStructuralFeatures().get(2);
+	public EAttribute getArtifactContentModel_Href() {
+		return (EAttribute)artifactContentModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -494,8 +484,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDeploymentPlan() {
-		return deploymentPlanEClass;
+	public EReference getArtifactContentModel_CustomAttributes() {
+		return (EReference)artifactContentModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -503,8 +493,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeploymentPlan_Name() {
-		return (EAttribute)deploymentPlanEClass.getEStructuralFeatures().get(0);
+	public EClass getArtifactRequirementModel() {
+		return artifactRequirementModelEClass;
 	}
 
 	/**
@@ -512,8 +502,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeploymentPlan_Description() {
-		return (EAttribute)deploymentPlanEClass.getEStructuralFeatures().get(1);
+	public EAttribute getArtifactRequirementModel_Name() {
+		return (EAttribute)artifactRequirementModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -521,8 +511,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeploymentPlan_Origin() {
-		return (EAttribute)deploymentPlanEClass.getEStructuralFeatures().get(2);
+	public EAttribute getArtifactRequirementModel_Description() {
+		return (EAttribute)artifactRequirementModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -530,8 +520,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeploymentPlan_SourceCode() {
-		return (EAttribute)deploymentPlanEClass.getEStructuralFeatures().get(3);
+	public EAttribute getArtifactRequirementModel_RequirementType() {
+		return (EAttribute)artifactRequirementModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -539,8 +529,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeploymentPlan_Type() {
-		return (EAttribute)deploymentPlanEClass.getEStructuralFeatures().get(4);
+	public EReference getArtifactRequirementModel_CustomAttributes() {
+		return (EReference)artifactRequirementModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -548,8 +538,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeploymentPlan_Artifacts() {
-		return (EReference)deploymentPlanEClass.getEStructuralFeatures().get(5);
+	public EAttribute getArtifactRequirementModel_Fulfillment() {
+		return (EAttribute)artifactRequirementModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -557,8 +547,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeploymentPlan_Services() {
-		return (EReference)deploymentPlanEClass.getEStructuralFeatures().get(6);
+	public EClass getDeploymentPlanModel() {
+		return deploymentPlanModelEClass;
 	}
 
 	/**
@@ -566,8 +556,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeploymentPlan_Policies() {
-		return (EReference)deploymentPlanEClass.getEStructuralFeatures().get(7);
+	public EAttribute getDeploymentPlanModel_Type() {
+		return (EAttribute)deploymentPlanModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -575,8 +565,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeploymentPlan_ActionGroups() {
-		return (EReference)deploymentPlanEClass.getEStructuralFeatures().get(8);
+	public EReference getDeploymentPlanModel_ActionGroups() {
+		return (EReference)deploymentPlanModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -584,8 +574,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPolicy() {
-		return policyEClass;
+	public EClass getPolicyModel() {
+		return policyModelEClass;
 	}
 
 	/**
@@ -593,8 +583,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicy_Name() {
-		return (EAttribute)policyEClass.getEStructuralFeatures().get(0);
+	public EAttribute getPolicyModel_Name() {
+		return (EAttribute)policyModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -602,8 +592,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicy_Description() {
-		return (EAttribute)policyEClass.getEStructuralFeatures().get(1);
+	public EAttribute getPolicyModel_Description() {
+		return (EAttribute)policyModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -611,8 +601,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicy_PolicyType() {
-		return (EAttribute)policyEClass.getEStructuralFeatures().get(2);
+	public EAttribute getPolicyModel_PolicyType() {
+		return (EAttribute)policyModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -620,8 +610,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPolicy_PolicyConstraints() {
-		return (EReference)policyEClass.getEStructuralFeatures().get(3);
+	public EReference getPolicyModel_PolicyConstraints() {
+		return (EReference)policyModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -629,8 +619,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicy_Targets() {
-		return (EAttribute)policyEClass.getEStructuralFeatures().get(4);
+	public EAttribute getPolicyModel_Targets() {
+		return (EAttribute)policyModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -638,8 +628,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPolicyConstraint() {
-		return policyConstraintEClass;
+	public EReference getPolicyModel_CustomAttributes() {
+		return (EReference)policyModelEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -647,8 +637,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyConstraint_Name() {
-		return (EAttribute)policyConstraintEClass.getEStructuralFeatures().get(0);
+	public EClass getPolicyConstraintModel() {
+		return policyConstraintModelEClass;
 	}
 
 	/**
@@ -656,8 +646,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyConstraint_Description() {
-		return (EAttribute)policyConstraintEClass.getEStructuralFeatures().get(1);
+	public EAttribute getPolicyConstraintModel_Name() {
+		return (EAttribute)policyConstraintModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -665,8 +655,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyConstraint_PolicyConstraintType() {
-		return (EAttribute)policyConstraintEClass.getEStructuralFeatures().get(2);
+	public EAttribute getPolicyConstraintModel_Description() {
+		return (EAttribute)policyConstraintModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -674,8 +664,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyConstraint_Value() {
-		return (EAttribute)policyConstraintEClass.getEStructuralFeatures().get(3);
+	public EAttribute getPolicyConstraintModel_PolicyConstraintType() {
+		return (EAttribute)policyConstraintModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -683,8 +673,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPolicyManagerPlan() {
-		return policyManagerPlanEClass;
+	public EAttribute getPolicyConstraintModel_Value() {
+		return (EAttribute)policyConstraintModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -692,8 +682,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyManagerPlan_Name() {
-		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(0);
+	public EReference getPolicyConstraintModel_CustomAttributes() {
+		return (EReference)policyConstraintModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -701,8 +691,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyManagerPlan_Description() {
-		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(1);
+	public EClass getPolicyManagerPlanModel() {
+		return policyManagerPlanModelEClass;
 	}
 
 	/**
@@ -710,8 +700,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyManagerPlan_Origin() {
-		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(2);
+	public EAttribute getPolicyManagerPlanModel_Name() {
+		return (EAttribute)policyManagerPlanModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -719,8 +709,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyManagerPlan_SourceCode() {
-		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(3);
+	public EAttribute getPolicyManagerPlanModel_Description() {
+		return (EAttribute)policyManagerPlanModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -728,8 +718,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPolicyManagerPlan_PolicyManagerType() {
-		return (EAttribute)policyManagerPlanEClass.getEStructuralFeatures().get(4);
+	public EAttribute getPolicyManagerPlanModel_Origin() {
+		return (EAttribute)policyManagerPlanModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -737,8 +727,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPolicyManagerPlan_ActionGroups() {
-		return (EReference)policyManagerPlanEClass.getEStructuralFeatures().get(5);
+	public EAttribute getPolicyManagerPlanModel_SourceCode() {
+		return (EAttribute)policyManagerPlanModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -746,8 +736,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getService() {
-		return serviceEClass;
+	public EAttribute getPolicyManagerPlanModel_PolicyManagerType() {
+		return (EAttribute)policyManagerPlanModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -755,8 +745,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getService_Name() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(0);
+	public EReference getPolicyManagerPlanModel_ActionGroups() {
+		return (EReference)policyManagerPlanModelEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -764,8 +754,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getService_Description() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(1);
+	public EReference getPolicyManagerPlanModel_CustomAttributes() {
+		return (EReference)policyManagerPlanModelEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -773,8 +763,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getService_ServiceType() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
+	public EClass getServiceModel() {
+		return serviceModelEClass;
 	}
 
 	/**
@@ -782,8 +772,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getService_Characteristics() {
-		return (EReference)serviceEClass.getEStructuralFeatures().get(3);
+	public EAttribute getServiceModel_Name() {
+		return (EAttribute)serviceModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -791,8 +781,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getServiceCharacteristic() {
-		return serviceCharacteristicEClass;
+	public EAttribute getServiceModel_Description() {
+		return (EAttribute)serviceModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -800,8 +790,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getServiceCharacteristic_Name() {
-		return (EAttribute)serviceCharacteristicEClass.getEStructuralFeatures().get(0);
+	public EAttribute getServiceModel_ServiceType() {
+		return (EAttribute)serviceModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -809,8 +799,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getServiceCharacteristic_Description() {
-		return (EAttribute)serviceCharacteristicEClass.getEStructuralFeatures().get(1);
+	public EReference getServiceModel_Characteristics() {
+		return (EReference)serviceModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -818,8 +808,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getServiceCharacteristic_CharacteristicType() {
-		return (EAttribute)serviceCharacteristicEClass.getEStructuralFeatures().get(2);
+	public EReference getServiceModel_CustomAttributes() {
+		return (EReference)serviceModelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -827,8 +817,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getServiceCharacteristic_CustomAttributes() {
-		return (EReference)serviceCharacteristicEClass.getEStructuralFeatures().get(3);
+	public EClass getServiceCharacteristicModel() {
+		return serviceCharacteristicModelEClass;
 	}
 
 	/**
@@ -836,8 +826,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTransition() {
-		return transitionEClass;
+	public EAttribute getServiceCharacteristicModel_Name() {
+		return (EAttribute)serviceCharacteristicModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -845,8 +835,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransition_Name() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(0);
+	public EAttribute getServiceCharacteristicModel_Description() {
+		return (EAttribute)serviceCharacteristicModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -854,8 +844,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransition_Description() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(1);
+	public EAttribute getServiceCharacteristicModel_CharacteristicType() {
+		return (EAttribute)serviceCharacteristicModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -863,8 +853,8 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransition_TransitionType() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(2);
+	public EReference getServiceCharacteristicModel_CustomAttributes() {
+		return (EReference)serviceCharacteristicModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -872,8 +862,53 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransition_Value() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(3);
+	public EReference getServiceCharacteristicModel_Member() {
+		return (EReference)serviceCharacteristicModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTransitionModel() {
+		return transitionModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransitionModel_Name() {
+		return (EAttribute)transitionModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransitionModel_Description() {
+		return (EAttribute)transitionModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransitionModel_TransitionType() {
+		return (EAttribute)transitionModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransitionModel_Value() {
+		return (EAttribute)transitionModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -908,15 +943,6 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getMaybe() {
-		return maybeEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public PdpFactory getPdpFactory() {
 		return (PdpFactory)getEFactoryInstance();
 	}
@@ -940,100 +966,102 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		abstractOCampPlanEClass = createEClass(ABSTRACT_OCAMP_PLAN);
-		createEAttribute(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__NAME);
-		createEAttribute(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__DESCRIPTION);
-		createEAttribute(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__ORIGIN);
-		createEAttribute(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__SOURCE_CODE);
-		createEReference(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__ARTIFACTS);
-		createEReference(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__SERVICES);
-		createEReference(abstractOCampPlanEClass, ABSTRACT_OCAMP_PLAN__POLICIES);
+		abstractOCampPlanModelEClass = createEClass(ABSTRACT_OCAMP_PLAN_MODEL);
+		createEAttribute(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__NAME);
+		createEAttribute(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__DESCRIPTION);
+		createEAttribute(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__ORIGIN);
+		createEAttribute(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__SOURCE_CODE);
+		createEReference(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__ARTIFACTS);
+		createEReference(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__SERVICES);
+		createEReference(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__POLICIES);
+		createEReference(abstractOCampPlanModelEClass, ABSTRACT_OCAMP_PLAN_MODEL__CUSTOM_ATTRIBUTES);
 
-		actionEClass = createEClass(ACTION);
-		createEAttribute(actionEClass, ACTION__NAME);
-		createEAttribute(actionEClass, ACTION__DESCRIPTION);
-		createEAttribute(actionEClass, ACTION__PROPERTY);
-		createEAttribute(actionEClass, ACTION__ACTION_TYPE);
-		createEReference(actionEClass, ACTION__TRANSITIONS);
+		actionModelEClass = createEClass(ACTION_MODEL);
+		createEAttribute(actionModelEClass, ACTION_MODEL__NAME);
+		createEAttribute(actionModelEClass, ACTION_MODEL__DESCRIPTION);
+		createEAttribute(actionModelEClass, ACTION_MODEL__PROPERTY);
+		createEAttribute(actionModelEClass, ACTION_MODEL__ACTION_TYPE);
+		createEReference(actionModelEClass, ACTION_MODEL__TRANSITIONS);
+		createEReference(actionModelEClass, ACTION_MODEL__CUSTOM_ATTRIBUTES);
 
-		actionGroupEClass = createEClass(ACTION_GROUP);
-		createEAttribute(actionGroupEClass, ACTION_GROUP__NAME);
-		createEAttribute(actionGroupEClass, ACTION_GROUP__DESCRIPTION);
-		createEAttribute(actionGroupEClass, ACTION_GROUP__ACTION_ID);
-		createEAttribute(actionGroupEClass, ACTION_GROUP__ACTION_GROUP_TYPE);
-		createEReference(actionGroupEClass, ACTION_GROUP__ACTIONS);
+		actionGroupModelEClass = createEClass(ACTION_GROUP_MODEL);
+		createEAttribute(actionGroupModelEClass, ACTION_GROUP_MODEL__NAME);
+		createEAttribute(actionGroupModelEClass, ACTION_GROUP_MODEL__DESCRIPTION);
+		createEAttribute(actionGroupModelEClass, ACTION_GROUP_MODEL__ACTION_ID);
+		createEAttribute(actionGroupModelEClass, ACTION_GROUP_MODEL__ACTION_GROUP_TYPE);
+		createEReference(actionGroupModelEClass, ACTION_GROUP_MODEL__ACTIONS);
+		createEReference(actionGroupModelEClass, ACTION_GROUP_MODEL__CUSTOM_ATTRIBUTES);
 
-		artifactEClass = createEClass(ARTIFACT);
-		createEAttribute(artifactEClass, ARTIFACT__NAME);
-		createEAttribute(artifactEClass, ARTIFACT__DESCRIPTION);
-		createEAttribute(artifactEClass, ARTIFACT__ARTIFACT_TYPE);
-		createEReference(artifactEClass, ARTIFACT__CONTENT);
-		createEReference(artifactEClass, ARTIFACT__REQUIREMENTS);
+		artifactModelEClass = createEClass(ARTIFACT_MODEL);
+		createEAttribute(artifactModelEClass, ARTIFACT_MODEL__NAME);
+		createEAttribute(artifactModelEClass, ARTIFACT_MODEL__DESCRIPTION);
+		createEAttribute(artifactModelEClass, ARTIFACT_MODEL__ARTIFACT_TYPE);
+		createEReference(artifactModelEClass, ARTIFACT_MODEL__CONTENT);
+		createEReference(artifactModelEClass, ARTIFACT_MODEL__REQUIREMENTS);
+		createEReference(artifactModelEClass, ARTIFACT_MODEL__CUSTOM_ATTRIBUTES);
 
-		artifactContentEClass = createEClass(ARTIFACT_CONTENT);
-		createEAttribute(artifactContentEClass, ARTIFACT_CONTENT__HREF);
+		artifactContentModelEClass = createEClass(ARTIFACT_CONTENT_MODEL);
+		createEAttribute(artifactContentModelEClass, ARTIFACT_CONTENT_MODEL__HREF);
+		createEReference(artifactContentModelEClass, ARTIFACT_CONTENT_MODEL__CUSTOM_ATTRIBUTES);
 
-		artifactRequirementEClass = createEClass(ARTIFACT_REQUIREMENT);
-		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__NAME);
-		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__DESCRIPTION);
-		createEAttribute(artifactRequirementEClass, ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE);
+		artifactRequirementModelEClass = createEClass(ARTIFACT_REQUIREMENT_MODEL);
+		createEAttribute(artifactRequirementModelEClass, ARTIFACT_REQUIREMENT_MODEL__NAME);
+		createEAttribute(artifactRequirementModelEClass, ARTIFACT_REQUIREMENT_MODEL__DESCRIPTION);
+		createEAttribute(artifactRequirementModelEClass, ARTIFACT_REQUIREMENT_MODEL__REQUIREMENT_TYPE);
+		createEReference(artifactRequirementModelEClass, ARTIFACT_REQUIREMENT_MODEL__CUSTOM_ATTRIBUTES);
+		createEAttribute(artifactRequirementModelEClass, ARTIFACT_REQUIREMENT_MODEL__FULFILLMENT);
 
-		deploymentPlanEClass = createEClass(DEPLOYMENT_PLAN);
-		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__NAME);
-		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__DESCRIPTION);
-		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__ORIGIN);
-		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__SOURCE_CODE);
-		createEAttribute(deploymentPlanEClass, DEPLOYMENT_PLAN__TYPE);
-		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__ARTIFACTS);
-		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__SERVICES);
-		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__POLICIES);
-		createEReference(deploymentPlanEClass, DEPLOYMENT_PLAN__ACTION_GROUPS);
+		deploymentPlanModelEClass = createEClass(DEPLOYMENT_PLAN_MODEL);
+		createEAttribute(deploymentPlanModelEClass, DEPLOYMENT_PLAN_MODEL__TYPE);
+		createEReference(deploymentPlanModelEClass, DEPLOYMENT_PLAN_MODEL__ACTION_GROUPS);
 
-		policyEClass = createEClass(POLICY);
-		createEAttribute(policyEClass, POLICY__NAME);
-		createEAttribute(policyEClass, POLICY__DESCRIPTION);
-		createEAttribute(policyEClass, POLICY__POLICY_TYPE);
-		createEReference(policyEClass, POLICY__POLICY_CONSTRAINTS);
-		createEAttribute(policyEClass, POLICY__TARGETS);
+		policyModelEClass = createEClass(POLICY_MODEL);
+		createEAttribute(policyModelEClass, POLICY_MODEL__NAME);
+		createEAttribute(policyModelEClass, POLICY_MODEL__DESCRIPTION);
+		createEAttribute(policyModelEClass, POLICY_MODEL__POLICY_TYPE);
+		createEReference(policyModelEClass, POLICY_MODEL__POLICY_CONSTRAINTS);
+		createEAttribute(policyModelEClass, POLICY_MODEL__TARGETS);
+		createEReference(policyModelEClass, POLICY_MODEL__CUSTOM_ATTRIBUTES);
 
-		policyConstraintEClass = createEClass(POLICY_CONSTRAINT);
-		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__NAME);
-		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__DESCRIPTION);
-		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__POLICY_CONSTRAINT_TYPE);
-		createEAttribute(policyConstraintEClass, POLICY_CONSTRAINT__VALUE);
+		policyConstraintModelEClass = createEClass(POLICY_CONSTRAINT_MODEL);
+		createEAttribute(policyConstraintModelEClass, POLICY_CONSTRAINT_MODEL__NAME);
+		createEAttribute(policyConstraintModelEClass, POLICY_CONSTRAINT_MODEL__DESCRIPTION);
+		createEAttribute(policyConstraintModelEClass, POLICY_CONSTRAINT_MODEL__POLICY_CONSTRAINT_TYPE);
+		createEAttribute(policyConstraintModelEClass, POLICY_CONSTRAINT_MODEL__VALUE);
+		createEReference(policyConstraintModelEClass, POLICY_CONSTRAINT_MODEL__CUSTOM_ATTRIBUTES);
 
-		policyManagerPlanEClass = createEClass(POLICY_MANAGER_PLAN);
-		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__NAME);
-		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__DESCRIPTION);
-		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__ORIGIN);
-		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__SOURCE_CODE);
-		createEAttribute(policyManagerPlanEClass, POLICY_MANAGER_PLAN__POLICY_MANAGER_TYPE);
-		createEReference(policyManagerPlanEClass, POLICY_MANAGER_PLAN__ACTION_GROUPS);
+		policyManagerPlanModelEClass = createEClass(POLICY_MANAGER_PLAN_MODEL);
+		createEAttribute(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__NAME);
+		createEAttribute(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__DESCRIPTION);
+		createEAttribute(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__ORIGIN);
+		createEAttribute(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__SOURCE_CODE);
+		createEAttribute(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__POLICY_MANAGER_TYPE);
+		createEReference(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__ACTION_GROUPS);
+		createEReference(policyManagerPlanModelEClass, POLICY_MANAGER_PLAN_MODEL__CUSTOM_ATTRIBUTES);
 
-		serviceEClass = createEClass(SERVICE);
-		createEAttribute(serviceEClass, SERVICE__NAME);
-		createEAttribute(serviceEClass, SERVICE__DESCRIPTION);
-		createEAttribute(serviceEClass, SERVICE__SERVICE_TYPE);
-		createEReference(serviceEClass, SERVICE__CHARACTERISTICS);
+		serviceModelEClass = createEClass(SERVICE_MODEL);
+		createEAttribute(serviceModelEClass, SERVICE_MODEL__NAME);
+		createEAttribute(serviceModelEClass, SERVICE_MODEL__DESCRIPTION);
+		createEAttribute(serviceModelEClass, SERVICE_MODEL__SERVICE_TYPE);
+		createEReference(serviceModelEClass, SERVICE_MODEL__CHARACTERISTICS);
+		createEReference(serviceModelEClass, SERVICE_MODEL__CUSTOM_ATTRIBUTES);
 
-		serviceCharacteristicEClass = createEClass(SERVICE_CHARACTERISTIC);
-		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__NAME);
-		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__DESCRIPTION);
-		createEAttribute(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE);
-		createEReference(serviceCharacteristicEClass, SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES);
+		serviceCharacteristicModelEClass = createEClass(SERVICE_CHARACTERISTIC_MODEL);
+		createEAttribute(serviceCharacteristicModelEClass, SERVICE_CHARACTERISTIC_MODEL__NAME);
+		createEAttribute(serviceCharacteristicModelEClass, SERVICE_CHARACTERISTIC_MODEL__DESCRIPTION);
+		createEAttribute(serviceCharacteristicModelEClass, SERVICE_CHARACTERISTIC_MODEL__CHARACTERISTIC_TYPE);
+		createEReference(serviceCharacteristicModelEClass, SERVICE_CHARACTERISTIC_MODEL__CUSTOM_ATTRIBUTES);
+		createEReference(serviceCharacteristicModelEClass, SERVICE_CHARACTERISTIC_MODEL__MEMBER);
 
-		transitionEClass = createEClass(TRANSITION);
-		createEAttribute(transitionEClass, TRANSITION__NAME);
-		createEAttribute(transitionEClass, TRANSITION__DESCRIPTION);
-		createEAttribute(transitionEClass, TRANSITION__TRANSITION_TYPE);
-		createEAttribute(transitionEClass, TRANSITION__VALUE);
+		transitionModelEClass = createEClass(TRANSITION_MODEL);
+		createEAttribute(transitionModelEClass, TRANSITION_MODEL__NAME);
+		createEAttribute(transitionModelEClass, TRANSITION_MODEL__DESCRIPTION);
+		createEAttribute(transitionModelEClass, TRANSITION_MODEL__TRANSITION_TYPE);
+		createEAttribute(transitionModelEClass, TRANSITION_MODEL__VALUE);
 
 		stringToEObjectMapEClass = createEClass(STRING_TO_EOBJECT_MAP);
 		createEAttribute(stringToEObjectMapEClass, STRING_TO_EOBJECT_MAP__KEY);
 		createEAttribute(stringToEObjectMapEClass, STRING_TO_EOBJECT_MAP__VALUE);
-
-		// Create data types
-		maybeEDataType = createEDataType(MAYBE);
 	}
 
 	/**
@@ -1060,107 +1088,109 @@ public class PdpPackageImpl extends EPackageImpl implements PdpPackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
-		addETypeParameter(maybeEDataType, "T");
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		deploymentPlanModelEClass.getESuperTypes().add(this.getAbstractOCampPlanModel());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(abstractOCampPlanEClass, AbstractOCampPlan.class, "AbstractOCampPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractOCampPlan_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractOCampPlan_Description(), ecorePackage.getEString(), "description", null, 0, 1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractOCampPlan_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractOCampPlan_SourceCode(), ecorePackage.getEString(), "sourceCode", null, 0, 1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractOCampPlan_Artifacts(), this.getArtifact(), null, "artifacts", null, 0, -1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractOCampPlan_Services(), this.getService(), null, "services", null, 0, -1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractOCampPlan_Policies(), this.getPolicy(), null, "policies", null, 0, -1, AbstractOCampPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractOCampPlanModelEClass, AbstractOCampPlanModel.class, "AbstractOCampPlanModel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractOCampPlanModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractOCampPlanModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractOCampPlanModel_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractOCampPlanModel_SourceCode(), ecorePackage.getEString(), "sourceCode", null, 0, 1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractOCampPlanModel_Artifacts(), this.getArtifactModel(), null, "artifacts", null, 0, -1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractOCampPlanModel_Services(), this.getServiceModel(), null, "services", null, 0, -1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractOCampPlanModel_Policies(), this.getPolicyModel(), null, "policies", null, 0, -1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractOCampPlanModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, AbstractOCampPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAction_Name(), ecorePackage.getEString(), "name", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAction_Description(), ecorePackage.getEString(), "description", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAction_Property(), ecorePackage.getEString(), "property", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAction_ActionType(), ecorePackage.getEString(), "actionType", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAction_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(actionModelEClass, ActionModel.class, "ActionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getActionModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ActionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, ActionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionModel_Property(), ecorePackage.getEString(), "property", null, 0, 1, ActionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionModel_ActionType(), ecorePackage.getEString(), "actionType", null, 0, 1, ActionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActionModel_Transitions(), this.getTransitionModel(), null, "transitions", null, 0, -1, ActionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActionModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ActionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(actionGroupEClass, ActionGroup.class, "ActionGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getActionGroup_Name(), ecorePackage.getEString(), "name", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActionGroup_Description(), ecorePackage.getEString(), "description", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActionGroup_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActionGroup_ActionGroupType(), ecorePackage.getEString(), "actionGroupType", null, 0, 1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActionGroup_Actions(), this.getAction(), null, "actions", null, 0, -1, ActionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(actionGroupModelEClass, ActionGroupModel.class, "ActionGroupModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getActionGroupModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ActionGroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionGroupModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, ActionGroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionGroupModel_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, ActionGroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActionGroupModel_ActionGroupType(), ecorePackage.getEString(), "actionGroupType", null, 0, 1, ActionGroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActionGroupModel_Actions(), this.getActionModel(), null, "actions", null, 0, -1, ActionGroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActionGroupModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ActionGroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifact_Description(), ecorePackage.getEString(), "description", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifact_ArtifactType(), ecorePackage.getEString(), "artifactType", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getArtifact_Content(), this.getArtifactContent(), null, "content", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getArtifact_Requirements(), this.getArtifactRequirement(), null, "requirements", null, 0, -1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(artifactModelEClass, ArtifactModel.class, "ArtifactModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArtifactModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArtifactModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifactModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, ArtifactModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifactModel_ArtifactType(), ecorePackage.getEString(), "artifactType", null, 0, 1, ArtifactModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifactModel_Content(), this.getArtifactContentModel(), null, "content", null, 0, 1, ArtifactModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifactModel_Requirements(), this.getArtifactRequirementModel(), null, "requirements", null, 0, -1, ArtifactModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifactModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ArtifactModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(artifactContentEClass, ArtifactContent.class, "ArtifactContent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArtifactContent_Href(), ecorePackage.getEString(), "href", null, 0, 1, ArtifactContent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(artifactContentModelEClass, ArtifactContentModel.class, "ArtifactContentModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArtifactContentModel_Href(), ecorePackage.getEString(), "href", null, 0, 1, ArtifactContentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifactContentModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ArtifactContentModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(artifactRequirementEClass, ArtifactRequirement.class, "ArtifactRequirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArtifactRequirement_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifactRequirement_Description(), ecorePackage.getEString(), "description", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifactRequirement_RequirementType(), ecorePackage.getEString(), "requirementType", null, 0, 1, ArtifactRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(artifactRequirementModelEClass, ArtifactRequirementModel.class, "ArtifactRequirementModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArtifactRequirementModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArtifactRequirementModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifactRequirementModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, ArtifactRequirementModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifactRequirementModel_RequirementType(), ecorePackage.getEString(), "requirementType", null, 0, 1, ArtifactRequirementModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifactRequirementModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ArtifactRequirementModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifactRequirementModel_Fulfillment(), ecorePackage.getEString(), "fulfillment", null, 0, 1, ArtifactRequirementModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(deploymentPlanEClass, DeploymentPlan.class, "DeploymentPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDeploymentPlan_Name(), ecorePackage.getEString(), "name", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeploymentPlan_Description(), ecorePackage.getEString(), "description", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeploymentPlan_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeploymentPlan_SourceCode(), ecorePackage.getEString(), "sourceCode", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeploymentPlan_Type(), ecorePackage.getEString(), "type", null, 0, 1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeploymentPlan_Artifacts(), this.getArtifact(), null, "artifacts", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeploymentPlan_Services(), this.getService(), null, "services", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeploymentPlan_Policies(), this.getPolicy(), null, "policies", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeploymentPlan_ActionGroups(), this.getActionGroup(), null, "actionGroups", null, 0, -1, DeploymentPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(deploymentPlanModelEClass, DeploymentPlanModel.class, "DeploymentPlanModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDeploymentPlanModel_Type(), ecorePackage.getEString(), "type", null, 0, 1, DeploymentPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeploymentPlanModel_ActionGroups(), this.getActionGroupModel(), null, "actionGroups", null, 0, -1, DeploymentPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(policyEClass, Policy.class, "Policy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPolicy_Name(), ecorePackage.getEString(), "name", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicy_Description(), ecorePackage.getEString(), "description", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicy_PolicyType(), ecorePackage.getEString(), "policyType", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPolicy_PolicyConstraints(), this.getPolicyConstraint(), null, "policyConstraints", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicy_Targets(), ecorePackage.getEString(), "targets", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(policyModelEClass, PolicyModel.class, "PolicyModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPolicyModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyModel_PolicyType(), ecorePackage.getEString(), "policyType", null, 0, 1, PolicyModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicyModel_PolicyConstraints(), this.getPolicyConstraintModel(), null, "policyConstraints", null, 0, -1, PolicyModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyModel_Targets(), ecorePackage.getEString(), "targets", null, 0, -1, PolicyModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicyModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, PolicyModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(policyConstraintEClass, PolicyConstraint.class, "PolicyConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPolicyConstraint_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyConstraint_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyConstraint_PolicyConstraintType(), ecorePackage.getEString(), "policyConstraintType", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyConstraint_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, PolicyConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(policyConstraintModelEClass, PolicyConstraintModel.class, "PolicyConstraintModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPolicyConstraintModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyConstraintModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyConstraintModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyConstraintModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyConstraintModel_PolicyConstraintType(), ecorePackage.getEString(), "policyConstraintType", null, 0, 1, PolicyConstraintModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyConstraintModel_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, PolicyConstraintModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicyConstraintModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, PolicyConstraintModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(policyManagerPlanEClass, PolicyManagerPlan.class, "PolicyManagerPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPolicyManagerPlan_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyManagerPlan_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyManagerPlan_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyManagerPlan_SourceCode(), ecorePackage.getEString(), "sourceCode", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPolicyManagerPlan_PolicyManagerType(), ecorePackage.getEString(), "policyManagerType", null, 0, 1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPolicyManagerPlan_ActionGroups(), this.getActionGroup(), null, "actionGroups", null, 0, -1, PolicyManagerPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(policyManagerPlanModelEClass, PolicyManagerPlanModel.class, "PolicyManagerPlanModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPolicyManagerPlanModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyManagerPlanModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyManagerPlanModel_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyManagerPlanModel_SourceCode(), ecorePackage.getEString(), "sourceCode", null, 0, 1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicyManagerPlanModel_PolicyManagerType(), ecorePackage.getEString(), "policyManagerType", null, 0, 1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicyManagerPlanModel_ActionGroups(), this.getActionGroupModel(), null, "actionGroups", null, 0, -1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicyManagerPlanModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, PolicyManagerPlanModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getService_Name(), ecorePackage.getEString(), "name", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getService_Description(), ecorePackage.getEString(), "description", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getService_ServiceType(), ecorePackage.getEString(), "serviceType", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getService_Characteristics(), this.getServiceCharacteristic(), null, "characteristics", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(serviceModelEClass, ServiceModel.class, "ServiceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getServiceModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getServiceModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getServiceModel_ServiceType(), ecorePackage.getEString(), "serviceType", null, 0, 1, ServiceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServiceModel_Characteristics(), this.getServiceCharacteristicModel(), null, "characteristics", null, 0, -1, ServiceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServiceModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ServiceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(serviceCharacteristicEClass, ServiceCharacteristic.class, "ServiceCharacteristic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getServiceCharacteristic_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getServiceCharacteristic_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getServiceCharacteristic_CharacteristicType(), ecorePackage.getEString(), "characteristicType", null, 0, 1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getServiceCharacteristic_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ServiceCharacteristic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(serviceCharacteristicModelEClass, ServiceCharacteristicModel.class, "ServiceCharacteristicModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getServiceCharacteristicModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceCharacteristicModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getServiceCharacteristicModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceCharacteristicModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getServiceCharacteristicModel_CharacteristicType(), ecorePackage.getEString(), "characteristicType", null, 0, 1, ServiceCharacteristicModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServiceCharacteristicModel_CustomAttributes(), this.getStringToEObjectMap(), null, "customAttributes", null, 0, -1, ServiceCharacteristicModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServiceCharacteristicModel_Member(), this.getServiceModel(), null, "member", null, 0, 1, ServiceCharacteristicModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransition_Description(), ecorePackage.getEString(), "description", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransition_TransitionType(), ecorePackage.getEString(), "transitionType", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransition_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(transitionModelEClass, TransitionModel.class, "TransitionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTransitionModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, TransitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransitionModel_Description(), ecorePackage.getEString(), "description", null, 0, 1, TransitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransitionModel_TransitionType(), ecorePackage.getEString(), "transitionType", null, 0, 1, TransitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransitionModel_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, TransitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stringToEObjectMapEClass, Map.Entry.class, "StringToEObjectMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringToEObjectMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStringToEObjectMap_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Initialize data types
-		initEDataType(maybeEDataType, Maybe.class, "Maybe", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

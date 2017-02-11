@@ -1,0 +1,53 @@
+Camp_Version: CAMP 1.1
+name: Simple WebApp example
+
+artifacts:
+- type: kr.ac.hanyang.entities.artifacts.War
+  content: http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war
+  requirements:
+  - type: kr.ac.hanyang.entities.requirements.DeployedOn
+    target: /webapps
+    fulfillment: id:tomcat          
+    
+  - type: kr.ac.hanyang.entities.requirements.ConnectsTo
+    port: 3306
+    fulfillment: mySQL_DBMS
+    
+- type: kr.ac.hanyang.entities.artifacts.SQL
+  content: file://webshop_database.sql
+  requirements:
+  - type: kr.ac.hanyang.entities.requirements.DeployedOn
+    server.port: 3306
+    fulfillment: mySQL_DBMS   
+
+services:
+  - id: tomcat
+    characteristics:
+      - characteristic_type: kr.ac.hanyang.entities.services.Tomcat8
+        version: 8.0.22
+
+  - id: mySQL_DBMS
+    characteristics:
+      - characteristic_type: kr.ac.hanyang.entities.services.MySQL      
+        mysql.port: 3306    
+
+policies:
+  - type: kr.ac.hanyang.oCamp.entities.policies.Placement
+    constraints:
+      - property: SERVICE_UP 
+        type: kr.ac.hanyang.oCamp.constraints.EqualTo
+        value: true
+      - property: PROVISIONING_LOCATION
+        type: kr.ac.hanyang.oCamp.constraints.Within  
+        value: [AWS Tokyo (ap-northeast-1),AWS Seoul (ap-northeast-2),AWS Singapore (ap-southeast-1),AWS Sydney (ap-southeast-2)]
+    targets: [tomcat]
+
+  - type: kr.ac.hanyang.oCamp.entities.policies.Placement
+    constraints:
+      - property: SERVICE_UP 
+        type: kr.ac.hanyang.oCamp.constraints.EqualTo
+        value: true
+      - property: PROVISIONING_LOCATION
+        type: kr.ac.hanyang.oCamp.constraints.Within  
+        value: [rackspace-cloudservers-HKG, rackspace-cloudservers-SYD]
+    targets: [mySQl_DBMS]
