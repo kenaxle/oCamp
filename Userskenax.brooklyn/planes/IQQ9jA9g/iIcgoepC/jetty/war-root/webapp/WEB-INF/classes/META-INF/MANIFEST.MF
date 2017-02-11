@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1460114979393
+Build-Jdk: 1.7.0_95
+Built-By: ubuntu
+Bundle-Description: JavaScript+HTML GUI for interacting with Brooklyn, u
+ sing the REST API
+Bundle-DocURL: http://www.apache.org/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Brooklyn REST JavaScript Web GUI
+Bundle-SymbolicName: org.apache.brooklyn.jsgui
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 0.9.0
+Created-By: Apache Maven Bundle Plugin
+Implementation-Title: Brooklyn REST JavaScript Web GUI
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Vendor-Id: org.apache.brooklyn
+Implementation-Version: 0.9.0
+Specification-Title: Brooklyn REST JavaScript Web GUI
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 0.9.0
+Tool: Bnd-2.4.1.201501161923
+Web-ContextPath: /

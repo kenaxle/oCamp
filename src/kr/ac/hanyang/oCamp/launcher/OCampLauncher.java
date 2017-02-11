@@ -45,6 +45,7 @@ import org.apache.brooklyn.util.os.Os;
 import org.apache.brooklyn.util.stream.Streams;
 import org.apache.brooklyn.util.time.Duration;
 import org.apache.brooklyn.util.time.Time;
+//import org.eclipse.m2m.atl.sample.files.T2CATLConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,8 +54,10 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
+import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.platform.oCampPlatformLauncher;
 import kr.ac.hanyang.oCamp.core.mgmt.BaseEntityManager;
+//import kr.ac.hanyang.tosca2camp.Tosca2CampPlatform;
 
 public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 	 private static final Logger LOG = LoggerFactory.getLogger(BrooklynLauncher.class);
@@ -418,22 +421,32 @@ public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 	        return this;
 	    }
 	    
-	    public static void main(String [] args){
-	    	//OCampLauncher launcher = OCampLauncher.newInstance()
-	    	//		.managementContext(new BaseEntityManager())
-	    			//.catalogInitialization(catInit)
-	    			//.webapp("/home", "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war")
-	    			//.start();
-	    			 
-	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
-	    			 //.location("localhost"))
-	    			 //.start();
-	    	OCampLauncher launcher = OCampLauncher.newInstance()
-	   			 .managementContext(new BaseEntityManager())
-	   			// .catalogInitialization(new CatalogInitialization())
-//	   			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
-//	   			 .location("localhost")
-	  			 .start();
-	    }
-	    
+//	    public static void main(String [] args){
+//	    	//OCampLauncher launcher = OCampLauncher.newInstance()
+//	    	//		.managementContext(new BaseEntityManager())
+//	    			//.catalogInitialization(catInit)
+//	    			//.webapp("/home", "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war")
+//	    			//.start();
+//	    			 
+//	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
+//	    			 //.location("localhost"))
+//	    			 //.start();
+//	    	OCampLauncher launcher = OCampLauncher.newInstance()
+//	   			 .managementContext(new BaseEntityManager())
+//	   			// .catalogInitialization(new CatalogInitialization())
+////	   			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
+////	   			 .location("localhost")
+//	  			 .start();
+//	    	
+//	    	Tosca2CampPlatform toscaPlatform = Tosca2CampPlatform.newPlatform();
+//	    	toscaPlatform.createServiceTemplate("WebAppExample.yml");
+//	    	oCampPlatform campPlatform = new oCampPlatformLauncher()
+//	                //.useManagementContext(new BaseEntityManager())
+//	                .launch()
+//	                .getCampPlatform();
+//	    	
+//	    	T2CATLConverter converter = T2CATLConverter.newT2CATLConverter()
+//	    											   .serviceTemplate(toscaPlatform.getServiceTemplate("ServiceTemplate"));
+//	    }
+//	    
 }
