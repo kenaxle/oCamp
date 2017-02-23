@@ -19,7 +19,7 @@ import org.apache.brooklyn.core.entity.Entities;
 
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.artifacts.WarImpl;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
+import kr.ac.hanyang.oCamp.entities.policies.PlacementImpl;
 import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
 import kr.ac.hanyang.oCamp.entities.requirements.IEntity;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
@@ -28,7 +28,7 @@ import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 public class Tomcat7Impl extends TomcatServerImpl implements IDeployable, Tomcat7, IService, oCampStartable, IEntity{
 	
 	private static final Logger log = LoggerFactory.getLogger(WarImpl.class);
-	private Map<String,PolicyManagerImpl> policyManagers;
+	private Map<String,PlacementImpl> policyManagers;
 	
 	public Tomcat7Impl(){
 		super();

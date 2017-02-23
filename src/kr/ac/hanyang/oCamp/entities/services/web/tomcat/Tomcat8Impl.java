@@ -22,7 +22,7 @@ import org.apache.brooklyn.core.entity.Entities;
 
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.artifacts.WarImpl;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
+import kr.ac.hanyang.oCamp.entities.policies.PlacementImpl;
 import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
 import kr.ac.hanyang.oCamp.entities.requirements.IEntity;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;

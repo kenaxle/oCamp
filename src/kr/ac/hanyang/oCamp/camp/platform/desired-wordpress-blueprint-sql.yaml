@@ -1,0 +1,25 @@
+name: desired wordpress blueprint sql
+artifacts:
+- type: kr.ac.hanyang.oCamp.entities.artifacts.Script
+  content: file://c:/users/kenax/git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/mysql_database_configure.sh
+  requirements:
+  - type: kr.ac.hanyang.oCamp.entities.requirements.ExecuteOn
+    fulfillment: id:mySQL_DBMS          
+
+services:
+- id: mySQL_DBMS
+  characteristics:
+  - type: kr.ac.hanyang.oCamp.entities.services.database.mysql.MySQL  
+    install_command: file://c:/users/kenax/git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/mysql_dbms_install.sh                
+        
+policies: 
+- type: kr.ac.hanyang.oCamp.entities.policies.Placement
+  constraints:
+  - property: SERVICE_UP 
+    type: kr.ac.hanyang.oCamp.entities.constraints.EqualTo
+    value: true
+  - property: PROVISIONING_LOCATION
+    type: kr.ac.hanyang.oCamp.entities.constraints.Within  
+    value: [Rackspace Hong Kong (hkg), Rackspace Sydney (syd)]
+  targets: [mySQL_DBMS]
+     

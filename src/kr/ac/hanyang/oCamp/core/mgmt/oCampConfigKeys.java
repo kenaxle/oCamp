@@ -21,6 +21,7 @@ import org.apache.brooklyn.entity.database.mysql.MySqlNode;
 import org.apache.brooklyn.entity.group.DynamicCluster;
 import org.apache.brooklyn.entity.software.base.SoftwareProcess;
 import org.apache.brooklyn.entity.software.base.SoftwareProcessDriverLifecycleEffectorTasks;
+import org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess;
 import org.apache.brooklyn.location.jclouds.JcloudsLocationConfig;
 import org.apache.brooklyn.entity.software.base.SoftwareProcess.ChildStartableMode;
 import org.apache.brooklyn.util.collections.MutableMap;
@@ -119,6 +120,9 @@ public class oCampConfigKeys extends BrooklynConfigKeys {
 
     @SetFromFlag("postLaunchCommand")
     public static final ConfigKey<String> POST_LAUNCH_COMMAND = BrooklynConfigKeys.POST_LAUNCH_COMMAND;
+    
+    @SetFromFlag("launchCommand")
+    public static final ConfigKey<String> LAUNCH_COMMAND = VanillaSoftwareProcess.LAUNCH_COMMAND;
 
     @SetFromFlag("env")
     public static final MapConfigKey<Object> SHELL_ENVIRONMENT = BrooklynConfigKeys.SHELL_ENVIRONMENT;

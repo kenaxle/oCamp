@@ -49,7 +49,7 @@ import javax.annotation.Nullable;
 import kr.ac.hanyang.oCamp.core.traits.oCampEnableable;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 	import kr.ac.hanyang.oCamp.entities.BasicOCampApplicationImpl;
-	import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
+	import kr.ac.hanyang.oCamp.entities.policies.PlacementImpl;
 	import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
 	import kr.ac.hanyang.oCamp.entities.requirements.IService;
 
@@ -88,6 +88,7 @@ import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 		        
 			 	Task<Void> task = Entities.invokeEffector(app, app, oCampStartable.STARTUP);
 			 	task.blockUntilEnded();
+			 	Task<Void> policyStartTask = Entities.invokeEffector(app, app, oCampEnableable.ENABLE);
 		        return CreationResult.of(app, task);
 		    }
 		 
@@ -277,7 +278,7 @@ import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 		    private static AssemblyTemplate buildWrapperAppTemplate(AssemblyTemplate template) {
 		        Builder<? extends AssemblyTemplate> builder = AssemblyTemplate.builder();
 		        if (template.getCustomAttributes().containsKey("policyMgr"))
-		        	builder.type("brooklyn:" + PolicyManagerImpl.class.getName());
+		        	builder.type("brooklyn:" + PlacementImpl.class.getName());
 		        else
 		        	builder.type("brooklyn:" + BasicOCampApplicationImpl.class.getName());  //FIXME leaving brooklyn tags for now 
 		        builder.id(template.getId());

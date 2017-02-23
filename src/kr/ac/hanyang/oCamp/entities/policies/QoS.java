@@ -3,7 +3,7 @@ package kr.ac.hanyang.oCamp.entities.policies;
 import org.apache.brooklyn.api.entity.ImplementedBy;
 
 @ImplementedBy(QoSImpl.class)
-public interface QoS extends PolicyManager{
+public interface QoS extends Placement{
 
 //	public static final String DEFAULT = 
 //			PolicyManager.DEFAULT

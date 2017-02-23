@@ -59,12 +59,12 @@ public class PdpProcessor{
 	}
 	
     
-    public DeploymentPlan parseDeploymentPlan(Reader yaml) {
+    public DeploymentPlanModel parseDeploymentPlan(Reader yaml) {
         return parseDeploymentPlan(Streams.readFully(yaml));
     }
     
     @SuppressWarnings("unchecked")
-    public DeploymentPlan parseDeploymentPlan(String yaml) {
+    public DeploymentPlanModel parseDeploymentPlan(String yaml) {
         Iterable<Object> template = Yamls.parseAll(yaml);
         
         Map<String, Object> dpRootUninterpreted = null;
@@ -135,7 +135,7 @@ public class PdpProcessor{
     
     /** create and return an AssemblyTemplate based on the given DP (yaml) */
 	public AssemblyTemplate registerDeploymentPlan(Reader yaml) {
-        DeploymentPlan plan = parseDeploymentPlan(yaml);
+        DeploymentPlanModel plan = parseDeploymentPlan(yaml);
         return registerDeploymentPlan(plan);
     }
     

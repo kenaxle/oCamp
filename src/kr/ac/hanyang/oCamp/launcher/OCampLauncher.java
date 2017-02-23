@@ -421,21 +421,23 @@ public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 	        return this;
 	    }
 	    
-//	    public static void main(String [] args){
-//	    	//OCampLauncher launcher = OCampLauncher.newInstance()
-//	    	//		.managementContext(new BaseEntityManager())
-//	    			//.catalogInitialization(catInit)
-//	    			//.webapp("/home", "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war")
-//	    			//.start();
-//	    			 
-//	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
-//	    			 //.location("localhost"))
-//	    			 //.start();
+	    public static void main(String [] args){
+	    	OCampLauncher launcher = OCampLauncher.newInstance()
+	    			.managementContext(new BaseEntityManager());
+	    			//.catalogInitialization(catInit)
+	    			//.webapp("/home", "http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0-M2/brooklyn-example-hello-world-sql-webapp-0.6.0-M2.war")
+	    			//.start();
+	    			 launcher.initCamp();
+	    			 launcher.start();
+	    			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
+	    			 //.location("localhost"))
+	    			 //.start();
+	   
 //	    	OCampLauncher launcher = OCampLauncher.newInstance()
 //	   			 .managementContext(new BaseEntityManager())
-//	   			// .catalogInitialization(new CatalogInitialization())
-////	   			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
-////	   			 .location("localhost")
+////	   			// .catalogInitialization(new CatalogInitialization())
+//////	   			 //.application(new WebClusterDatabaseExample().appDisplayName("Web-cluster example"))
+//////	   			 .location("localhost")
 //	  			 .start();
 //	    	
 //	    	Tosca2CampPlatform toscaPlatform = Tosca2CampPlatform.newPlatform();
@@ -445,8 +447,8 @@ public class OCampLauncher extends BasicLauncher<OCampLauncher>{
 //	                .launch()
 //	                .getCampPlatform();
 //	    	
-//	    	T2CATLConverter converter = T2CATLConverter.newT2CATLConverter()
-//	    											   .serviceTemplate(toscaPlatform.getServiceTemplate("ServiceTemplate"));
-//	    }
+	    	//T2CATLConverter converter = T2CATLConverter.newT2CATLConverter()
+	    											  // .serviceTemplate(toscaPlatform.getServiceTemplate("ServiceTemplate"));
+	    }
 //	    
 }

@@ -7,8 +7,8 @@ import org.apache.brooklyn.core.config.ConfigKeys;
 import org.apache.brooklyn.core.sensor.BasicNotificationSensor;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 
-@ImplementedBy(PolicyManagerImpl.class)
-public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.PolicyManager{
+@ImplementedBy(PlacementImpl.class)
+public interface Placement extends kr.ac.hanyang.oCamp.api.policyManager.PolicyManager{
 	
 	public static final ConfigKey<Object> POLMGRTYPE = ConfigKeys.newConfigKey(Object.class,"policymanager.type","used only to get the policy manager type from the spec");
 	
@@ -21,7 +21,7 @@ public interface PolicyManager extends kr.ac.hanyang.oCamp.api.policyManager.Pol
 	public static final Sensor<Object> ACTIONGROUPS_SET = new BasicNotificationSensor<Object>(
 			Object.class, "actiongroups.set", "The actiongroups were set");
 	
-	public static final String DEFAULT = "type: kr.ac.hanyang.oCamp.entities.policies.PolicyManager\n"
+	public static final String DEFAULT = "type: kr.ac.hanyang.oCamp.entities.policies.Placement\n"
 									   + "actiongroups:\n"
 									   + "- id: START\n"
 									   + "  actions:\n"

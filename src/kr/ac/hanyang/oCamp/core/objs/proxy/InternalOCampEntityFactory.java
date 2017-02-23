@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
 
 import kr.ac.hanyang.oCamp.entities.constraints.Constraint;
 import kr.ac.hanyang.oCamp.entities.constraints.ConstraintImpl;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
+import kr.ac.hanyang.oCamp.entities.policies.Placement;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Action;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ActionGroup;
 import kr.ac.hanyang.oCamp.entities.policies.objs.ConstraintProperties;
@@ -146,7 +146,7 @@ public class InternalOCampEntityFactory extends InternalEntityFactory {
 					entity.addChild(createEntitiesRec(childSpec, entitiesByEntityId, specsByEntityId));
 					if (entity instanceof PolicyImpl){
 						//set the targets and constraints
-						entity.config().set(PolicyManager.POLMGRTYPE,(String) spec.getConfig().get(PolicyManager.POLMGRTYPE));
+						entity.config().set(Placement.POLMGRTYPE,(String) spec.getConfig().get(Placement.POLMGRTYPE));
 						List<Entity> targetList = Lists.newArrayList();
 						for (String id: (List<String>) spec.getConfig().get(PolicyImpl.TARGETS)){
 							targetList.add(entitiesByEntityId.get(planId2serviceId.get(id)));

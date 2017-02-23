@@ -24,12 +24,12 @@ import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.policies.objs.PolicyImpl;
 
 
-public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
-	private static final Logger log = LoggerFactory.getLogger(PolicyManagerImpl.class);
+public class PlacementImpl extends AbstractEntity implements Placement{
+	private static final Logger log = LoggerFactory.getLogger(PlacementImpl.class);
 	private List<Policy> policyList;	
 	private List<ActionGroup> validActions;
 
-	public PolicyManagerImpl(){ }
+	public PlacementImpl(){ }
 	
 	@Override
 	public void init(){
@@ -41,7 +41,7 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	public boolean addOCampPolicy(Policy policy) {
 		if (this.policyList.add(policy)){
 			this.subscriptions().subscribe(policy, PolicyImpl.POLICY_VIOLATED, policyManagerListener(this));
-			sensors().emit(PolicyManager.POLICY_ADDED, (PolicyImpl)policy);
+			sensors().emit(Placement.POLICY_ADDED, (PolicyImpl)policy);
 			return true;
 		}
 			return false;
@@ -51,13 +51,13 @@ public class PolicyManagerImpl extends AbstractEntity implements PolicyManager{
 	public boolean removeOCampPolicy(Policy policy) {
 		if (this.policyList.remove(policy)){
 			this.subscriptions().unsubscribe((PolicyImpl) policy);
-			sensors().emit(PolicyManager.POLICY_REMOVED, (PolicyImpl)policy);
+			sensors().emit(Placement.POLICY_REMOVED, (PolicyImpl)policy);
 			return true;
 		}
 			return false;
 	}
 	
-	private SensorEventListener<Object> policyManagerListener(PolicyManager listener){
+	private SensorEventListener<Object> policyManagerListener(Placement listener){
 		return new SensorEventListener<Object>(){
 			public void onEvent(SensorEvent<Object> event){
 				log.info("*********Sensor Event Detected**********");

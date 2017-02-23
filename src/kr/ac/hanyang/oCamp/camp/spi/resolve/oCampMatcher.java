@@ -25,6 +25,7 @@ import org.apache.brooklyn.util.collections.MutableMap;
 import org.apache.brooklyn.util.guava.Maybe;
 import org.apache.brooklyn.util.text.Strings;
 import org.apache.commons.lang.ArrayUtils;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpFactory;
@@ -182,7 +184,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
             List<Object> characteristics = MutableList.copyOf(((ServiceModel)deploymentPlanItem).getCharacteristics());
             for(Object servChar: characteristics){
             	//Map<String, Object> attrs =  ((ServiceCharacteristic)servChar).getCustomAttributes().map() ;           	
-	            if (((ServiceCharacteristicModel)servChar).eGet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__MEMBER) != null){ // this is a cluster of group. parse the spec of the member
+	            if ( !((ServiceCharacteristicModel)servChar).getMember().getCharacteristics().isEmpty()){ // this is a cluster of group. parse the spec of the member
 	            	ServiceModel memberService = (ServiceModel) ((ServiceCharacteristicModel)servChar).eGet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__MEMBER);
 	            	
 	            	oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> memberBuilder = oCampPlatformComponentTemplate.builder();
@@ -217,7 +219,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	name = ((ArtifactModel)deploymentPlanItem).getName();
         	if (!Strings.isBlank(name)) 
         		builder.name(name);
-        	ArtifactContent content = (ArtifactContent)((ArtifactModel)deploymentPlanItem).getContent();
+        	ArtifactContentModel content = (ArtifactContentModel)((ArtifactModel)deploymentPlanItem).getContent();
         	if (content != null){
         		builder.customAttribute("content",content.getHref());
         	}
@@ -231,8 +233,9 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	
         		for(Object requirement: reqs){
         			ArtifactRequirementModel artRequirement = (ArtifactRequirementModel) requirement;
-        			String reqType = extractSubValue(artRequirement.getRequirementType(),".");
-        			Map<String, Object> reqAttrs = artRequirement.getCustomAttributes().map() ;
+        			//String reqType = extractSubValue(artRequirement.getRequirementType(),".");
+        			String reqType = artRequirement.getRequirementType();
+        			Map<String, Object> reqAttrs = (Map<String, Object>) artRequirement.getCustomAttributes().map() ;
         			
         			oCampPlatformComponentTemplate.Builder<? extends oCampPlatformComponentTemplate> reqBuilder = oCampPlatformComponentTemplate.builder(); 
         	        reqBuilder.type( reqType);
@@ -241,7 +244,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         	        //add custom tags
         	        Collection<String> keys = getTagIDs();
         	        for(String key: keys){
-        	        	addCustomMapAttributeIfNonNull(reqBuilder, reqAttrs, key);
+        	        	addCustomAttributeIfNonNull(reqBuilder, reqAttrs, key);
         	        }
         	  
         	        reqBuilder.add(artifact);
@@ -303,7 +306,7 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
         		builder.name(name);
         	
         	builder.customAttribute("actionId", ((ActionGroupModel)deploymentPlanItem).getActionId());
-        	Map<String, Object> attrs =  (Map<String, Object>) ((ActionGroupModel)deploymentPlanItem).getCustomAttributes() ; 
+        	Map<String, Object> attrs =  ((ActionGroupModel)deploymentPlanItem).getCustomAttributes().map() ; 
         	List<ActionModel> actions = MutableList.copyOf( ((ActionGroupModel)deploymentPlanItem).getActions());
         	if (actions != null ){
         		for(ActionModel action: actions){
@@ -333,6 +336,12 @@ public class oCampMatcher extends BrooklynEntityMatcher implements PdpMatcher,oC
 		
 	}
 	
+	private void addCustomAttributeIfNonNull(Builder<? extends PlatformComponentTemplate> builder, Map<?,?> attrs, String key) {
+		Object item = attrs.remove(key);
+		if (item != null){
+			builder.customAttribute(key, item);
+		}
+	}
 	
 	 /**
      * Looks for the given key in the map of attributes and adds it to the given builder

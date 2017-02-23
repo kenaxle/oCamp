@@ -14,18 +14,32 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.eclipse.emf.ecore.EFactory;
 
 import kr.ac.hanyang.oCamp.camp.pdp.ActionGroup;
+import kr.ac.hanyang.oCamp.camp.pdp.ActionGroupModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ActionModel;
 import kr.ac.hanyang.oCamp.camp.pdp.Artifact;
 import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlan;
+import kr.ac.hanyang.oCamp.camp.pdp.DeploymentPlanModel;
 import kr.ac.hanyang.oCamp.camp.pdp.PdpPackage;
 import kr.ac.hanyang.oCamp.camp.pdp.Policy;
 import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraint;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyConstraintModel;
+import kr.ac.hanyang.oCamp.camp.pdp.PolicyModel;
 //import kr.ac.hanyang.oCamp.camp.pdp.Service;
 //import kr.ac.hanyang.tosca2camp.rest.model.ModelPackage;
 //import kr.ac.hanyang.tosca2camp.rest.model.ServiceTemplateModel;
 import kr.ac.hanyang.oCamp.camp.pdp.Service;
 import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristic;
+import kr.ac.hanyang.oCamp.camp.pdp.ServiceCharacteristicModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ServiceModel;
+import kr.ac.hanyang.oCamp.camp.pdp.TransitionModel;
+import kr.ac.hanyang.oCamp.camp.pdp.bk.Action;
+import kr.ac.hanyang.oCamp.camp.pdp.bk.Transition;
+import kr.ac.hanyang.oCamp.camp.platform.oCampReserved;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContent;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactContentModel;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactModel;
 import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirement;
+import kr.ac.hanyang.oCamp.camp.pdp.ArtifactRequirementModel;
 
 
 public class DeploymentPlanTransformer {
@@ -43,121 +57,184 @@ public class DeploymentPlanTransformer {
 		   
 	   
     @SuppressWarnings("unchecked")
-    public static DeploymentPlan getDeploymentPlan(Map<String,Object> root, String optionalSourceCode) {
+    public static DeploymentPlanModel getDeploymentPlan(Map<String,Object> root, String optionalSourceCode) {
         Map<String,Object> attrs = MutableMap.copyOf(root);
         
         EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-		DeploymentPlan deploymentPlan = (DeploymentPlan) factory.create(PdpPackage.Literals.DEPLOYMENT_PLAN);
+		DeploymentPlanModel deploymentPlan = (DeploymentPlanModel) factory.create(PdpPackage.Literals.DEPLOYMENT_PLAN_MODEL);
 		
         //DeploymentPlanTransformer result = new DeploymentPlanTransformer();
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__NAME,(String) attrs.remove("name"));
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__DESCRIPTION,(String) attrs.remove("description"));
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__ORIGIN,(String) attrs.remove("origin"));
-		deploymentPlan.eSet(PdpPackage.Literals.DEPLOYMENT_PLAN__TYPE,(String) Yamls.removeMultinameAttribute(attrs, "policyManager_type", "policyManagerType", "type"));
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__SOURCE_CODE,optionalSourceCode);
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__NAME,(String) attrs.remove("name"));
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__DESCRIPTION,(String) attrs.remove("description"));
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__ORIGIN,(String) attrs.remove("origin"));
+		deploymentPlan.eSet(PdpPackage.Literals.DEPLOYMENT_PLAN_MODEL__TYPE,(String) Yamls.removeMultinameAttribute(attrs, "policyManager_type", "policyManagerType", "type"));
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__SOURCE_CODE,optionalSourceCode);
         
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__ARTIFACTS, getArtifacts(attrs.remove("artifacts")));
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__SERVICES, getServices(attrs.remove("services")));
-		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN__POLICIES, getPolicies(attrs.remove("policies")));
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__ARTIFACTS, getArtifacts(attrs.remove("artifacts")));
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__SERVICES, getServices(attrs.remove("services")));
+		deploymentPlan.eSet(PdpPackage.Literals.ABSTRACT_OCAMP_PLAN_MODEL__POLICIES, getPolicies(attrs.remove("policies")));
+		deploymentPlan.eSet(PdpPackage.Literals.DEPLOYMENT_PLAN_MODEL__ACTION_GROUPS,getActionGroups(attrs.remove("actiongroups")));
+		//actiongroups
+		//custom attributes
 		// TODO version
 		return deploymentPlan;
         
     }
     
-    public static Service getService(Map<String, Object> svc){
+    public static ServiceModel getService(Map<String, Object> svc){
     	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-		Service service = (Service) factory.create(PdpPackage.Literals.SERVICE);
+		ServiceModel service = (ServiceModel) factory.create(PdpPackage.Literals.SERVICE_MODEL);
     	
 		Map<String,Object> fields = MutableMap.copyOf(svc);
     	
-		service.eSet(PdpPackage.Literals.SERVICE__NAME, (String) fields.remove("name"));
-		service.eSet(PdpPackage.Literals.SERVICE__DESCRIPTION, (String) fields.remove("description"));
-		service.eSet(PdpPackage.Literals.SERVICE__SERVICE_TYPE, (String) Yamls.removeMultinameAttribute(fields, "service_type", "serviceType", "type"));
+		service.eSet(PdpPackage.Literals.SERVICE_MODEL__NAME, (String) fields.remove("name"));
+		service.eSet(PdpPackage.Literals.SERVICE_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		service.eSet(PdpPackage.Literals.SERVICE_MODEL__SERVICE_TYPE, (String) Yamls.removeMultinameAttribute(fields, "service_type", "serviceType", "type"));
 		
-		service.eSet(PdpPackage.Literals.SERVICE__CHARACTERISTICS, getServiceCharacteristics(fields.remove("characteristics")));
-        service.eSet(PdpPackage.Literals.SERVICE__CUSTOM_ATTRIBUTES, fields);
+		service.eSet(PdpPackage.Literals.SERVICE_MODEL__CHARACTERISTICS, getServiceCharacteristics(fields.remove("characteristics")));
+        service.eSet(PdpPackage.Literals.SERVICE_MODEL__CUSTOM_ATTRIBUTES, fields);
         return service;
     }
        
     
-    public static ServiceCharacteristic getServiceCharacteristic(Map<String,Object> svc){
+    public static ServiceCharacteristicModel getServiceCharacteristic(Map<String,Object> svc){
     	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-    	ServiceCharacteristic serviceCharacteristic = (ServiceCharacteristic) factory.create(PdpPackage.Literals.SERVICE_CHARACTERISTIC);
+    	ServiceCharacteristicModel serviceCharacteristic = (ServiceCharacteristicModel) factory.create(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL);
 		Map<String,Object> fields = MutableMap.copyOf(svc);
     	
-		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC__NAME, (String) fields.remove("name"));
-		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC__DESCRIPTION, (String) fields.remove("description"));
-		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC__CHARACTERISTIC_TYPE, (String) Yamls.removeMultinameAttribute(fields, "characteristicType", "type"));	
-        serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC__CUSTOM_ATTRIBUTES, fields);
+		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__NAME, (String) fields.remove("name"));
+		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__CHARACTERISTIC_TYPE, (String) Yamls.removeMultinameAttribute(fields, "characteristicType", "type"));
+		serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__MEMBER, getService((Map<String, Object>)fields.remove("member")));
+        serviceCharacteristic.eSet(PdpPackage.Literals.SERVICE_CHARACTERISTIC_MODEL__CUSTOM_ATTRIBUTES, fields);
         
         return serviceCharacteristic;
     }
     
-    public static Artifact getArtifact(Map<String,Object> art){
+    public static ArtifactModel getArtifact(Map<String,Object> art){
     	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-    	Artifact artifact = (Artifact) factory.create(PdpPackage.Literals.SERVICE_CHARACTERISTIC);
+    	ArtifactModel artifact = (ArtifactModel) factory.create(PdpPackage.Literals.ARTIFACT_MODEL);
 		Map<String,Object> fields = MutableMap.copyOf(art);
     	
-		artifact.eSet(PdpPackage.Literals.ARTIFACT__NAME, (String) fields.remove("name"));
-		artifact.eSet(PdpPackage.Literals.ARTIFACT__DESCRIPTION, (String) fields.remove("description"));
-		artifact.eSet(PdpPackage.Literals.ARTIFACT__ARTIFACT_TYPE, (String) Yamls.removeMultinameAttribute(fields, "artifactType", "type"));	
-		artifact.eSet(PdpPackage.Literals.ARTIFACT__CONTENT, fields.remove("content"));
-		artifact.eSet(PdpPackage.Literals.ARTIFACT__REQUIREMENTS, getRequirements(fields.remove("requirements")));
+		artifact.eSet(PdpPackage.Literals.ARTIFACT_MODEL__NAME, (String) fields.remove("name"));
+		artifact.eSet(PdpPackage.Literals.ARTIFACT_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		artifact.eSet(PdpPackage.Literals.ARTIFACT_MODEL__ARTIFACT_TYPE, (String) Yamls.removeMultinameAttribute(fields, "artifactType", "type"));	
+		artifact.eSet(PdpPackage.Literals.ARTIFACT_MODEL__CONTENT, getContent(fields.remove("content")));
+		artifact.eSet(PdpPackage.Literals.ARTIFACT_MODEL__REQUIREMENTS, getRequirements(fields.remove("requirements")));
 		
-		artifact.eSet(PdpPackage.Literals.ARTIFACT__CUSTOM_ATTRIBUTES, fields);
+		artifact.eSet(PdpPackage.Literals.ARTIFACT_MODEL__CUSTOM_ATTRIBUTES, fields);
 		
         return artifact;
     }
     
-    public static ArtifactRequirement getRequirement(Map<String,Object> requirement){
+    public static ArtifactContentModel getContent(Object spec){
     	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-    	ArtifactRequirement req = (ArtifactRequirement) factory.create(PdpPackage.Literals.ARTIFACT_REQUIREMENT);
+    	ArtifactContentModel artCont = (ArtifactContentModel) factory.create(PdpPackage.Literals.ARTIFACT_CONTENT_MODEL);
+    	if (spec instanceof String) {
+    		artCont.eSet(PdpPackage.Literals.ARTIFACT_CONTENT_MODEL__HREF, (String)spec);
+        } else if (spec instanceof Map) {
+            @SuppressWarnings("unchecked")
+            Map<String,Object> fields = MutableMap.copyOf( (Map<String,Object>) spec );
+            artCont.eSet(PdpPackage.Literals.ARTIFACT_CONTENT_MODEL__HREF, (String) fields.remove("href"));
+            artCont.eSet(PdpPackage.Literals.ARTIFACT_CONTENT_MODEL__CUSTOM_ATTRIBUTES, fields);            
+        } else {
+            throw new IllegalArgumentException("artifact content should be map or string, not "+spec.getClass());
+        }	
+        return artCont;
+    }
+    
+    public static ArtifactRequirementModel getRequirement(Map<String,Object> requirement){
+    	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
+    	ArtifactRequirementModel req = (ArtifactRequirementModel) factory.create(PdpPackage.Literals.ARTIFACT_REQUIREMENT_MODEL);
 		Map<String,Object> fields = MutableMap.copyOf(requirement);
     	
-		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT__NAME, (String) fields.remove("name"));
-		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT__DESCRIPTION, (String) fields.remove("description"));
-		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT__REQUIREMENT_TYPE, (String) Yamls.removeMultinameAttribute(fields, "artifactType", "type"));	
-		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT__FULFILLMENT, fields.remove("fulfillment"));
+		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT_MODEL__NAME, (String) fields.remove("name"));
+		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT_MODEL__REQUIREMENT_TYPE, (String) Yamls.removeMultinameAttribute(fields, "artifactType", "type"));	
+		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT_MODEL__FULFILLMENT, fields.remove("fulfillment"));
 		
-		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT__CUSTOM_ATTRIBUTES, fields);
+		req.eSet(PdpPackage.Literals.ARTIFACT_REQUIREMENT_MODEL__CUSTOM_ATTRIBUTES, fields);
 		
         return req;
     }
     
-    public static Policy getPolicy(Map<String,Object> pols){
+    public static PolicyModel getPolicy(Map<String,Object> pols){
     	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-    	Policy pol = (Policy) factory.create(PdpPackage.Literals.POLICY);
+    	PolicyModel pol = (PolicyModel) factory.create(PdpPackage.Literals.POLICY_MODEL);
 		Map<String,Object> fields = MutableMap.copyOf(pols);
     	
-		pol.eSet(PdpPackage.Literals.POLICY__NAME, (String) fields.remove("name"));
-		pol.eSet(PdpPackage.Literals.POLICY__DESCRIPTION, (String) fields.remove("description"));
-		pol.eSet(PdpPackage.Literals.POLICY__POLICY_TYPE, (String) Yamls.removeMultinameAttribute(fields, "policyType", "type"));	
-		pol.eSet(PdpPackage.Literals.POLICY__POLICY_CONSTRAINTS, getConstraints( fields.remove("constraints")));
-		pol.eSet(PdpPackage.Literals.POLICY__TARGETS, getTargets( fields.remove("constraints")));	
-        pol.eSet(PdpPackage.Literals.POLICY__CUSTOM_ATTRIBUTES, fields);
+		pol.eSet(PdpPackage.Literals.POLICY_MODEL__NAME, (String) fields.remove("name"));
+		pol.eSet(PdpPackage.Literals.POLICY_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		pol.eSet(PdpPackage.Literals.POLICY_MODEL__POLICY_TYPE, (String) Yamls.removeMultinameAttribute(fields, "policyType", "type"));	
+		pol.eSet(PdpPackage.Literals.POLICY_MODEL__POLICY_CONSTRAINTS, getConstraints( fields.remove("constraints")));
+		pol.eSet(PdpPackage.Literals.POLICY_MODEL__TARGETS, getTargets( fields.remove("targets")));	
+        pol.eSet(PdpPackage.Literals.POLICY_MODEL__CUSTOM_ATTRIBUTES, fields);
         
         return pol;
     }
     
     
-    public static PolicyConstraint getPolicyConstraint(Map<String,Object> polConsts){
+    public static PolicyConstraintModel getPolicyConstraint(Map<String,Object> polConsts){
     	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
-    	PolicyConstraint polConst = (PolicyConstraint) factory.create(PdpPackage.Literals.POLICY_CONSTRAINT);
+    	PolicyConstraintModel polConst = (PolicyConstraintModel) factory.create(PdpPackage.Literals.POLICY_CONSTRAINT_MODEL);
 		Map<String,Object> fields = MutableMap.copyOf(polConsts);
     	
-		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT__NAME, (String) fields.remove("name"));
-		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT__DESCRIPTION, (String) fields.remove("description"));
-		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT__POLICY_CONSTRAINT_TYPE, (String) Yamls.removeMultinameAttribute(fields, "policyConstraintType", "type"));
-		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT__VALUE, fields.remove("value"));	
-        polConst.eSet(PdpPackage.Literals.POLICY__CUSTOM_ATTRIBUTES, fields);
+		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT_MODEL__NAME, (String) fields.remove("name"));
+		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT_MODEL__POLICY_CONSTRAINT_TYPE, (String) Yamls.removeMultinameAttribute(fields, "policyConstraintType", "type"));
+		polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT_MODEL__VALUE, fields.remove("value"));	
+        polConst.eSet(PdpPackage.Literals.POLICY_CONSTRAINT_MODEL__CUSTOM_ATTRIBUTES, fields);
         
         return polConst;
     }
     
     
+    public static ActionGroupModel getActionGroup(Map<String, Object> actionGroups){
+    	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
+    	ActionGroupModel actionGroup = (ActionGroupModel) factory.create(PdpPackage.Literals.ACTION_GROUP_MODEL);
+		Map<String,Object> fields = MutableMap.copyOf(actionGroups);
+		
+		actionGroup.eSet(PdpPackage.Literals.ACTION_GROUP_MODEL__NAME, (String) fields.remove("name"));
+		actionGroup.eSet(PdpPackage.Literals.ACTION_GROUP_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		actionGroup.eSet(PdpPackage.Literals.ACTION_GROUP_MODEL__ACTION_GROUP_TYPE, oCampReserved.POLICY_PREFIX+"ActionGroup");
+		actionGroup.eSet(PdpPackage.Literals.ACTION_GROUP_MODEL__ACTION_ID, (String) Yamls.removeMultinameAttribute(fields, "actiong_id", "actionId", "id"));
+		actionGroup.eSet(PdpPackage.Literals.ACTION_GROUP_MODEL__ACTIONS, getActions(fields.remove("actions")));
+		
+		return actionGroup;
+    }
     
-    public static List<ServiceCharacteristic> getServiceCharacteristics(Object chars){
-        List<ServiceCharacteristic> toReturn = new ArrayList<ServiceCharacteristic>();
+    public static ActionModel getAction(Map<String, Object> actions){
+    	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
+    	ActionModel action = (ActionModel) factory.create(PdpPackage.Literals.ACTION_MODEL);
+		Map<String,Object> fields = MutableMap.copyOf(actions);
+		
+		action.eSet(PdpPackage.Literals.ACTION_MODEL__NAME, (String) fields.remove("name"));
+		action.eSet(PdpPackage.Literals.ACTION_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		action.eSet(PdpPackage.Literals.ACTION_MODEL__ACTION_TYPE, oCampReserved.POLICY_PREFIX+"Action");
+		action.eSet(PdpPackage.Literals.ACTION_MODEL__PROPERTY, (String) fields.remove("property"));
+		action.eSet(PdpPackage.Literals.ACTION_MODEL__TRANSITIONS, getTransitions(fields.remove("transitions")));
+		
+		return action;
+    }
+    
+    public static TransitionModel getTransition(Map<String, Object> transitions){
+    	EFactory factory = PdpPackage.eINSTANCE.getEFactoryInstance();
+    	TransitionModel transition = (TransitionModel) factory.create(PdpPackage.Literals.TRANSITION_MODEL);
+		Map<String,Object> fields = MutableMap.copyOf(transitions);
+		
+		transition.eSet(PdpPackage.Literals.TRANSITION_MODEL__NAME, (String) fields.remove("name"));
+		transition.eSet(PdpPackage.Literals.TRANSITION_MODEL__DESCRIPTION, (String) fields.remove("description"));
+		transition.eSet(PdpPackage.Literals.TRANSITION_MODEL__TRANSITION_TYPE, (String) Yamls.removeMultinameAttribute(fields, "transition_type", "transitionType", "type"));
+		transition.eSet(PdpPackage.Literals.TRANSITION_MODEL__VALUE, fields.remove("value"));
+		
+		return transition;
+		
+    }
+    
+    
+    
+    public static List<ServiceCharacteristicModel> getServiceCharacteristics(Object chars){
+        List<ServiceCharacteristicModel> toReturn = new ArrayList<ServiceCharacteristicModel>();
         
         if (chars instanceof Iterable) {
             for (Object req: (Iterable<Object>)chars) {
@@ -176,9 +253,9 @@ public class DeploymentPlanTransformer {
     }
     
     
-    public static List<Service> getServices(Object services){
+    public static List<ServiceModel> getServices(Object services){
 
-    	List<Service> toReturn = new ArrayList<Service>();
+    	List<ServiceModel> toReturn = new ArrayList<ServiceModel>();
    
         if (services instanceof Iterable) {
             for (Object svc: (Iterable<Object>)services) {
@@ -196,8 +273,8 @@ public class DeploymentPlanTransformer {
     }
     
     
-    public static List<Artifact> getArtifacts(Object artifacts){
-        List<Artifact> toReturn = new ArrayList<Artifact>();
+    public static List<ArtifactModel> getArtifacts(Object artifacts){
+        List<ArtifactModel> toReturn = new ArrayList<ArtifactModel>();
         
         
         if (artifacts instanceof Iterable) {
@@ -217,8 +294,8 @@ public class DeploymentPlanTransformer {
     }
         
         
-    public static List<ArtifactRequirement> getRequirements(Object reqs){
-    	List<ArtifactRequirement> toReturn = new ArrayList<ArtifactRequirement>();
+    public static List<ArtifactRequirementModel> getRequirements(Object reqs){
+    	List<ArtifactRequirementModel> toReturn = new ArrayList<ArtifactRequirementModel>();
     	
     	if (reqs instanceof Iterable) {
             for (Object req: (Iterable<Object>)reqs) {
@@ -238,8 +315,8 @@ public class DeploymentPlanTransformer {
     }
     
     
-    public static List<Policy> getPolicies(Object policies){
-    	List<Policy> toReturn = new ArrayList<Policy>();
+    public static List<PolicyModel> getPolicies(Object policies){
+    	List<PolicyModel> toReturn = new ArrayList<PolicyModel>();
     
        
         if (policies instanceof Iterable) {
@@ -257,8 +334,66 @@ public class DeploymentPlanTransformer {
         return toReturn;
     }
     
-    public static List<PolicyConstraint> getConstraints(Object polConsts){
-    	List<PolicyConstraint> toReturn = new ArrayList<PolicyConstraint>();
+    
+    public static List<ActionGroupModel> getActionGroups(Object actionGroups){
+    	List<ActionGroupModel> toReturn = new ArrayList<ActionGroupModel>();
+    	
+      if (actionGroups instanceof Iterable) {
+          for (Object actionGroup: (Iterable<Object>)actionGroups) {
+              if (actionGroup instanceof Map) {
+                  toReturn.add(getActionGroup((Map<String,Object>) actionGroup));
+              } else {
+                  throw new UserFacingException("ActionGroup list should have a map for each entry, not "+JavaClassNames.superSimpleClassName(actionGroup));
+              }
+          }
+      } else if (actionGroups!=null) {
+          // TODO "map" short form
+          throw new UserFacingException("ActionGroups block should be a list, not "+JavaClassNames.superSimpleClassName(actionGroups));
+      }     
+      return toReturn;
+
+    }
+    
+    public static List<ActionModel> getActions(Object actions){
+    	List<ActionModel> toReturn = new ArrayList<ActionModel>();
+    	
+    	if (actions instanceof Iterable) {
+            for (Object action: (Iterable<Object>)actions) {
+                if (action instanceof Map) {
+                    toReturn.add(getAction((Map<String,Object>) action));
+                } else {
+                    throw new UserFacingException("Actions list should have a map for each entry, not "+JavaClassNames.superSimpleClassName(action));
+                }
+            }
+        } else if (actions!=null) {
+            // TODO "map" short form
+            throw new UserFacingException("Actions block should be a list, not "+JavaClassNames.superSimpleClassName(actions));
+        }
+    	return toReturn;
+    }
+    
+    
+    public static List<TransitionModel> getTransitions(Object transitions){
+    	List<TransitionModel> toReturn = new ArrayList<TransitionModel>();
+    	
+    	 if (transitions instanceof Iterable) {
+             for (Object transition: (Iterable<Object>)transitions) {
+                 if (transition instanceof Map) {
+                     toReturn.add(getTransition((Map<String,Object>) transition));
+                 } else {
+                     throw new UserFacingException("Transitions list should have a map for each entry, not "+JavaClassNames.superSimpleClassName(transition));
+                 }
+             }
+         } else if (transitions!=null) {
+             // TODO "map" short form
+             throw new UserFacingException("Transitions block should be a list, not "+JavaClassNames.superSimpleClassName(transitions));
+         }
+    	 
+    	 return toReturn;
+    }
+    
+    public static List<PolicyConstraintModel> getConstraints(Object polConsts){
+    	List<PolicyConstraintModel> toReturn = new ArrayList<PolicyConstraintModel>();
         
         
         if (polConsts instanceof Iterable) {

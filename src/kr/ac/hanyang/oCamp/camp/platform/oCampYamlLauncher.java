@@ -111,7 +111,7 @@ public class oCampYamlLauncher {
 	
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) throws FileNotFoundException{
-		PrintWriter outStream = new PrintWriter(new FileOutputStream("/users/kena/datafile.txt"));
+		PrintWriter outStream = new PrintWriter(new FileOutputStream("C:/users/kenax/datafile.txt"));
 		Application app = null;
 		oCampYamlLauncher l = new oCampYamlLauncher();
 		l.setShutdownAppsOnExit(true);
@@ -128,7 +128,7 @@ public class oCampYamlLauncher {
 			String choice = myScanner.next();
 			switch (choice){
 				case "1":
-					app = l.launchAppYaml("file:///Users/Kena/Git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/basic-empty-app-and-entity-blueprint3.yaml");
+					app = l.launchAppYaml("file:///C:/Users/Kenax/Git/oCamp/src/kr/ac/hanyang/oCamp/camp/platform/desired-wordpress-blueprint-sql.yaml");
 					break;
 				case "2":
 					outStream.println("Starting Appliction"+ System.currentTimeMillis());

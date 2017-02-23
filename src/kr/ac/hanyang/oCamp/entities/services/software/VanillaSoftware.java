@@ -13,7 +13,7 @@ import org.apache.brooklyn.util.core.flags.SetFromFlag;
 public interface VanillaSoftware extends VanillaSoftwareProcess {
     
     @SetFromFlag("install_command")
-    ConfigKey<String> INSTALL_COMMAND = VanillaSoftwareProcess.LAUNCH_COMMAND;
+    ConfigKey<String> INSTALL_COMMAND = VanillaSoftwareProcess.INSTALL_COMMAND;
     
     @SetFromFlag("customize_command")
     ConfigKey<String> CUSTOMIZE_COMMAND = VanillaSoftwareProcess.CUSTOMIZE_COMMAND;

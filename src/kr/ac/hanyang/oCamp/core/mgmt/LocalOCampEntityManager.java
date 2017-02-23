@@ -43,7 +43,7 @@ import kr.ac.hanyang.oCamp.camp.platform.oCampPlatform;
 import kr.ac.hanyang.oCamp.camp.spi.PolicyManagerTemplate;
 import kr.ac.hanyang.oCamp.camp.spi.resolve.PdpProcessor;
 import kr.ac.hanyang.oCamp.core.objs.proxy.InternalOCampEntityFactory;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManager;
+import kr.ac.hanyang.oCamp.entities.policies.Placement;
 import kr.ac.hanyang.oCamp.entities.policies.objs.Policy;
 import kr.ac.hanyang.oCamp.entities.services.BasicOCampService;
 
@@ -59,7 +59,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
 	private final Set<String> policyManagerIds;
 	
 	/** Proxies of the managed entities that are applications */
-    protected final Set<PolicyManager> policyManagers = Sets.newConcurrentHashSet();
+    protected final Set<Placement> policyManagers = Sets.newConcurrentHashSet();
 	
 	public LocalOCampEntityManager(LocalManagementContext managementContext) {
 		super(managementContext);
@@ -227,20 +227,22 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         entitiesById.put(e.getId(), realE);
 
         preManagedEntitiesById.remove(e.getId());
-        if ((e instanceof Application) && (e.getParent()==null) && !(e instanceof PolicyManager)) {
+        if ((e instanceof Application) && (e.getParent()==null) && !(e instanceof Placement)) {
             applications.add((Application)proxyE);
             applicationIds.add(e.getId());
         }
-        if ((e instanceof PolicyManager)) {
-        	policyManagers.add((PolicyManager)proxyE);
+        if ((e instanceof Placement)) {
+        	policyManagers.add((Placement)proxyE);
         	policyManagerIds.add(e.getId());
         }
         if ((e instanceof Policy)){
         	log.info("Policy");
         	//configureLocations((Policy) e);
-        	((Policy) e).initTargetLocations((BasicLocationRegistry) this.managementContext.getLocationRegistry());
         	String policyManagerType = e.config().get(ConfigKeys.newConfigKey(String.class, "policymanager.type"));
-        	PolicyManager policyManager = (PolicyManager) getPolicyManagerByType(policyManagerType);
+        	if (policyManagerType.equals(oCampReservedKeys.PLACEMENT_POLICY_TYPE))
+        		((Policy) e).initTargetLocations((BasicLocationRegistry) this.managementContext.getLocationRegistry());
+        	
+        	Placement policyManager = (Placement) getPolicyManagerByType(policyManagerType);
         	if (policyManager != null){
         		policyManager.addOCampPolicy((Policy)e); 
         	}else{
@@ -259,7 +261,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
         return true;
     }
     
-    private PolicyManager buildPolicyManager(String policyManagerType){
+    private Placement buildPolicyManager(String policyManagerType){
     	try{
     		String yaml;
     		Class clazz = Class.forName(policyManagerType);
@@ -272,7 +274,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
 				PdpProcessor pdp = platform.oCampPdp();
 				PolicyManagerTemplate pmt = (PolicyManagerTemplate) pdp.registerDeploymentPlan(pdp.parseDeploymentPlan(yaml));
 				//PolicyManager polMgr = (PolicyManager) ((oCampAssemblyTemplateInstantiator) pmt.getInstantiator().newInstance()).instantiateApp(pmt, platform);
-				PolicyManager polMgr = (PolicyManager) OCampEntityManagementUtils.instantiateApp(pmt, platform);
+				Placement polMgr = (Placement) OCampEntityManagementUtils.instantiateApp(pmt, platform);
 				
 				return polMgr;
 			}else{
@@ -291,7 +293,7 @@ public class LocalOCampEntityManager extends LocalEntityManager {
 //    }
     
     private <T extends Entity> T getPolicyManagerByType(String type){
-    	for(PolicyManager policyManager: policyManagers){
+    	for(Placement policyManager: policyManagers){
     		if (policyManager.config().get(ConfigKeys.newConfigKey(String.class, "policymanager.type")) != null){
     			return (T) policyManager; // this is a proxy
     		}

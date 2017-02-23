@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import kr.ac.hanyang.oCamp.core.traits.Scalable;
 import kr.ac.hanyang.oCamp.core.traits.oCampStartable;
 import kr.ac.hanyang.oCamp.entities.artifacts.WarImpl;
-import kr.ac.hanyang.oCamp.entities.policies.PolicyManagerImpl;
+import kr.ac.hanyang.oCamp.entities.policies.PlacementImpl;
 import kr.ac.hanyang.oCamp.entities.requirements.IDeployable;
 import kr.ac.hanyang.oCamp.entities.requirements.IEntity;
 import kr.ac.hanyang.oCamp.entities.requirements.IService;
@@ -61,7 +61,7 @@ public class WebAppClusterImpl extends ControlledDynamicWebAppClusterImpl implem
 	// this will initiate the start on the requirements and Artifacts then call 
 	// start on itself
 	//builds a parallel startup task and waits for the completion of the members.
-	public void startup(/*Collection<? extends Location> locations*/){
+	public void startup(){
 		log.info("**** INFO INFO **** Starting WebAppCluster...");
 
 		TaskBuilder<Void> taskBuilder = TaskBuilder.builder();
